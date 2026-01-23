@@ -52,7 +52,7 @@
 				},
 				"a": {
 					"opcode": "motion_gotoxy",
-					"next": "b",
+					"next": "b", //b
 					"parent": "c",
 					"inputs": {
 						"X": [

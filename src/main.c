@@ -19,30 +19,43 @@ struct vecScratchLine {
 void PrintScratchLine(ScratchLine line)
 {
 	printf("%s(",line.opcode);
-	for (int i = 0; i < line.args; i++) 
+	for (int i = 0; i < line.args - 1; i++) 
 	{
 		printf("%s,",line.argsData[i]);
 	}
-	//printf("%s", line.argsData[line.args - 1]);
+	if (line.args != 0)
+	{
+		printf("%s", line.argsData[line.args - 1]);
+	}
 	printf(");\n");
 }
 
 char* GetArgFromJson(struct json_object* arg) 
 {
-	printf("%s\n", json_object_to_json_string(arg));
+	//printf("%s\n", json_object_to_json_string(json_object_array_get_idx(json_object_array_get_idx(arg, 1), 1)));
 
-	return NULL;
+	return json_object_to_json_string(json_object_array_get_idx(json_object_array_get_idx(arg, 1), 1));
 }
 
 ScratchLine GetScratchLineFromJson(struct json_object* object)
 {
 	ScratchLine sl;
 	sl.opcode = json_object_get_string(json_object_object_get(object, "opcode"));
-	sl.args = 0;
 
 	struct json_object* args = json_object_object_get(object, "inputs");
 
-	GetArgFromJson(json_object_object_get(args,"X"));
+	sl.args = json_object_object_length(args);
+
+	sl.argsData = malloc(sl.args); if (!sl.argsData) { printf("Malloc error!"); exit(-1); }
+
+	int i = 0;
+
+	json_object_object_foreach(args, key, val)
+	{
+		sl.argsData[i] = GetArgFromJson(val); i++;
+	}
+
+
 
 	return sl;
 }
@@ -76,7 +89,7 @@ int main()
 		exit(-1);
 	}
 
-	char* text = SafeMalloc(bufferSize);
+	char* text = malloc(bufferSize); if (!text) { printf("Malloc error!"); exit(-1); }
 
 	if (text == NULL)
 	{
