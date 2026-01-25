@@ -1,0 +1,1 @@
+String SafeStringMerge(String a, String b);
