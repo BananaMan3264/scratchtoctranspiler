@@ -42,7 +42,13 @@ int main()
 
 	fread(text, 1, bufferSize, json);
 
-	vecScratchBlock lines = ParseText(text);
+	struct json_object* project = json_tokener_parse(text);
+
+	struct json_object* blocks = json_object_object_get(json_object_array_get_idx(json_object_object_get(project, "targets"), 1), "blocks");
+
+	vecScratchBlock lines = ParseText(blocks);
+
+	//int jEk@4 | i[#Fk ? (8x)AV. - my variable a;
 
 	//for (int i = 0; i < lines.length; i++) 
 	//{
@@ -63,7 +69,7 @@ int main()
 	//	printf("\n");
 	//}
 
-	GetFullProgram(lines);
+	GetFullProgram(lines, json_object_object_get(json_object_array_get_idx(json_object_object_get(project, "targets"), 0), "variables"));
 
 	return 0;
 }

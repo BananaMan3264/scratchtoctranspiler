@@ -1,26 +1,19 @@
 #include<scratch.h>
+double YbjaEakabb4acbiadbcbFakadbeb8axafbAaVagbhbmayaibvaaaraiaaabalaea = 1;
+double Ya5aHacb2ajblbSagbpajbdbkbuajbmbqaNa8aeb = 0;
+double Yaaanbdbabobyahbpbqbka2alagacala8afaabHa = 0;
+double Ybga3ahamazajbwbtb4aaa9aOacadb4aFaQawaAa = 0;
+double YbFaKaoaGaKaeabb8aUaDahagbgb4aiaLambVaVa = 0;
+double YatbxbVa9apbiaeboakbHaqbeacaEawaOapbOaqb = 0;
+double YabbPaobAaLa2a2a2a5aUaebVarbNaAaDaQaTaka = 0;
+double Ybfb6atbua0aqaBaDa7axbYauavaEapaoaebIasb = 0;
+double Yahasa9anb0arbWaLasaZaGaebxbpazaiaebMaEa = 0;
+double YaAakbiaubxbvb1adbvblbVaiavaZa8axbhaJalb = 0;
+char* YawbRayaxaub9aabLarbba1alaHaEaVamazajb2a = "test";
 int main() {
 	start();
 }
 void start() 
 {
-	motion_movesteps(operator_add(operator_add(1, 2), operator_add(1, operator_add(1, 2))));
-	motion_turnright(operator_subtract(1, 1));
-	motion_turnleft(operator_multiply(2, 4));
-	motion_gotoxy(operator_divide(2, 8), 0);
-	motion_glidesecstoxy(1, 186, 86);
-	motion_pointindirection(90);
-	motion_changexby(operator_mod(1, 2));
-	motion_setx(operator_round(1.2));
-	motion_changeyby(10);
-	motion_sety(86);
-	motion_ifonedgebounce();
-	looks_sayforsecs("Hello!", 2);
-	looks_say("Hello!");
-	looks_thinkforsecs("Hmm...", 2);
-	looks_think("Hmm...");
-	looks_nextcostume();
-	looks_nextbackdrop();
-	looks_changesizeby(10);
-	looks_setsizeto(100);
+	motion_movesteps(operator_add(YbjaEakabb4acbiadbcbFakadbeb8axafbAaVagbhbmayaibvaaaraiaaabalaea, 1));
 }

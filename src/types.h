@@ -7,7 +7,9 @@ enum ArgTypes
 	ArgType_Integer = 7,		// Integer		   | 
 	ArgType_Angle = 8,			// Angle		   | 
 
-	ArgType_String = 10,	// Text
+	ArgType_String = 10,		// String
+
+	ArgType_Variable = 12,		// Variable
 };
 
 typedef struct String

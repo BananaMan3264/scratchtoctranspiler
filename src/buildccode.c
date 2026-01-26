@@ -58,14 +58,38 @@ String GetArg(int argtype, ScratchArgData argdata, vecScratchBlock lines)
 
 	case ArgType_String:
 		return SafeStringMerge(SafeStringMerge(AsManagedString("\""), argdata.text), AsManagedString("\""));
+
+	case ArgType_Variable:
+		return argdata.text;
 	}
 }
 
-char* GetFullProgram(vecScratchBlock lines)
+char* GetFullProgram(vecScratchBlock lines, struct json_object* variables)
 {
 	FILE* file = fopen("../../../../output/output.c", "w");
 
-	fprintf(file, "#include<scratch.h>\nint main() {\n\tstart();\n}\n");
+	fprintf(file, "#include<scratch.h>\n");
+
+	json_object_object_foreach(variables, key, val)
+	{
+		switch (json_object_get_type(json_object_array_get_idx(val, 1)))
+		{
+		case json_type_int:
+			fprintf(file, "double %s = %i;\n", FixVarName(AsManagedString(key)).data, json_object_get_int(json_object_array_get_idx(val, 1)));
+			break;
+		case json_type_double:
+			fprintf(file, "double %s = %f;\n", FixVarName(AsManagedString(key)).data, json_object_get_double(json_object_array_get_idx(val, 1)));
+			break;
+		case json_type_string:
+			fprintf(file, "char* %s = \"%s\";\n", FixVarName(AsManagedString(key)).data, json_object_get_string(json_object_array_get_idx(val, 1)));
+			break;
+		default:
+			printf("Type not implemented!");
+			exit(-1);
+		}
+	}
+
+	fprintf(file, "int main() {\n\tstart();\n}\n");
 
 	if (file == NULL) {
 		perror("Error opening file");

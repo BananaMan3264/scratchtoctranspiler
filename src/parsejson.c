@@ -6,17 +6,13 @@
 #include "types.h"
 #include "util.h"
 
-vecScratchBlock ParseText(char* data)
+vecScratchBlock ParseText(struct json_object* blocks)
 {
 	vecScratchBlock lines;
 
 	lines.allocated_size = 8; lines.length = 0; lines.sizeoftype = sizeof(ScratchBlock); lines.data = malloc(sizeof(ScratchBlock) * lines.allocated_size); if (!lines.data) {
 		exit(-1);
 	}
-
-	struct json_object* project = json_tokener_parse(data);
-
-	struct json_object* blocks = json_object_object_get(json_object_array_get_idx(json_object_object_get(project, "targets"), 1), "blocks");
 
 	json_object_object_foreach(blocks, key, val)
 	{
@@ -51,8 +47,8 @@ vecScratchBlock ParseText(char* data)
 		int i = 0;
 		json_object_object_foreach(json_object_object_get(val, "inputs"), block_key, block_val)
 		{
-			int a = json_object_get_int(json_object_array_get_idx(block_val, 0));
 			struct json_object* this = block_val;
+			int a = json_object_get_int(json_object_array_get_idx(this, 0));
 			sb.argtypes[i] = a;
 		get_by_type:
 			switch (a)
@@ -63,8 +59,19 @@ vecScratchBlock ParseText(char* data)
 				this = json_object_array_get_idx(this, 1);
 				goto get_by_type;
 			case ArgType_Pointer:
-				sb.argdata[i].idPointer = AsManagedString(json_object_get_string(json_object_array_get_idx(this, 1)));
-				sb.argtypes[i] = a;
+				if (json_object_get_type(json_object_array_get_idx(this, 1)) == json_type_string)
+				{
+					struct json_object* this = block_val;
+					sb.argdata[i].idPointer = AsManagedString(json_object_get_string(json_object_array_get_idx(this, 1)));
+					sb.argtypes[i] = a;
+				}
+				else 
+				{
+					a = json_object_get_int(json_object_array_get_idx(json_object_array_get_idx(this, 1), 0));
+					this = json_object_array_get_idx(this, 1);
+
+					goto get_by_type;
+				}
 				break;
 			case ArgType_Number:
 			case ArgType_PositiveNumber:
@@ -78,7 +85,9 @@ vecScratchBlock ParseText(char* data)
 				sb.argdata[i].text = AsManagedString(json_object_get_string(json_object_array_get_idx(this, 1)));
 				sb.argtypes[i] = ArgType_String;
 				break;
-				printf("These argument types (numbers) have not been implemented!");
+			case ArgType_Variable:
+				sb.argdata[i].text = FixVarName(AsManagedString(json_object_get_string(json_object_array_get_idx(this, 2))));
+				sb.argtypes[i] = ArgType_Variable;
 				break;
 			default:
 				printf("These argument types have not been implemented! %i\n", a);
