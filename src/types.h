@@ -39,13 +39,18 @@ typedef struct Function
 {
 	String proccode;
 	int args;
+	String next;
 	char* argTypes;
 	String* argids;
-};
+} Function;
 
 typedef struct vecScratchBlock {
 	ScratchBlock* data; size_t allocated_size; size_t length; size_t sizeoftype;
 } vecScratchBlock;
+
+typedef struct vecFunction {
+	Function* data; size_t allocated_size; size_t length; size_t sizeoftype;
+} vecFunction;
 
 #define AsUnmanagedString(a) (String){false, a}
 #define AsManagedString(a)   (String){true,  a}

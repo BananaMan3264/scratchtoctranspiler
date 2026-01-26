@@ -46,7 +46,10 @@ int main()
 
 	struct json_object* blocks = json_object_object_get(json_object_array_get_idx(json_object_object_get(project, "targets"), 1), "blocks");
 
-	vecScratchBlock lines = ParseText(blocks);
+	ParseTextReturn out = ParseText(blocks);
+
+	vecScratchBlock lines = out.blocks;
+	vecFunction functions = out.functions;
 
 	//int jEk@4 | i[#Fk ? (8x)AV. - my variable a;
 
@@ -69,7 +72,7 @@ int main()
 	//	printf("\n");
 	//}
 
-	GetFullProgram(lines, json_object_object_get(json_object_array_get_idx(json_object_object_get(project, "targets"), 0), "variables"));
+	GetFullProgram(lines, json_object_object_get(json_object_array_get_idx(json_object_object_get(project, "targets"), 0), "variables"), out.functions);
 
 	return 0;
 }

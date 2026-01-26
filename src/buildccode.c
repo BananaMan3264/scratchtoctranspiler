@@ -29,7 +29,9 @@ String LineToBlock(int index, vecScratchBlock lines, bool top)
 	}
 	if (lines.data[index].args != 0)
 	{
-		str = SafeStringMerge(str, GetArg(lines.data[index].argtypes[lines.data[index].args - 1], lines.data[index].argdata[lines.data[index].args - 1], lines));
+		int idx = lines.data[index].args - 1;
+		String c = GetArg(lines.data[index].argtypes[idx], lines.data[index].argdata[idx], lines);
+		str = SafeStringMerge(str, c);
 	}
 	if (top)
 	{
@@ -64,7 +66,7 @@ String GetArg(int argtype, ScratchArgData argdata, vecScratchBlock lines)
 	}
 }
 
-char* GetFullProgram(vecScratchBlock lines, struct json_object* variables)
+char* GetFullProgram(vecScratchBlock lines, struct json_object* variables, vecFunction functions)
 {
 	FILE* file = fopen("../../../../output/output.c", "w");
 
@@ -96,34 +98,37 @@ char* GetFullProgram(vecScratchBlock lines, struct json_object* variables)
 		return 1;
 	}
 
-
-	int index = GetFirstWhenFlagClicked(lines);
-
-	int indentation = 0;
-
-	while (index != -1)
+	for (int i = 0; i < functions.length; i++) 
 	{
-		for (int i = 0; i < indentation; i++)
+		fprintf(file, "void %s (", functions.data[i].proccode.data);
+		for (int j = 0; j < functions.data[i].args; j++) 
 		{
-			fprintf(file, "\t");
+			switch (functions.data[i].argTypes[j])
+			{
+			case 'n':
+				fprintf(file, "double ");
+				break;
+			default:
+				printf("Error in buildccode ~line 141, type not implemented!");
+				break;
+				exit(-1);
+			}
+			fprintf(file, "%s", functions.data[i].argids[j].data);
 		}
-		if (strcmp(lines.data[index].opcode.data, "event_whenflagclicked") == 0)
+		fprintf(file, ") {\n");
+		
+		int index = GetIndexOfBlockById(functions.data[i].next.data, lines);
+
+		int indentation = 1;
+
+		while (index != -1)
 		{
-			fprintf(file, "void start() \n{\n");
-			indentation++;
-		}
-		else 
-		{
+			for (int i = 0; i < indentation; i++)
+			{
+				fprintf(file, "\t");
+			}
 			fprintf(file, "%s\n", LineToBlock(index, lines, true).data);
-		}
-		index = GetIndexOfBlockById(lines.data[index].next.data, lines);
-	}
-	while (indentation > 0) 
-	{
-		indentation--;
-		for (int i = 0; i < indentation; i++)
-		{
-			fprintf(file, "\t");
+			index = GetIndexOfBlockById(lines.data[index].next.data, lines);
 		}
 		fprintf(file, "}\n");
 	}
