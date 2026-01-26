@@ -30,7 +30,7 @@ String SafeStringMerge(String a, String b)
 	return AsUnmanagedString(c);
 }
 
-String FixVarName(String varName)
+String SanitiseScratchNameToC(String varName)
 {
 	String str = AsUnmanagedString(malloc(strlen(varName.data) * 2 + 1));
 	if (!str.data) { printf("Malloc Error!"); exit(-1); }

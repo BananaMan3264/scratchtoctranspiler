@@ -35,6 +35,14 @@ typedef struct ScratchBlock
 	ScratchArgData* argdata;
 } ScratchBlock;
 
+typedef struct Function 
+{
+	String proccode;
+	int args;
+	char* argTypes;
+	String* argids;
+};
+
 typedef struct vecScratchBlock {
 	ScratchBlock* data; size_t allocated_size; size_t length; size_t sizeoftype;
 } vecScratchBlock;

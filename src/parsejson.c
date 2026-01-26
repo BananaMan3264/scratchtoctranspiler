@@ -39,6 +39,34 @@ vecScratchBlock ParseText(struct json_object* blocks)
 
 		sb.opcode = AsManagedString(json_object_get_string(json_object_object_get(val, "opcode")));
 
+		if (strcmp(sb.opcode.data, "procedures_call") == 0)
+		{
+			sb.opcode = 
+			SanitiseScratchNameToC(
+				AsManagedString(
+					json_object_get_string(
+						json_object_object_get(
+							json_object_object_get(
+								val, 
+								"mutation"
+							), 
+							"proccode"
+						)
+					)
+				)
+			);
+		}
+
+		if (strcmp(sb.opcode.data, "procedures_definition") == 0)
+		{
+			continue;
+		}
+
+		if (strcmp(sb.opcode.data, "procedures_prototype") == 0) 
+		{
+			continue;
+		}
+
 		sb.args = json_object_object_length(json_object_object_get(val, "inputs"));
 
 		sb.argdata = malloc(sb.args * sizeof(ScratchArgData));
@@ -86,12 +114,16 @@ vecScratchBlock ParseText(struct json_object* blocks)
 				sb.argtypes[i] = ArgType_String;
 				break;
 			case ArgType_Variable:
-				sb.argdata[i].text = FixVarName(AsManagedString(json_object_get_string(json_object_array_get_idx(this, 2))));
+				sb.argdata[i].text = SanitiseScratchNameToC(AsManagedString(json_object_get_string(json_object_array_get_idx(this, 2))));
 				sb.argtypes[i] = ArgType_Variable;
 				break;
 			default:
 				printf("These argument types have not been implemented! %i\n", a);
 				exit(-1);
+			}
+			if (strcmp(json_object_get_string(json_object_object_get(val, "opcode")), "procedures_call") == 0)
+			{
+				sb.argtypes[i] = ArgType_Number;
 			}
 			i++;
 		}

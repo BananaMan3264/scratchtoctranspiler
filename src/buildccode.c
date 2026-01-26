@@ -75,13 +75,13 @@ char* GetFullProgram(vecScratchBlock lines, struct json_object* variables)
 		switch (json_object_get_type(json_object_array_get_idx(val, 1)))
 		{
 		case json_type_int:
-			fprintf(file, "double %s = %i;\n", FixVarName(AsManagedString(key)).data, json_object_get_int(json_object_array_get_idx(val, 1)));
+			fprintf(file, "double %s = %i;\n", SanitiseScratchNameToC(AsManagedString(key)).data, json_object_get_int(json_object_array_get_idx(val, 1)));
 			break;
 		case json_type_double:
-			fprintf(file, "double %s = %f;\n", FixVarName(AsManagedString(key)).data, json_object_get_double(json_object_array_get_idx(val, 1)));
+			fprintf(file, "double %s = %f;\n", SanitiseScratchNameToC(AsManagedString(key)).data, json_object_get_double(json_object_array_get_idx(val, 1)));
 			break;
 		case json_type_string:
-			fprintf(file, "char* %s = \"%s\";\n", FixVarName(AsManagedString(key)).data, json_object_get_string(json_object_array_get_idx(val, 1)));
+			fprintf(file, "char*  %s = \"%s\";\n", SanitiseScratchNameToC(AsManagedString(key)).data, json_object_get_string(json_object_array_get_idx(val, 1)));
 			break;
 		default:
 			printf("Type not implemented!");
