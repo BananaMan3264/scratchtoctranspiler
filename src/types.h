@@ -1,15 +1,18 @@
 enum ArgTypes
 {
 	ArgType_Pointer = 3,
-	ArgType_Text = 4,
-	ArgType_Number = 5,
-	ArgType_Number1 = 6,	// Positive number | These two are Scratch jankness; they
-	ArgType_Number2 = 7,	// Angle		   | work the same way as ArgType_Number
+	ArgType_Number = 4,			// Number		   | All of these act the same way. They are only seperate for the purpose of the editor.
+	ArgType_PositiveNumber = 5,	// Positive Number |
+	ArgType_NegativeNumber = 6,	// Negative Number | 
+	ArgType_Integer = 7,		// Integer		   | 
+	ArgType_Angle = 8,			// Angle		   | 
+
+	ArgType_String = 10,	// Text
 };
 
 typedef struct String
 {
-	bool managed; // True if the string should not be freed (Managed by json-c)
+	bool managed; // True if the string should not be freed.
 	char* data;
 } String;
 
@@ -17,7 +20,6 @@ typedef union ScratchArgData
 {
 	String idPointer;
 	String text;
-	double number;
 } ScratchArgData;
 
 typedef struct ScratchBlock

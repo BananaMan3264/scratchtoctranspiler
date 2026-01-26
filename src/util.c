@@ -5,6 +5,19 @@
 #include "std_vector.h"
 #include "types.h"
 
+int GetIndexOfBlockById(char* id, vecScratchBlock lines)
+{
+	if (id == NULL) { return -1; }
+	for (int i = 0; i < lines.length; i++)
+	{
+		if (strcmp(lines.data[i].id.data, id) == 0)
+		{
+			return i;
+		}
+	}
+	return -1;
+}
+
 String SafeStringMerge(String a, String b) 
 {
 	int sa = strlen(a.data), sb = strlen(b.data);

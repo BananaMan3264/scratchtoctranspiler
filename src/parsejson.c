@@ -4,6 +4,7 @@
 #include <stdbool.h>
 #include "std_vector.h"
 #include "types.h"
+#include "util.h"
 
 vecScratchBlock ParseText(char* data)
 {
@@ -65,12 +66,22 @@ vecScratchBlock ParseText(char* data)
 				sb.argdata[i].idPointer = AsManagedString(json_object_get_string(json_object_array_get_idx(this, 1)));
 				sb.argtypes[i] = a;
 				break;
-			case ArgType_Text:
+			case ArgType_Number:
+			case ArgType_PositiveNumber:
+			case ArgType_NegativeNumber:
+			case ArgType_Integer:
+			case ArgType_Angle:
 				sb.argdata[i].text = AsManagedString(json_object_get_string(json_object_array_get_idx(this, 1)));
-				sb.argtypes[i] = a;
+				sb.argtypes[i] = ArgType_Number;
+				break;
+			case ArgType_String:
+				sb.argdata[i].text = AsManagedString(json_object_get_string(json_object_array_get_idx(this, 1)));
+				sb.argtypes[i] = ArgType_String;
+				break;
+				printf("These argument types (numbers) have not been implemented!");
 				break;
 			default:
-				printf("These argument types have not been implemented!");
+				printf("These argument types have not been implemented! %i\n", a);
 				exit(-1);
 			}
 			i++;
@@ -80,16 +91,4 @@ vecScratchBlock ParseText(char* data)
 	}
 
 	return lines;
-}
-
-int GetIndexOfBlockById(char* id, vecScratchBlock lines) 
-{
-	for (int i = 0; i < lines.length; i++) 
-	{
-		if (strcmp(lines.data[i].id.data, id) == 0) 
-		{
-			return i;
-		}
-	}
-	return -1;
 }

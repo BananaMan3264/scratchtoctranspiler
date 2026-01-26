@@ -6,6 +6,7 @@
 #include "types.h"
 #include "parsejson.h"
 #include "util.h"
+#include "buildccode.h"
 
 int main()
 {
@@ -43,24 +44,26 @@ int main()
 
 	vecScratchBlock lines = ParseText(text);
 
-	for (int i = 0; i < lines.length; i++) 
-	{
-		ScratchBlock sb = lines.data[i];
-		printf("Id: %s\nOpcode: %s\nNext: %s\nParent: %s\n", sb.id.data, sb.opcode.data, sb.next.data, sb.previous.data);
-		for (int j = 0; j < sb.args; j++)
-		{
-			switch (sb.argtypes[j])
-			{
-			case ArgType_Pointer:
-				printf("\tBlock pointer: %s\n", sb.argdata[j].text.data);
-				break;
-			case ArgType_Text:
-				printf("\tString: %s\n", sb.argdata[j].text.data);
-				break;
-			}
-		}
-		printf("\n");
-	}
+	//for (int i = 0; i < lines.length; i++) 
+	//{
+	//	ScratchBlock sb = lines.data[i];
+	//	printf("Id: %s\nOpcode: %s\nNext: %s\nParent: %s\n", sb.id.data, sb.opcode.data, sb.next.data, sb.previous.data);
+	//	for (int j = 0; j < sb.args; j++)
+	//	{
+	//		switch (sb.argtypes[j])
+	//		{
+	//		case ArgType_Pointer:
+	//			printf("\tBlock pointer: %s\n", sb.argdata[j].text.data);
+	//			break;
+	//		case ArgType_Text:
+	//			printf("\tString: %s\n", sb.argdata[j].text.data);
+	//			break;
+	//		}
+	//	}
+	//	printf("\n");
+	//}
+
+	GetFullProgram(lines);
 
 	return 0;
 }
