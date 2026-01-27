@@ -53,24 +53,24 @@ int main()
 
 	//int jEk@4 | i[#Fk ? (8x)AV. - my variable a;
 
-	//for (int i = 0; i < lines.length; i++) 
-	//{
-	//	ScratchBlock sb = lines.data[i];
-	//	printf("Id: %s\nOpcode: %s\nNext: %s\nParent: %s\n", sb.id.data, sb.opcode.data, sb.next.data, sb.previous.data);
-	//	for (int j = 0; j < sb.args; j++)
-	//	{
-	//		switch (sb.argtypes[j])
-	//		{
-	//		case ArgType_Pointer:
-	//			printf("\tBlock pointer: %s\n", sb.argdata[j].text.data);
-	//			break;
-	//		case ArgType_Text:
-	//			printf("\tString: %s\n", sb.argdata[j].text.data);
-	//			break;
-	//		}
-	//	}
-	//	printf("\n");
-	//}
+	for (int i = 0; i < lines.length; i++) 
+	{
+		ScratchBlock sb = lines.data[i];
+		printf("Id: %s\nOpcode: %s\nNext: %s\nParent: %s\n", sb.id.data, sb.opcode.data, sb.next.data, sb.previous.data);
+		for (int j = 0; j < sb.args; j++)
+		{
+			switch (sb.argtypes[j])
+			{
+			case ArgType_Pointer:
+				printf("\tBlock pointer: %s\n", sb.argdata[j].text.data);
+				break;
+			case ArgType_Number:
+				printf("\tString: %s\n", sb.argdata[j].text.data);
+				break;
+			}
+		}
+		printf("\n");
+	}
 
 	GetFullProgram(lines, json_object_object_get(json_object_array_get_idx(json_object_object_get(project, "targets"), 0), "variables"), out.functions);
 

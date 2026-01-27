@@ -33,6 +33,8 @@ typedef struct ScratchBlock
 	int args;
 	int* argtypes;
 	ScratchArgData* argdata;
+	int substackLength;
+	String* substack;
 } ScratchBlock;
 
 typedef struct Function 
@@ -42,6 +44,7 @@ typedef struct Function
 	String next;
 	char* argTypes;
 	String* argids;
+	bool warp;
 } Function;
 
 typedef struct vecScratchBlock {

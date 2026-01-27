@@ -87,9 +87,9 @@
       "broadcasts": {
       },
       "blocks": {
-        "z": {
+        "c": {
           "opcode": "event_whenflagclicked",
-          "next": "k",
+          "next": "a",
           "parent": null,
           "inputs": {
           },
@@ -100,333 +100,32 @@
           "x": 138,
           "y": 216
         },
-        "k": {
-          "opcode": "motion_movesteps",
-          "next": "l",
-          "parent": "z",
+        "a": {
+          "opcode": "control_repeat",
+          "next": null,
+          "parent": "c",
           "inputs": {
-            "STEPS": [
+            "TIMES": [
               1,
               [
-                4,
+                6,
                 "10"
               ]
-            ]
-          },
-          "fields": {
-          },
-          "shadow": false,
-          "topLevel": false
-        },
-        "l": {
-          "opcode": "motion_turnright",
-          "next": "m",
-          "parent": "k",
-          "inputs": {
-            "DEGREES": [
-              1,
-              [
-                4,
-                "15"
-              ]
-            ]
-          },
-          "fields": {
-          },
-          "shadow": false,
-          "topLevel": false
-        },
-        "m": {
-          "opcode": "motion_turnleft",
-          "next": "b",
-          "parent": "l",
-          "inputs": {
-            "DEGREES": [
-              1,
-              [
-                4,
-                "15"
-              ]
-            ]
-          },
-          "fields": {
-          },
-          "shadow": false,
-          "topLevel": false
-        },
-        "c": {
-          "opcode": "motion_goto",
-          "next": "n",
-          "parent": "b",
-          "inputs": {
-            "TO": [
-              1,
-              "A"
-            ]
-          },
-          "fields": {
-          },
-          "shadow": false,
-          "topLevel": false
-        },
-        "A": {
-          "opcode": "motion_goto_menu",
-          "next": null,
-          "parent": "c",
-          "inputs": {
-          },
-          "fields": {
-            "TO": [
-              "_mouse_",
-              null
-            ]
-          },
-          "shadow": true,
-          "topLevel": false
-        },
-        "b": {
-          "opcode": "motion_goto",
-          "next": "c",
-          "parent": "m",
-          "inputs": {
-            "TO": [
-              1,
-              "B"
-            ]
-          },
-          "fields": {
-          },
-          "shadow": false,
-          "topLevel": false
-        },
-        "B": {
-          "opcode": "motion_goto_menu",
-          "next": null,
-          "parent": "b",
-          "inputs": {
-          },
-          "fields": {
-            "TO": [
-              "_random_",
-              null
-            ]
-          },
-          "shadow": true,
-          "topLevel": false
-        },
-        "n": {
-          "opcode": "motion_gotoxy",
-          "next": "d",
-          "parent": "c",
-          "inputs": {
-            "X": [
-              1,
-              [
-                4,
-                "218"
-              ]
             ],
-            "Y": [
-              1,
-              [
-                4,
-                "57"
-              ]
+            "SUBSTACK": [
+              2,
+              "b"
             ]
           },
           "fields": {
           },
           "shadow": false,
-          "topLevel": false
-        },
-        "e": {
-          "opcode": "motion_glideto",
-          "next": "o",
-          "parent": "d",
-          "inputs": {
-            "SECS": [
-              1,
-              [
-                4,
-                "1"
-              ]
-            ],
-            "TO": [
-              1,
-              "C"
-            ]
-          },
-          "fields": {
-          },
-          "shadow": false,
-          "topLevel": false
-        },
-        "C": {
-          "opcode": "motion_glideto_menu",
-          "next": null,
-          "parent": "e",
-          "inputs": {
-          },
-          "fields": {
-            "TO": [
-              "_mouse_",
-              null
-            ]
-          },
-          "shadow": true,
           "topLevel": false
         },
         "d": {
-          "opcode": "motion_glideto",
-          "next": "e",
-          "parent": "n",
-          "inputs": {
-            "SECS": [
-              1,
-              [
-                4,
-                "1"
-              ]
-            ],
-            "TO": [
-              1,
-              "D"
-            ]
-          },
-          "fields": {
-          },
-          "shadow": false,
-          "topLevel": false
-        },
-        "D": {
-          "opcode": "motion_glideto_menu",
-          "next": null,
-          "parent": "d",
-          "inputs": {
-          },
-          "fields": {
-            "TO": [
-              "_random_",
-              null
-            ]
-          },
-          "shadow": true,
-          "topLevel": false
-        },
-        "o": {
-          "opcode": "motion_glidesecstoxy",
-          "next": "p",
-          "parent": "e",
-          "inputs": {
-            "SECS": [
-              1,
-              [
-                4,
-                "1"
-              ]
-            ],
-            "X": [
-              1,
-              [
-                4,
-                "218"
-              ]
-            ],
-            "Y": [
-              1,
-              [
-                4,
-                "57"
-              ]
-            ]
-          },
-          "fields": {
-          },
-          "shadow": false,
-          "topLevel": false
-        },
-        "p": {
-          "opcode": "motion_pointindirection",
-          "next": "f",
-          "parent": "o",
-          "inputs": {
-            "DIRECTION": [
-              1,
-              [
-                8,
-                "90"
-              ]
-            ]
-          },
-          "fields": {
-          },
-          "shadow": false,
-          "topLevel": false
-        },
-        "g": {
-          "opcode": "motion_pointtowards",
-          "next": "q",
-          "parent": "f",
-          "inputs": {
-            "TOWARDS": [
-              1,
-              "E"
-            ]
-          },
-          "fields": {
-          },
-          "shadow": false,
-          "topLevel": false
-        },
-        "E": {
-          "opcode": "motion_pointtowards_menu",
-          "next": null,
-          "parent": "g",
-          "inputs": {
-          },
-          "fields": {
-            "TOWARDS": [
-              "_random_",
-              null
-            ]
-          },
-          "shadow": true,
-          "topLevel": false
-        },
-        "f": {
-          "opcode": "motion_pointtowards",
-          "next": "g",
-          "parent": "p",
-          "inputs": {
-            "TOWARDS": [
-              1,
-              "F"
-            ]
-          },
-          "fields": {
-          },
-          "shadow": false,
-          "topLevel": false
-        },
-        "F": {
-          "opcode": "motion_pointtowards_menu",
-          "next": null,
-          "parent": "f",
-          "inputs": {
-          },
-          "fields": {
-            "TOWARDS": [
-              "_mouse_",
-              null
-            ]
-          },
-          "shadow": true,
-          "topLevel": false
-        },
-        "q": {
           "opcode": "motion_changexby",
-          "next": "r",
-          "parent": "g",
+          "next": null,
+          "parent": "b",
           "inputs": {
             "DX": [
               1,
@@ -441,292 +140,21 @@
           "shadow": false,
           "topLevel": false
         },
-        "r": {
-          "opcode": "motion_setx",
-          "next": "s",
-          "parent": "q",
-          "inputs": {
-            "X": [
-              1,
-              [
-                4,
-                "218"
-              ]
-            ]
-          },
-          "fields": {
-          },
-          "shadow": false,
-          "topLevel": false
-        },
-        "s": {
-          "opcode": "motion_changeyby",
-          "next": "t",
-          "parent": "r",
-          "inputs": {
-            "DY": [
-              1,
-              [
-                4,
-                "10"
-              ]
-            ]
-          },
-          "fields": {
-          },
-          "shadow": false,
-          "topLevel": false
-        },
-        "t": {
-          "opcode": "motion_sety",
-          "next": "u",
-          "parent": "s",
-          "inputs": {
-            "Y": [
-              1,
-              [
-                4,
-                "57"
-              ]
-            ]
-          },
-          "fields": {
-          },
-          "shadow": false,
-          "topLevel": false
-        },
-        "u": {
-          "opcode": "motion_ifonedgebounce",
-          "next": "v",
-          "parent": "t",
-          "inputs": {
-          },
-          "fields": {
-          },
-          "shadow": false,
-          "topLevel": false
-        },
-        "w": {
-          "opcode": "motion_setrotationstyle",
-          "next": "x",
-          "parent": "v",
-          "inputs": {
-          },
-          "fields": {
-            "STYLE": [
-              "don't rotate",
-              null
-            ]
-          },
-          "shadow": false,
-          "topLevel": false
-        },
-        "v": {
-          "opcode": "motion_setrotationstyle",
-          "next": "w",
-          "parent": "u",
-          "inputs": {
-          },
-          "fields": {
-            "STYLE": [
-              "left-right",
-              null
-            ]
-          },
-          "shadow": false,
-          "topLevel": false
-        },
-        "x": {
-          "opcode": "motion_setrotationstyle",
-          "next": "h",
-          "parent": "w",
-          "inputs": {
-          },
-          "fields": {
-            "STYLE": [
-              "all around",
-              null
-            ]
-          },
-          "shadow": false,
-          "topLevel": false
-        },
-        "i": {
-          "opcode": "motion_changexby",
-          "next": "a",
-          "parent": "j",
-          "inputs": {
-            "DX": [
-              3,
-              "G",
-              [
-                4,
-                "10"
-              ]
-            ]
-          },
-          "fields": {
-          },
-          "shadow": false,
-          "topLevel": false
-        },
-        "h": {
-          "opcode": "motion_changexby",
-          "next": "j",
-          "parent": "x",
-          "inputs": {
-            "DX": [
-              3,
-              "H",
-              [
-                4,
-                "10"
-              ]
-            ]
-          },
-          "fields": {
-          },
-          "shadow": false,
-          "topLevel": false
-        },
-        "H": {
-          "opcode": "motion_xposition",
-          "next": null,
-          "parent": "h",
-          "inputs": {
-          },
-          "fields": {
-          },
-          "shadow": false,
-          "topLevel": false
-        },
-        "j": {
-          "opcode": "motion_changexby",
-          "next": "i",
-          "parent": "h",
-          "inputs": {
-            "DX": [
-              3,
-              "I",
-              [
-                4,
-                "10"
-              ]
-            ]
-          },
-          "fields": {
-          },
-          "shadow": false,
-          "topLevel": false
-        },
-        "I": {
-          "opcode": "motion_yposition",
-          "next": null,
-          "parent": "j",
-          "inputs": {
-          },
-          "fields": {
-          },
-          "shadow": false,
-          "topLevel": false
-        },
-        "G": {
-          "opcode": "motion_direction",
-          "next": null,
-          "parent": "i",
-          "inputs": {
-          },
-          "fields": {
-          },
-          "shadow": false,
-          "topLevel": false
-        },
-        "a": {
-          "opcode": "motion_gotoxy",
-          "next": "y",
-          "parent": "i",
-          "inputs": {
-            "X": [
-              3,
-              "J",
-              [
-                4,
-                "218"
-              ]
-            ],
-            "Y": [
-              3,
-              "K",
-              [
-                4,
-                "57"
-              ]
-            ]
-          },
-          "fields": {
-          },
-          "shadow": false,
-          "topLevel": false
-        },
-        "y": {
-          "opcode": "motion_changexby",
+        "b": {
+          "opcode": "control_repeat",
           "next": null,
           "parent": "a",
           "inputs": {
-            "DX": [
-              3,
-              "L",
-              [
-                4,
-                "10"
-              ]
-            ]
-          },
-          "fields": {
-          },
-          "shadow": false,
-          "topLevel": false
-        },
-        "J": {
-          "opcode": "sensing_mousex",
-          "next": null,
-          "parent": "a",
-          "inputs": {
-          },
-          "fields": {
-          },
-          "shadow": false,
-          "topLevel": false
-        },
-        "K": {
-          "opcode": "sensing_mousey",
-          "next": null,
-          "parent": "a",
-          "inputs": {
-          },
-          "fields": {
-          },
-          "shadow": false,
-          "topLevel": false
-        },
-        "L": {
-          "opcode": "operator_random",
-          "next": null,
-          "parent": "y",
-          "inputs": {
-            "FROM": [
+            "TIMES": [
               1,
               [
-                4,
-                "1"
+                6,
+                "11"
               ]
             ],
-            "TO": [
-              1,
-              [
-                4,
-                "10"
-              ]
+            "SUBSTACK": [
+              2,
+              "d"
             ]
           },
           "fields": {
@@ -754,8 +182,8 @@
       "volume": 100,
       "layerOrder": 1,
       "visible": true,
-      "x": 218,
-      "y": 57,
+      "x": 0,
+      "y": 100,
       "size": 100,
       "direction": 90,
       "draggable": false,

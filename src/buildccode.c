@@ -49,7 +49,7 @@ String GetArg(int argtype, ScratchArgData argdata, vecScratchBlock lines)
 	switch (argtype) 
 	{
 	case ArgType_Pointer:
-		return LineToBlock(GetIndexOfBlockById(argdata.idPointer.data,lines), lines, false);
+		return LineToBlock(GetIndexOfBlockById(argdata.idPointer.data, lines), lines, false);
 	
 	case ArgType_Number:
 	case ArgType_PositiveNumber:
@@ -70,7 +70,7 @@ char* GetFullProgram(vecScratchBlock lines, struct json_object* variables, vecFu
 {
 	FILE* file = fopen("../../../../output/output.c", "w");
 
-	fprintf(file, "#include<scratch.h>\n");
+	fprintf(file, "#include<scratch.h>\n\n");
 
 	json_object_object_foreach(variables, key, val)
 	{
@@ -91,7 +91,31 @@ char* GetFullProgram(vecScratchBlock lines, struct json_object* variables, vecFu
 		}
 	}
 
-	fprintf(file, "int main() {\n\tstart();\n}\n");
+	fprintf(file, "\n");
+
+	for (int i = 0; i < functions.length; i++)
+	{
+		fprintf(file, "void %s (", functions.data[i].proccode.data);
+		for (int j = 0; j < functions.data[i].args; j++)
+		{
+			switch (functions.data[i].argTypes[j])
+			{
+			case 'n':
+				fprintf(file, "double ");
+				break;
+			default:
+				printf("Error in buildccode ~line 141, type not implemented!");
+				break;
+				exit(-1);
+			}
+			fprintf(file, "%s", functions.data[i].argids[j].data);
+		}
+		fprintf(file, ");\n");
+	}
+
+	fprintf(file, "\n");
+
+	fprintf(file, "int main() {\n\tStart();\n}\n\n");
 
 	if (file == NULL) {
 		perror("Error opening file");
@@ -115,22 +139,53 @@ char* GetFullProgram(vecScratchBlock lines, struct json_object* variables, vecFu
 			}
 			fprintf(file, "%s", functions.data[i].argids[j].data);
 		}
-		fprintf(file, ") {\n");
-		
+		if (functions.data[i].warp)
+		{
+			fprintf(file, ") {\n\tenableWarp();\n");
+		}
+		else 
+		{
+			fprintf(file, ") {\n");
+		}
+
 		int index = GetIndexOfBlockById(functions.data[i].next.data, lines);
 
 		int indentation = 1;
 
 		while (index != -1)
 		{
+			ScratchBlock sb = lines.data[index];
+			bool rep_end = strcmp(sb.opcode.data, "control_repeat_end") == 0;
+			if (rep_end) 
+			{
+				indentation--;
+			}
 			for (int i = 0; i < indentation; i++)
 			{
 				fprintf(file, "\t");
 			}
-			fprintf(file, "%s\n", LineToBlock(index, lines, true).data);
-			index = GetIndexOfBlockById(lines.data[index].next.data, lines);
+			if (strcmp(sb.opcode.data, "control_repeat") == 0)
+			{
+				fprintf(file, "for(int i%i = 0; i%i < %s; i%i++) {\n", indentation, indentation, sb.argdata->text.data, indentation); indentation++;
+			}
+			else if (rep_end)
+			{
+				fprintf(file, "}\n");
+			}
+			else
+			{
+				fprintf(file, "%s\n", LineToBlock(index, lines, true).data);
+			}
+			index = GetIndexOfBlockById(sb.next.data, lines);
 		}
-		fprintf(file, "}\n");
+		if (functions.data[i].warp)
+		{
+			fprintf(file, "\tdisableWarp();\n}\n\n");
+		}
+		else 
+		{
+			fprintf(file, "}\n\n");
+		}
 	}
 
 	fclose(file);
