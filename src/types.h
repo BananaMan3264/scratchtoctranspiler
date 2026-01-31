@@ -26,16 +26,15 @@ typedef union ScratchArgData
 
 typedef struct ScratchBlock
 {
-	String id;
 	String opcode;
-	String next;
-	String previous;
 	int args;
 	int* argtypes;
 	ScratchArgData* argdata;
-	int substackLength;
-	String* substack;
 } ScratchBlock;
+
+typedef struct vecScratchBlock {
+	ScratchBlock* data; size_t allocated_size; size_t length; size_t sizeoftype;
+} vecScratchBlock;
 
 typedef struct Function 
 {
@@ -44,12 +43,9 @@ typedef struct Function
 	String next;
 	char* argTypes;
 	String* argids;
+	vecScratchBlock blocks;
 	bool warp;
 } Function;
-
-typedef struct vecScratchBlock {
-	ScratchBlock* data; size_t allocated_size; size_t length; size_t sizeoftype;
-} vecScratchBlock;
 
 typedef struct vecFunction {
 	Function* data; size_t allocated_size; size_t length; size_t sizeoftype;

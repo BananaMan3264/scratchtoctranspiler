@@ -10,10 +10,10 @@ int GetIndexOfBlockById(char* id, vecScratchBlock lines)
 	if (id == NULL) { return -1; }
 	for (int i = 0; i < lines.length; i++)
 	{
-		if (strcmp(lines.data[i].id.data, id) == 0)
-		{
-			return i;
-		}
+		//if (strcmp(lines.data[i].id.data, id) == 0)
+		//{
+		//	return i;
+		//}
 	}
 	return -1;
 }
@@ -124,8 +124,8 @@ String SanitiseScratchNameToC(String varName)
 			str.data[j] = 'b'; j++;
 			break;
 		default:
-			str.data[j] = varName.data[i]; j++;
 			str.data[j] = 'a'; j++;
+			str.data[j] = varName.data[i]; j++;
 			break;
 		}
 	}

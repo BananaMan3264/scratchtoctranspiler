@@ -46,33 +46,23 @@ int main()
 
 	struct json_object* blocks = json_object_object_get(json_object_array_get_idx(json_object_object_get(project, "targets"), 1), "blocks");
 
-	ParseTextReturn out = ParseText(blocks);
+	vecFunction functions = ParseText(blocks);
 
-	vecScratchBlock lines = out.blocks;
-	vecFunction functions = out.functions;
-
-	//int jEk@4 | i[#Fk ? (8x)AV. - my variable a;
-
-	for (int i = 0; i < lines.length; i++) 
+	for (int i = 0; i < functions.length; i++) 
 	{
-		ScratchBlock sb = lines.data[i];
-		printf("Id: %s\nOpcode: %s\nNext: %s\nParent: %s\n", sb.id.data, sb.opcode.data, sb.next.data, sb.previous.data);
-		for (int j = 0; j < sb.args; j++)
+		printf("Function: %s\n",functions.data[i].proccode.data);
+		for (int j = 0; j < functions.data[i].blocks.length; j++) 
 		{
-			switch (sb.argtypes[j])
-			{
-			case ArgType_Pointer:
-				printf("\tBlock pointer: %s\n", sb.argdata[j].text.data);
-				break;
-			case ArgType_Number:
-				printf("\tString: %s\n", sb.argdata[j].text.data);
-				break;
-			}
+#define this functions.data[i].blocks.data[j]
+			printf("\tBlock: %s\n\tArgs: %i\n", this.opcode.data, this.args);
+#undef this
 		}
 		printf("\n");
 	}
 
-	GetFullProgram(lines, json_object_object_get(json_object_array_get_idx(json_object_object_get(project, "targets"), 0), "variables"), out.functions);
+	struct json_object* vars = json_object_object_get(json_object_array_get_idx(json_object_object_get(project, "targets"), 0), "variables");
+
+	GetFullProgram(vars, functions, blocks);
 
 	return 0;
 }

@@ -5,8 +5,9 @@
 #include "std_vector.h"
 #include "types.h"
 #include "util.h"
+#include "parsejson.h"
 
-String GetArg(int argtype, ScratchArgData argdata, vecScratchBlock lines);
+String GetArg(int argtype, ScratchArgData argdata, struct json_object* blocks);
 
 int GetFirstWhenFlagClicked(vecScratchBlock lines)
 {
@@ -19,18 +20,18 @@ int GetFirstWhenFlagClicked(vecScratchBlock lines)
 	}
 }
 
-String LineToBlock(int index, vecScratchBlock lines, bool top)
+String LineToBlock(ScratchBlock sb, struct json_object* blocks, bool top)
 {
-	String str = SafeStringMerge(lines.data[index].opcode, AsManagedString("("));
-	for (int i = 0; i < lines.data[index].args - 1; i++)
+	String str = SafeStringMerge(sb.opcode, AsManagedString("("));
+	for (int i = 0; i < sb.args - 1; i++)
 	{
-		str = SafeStringMerge(str, GetArg(lines.data[index].argtypes[i], lines.data[index].argdata[i], lines));
+		str = SafeStringMerge(str, GetArg(sb.argtypes[i], sb.argdata[i], blocks));
 		str = SafeStringMerge(str, AsManagedString(", "));
 	}
-	if (lines.data[index].args != 0)
+	if (sb.args != 0)
 	{
-		int idx = lines.data[index].args - 1;
-		String c = GetArg(lines.data[index].argtypes[idx], lines.data[index].argdata[idx], lines);
+		int idx = sb.args - 1;
+		String c = GetArg(sb.argtypes[idx], sb.argdata[idx], blocks);
 		str = SafeStringMerge(str, c);
 	}
 	if (top)
@@ -44,12 +45,12 @@ String LineToBlock(int index, vecScratchBlock lines, bool top)
 	return str;
 }
 
-String GetArg(int argtype, ScratchArgData argdata, vecScratchBlock lines)
+String GetArg(int argtype, ScratchArgData argdata, struct json_object* blocks)
 {
 	switch (argtype) 
 	{
 	case ArgType_Pointer:
-		return LineToBlock(GetIndexOfBlockById(argdata.idPointer.data, lines), lines, false);
+		return LineToBlock(GetBlock(argdata.idPointer.data, blocks), blocks, false);
 	
 	case ArgType_Number:
 	case ArgType_PositiveNumber:
@@ -66,7 +67,7 @@ String GetArg(int argtype, ScratchArgData argdata, vecScratchBlock lines)
 	}
 }
 
-char* GetFullProgram(vecScratchBlock lines, struct json_object* variables, vecFunction functions)
+char* GetFullProgram(struct json_object* variables, vecFunction functions, struct json_object* blocks)
 {
 	FILE* file = fopen("../../../../output/output.c", "w");
 
@@ -93,99 +94,64 @@ char* GetFullProgram(vecScratchBlock lines, struct json_object* variables, vecFu
 
 	fprintf(file, "\n");
 
-	for (int i = 0; i < functions.length; i++)
-	{
-		fprintf(file, "void %s (", functions.data[i].proccode.data);
-		for (int j = 0; j < functions.data[i].args; j++)
-		{
-			switch (functions.data[i].argTypes[j])
-			{
-			case 'n':
-				fprintf(file, "double ");
-				break;
-			default:
-				printf("Error in buildccode ~line 141, type not implemented!");
-				break;
-				exit(-1);
-			}
-			fprintf(file, "%s", functions.data[i].argids[j].data);
-		}
-		fprintf(file, ");\n");
-	}
+	int indentation = 0;
 
-	fprintf(file, "\n");
-
-	fprintf(file, "int main() {\n\tStart();\n}\n\n");
-
-	if (file == NULL) {
-		perror("Error opening file");
-		return 1;
-	}
+#define PRINT_INDENTATION for(int qx = 0; qx < indentation; qx++) { fprintf(file, "\t"); }
 
 	for (int i = 0; i < functions.length; i++) 
 	{
-		fprintf(file, "void %s (", functions.data[i].proccode.data);
-		for (int j = 0; j < functions.data[i].args; j++) 
+		PRINT_INDENTATION fprintf(file, "void %s(", functions.data[i].proccode.data);
+		PRINT_INDENTATION fprintf(file, ") \n{\n");
+		indentation++;
+		for (int j = 0; j < functions.data[i].blocks.length; j++) 
 		{
-			switch (functions.data[i].argTypes[j])
+#define THIS functions.data[i].blocks.data[j]
+
+			if (strcmp(THIS.opcode.data, "control_repeat") == 0)
 			{
-			case 'n':
-				fprintf(file, "double ");
-				break;
-			default:
-				printf("Error in buildccode ~line 141, type not implemented!");
-				break;
-				exit(-1);
+				PRINT_INDENTATION fprintf(file, "for(int i%i = 0; i%i < %s; i%i++)\n", indentation, indentation, GetArg(THIS.argtypes[0], THIS.argdata[0], blocks).data, indentation);
+				PRINT_INDENTATION fprintf(file, "{\n");
+				indentation++;
 			}
-			fprintf(file, "%s", functions.data[i].argids[j].data);
-		}
-		if (functions.data[i].warp)
-		{
-			fprintf(file, ") {\n\tenableWarp();\n");
-		}
-		else 
-		{
-			fprintf(file, ") {\n");
-		}
-
-		int index = GetIndexOfBlockById(functions.data[i].next.data, lines);
-
-		int indentation = 1;
-
-		while (index != -1)
-		{
-			ScratchBlock sb = lines.data[index];
-			bool rep_end = strcmp(sb.opcode.data, "control_repeat_end") == 0;
-			if (rep_end) 
+			else if (strcmp(THIS.opcode.data, "control_if") == 0) 
+			{
+				PRINT_INDENTATION fprintf(file, "if(%s)\n", GetArg(THIS.argtypes[0], THIS.argdata[0], blocks).data);
+				PRINT_INDENTATION fprintf(file, "{\n");
+				indentation++;
+			}
+			else if (strcmp(THIS.opcode.data, "control_repeat_until") == 0)
+			{
+				PRINT_INDENTATION fprintf(file, "while(!(%s))\n", GetArg(THIS.argtypes[0], THIS.argdata[0], blocks).data);
+				PRINT_INDENTATION fprintf(file, "{\n");
+				indentation++;
+			}
+			else if (strcmp(THIS.opcode.data, "control_while") == 0)
+			{
+				PRINT_INDENTATION fprintf(file, "while(%s)\n", GetArg(THIS.argtypes[0], THIS.argdata[0], blocks).data);
+				PRINT_INDENTATION fprintf(file, "{\n");
+				indentation++;
+			}
+			else if (strcmp(THIS.opcode.data, "control_forever") == 0)
+			{
+				PRINT_INDENTATION fprintf(file, "while(1)\n");
+				PRINT_INDENTATION fprintf(file, "{\n");
+				indentation++;
+			}
+			else if (strcmp(THIS.opcode.data, "control_repeat_end") == 0)
 			{
 				indentation--;
-			}
-			for (int i = 0; i < indentation; i++)
-			{
-				fprintf(file, "\t");
-			}
-			if (strcmp(sb.opcode.data, "control_repeat") == 0)
-			{
-				fprintf(file, "for(int i%i = 0; i%i < %s; i%i++) {\n", indentation, indentation, sb.argdata->text.data, indentation); indentation++;
-			}
-			else if (rep_end)
-			{
-				fprintf(file, "}\n");
+				PRINT_INDENTATION fprintf(file, "}\n");
 			}
 			else
 			{
-				fprintf(file, "%s\n", LineToBlock(index, lines, true).data);
+				PRINT_INDENTATION fprintf(file, "%s\n", LineToBlock(THIS, blocks, true).data);
 			}
-			index = GetIndexOfBlockById(sb.next.data, lines);
+
+#undef THIS
 		}
-		if (functions.data[i].warp)
-		{
-			fprintf(file, "\tdisableWarp();\n}\n\n");
-		}
-		else 
-		{
-			fprintf(file, "}\n\n");
-		}
+		indentation--;
+		PRINT_INDENTATION fprintf(file, "}\n\n");
+
 	}
 
 	fclose(file);

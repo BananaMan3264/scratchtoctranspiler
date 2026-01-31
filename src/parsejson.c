@@ -7,148 +7,32 @@
 #include "parsejson.h"
 #include "util.h"
 
-ScratchBlock GetScratchBlock(struct json_object* block, String id, vecScratchBlock* lines, struct json_object* blocks, bool probe)
+#define NEXT(a, b) json_object_object_get(a, b)
+#define NEXT2(a, b, c) NEXT(NEXT(a,b),c)
+
+ScratchBlock GetBlock(char* id, struct json_object* blocks) 
 {
-	int idx = GetIndexOfBlockById(id.data, *lines);
-	if (idx != -1) 
-	{
-		return lines->data[idx];
-	}
-
 	ScratchBlock sb;
-
-	sb.id = id;
+	struct json_object* block = json_object_object_get(blocks, id);
 
 	sb.opcode = AsManagedString(json_object_get_string(json_object_object_get(block, "opcode")));
 
-	struct json_object* next = json_object_object_get(block, "next");
-	if (json_object_is_type(next, json_type_null))
-	{
-		sb.next = (String){ NULL, false };
-	}
-	else
-	{
-		sb.next = AsManagedString(json_object_get_string(next));
-	}
-	struct json_object* previous = json_object_object_get(block, "parent");
-	if (json_object_is_type(previous, json_type_null))
-	{
-		sb.previous = (String){ NULL, false };
-	}
-	else
-	{
-		sb.previous = AsManagedString(json_object_get_string(previous));
-	}
-
-
-	if (strcmp("control_repeat", sb.opcode.data) == 0)
-	{
-		sb.args = 1;
-		sb.argdata = malloc(sizeof(ScratchArgData)); if (!sb.argdata) { printf("Malloc error!"); exit(-1); }
-		sb.argtypes = malloc(sizeof(int)); if (!sb.argtypes) { printf("Malloc error!"); exit(-1); }
-
-		sb.argdata[0].text = AsManagedString(json_object_get_string(json_object_array_get_idx(json_object_array_get_idx(
-			json_object_object_get(json_object_object_get(block, "inputs"), "TIMES"),
-			1), 1)));
-		sb.argtypes[0] = ArgType_Number;
-
-		String realNext = AsManagedString(json_object_get_string(json_object_array_get_idx(json_object_object_get(json_object_object_get(block, "inputs"), "SUBSTACK"), 1)));
-
-		String storeRealNext = realNext;
-
-		ScratchBlock sbLoop;
-		String buf;
-		while (realNext.data != NULL)
-		{
-			sbLoop = GetScratchBlock(json_object_object_get(blocks, realNext.data), realNext, lines, blocks, true);
-
-			String storePrevNext = sbLoop.next;
-
-
-			if (sbLoop.next.data == NULL)
-			{
-				
-				int idx = GetIndexOfBlockById(realNext.data, *lines);
-				buf = AsManagedString(SafeStringMerge(sb.id, AsManagedString("_LoopEnd")).data);
-				if (idx == -1)
-				{
-					struct json_object* block = json_object_object_get(blocks, realNext.data);
-					if (json_object_object_add(block, "next", json_object_new_string(buf.data)) != 0)
-					{
-						printf("Could not reset next value");
-						exit(-1);
-					}
-					free(buf.data);
-				}
-				else 
-				{
-					lines->data[idx].next = buf;
-				}
-			}
-
-
-			realNext = storePrevNext;
-		}
-
-		ScratchBlock sbLoopEnd;
-
-		sbLoopEnd.args = 0;
-		sbLoopEnd.next = sb.next;
-		sbLoopEnd.previous = sbLoop.id;
-
-		sbLoopEnd.id = SafeStringMerge(sb.id, AsManagedString("_LoopEnd"));
-
-		sbLoopEnd.opcode = SafeStringMerge(AsManagedString(""),AsManagedString("control_repeat_end"));
-
-		if (!probe) 
-		{
-			if (lines->length + 1 > lines->allocated_size) {
-				{
-					lines->allocated_size = lines->allocated_size * 2; void* temp = realloc(lines->data, lines->allocated_size * lines->sizeoftype); if (!temp) {
-						exit(-1);
-					} lines->data = temp;
-				};
-			} lines->data[lines->length] = sbLoopEnd; lines->length++;
-		}
-
-		sb.next = storeRealNext;
-
-		return sb;
-	}
-
 	if (strcmp(sb.opcode.data, "procedures_call") == 0)
 	{
-		sb.opcode =
-			SanitiseScratchNameToC(
-				AsManagedString(
-					json_object_get_string(
-						json_object_object_get(
-							json_object_object_get(
-								block,
-								"mutation"
-							),
-							"proccode"
-						)
-					)
-				)
-			);
+		sb.opcode = SanitiseScratchNameToC(AsManagedString(json_object_get_string(NEXT2(block, "mutation", "proccode"))));
 	}
 
-	if (strcmp(sb.opcode.data, "argument_reporter_string_number") == 0)
+	struct json_object* fields = NEXT(block, "fields");
+
+	json_object_object_foreach(fields, key, val) 
 	{
-		sb.args = 1;
-		sb.argtypes = malloc(sizeof(int)); if (!sb.argtypes) { printf("Malloc error!"); exit(-1); } sb.argtypes[0] = ArgType_Variable;
-		ScratchArgData ad; ad.text = AsManagedString(json_object_get_string(json_object_array_get_idx(json_object_object_get(json_object_object_get(block, "fields"), "VALUE"), 0)));
-		sb.argdata = malloc(sizeof(ScratchArgData)); if (!sb.argdata) { printf("Malloc error!"); exit(-1); } sb.argdata[0] = ad;
-		return sb;
+		sb.opcode = SafeStringMerge(sb.opcode, SanitiseScratchNameToC(AsManagedString(json_object_get_string(json_object_array_get_idx(val, 0)))));
 	}
 
-	struct json_object* args = json_object_object_get(block, "inputs");
 	sb.args = json_object_object_length(json_object_object_get(block, "inputs"));
-
-	sb.argdata = malloc(sb.args * sizeof(ScratchArgData));
-	sb.argtypes = malloc(sb.args * sizeof(int));
-
+	sb.argdata = malloc(sizeof(ScratchArgData) * sb.args); if (!sb.argdata) { printf("Malloc error!"); exit(-1); }
+	sb.argtypes = malloc(sizeof(int) * sb.args); if (!sb.argtypes) { printf("Malloc error!"); exit(-1); }
+	struct json_object* args = NEXT(block, "inputs");
 	int i = 0;
 	json_object_object_foreach(args, block_key, block_val)
 	{
@@ -209,26 +93,115 @@ ScratchBlock GetScratchBlock(struct json_object* block, String id, vecScratchBlo
 		}
 		i++;
 	}
-
-	struct json_object* fields = json_object_object_get(block, "fields");
-
-	json_object_object_foreach(fields, fields_key, fields_val)
-	{
-		String new = SanitiseScratchNameToC(AsManagedString(json_object_get_string(json_object_array_get_idx(fields_val, 0))));
-		sb.opcode = SafeStringMerge(sb.opcode, new);
-	}
-
 	return sb;
 }
 
-ParseTextReturn ParseText(struct json_object* blocks)
+void PushBlock(char* id, struct json_object* blocks, vecScratchBlock* lines) 
 {
-	vecScratchBlock lines;
 
-	lines.allocated_size = 8; lines.length = 0; lines.sizeoftype = sizeof(ScratchBlock); lines.data = malloc(sizeof(ScratchBlock) * lines.allocated_size); if (!lines.data) {
-		exit(-1);
+	ScratchBlock sb;
+
+	struct json_object* this = json_object_object_get(blocks, id);
+
+	sb.opcode = AsManagedString(json_object_get_string(json_object_object_get(this, "opcode")));
+
+	if (strcmp(sb.opcode.data, "control_repeat") == 0)
+	{
+		sb.args = 1;
+		sb.argdata  = malloc(sizeof(ScratchArgData)); if(!sb.argdata ) { printf("Malloc error!"); exit(-1); } 
+		sb.argtypes = malloc(sizeof(int)		   ); if(!sb.argtypes) { printf("Malloc error!"); exit(-1); } 
+
+		sb.argdata[0].text = AsManagedString(json_object_get_string(json_object_array_get_idx(json_object_array_get_idx(NEXT2(this, "inputs", "TIMES"), 1), 1)));
+		sb.argtypes[0] = ArgType_Number;
+
+		if (lines->length + 1 > lines->allocated_size) {
+			{
+				lines->allocated_size = lines->allocated_size * 2; void* temp = realloc(lines->data, lines->allocated_size * lines->sizeoftype); if (!temp) {
+					exit(-1);
+				} lines->data = temp;
+			};
+		} lines->data[lines->length] = sb; lines->length++;
+
+		char* next = json_object_get_string(json_object_array_get_idx(NEXT2(this,"inputs","SUBSTACK"), 1));
+		while (next) 
+		{
+			PushBlock(next, blocks, lines);
+
+			next = json_object_get_string(NEXT2(blocks, next, "next"));
+		}
+
+		sb.opcode = SafeStringMerge(AsManagedString("control_repeat_end"),AsManagedString(""));
+		sb.args = 0;
+	}
+	else if (strcmp(sb.opcode.data, "control_if") == 0 || strcmp(sb.opcode.data, "control_repeat_until") == 0 || strcmp(sb.opcode.data, "control_while") == 0)
+	{
+		sb.args = 1;
+		sb.argdata = malloc(sizeof(ScratchArgData)); if (!sb.argdata) { printf("Malloc error!"); exit(-1); }
+		sb.argtypes = malloc(sizeof(int)); if (!sb.argtypes) { printf("Malloc error!"); exit(-1); }
+
+		sb.argdata[0].text = AsManagedString(json_object_get_string(json_object_array_get_idx(NEXT2(this, "inputs", "CONDITION"), 1)));
+		sb.argtypes[0] = ArgType_Pointer;
+
+		if (lines->length + 1 > lines->allocated_size) {
+			{
+				lines->allocated_size = lines->allocated_size * 2; void* temp = realloc(lines->data, lines->allocated_size * lines->sizeoftype); if (!temp) {
+					exit(-1);
+				} lines->data = temp;
+			};
+		} lines->data[lines->length] = sb; lines->length++;
+
+		char* next = json_object_get_string(json_object_array_get_idx(NEXT2(this, "inputs", "SUBSTACK"), 1));
+		while (next)
+		{
+			PushBlock(next, blocks, lines);
+
+			next = json_object_get_string(NEXT2(blocks, next, "next"));
+		}
+
+		sb.opcode = SafeStringMerge(AsManagedString("control_repeat_end"), AsManagedString(""));
+		sb.args = 0;
+	}
+	else if (strcmp(sb.opcode.data, "control_forever") == 0)
+	{
+		sb.args = 0;
+
+		if (lines->length + 1 > lines->allocated_size) {
+			{
+				lines->allocated_size = lines->allocated_size * 2; void* temp = realloc(lines->data, lines->allocated_size * lines->sizeoftype); if (!temp) {
+					exit(-1);
+				} lines->data = temp;
+			};
+		} lines->data[lines->length] = sb; lines->length++;
+
+		char* next = json_object_get_string(json_object_array_get_idx(NEXT2(this, "inputs", "SUBSTACK"), 1));
+		while (next)
+		{
+			PushBlock(next, blocks, lines);
+
+			next = json_object_get_string(NEXT2(blocks, next, "next"));
+		}
+
+		sb.opcode = SafeStringMerge(AsManagedString("control_repeat_end"), AsManagedString(""));
+		sb.args = 0;
+	}
+	else
+	{
+		sb = GetBlock(id, blocks);
 	}
 
+	{
+		if (lines->length + 1 > lines->allocated_size) {
+			{
+				lines->allocated_size = lines->allocated_size * 2; void* temp = realloc(lines->data, lines->allocated_size * lines->sizeoftype); if (!temp) {
+					exit(-1);
+				} lines->data = temp;
+			};
+		} lines->data[lines->length] = sb; lines->length++;
+	}
+}
+
+vecFunction ParseText(struct json_object* blocks)
+{
 	vecFunction functions;
 
 	functions.allocated_size = 8; functions.length = 0; functions.sizeoftype = sizeof(Function); functions.data = malloc(sizeof(Function) * functions.allocated_size);
@@ -236,111 +209,68 @@ ParseTextReturn ParseText(struct json_object* blocks)
 		exit(-1);
 	}
 
-	json_object_object_foreach(blocks, key, val)
+	json_object_object_foreach(blocks, key, block)
 	{
-		ScratchBlock sb;
-		sb.id = AsManagedString(key);
+		char* opcode = json_object_get_string(json_object_object_get(block, "opcode"));
 
-		sb.opcode = AsManagedString(json_object_get_string(json_object_object_get(val, "opcode")));
-
-		struct json_object* next = json_object_object_get(val, "next");
-		if (json_object_is_type(next, json_type_null))
-		{
-			sb.next = (String){ NULL, false };
-		}
-		else
-		{
-			sb.next = AsManagedString(json_object_get_string(next));
-		}
-		struct json_object* previous = json_object_object_get(val, "parent");
-		if (json_object_is_type(previous, json_type_null))
-		{
-			sb.previous = (String){ NULL, false };
-		}
-		else
-		{
-			sb.previous = AsManagedString(json_object_get_string(previous));
-		}
-
-		if (strcmp(sb.opcode.data, "event_whenflagclicked") == 0)
+		if (strcmp(opcode, "event_whenflagclicked") == 0)
 		{
 			Function f;
 
+			vecScratchBlock lines;
+
+			lines.allocated_size = 8; lines.length = 0; lines.sizeoftype = sizeof(ScratchBlock); lines.data = malloc(sizeof(ScratchBlock) * lines.allocated_size); if (!lines.data) {
+				exit(-1);
+			}
+
+			f.blocks = lines;
+
 			f.args = 0;
-			char* c = "Start";
-			char* d = malloc(strlen(c) + 1); if (!d) { printf("Malloc error!"); exit(-1); }
-			memcpy(d, c, strlen(c) + 1);
-			f.proccode = AsUnmanagedString(d);
+			f.next = AsManagedString(json_object_get_string(json_object_object_get(block, "next")));
+
+			f.proccode = SafeStringMerge(AsManagedString("Start"), AsManagedString(""));
 
 			f.warp = false;
 
-			f.next = sb.next;
-			
 			std_vector_pushback(functions, f);
-			continue;
 		}
-
-		if (strcmp(sb.opcode.data, "procedures_definition") == 0)
-		{
-			continue;
-		}
-
-		if (strcmp(sb.opcode.data, "procedures_prototype") == 0)
+		else if (strcmp(opcode, "procedures_prototype") == 0) 
 		{
 			Function f;
 
-			struct json_object* mutation = json_object_object_get(val, "mutation");
+			vecScratchBlock lines;
 
-			struct json_object* argnames = json_tokener_parse(json_object_get_string(json_object_object_get(mutation, "argumentnames")));
-
-			f.args = json_object_array_length(argnames);
-
-			f.argids = malloc(sizeof(String) * f.args);
-			f.argTypes = malloc(sizeof(char) * f.args);
-
-			f.next = AsManagedString(json_object_get_string(json_object_object_get(json_object_object_get(blocks, sb.previous.data), "next")));
-
-			if (!f.argids) { printf("Malloc Error!"); exit(-1); }
-			if (!f.argTypes) { printf("Malloc Error!"); exit(-1); }
-
-			for (int i = 0; i < f.args; i++)
-			{
-				f.argTypes[i] = 'n';
-				char* a = json_object_get_string(json_object_array_get_idx(argnames, i));
-				char* b = malloc(strlen(a) + 1); if (!b) { printf("Malloc error!"); exit(-1); }
-				memcpy(b, a, strlen(a) + 1);
-				f.argids[i] = AsManagedString(b);
+			lines.allocated_size = 8; lines.length = 0; lines.sizeoftype = sizeof(ScratchBlock); lines.data = malloc(sizeof(ScratchBlock) * lines.allocated_size); if (!lines.data) {
+				exit(-1);
 			}
 
-			json_object_put(argnames);
+			f.blocks = lines;
 
-			f.proccode =
-				SanitiseScratchNameToC(
-					AsManagedString(
-						json_object_get_string(
-							json_object_object_get(
-								mutation,
-								"proccode"
-							)
-						)
-					)
-				);
+			f.args = 0;
 
-			f.warp = strcmp(json_object_get_string(json_object_object_get(mutation, "warp")), "true") == 0;
+			char* parent = json_object_get_string(json_object_object_get(block, "parent"));
+
+			f.next = AsManagedString(json_object_get_string(json_object_object_get(json_object_object_get(blocks, parent),"next")));
+
+			f.proccode = SanitiseScratchNameToC(AsManagedString(json_object_get_string(json_object_object_get(json_object_object_get(block, "mutation"), "proccode"))));
+
+			f.warp = false;
 
 			std_vector_pushback(functions, f);
-			continue;
 		}
-
-		sb = GetScratchBlock(val, AsManagedString(key), &lines, blocks, false);
-
-		std_vector_pushback(lines, sb);
 	}
 
-	ParseTextReturn output;
+	for (int i = 0; i < functions.length; i++) 
+	{
+		char* next = functions.data[i].next.data;
 
-	output.blocks = lines;
-	output.functions = functions;
+		while (next != NULL) 
+		{
+			PushBlock(next, blocks, &functions.data[i].blocks);
 
-	return output;
+			next = json_object_get_string(json_object_object_get(json_object_object_get(blocks, next), "next"));
+		}
+	}
+
+	return functions;
 }
