@@ -57,10 +57,10 @@ String GetArg(int argtype, ScratchArgData argdata, struct json_object* blocks)
 	case ArgType_NegativeNumber:
 	case ArgType_Integer:
 	case ArgType_Angle:
-		return argdata.text;
+		return SafeStringMerge(SafeStringMerge(AsManagedString("ScratchSetDouble("), argdata.text), AsManagedString(")"));
 
 	case ArgType_String:
-		return SafeStringMerge(SafeStringMerge(AsManagedString("\""), argdata.text), AsManagedString("\""));
+		return SafeStringMerge(SafeStringMerge(AsManagedString("ScratchSetString(\""), argdata.text), AsManagedString("\")"));
 
 	case ArgType_Variable:
 		return argdata.text;
@@ -71,20 +71,20 @@ char* GetFullProgram(struct json_object* variables, vecFunction functions, struc
 {
 	FILE* file = fopen("../../../../output/output.c", "w");
 
-	fprintf(file, "#include<scratch.h>\n\n");
+	fprintf(file, "#include\"runtime/scratch.h\"\n\n");
 
 	json_object_object_foreach(variables, key, val)
 	{
 		switch (json_object_get_type(json_object_array_get_idx(val, 1)))
 		{
 		case json_type_int:
-			fprintf(file, "double %s = %i;\n", SanitiseScratchNameToC(AsManagedString(key)).data, json_object_get_int(json_object_array_get_idx(val, 1)));
+			fprintf(file, "ScratchValue %s = ScratchSetDouble(%i);\n", SanitiseScratchNameToC(AsManagedString(key)).data, json_object_get_int(json_object_array_get_idx(val, 1)));
 			break;
 		case json_type_double:
-			fprintf(file, "double %s = %f;\n", SanitiseScratchNameToC(AsManagedString(key)).data, json_object_get_double(json_object_array_get_idx(val, 1)));
+			fprintf(file, "ScratchValue %s = ScratchSetDouble(%f);\n", SanitiseScratchNameToC(AsManagedString(key)).data, json_object_get_double(json_object_array_get_idx(val, 1)));
 			break;
 		case json_type_string:
-			fprintf(file, "char*  %s = \"%s\";\n", SanitiseScratchNameToC(AsManagedString(key)).data, json_object_get_string(json_object_array_get_idx(val, 1)));
+			fprintf(file, "ScratchValue %s = ScratchSetString(\"%s\");\n", SanitiseScratchNameToC(AsManagedString(key)).data, json_object_get_string(json_object_array_get_idx(val, 1)));
 			break;
 		default:
 			printf("Type not implemented!");

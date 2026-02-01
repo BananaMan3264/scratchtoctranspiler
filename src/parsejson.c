@@ -24,14 +24,25 @@ ScratchBlock GetBlock(const char* id, struct json_object* blocks)
 
 	struct json_object* fields = NEXT(block, "fields");
 
-	json_object_object_foreach(fields, key, val) 
+	if (strcmp(sb.opcode.data, "data_setvariableto") == 0 || strcmp(sb.opcode.data, "data_changevariableby") == 0)
 	{
-		sb.opcode = SafeStringMerge(sb.opcode, SanitiseScratchNameToC(AsManagedString(json_object_get_string(json_object_array_get_idx(val, 0)))));
+		sb.args = 2;
+		sb.argdata = malloc(sizeof(ScratchArgData) * sb.args); if (!sb.argdata) { printf("Malloc error!"); exit(-1); }
+		sb.argtypes = malloc(sizeof(int) * sb.args); if (!sb.argtypes) { printf("Malloc error!"); exit(-1); }
+		sb.argdata[1].text = SanitiseScratchNameToC(AsManagedString(json_object_get_string(json_object_array_get_idx(NEXT2(block, "fields", "VARIABLE"), 1))));
+		sb.argtypes[1] = ArgType_Variable;
 	}
+	else 
+	{
+		json_object_object_foreach(fields, key, val)
+		{
+			sb.opcode = SafeStringMerge(sb.opcode, SanitiseScratchNameToC(AsManagedString(json_object_get_string(json_object_array_get_idx(val, 0)))));
+		}
 
-	sb.args = json_object_object_length(json_object_object_get(block, "inputs"));
-	sb.argdata = malloc(sizeof(ScratchArgData) * sb.args); if (!sb.argdata) { printf("Malloc error!"); exit(-1); }
-	sb.argtypes = malloc(sizeof(int) * sb.args); if (!sb.argtypes) { printf("Malloc error!"); exit(-1); }
+		sb.args = json_object_object_length(json_object_object_get(block, "inputs"));
+		sb.argdata = malloc(sizeof(ScratchArgData) * sb.args); if (!sb.argdata) { printf("Malloc error!"); exit(-1); }
+		sb.argtypes = malloc(sizeof(int) * sb.args); if (!sb.argtypes) { printf("Malloc error!"); exit(-1); }
+	}
 	struct json_object* args = NEXT(block, "inputs");
 	int i = 0;
 	json_object_object_foreach(args, block_key, block_val)
