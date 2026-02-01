@@ -51,7 +51,7 @@ typedef struct vecFunction {
 	Function* data; size_t allocated_size; size_t length; size_t sizeoftype;
 } vecFunction;
 
-#define AsUnmanagedString(a) (String){false, a}
-#define AsManagedString(a)   (String){true,  a}
+#define AsUnmanagedString(a) (String){false, (char *)(a)}
+#define AsManagedString(a)   (String){true,  (char *)(a)}
 
 #define freeIfUnmanaged(a) if(!a.managed) { free(a.data); }

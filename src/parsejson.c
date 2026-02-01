@@ -10,7 +10,7 @@
 #define NEXT(a, b) json_object_object_get(a, b)
 #define NEXT2(a, b, c) NEXT(NEXT(a,b),c)
 
-ScratchBlock GetBlock(char* id, struct json_object* blocks) 
+ScratchBlock GetBlock(const char* id, struct json_object* blocks) 
 {
 	ScratchBlock sb;
 	struct json_object* block = json_object_object_get(blocks, id);
@@ -96,7 +96,7 @@ ScratchBlock GetBlock(char* id, struct json_object* blocks)
 	return sb;
 }
 
-void PushBlock(char* id, struct json_object* blocks, vecScratchBlock* lines) 
+void PushBlock(const char* id, struct json_object* blocks, vecScratchBlock* lines) 
 {
 
 	ScratchBlock sb;
@@ -122,7 +122,7 @@ void PushBlock(char* id, struct json_object* blocks, vecScratchBlock* lines)
 			};
 		} lines->data[lines->length] = sb; lines->length++;
 
-		char* next = json_object_get_string(json_object_array_get_idx(NEXT2(this,"inputs","SUBSTACK"), 1));
+		const char* next = json_object_get_string(json_object_array_get_idx(NEXT2(this,"inputs","SUBSTACK"), 1));
 		while (next) 
 		{
 			PushBlock(next, blocks, lines);
@@ -150,7 +150,7 @@ void PushBlock(char* id, struct json_object* blocks, vecScratchBlock* lines)
 			};
 		} lines->data[lines->length] = sb; lines->length++;
 
-		char* next = json_object_get_string(json_object_array_get_idx(NEXT2(this, "inputs", "SUBSTACK"), 1));
+		const char* next = json_object_get_string(json_object_array_get_idx(NEXT2(this, "inputs", "SUBSTACK"), 1));
 		while (next)
 		{
 			PushBlock(next, blocks, lines);
@@ -173,7 +173,7 @@ void PushBlock(char* id, struct json_object* blocks, vecScratchBlock* lines)
 			};
 		} lines->data[lines->length] = sb; lines->length++;
 
-		char* next = json_object_get_string(json_object_array_get_idx(NEXT2(this, "inputs", "SUBSTACK"), 1));
+		const char* next = json_object_get_string(json_object_array_get_idx(NEXT2(this, "inputs", "SUBSTACK"), 1));
 		while (next)
 		{
 			PushBlock(next, blocks, lines);
@@ -211,7 +211,7 @@ vecFunction ParseText(struct json_object* blocks)
 
 	json_object_object_foreach(blocks, key, block)
 	{
-		char* opcode = json_object_get_string(json_object_object_get(block, "opcode"));
+		const char* opcode = json_object_get_string(json_object_object_get(block, "opcode"));
 
 		if (strcmp(opcode, "event_whenflagclicked") == 0)
 		{
@@ -248,7 +248,7 @@ vecFunction ParseText(struct json_object* blocks)
 
 			f.args = 0;
 
-			char* parent = json_object_get_string(json_object_object_get(block, "parent"));
+			const char* parent = json_object_get_string(json_object_object_get(block, "parent"));
 
 			f.next = AsManagedString(json_object_get_string(json_object_object_get(json_object_object_get(blocks, parent),"next")));
 
@@ -262,7 +262,7 @@ vecFunction ParseText(struct json_object* blocks)
 
 	for (int i = 0; i < functions.length; i++) 
 	{
-		char* next = functions.data[i].next.data;
+		const char* next = functions.data[i].next.data;
 
 		while (next != NULL) 
 		{

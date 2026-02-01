@@ -8,9 +8,15 @@
 #include "util.h"
 #include "buildccode.h"
 
-int main()
-{
-	FILE* json = fopen("../../../../scratch/Project/project.json", "r");
+int main(int argc, char**argv)
+{	
+	if (argc < 2) {
+		printf("Error: no arguments supplied!\n");
+		exit(-1);
+	}
+
+	const char* filePath = argv[1];
+	FILE* json = fopen(filePath, "r");
 	if (json == NULL)
 	{
 		printf("Error opening file - File could not be found!\n");
