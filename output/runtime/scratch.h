@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include "runtime/motion.h"
+#include "runtime/looks.h"
 #include "runtime/types.h"
 
 #pragma once

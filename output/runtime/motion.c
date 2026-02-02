@@ -9,13 +9,11 @@ extern int activeSprite;
 
 extern double scratch_motion_SpriteX[];
 extern double scratch_motion_SpriteY[];
-extern double scratch_motion_SpriteSize[];
 extern double scratch_motion_SpriteDirection[];
 extern int scratch_motion_SpriteRotStyle[];
 
 #define SX scratch_motion_SpriteX[activeSprite]
 #define SY scratch_motion_SpriteY[activeSprite]
-#define SS scratch_motion_SpriteSize[activeSprite]
 #define SD scratch_motion_SpriteDirection[activeSprite]
 #define SR scratch_motion_SpriteRotStyle[activeSprite]
 
