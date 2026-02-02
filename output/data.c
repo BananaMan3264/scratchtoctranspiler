@@ -1,5 +1,6 @@
 #include <stdbool.h>
 #include "runtime/motion.h"
+#include "data.h"
 
 double scratch_motion_SpriteX[] = { 0.0, 0.0, 0.0 };
 double scratch_motion_SpriteY[] = { 0.0, 0.0, 0.0 };
@@ -12,7 +13,7 @@ int scratch_motion_SpriteRotStyle[] = { RotStyle_allaround, RotStyle_allaround, 
 int scratch_looks_CostumeIndex[]  = { 0, 0, 0 };
 int scratch_looks_CostumeCounts[] = { 3, 3, 3 };
 
-char* scratch_looks_CostumeNames[3][3] =
+char* scratch_looks_CostumeNames[SPRITES][MAX_COSTUME_LENGTH] =
 {
 	{ "abc", "abc1", "abc2"},
 	{ "abc", "abc1", "abc2"},

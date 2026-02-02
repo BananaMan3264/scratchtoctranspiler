@@ -1,13 +1,20 @@
 cmake_minimum_required(VERSION 3.20)
 project(scratchtocruntime C)
 
-find_package(json-c CONFIG REQUIRED)
 find_package(SDL2 CONFIG REQUIRED)
+find_package(PkgConfig REQUIRED)
 
-add_executable(scratchruntime output.c data.c runtime/scratch.c runtime/main.c runtime/motion.c runtime/looks.c runtime/operators.c runtime/renderer.c "runtime/renderer.h" "runtime/output.h" "runtime/main.h")
+pkg_check_modules(RSVG REQUIRED IMPORTED_TARGET librsvg-2.0)
+pkg_check_modules(CAIRO REQUIRED IMPORTED_TARGET cairo)
+pkg_check_modules(GLIB REQUIRED IMPORTED_TARGET glib-2.0)
+
+add_executable(scratchruntime output.c data.c runtime/scratch.c runtime/main.c runtime/motion.c runtime/looks.c runtime/operators.c runtime/renderer.c runtime/renderer.h "runtime/output.h" "runtime/main.h" "runtime/control.c" "runtime/control.h" "data.h")
 
 target_link_libraries(scratchruntime PRIVATE
-    json-c::json-c
-    SDL2::SDL2
-    SDL2::SDL2main
+	SDL2::SDL2
+	SDL2::SDL2main
+	PkgConfig::RSVG
+	PkgConfig::CAIRO
+	PkgConfig::GLIB
+
 )

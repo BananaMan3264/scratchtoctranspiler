@@ -1,0 +1,2 @@
+#define SPRITES 3
+#define MAX_COSTUME_LENGTH 3

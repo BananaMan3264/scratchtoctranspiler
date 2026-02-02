@@ -5,7 +5,7 @@
 #include "types.h"
 
 
-extern int scratch_motion_SpriteSize[];
+extern double scratch_motion_SpriteSize[];
 extern int scratch_looks_CostumeIndex[];
 extern int scratch_looks_CostumeCounts[];
 extern char* scratch_looks_CostumeNames[3][3];

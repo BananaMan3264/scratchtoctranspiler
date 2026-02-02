@@ -32,9 +32,12 @@ void Init()
 
 void Start() 
 {
-	for(int i1 = 0; i1 < (int)ScratchVarGetDouble(ScratchSetDouble(2)); i1++)
+	motion_setrotationstyleYaalalibaaaraoauanad();
+	while(1)
 	{
+		looks_setsizeto(operator_random(ScratchSetDouble(50), ScratchSetDouble(150)));
 		motion_glideto(ScratchSetDouble(1), motion_glideto_menuY_araaanadaoama_());
+		motion_pointindirection(operator_random(ScratchSetDouble(0), ScratchSetDouble(360)));
 		YIELD
 	}
 }

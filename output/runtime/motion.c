@@ -59,8 +59,6 @@ void motion_glideto(ScratchValue secs, ScratchValue x, ScratchValue y)
 		double sx = _x * t + startx * (1 - t);
 		double sy = _y * t + starty * (1 - t);
 
-		printf("X: %f, Y: %f sx: %f sy: %f ex: %f ey: %f t: %f\n", sx, sy, startx, starty, _x, _y, t);
-
 		SX = sx;
 		SY = sy;
 

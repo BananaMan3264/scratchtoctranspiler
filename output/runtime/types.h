@@ -30,5 +30,8 @@ enum RotationStyle
 	RotStyle_allaround,
 };
 
-#define STAGE_WIDTH 480
-#define STAGE_HEIGHT 360
+#define WINDOW_WIDTH 1028
+#define WINDOW_HEIGHT 771
+
+#define STAGE_WIDTH 800
+#define STAGE_HEIGHT 600

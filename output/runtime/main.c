@@ -2,6 +2,7 @@
 #include<stdbool.h>
 #include"renderer.h"
 #include"output.h"
+#include"types.h"
 
 SDL_Renderer* renderer;
 
@@ -28,12 +29,14 @@ int main()
 		exit(-1);
 	}
 
+	SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "2");
+
 	SDL_Window* window = SDL_CreateWindow(
 		"Scratch",
 		SDL_WINDOWPOS_CENTERED,
 		SDL_WINDOWPOS_CENTERED,
-		480,
-		360,
+		WINDOW_WIDTH,
+		WINDOW_HEIGHT,
 		SDL_WINDOW_SHOWN
 	);
 
@@ -55,6 +58,7 @@ int main()
 		exit(-1);
 	}
 
+	initRenderer();
 	Init();
 	Start();
 
