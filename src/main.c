@@ -23,7 +23,13 @@ int main(int argc, char**argv)
 	//	exit(-1);
 	//}
 
-	FILE* json = fopen("../../../../scratch/Project/project.json", "r");
+	FILE* json = fopen("../../../scratch/Project/project.json", "r");
+
+	if (!json)
+	{
+		printf("Error opening file - file could not be opened!\n");
+		exit(-1);
+	}
 
 	fseek(json, 0, SEEK_END);
 	size_t bufferSize = ftell(json);

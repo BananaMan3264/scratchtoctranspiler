@@ -1,24 +1,10 @@
 #include <math.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include "runtime/motion.h"
-#include "runtime/looks.h"
-#include "runtime/types.h"
+#include "types.h"
+#include "renderer.h"
 
 #pragma once
-
-#define operator_add(a,b)		 ScratchSetDouble(ScratchVarGetDouble(a)+ScratchVarGetDouble(b))
-#define operator_subtract(a,b)	 ScratchSetDouble(ScratchVarGetDouble(a)-ScratchVarGetDouble(b))
-#define operator_multiply(a,b)	 ScratchSetDouble(ScratchVarGetDouble(a)*ScratchVarGetDouble(b))
-#define operator_divide(a,b)	 ScratchSetDouble(ScratchVarGetDouble(a)/ScratchVarGetDouble(b))
-#define operator_mod(a,b)		 ScratchSetDouble(fmod(ScratchVarGetDouble(a)%ScratchVarGetDouble(b))) // fmod
-#define operator_round(a)		 ScratchSetDouble(round(ScratchVarGetDouble(a)))
-#define operator_equals(a,b)	 a==b
-
-int operator_random(int min, int max)
-{
-	return rand() % (max - min) + min;
-}
 
 #define argument_reporter_string_number(a) a
 

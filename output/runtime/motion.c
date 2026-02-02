@@ -1,7 +1,9 @@
 #include <math.h>
-#include "runtime/scratch.h"
-#include "runtime/motion.h"
-#include "runtime/types.h"
+#include <time.h>
+#include "main.h"
+#include "scratch.h"
+#include "motion.h"
+#include "types.h"
 
 #pragma once
 
@@ -21,14 +23,11 @@ extern int scratch_motion_SpriteRotStyle[];
 #define RAD_TO_DEG 57.295779513082
 #define HALF_PI    1.5707963267948
 
-#define max(a, b) (( (a) > (b) ) ? (a) : (b))
-#define min(a, b) (( (a) < (b) ) ? (a) : (b))
-
 void motion_movesteps(ScratchValue steps) 
 {
-	double steps = ScratchVarGetDouble(steps);
-	SX += cos(SD) * steps;
-	SY += sin(SD) * steps;
+	double Steps = ScratchVarGetDouble(steps);
+	SX += cos(SD) * Steps;
+	SY += sin(SD) * Steps;
 }
 
 void motion_turnright(ScratchValue degrees) 
@@ -44,12 +43,33 @@ void motion_turnleft(ScratchValue degrees)
 void motion_goto(ScratchValue x, ScratchValue y) 
 {
 	SX = ScratchVarGetDouble(x);
-	XY = ScratchVarGetDouble(y);
+	SY = ScratchVarGetDouble(y);
 }
 
 void motion_glideto(ScratchValue secs, ScratchValue x, ScratchValue y) 
 {
-	// TODO: THIS
+	double startTime = clock() / (double)CLOCKS_PER_SEC;
+	double _secs = ScratchVarGetDouble(secs), _x = ScratchVarGetDouble(x), _y = ScratchVarGetDouble(y);
+	double startx = SX, starty = SY;
+	double time = (clock() / (double)CLOCKS_PER_SEC);
+	while (time < startTime + _secs) 
+	{
+		double t = (time - startTime) / (_secs);
+
+		double sx = _x * t + startx * (1 - t);
+		double sy = _y * t + starty * (1 - t);
+
+		printf("X: %f, Y: %f sx: %f sy: %f ex: %f ey: %f t: %f\n", sx, sy, startx, starty, _x, _y, t);
+
+		SX = sx;
+		SY = sy;
+
+		Yield();
+		time = (clock() / (double)CLOCKS_PER_SEC);
+	}
+
+	SX = _x;
+	SY = _y;
 }
 
 void motion_pointtowards(ScratchValue dir)
@@ -69,12 +89,12 @@ void motion_changeyby(ScratchValue y)
 
 void motion_setx(ScratchValue x)
 {
-	SX + ScratchVarGetDouble(x);
+	SX = ScratchVarGetDouble(x);
 }
 
 void motion_sety(ScratchValue y)
 {
-	SY + ScratchVarGetDouble(y);
+	SY = ScratchVarGetDouble(y);
 }
 
 void motion_setrotationstyleYlaeafathbaraiagahat() 
@@ -106,7 +126,7 @@ void motion_ifonedgebounce()
 	double distRight   = max(0, (STAGE_WIDTH  / 2)); 
 	double distBottom  = max(0, (STAGE_HEIGHT / 2));
 
-	int nearestEdge = '';
+	int nearestEdge = 0;
 	double minDist = distLeft + 1;
 	if (distLeft < minDist) {
 		minDist = distLeft;

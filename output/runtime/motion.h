@@ -1,4 +1,4 @@
-#include "runtime/types.h"
+#include "types.h"
 
 void motion_movesteps(ScratchValue steps);
 void motion_turnright(ScratchValue degrees);

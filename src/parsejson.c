@@ -157,7 +157,7 @@ void PushBlock(const char* id, struct json_object* blocks, vecScratchBlock* line
 			next = json_object_get_string(NEXT2(blocks, next, "next"));
 		}
 
-		sb.opcode = SafeStringMerge(AsManagedString("control_repeat_end"),AsManagedString(""));
+		sb.opcode = SafeStringMerge(AsManagedString("control_loop_end"),AsManagedString(""));
 		sb.args = 0;
 	}
 	else if (strcmp(sb.opcode.data, "control_if") == 0 || strcmp(sb.opcode.data, "control_repeat_until") == 0 || strcmp(sb.opcode.data, "control_while") == 0)
@@ -185,7 +185,62 @@ void PushBlock(const char* id, struct json_object* blocks, vecScratchBlock* line
 			next = json_object_get_string(NEXT2(blocks, next, "next"));
 		}
 
-		sb.opcode = SafeStringMerge(AsManagedString("control_repeat_end"), AsManagedString(""));
+		if (strcmp(sb.opcode.data, "control_if") == 0)
+		{
+			sb.opcode = SafeStringMerge(AsManagedString("control_if_end"), AsManagedString(""));
+		}
+		else 
+		{
+			sb.opcode = SafeStringMerge(AsManagedString("control_loop_end"), AsManagedString(""));
+		}
+		sb.args = 0;
+	}
+	else if (strcmp(sb.opcode.data, "control_if_else") == 0) 
+	{
+		sb.args = 1;
+		sb.opcode = SafeStringMerge(AsManagedString("control_if"), AsManagedString(""));
+		sb.argdata = malloc(sizeof(ScratchArgData)); if (!sb.argdata) { printf("Malloc error!"); exit(-1); }
+		sb.argtypes = malloc(sizeof(int)); if (!sb.argtypes) { printf("Malloc error!"); exit(-1); }
+
+		sb.argdata[0].text = AsManagedString(json_object_get_string(json_object_array_get_idx(NEXT2(this, "inputs", "CONDITION"), 1)));
+		sb.argtypes[0] = ArgType_Pointer;
+
+		if (lines->length + 1 > lines->allocated_size) {
+			{
+				lines->allocated_size = lines->allocated_size * 2; void* temp = realloc(lines->data, lines->allocated_size * lines->sizeoftype); if (!temp) {
+					exit(-1);
+				} lines->data = temp;
+			};
+		} lines->data[lines->length] = sb; lines->length++;
+
+		const char* next = json_object_get_string(json_object_array_get_idx(NEXT2(this, "inputs", "SUBSTACK"), 1));
+		while (next)
+		{
+			PushBlock(next, blocks, lines);
+
+			next = json_object_get_string(NEXT2(blocks, next, "next"));
+		}
+
+		sb.opcode = SafeStringMerge(AsManagedString("control_else"), AsManagedString(""));
+		sb.args = 0;
+
+		if (lines->length + 1 > lines->allocated_size) {
+			{
+				lines->allocated_size = lines->allocated_size * 2; void* temp = realloc(lines->data, lines->allocated_size * lines->sizeoftype); if (!temp) {
+					exit(-1);
+				} lines->data = temp;
+			};
+		} lines->data[lines->length] = sb; lines->length++;
+
+		next = json_object_get_string(json_object_array_get_idx(NEXT2(this, "inputs", "SUBSTACK2"), 1));
+		while (next)
+		{
+			PushBlock(next, blocks, lines);
+
+			next = json_object_get_string(NEXT2(blocks, next, "next"));
+		}
+
+		sb.opcode = SafeStringMerge(AsManagedString("control_if_end"), AsManagedString(""));
 		sb.args = 0;
 	}
 	else if (strcmp(sb.opcode.data, "control_forever") == 0)
@@ -208,7 +263,7 @@ void PushBlock(const char* id, struct json_object* blocks, vecScratchBlock* line
 			next = json_object_get_string(NEXT2(blocks, next, "next"));
 		}
 
-		sb.opcode = SafeStringMerge(AsManagedString("control_repeat_end"), AsManagedString(""));
+		sb.opcode = SafeStringMerge(AsManagedString("control_loop_end"), AsManagedString(""));
 		sb.args = 0;
 	}
 	else

@@ -69,30 +69,52 @@ String GetArg(int argtype, ScratchArgData argdata, struct json_object* blocks)
 
 char* GetFullProgram(struct json_object* variables, vecFunction functions, struct json_object* blocks)
 {
-	FILE* file = fopen("../../../../output/output.c", "w");
+	FILE* file = fopen("../../../output/output.c", "w");
 
-	fprintf(file, "#include\"runtime/scratch.h\"\n\n");
-
-	json_object_object_foreach(variables, key, val)
+	fprintf(file, "#define YIELD Yield();\n#include \"runtime/scratch.h\"\n#include \"runtime/motion.h\"\n#include \"runtime/looks.h\"\n#include \"runtime/operators.h\"\n\n");
 	{
-		switch (json_object_get_type(json_object_array_get_idx(val, 1)))
+		json_object_object_foreach(variables, key, val)
 		{
-		case json_type_int:
-			fprintf(file, "ScratchValue %s = ScratchSetDouble(%i);\n", SanitiseScratchNameToC(AsManagedString(key)).data, json_object_get_int(json_object_array_get_idx(val, 1)));
-			break;
-		case json_type_double:
-			fprintf(file, "ScratchValue %s = ScratchSetDouble(%f);\n", SanitiseScratchNameToC(AsManagedString(key)).data, json_object_get_double(json_object_array_get_idx(val, 1)));
-			break;
-		case json_type_string:
-			fprintf(file, "ScratchValue %s = ScratchSetString(\"%s\");\n", SanitiseScratchNameToC(AsManagedString(key)).data, json_object_get_string(json_object_array_get_idx(val, 1)));
-			break;
-		default:
-			printf("Type not implemented!");
-			exit(-1);
+			switch (json_object_get_type(json_object_array_get_idx(val, 1)))
+			{
+			case json_type_int:
+				fprintf(file, "ScratchValue %s;\n", SanitiseScratchNameToC(AsManagedString(key)).data);
+				break;
+			case json_type_double:
+				fprintf(file, "ScratchValue %s;\n", SanitiseScratchNameToC(AsManagedString(key)).data);
+				break;
+			case json_type_string:
+				fprintf(file, "ScratchValue %s;\n", SanitiseScratchNameToC(AsManagedString(key)).data);
+				break;
+			default:
+				printf("Type not implemented!");
+				exit(-1);
+			}
+		}
+	}
+	fprintf(file, "\nvoid Init()\n{");
+	{
+		json_object_object_foreach(variables, key, val)
+		{
+			switch (json_object_get_type(json_object_array_get_idx(val, 1)))
+			{
+			case json_type_int:
+				fprintf(file, "\t%s = ScratchSetDouble(%i);\n", SanitiseScratchNameToC(AsManagedString(key)).data, json_object_get_int(json_object_array_get_idx(val, 1)));
+				break;
+			case json_type_double:
+				fprintf(file, "\t%s = ScratchSetDouble(%f);\n", SanitiseScratchNameToC(AsManagedString(key)).data, json_object_get_double(json_object_array_get_idx(val, 1)));
+				break;
+			case json_type_string:
+				fprintf(file, "\t%s = ScratchSetString(\"%s\");\n", SanitiseScratchNameToC(AsManagedString(key)).data, json_object_get_string(json_object_array_get_idx(val, 1)));
+				break;
+			default:
+				printf("Type not implemented!");
+				exit(-1);
+			}
 		}
 	}
 
-	fprintf(file, "\n");
+	fprintf(file, "}\n\n");
 
 	int indentation = 0;
 
@@ -109,25 +131,25 @@ char* GetFullProgram(struct json_object* variables, vecFunction functions, struc
 
 			if (strcmp(THIS.opcode.data, "control_repeat") == 0)
 			{
-				PRINT_INDENTATION fprintf(file, "for(int i%i = 0; i%i < %s; i%i++)\n", indentation, indentation, GetArg(THIS.argtypes[0], THIS.argdata[0], blocks).data, indentation);
+				PRINT_INDENTATION fprintf(file, "for(int i%i = 0; i%i < (int)ScratchVarGetDouble(%s); i%i++)\n", indentation, indentation, GetArg(THIS.argtypes[0], THIS.argdata[0], blocks).data, indentation);
 				PRINT_INDENTATION fprintf(file, "{\n");
 				indentation++;
 			}
 			else if (strcmp(THIS.opcode.data, "control_if") == 0) 
 			{
-				PRINT_INDENTATION fprintf(file, "if(%s)\n", GetArg(THIS.argtypes[0], THIS.argdata[0], blocks).data);
+				PRINT_INDENTATION fprintf(file, "if(ScratchVarGetBool(%s))\n", GetArg(THIS.argtypes[0], THIS.argdata[0], blocks).data);
 				PRINT_INDENTATION fprintf(file, "{\n");
 				indentation++;
 			}
 			else if (strcmp(THIS.opcode.data, "control_repeat_until") == 0)
 			{
-				PRINT_INDENTATION fprintf(file, "while(!(%s))\n", GetArg(THIS.argtypes[0], THIS.argdata[0], blocks).data);
+				PRINT_INDENTATION fprintf(file, "while(!(ScratchVarGetBool(%s)))\n", GetArg(THIS.argtypes[0], THIS.argdata[0], blocks).data);
 				PRINT_INDENTATION fprintf(file, "{\n");
 				indentation++;
 			}
 			else if (strcmp(THIS.opcode.data, "control_while") == 0)
 			{
-				PRINT_INDENTATION fprintf(file, "while(%s)\n", GetArg(THIS.argtypes[0], THIS.argdata[0], blocks).data);
+				PRINT_INDENTATION fprintf(file, "while(ScratchVarGetBool(%s))\n", GetArg(THIS.argtypes[0], THIS.argdata[0], blocks).data);
 				PRINT_INDENTATION fprintf(file, "{\n");
 				indentation++;
 			}
@@ -137,10 +159,24 @@ char* GetFullProgram(struct json_object* variables, vecFunction functions, struc
 				PRINT_INDENTATION fprintf(file, "{\n");
 				indentation++;
 			}
-			else if (strcmp(THIS.opcode.data, "control_repeat_end") == 0)
+			else if (strcmp(THIS.opcode.data, "control_loop_end") == 0)
+			{
+				PRINT_INDENTATION fprintf(file, "YIELD\n");
+				indentation--;
+				PRINT_INDENTATION fprintf(file, "}\n");
+			}
+			else if (strcmp(THIS.opcode.data, "control_if_end") == 0)
 			{
 				indentation--;
 				PRINT_INDENTATION fprintf(file, "}\n");
+			}
+			else if (strcmp(THIS.opcode.data, "control_else") == 0)
+			{
+				indentation--;
+				PRINT_INDENTATION fprintf(file, "}\n");
+				PRINT_INDENTATION fprintf(file, "else\n");
+				PRINT_INDENTATION fprintf(file, "{\n");
+				indentation++;
 			}
 			else
 			{

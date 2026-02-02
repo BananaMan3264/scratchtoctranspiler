@@ -1,9 +1,14 @@
+#include<stdbool.h>
+
+#define max(a, b) (( (a) > (b) ) ? (a) : (b))
+#define min(a, b) (( (a) < (b) ) ? (a) : (b))
+
 #pragma once
 
 enum ScratchType
 {
-	ScratchType_Number,
 	ScratchType_Bool,
+	ScratchType_Number,
 	ScratchType_String
 };
 

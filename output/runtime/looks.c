@@ -1,14 +1,26 @@
 #include <math.h>
 #include <string.h>
-#include "runtime/scratch.h"
-#include "runtime/looks.h"
-#include "runtime/types.h"
+#include "scratch.h"
+#include "looks.h"
+#include "types.h"
 
 
-extern double scratch_motion_SpriteSize[];
-extern double scratch_looks_CostumeIndex[];
-extern double scratch_looks_CostumeCounts[];
-extern double scratch_looks_CostumeNames[];
+extern int scratch_motion_SpriteSize[];
+extern int scratch_looks_CostumeIndex[];
+extern int scratch_looks_CostumeCounts[];
+extern char* scratch_looks_CostumeNames[3][3];
+
+extern double scratch_looks_effects_colour[];
+extern double scratch_looks_effects_fisheye[];
+extern double scratch_looks_effects_whirl[];
+extern double scratch_looks_effects_pixelate[];
+extern double scratch_looks_effects_mosaic[];
+extern double scratch_looks_effects_brightness[];
+extern double scratch_looks_effects_ghost[];
+
+extern bool scratch_looks_hidden[];
+
+extern int activeSprite;
 
 #define SS  scratch_motion_SpriteSize[activeSprite]
 #define SCI scratch_looks_CostumeIndex[activeSprite]
@@ -86,7 +98,7 @@ void looks_changeeffectbyYCaOaLaOaR(ScratchValue change)
 
 void looks_seteffecttoYCaOaLaOaR(ScratchValue set) 
 {
-	EFFECT_COLOUR = ScratchVarGetDouble(val;)
+	EFFECT_COLOUR = ScratchVarGetDouble(set);
 }
 
 void looks_changeeffectbyYFaIaSaHaEaYaE(ScratchValue change)
@@ -96,7 +108,7 @@ void looks_changeeffectbyYFaIaSaHaEaYaE(ScratchValue change)
 
 void looks_seteffecttoYFaIaSaHaEaYaE(ScratchValue set)
 {
-	EFFECT_FISHEYE = ScratchVarGetDouble(val;)
+	EFFECT_FISHEYE = ScratchVarGetDouble(set);
 }
 
 void looks_changeeffectbyYWaHaIaRaL(ScratchValue change)
@@ -106,7 +118,7 @@ void looks_changeeffectbyYWaHaIaRaL(ScratchValue change)
 
 void looks_seteffecttoYWaHaIaRaL(ScratchValue set)
 {
-	EFFECT_WHIRL = ScratchVarGetDouble(val;)
+	EFFECT_WHIRL = ScratchVarGetDouble(set);
 }
 
 void looks_changeeffectbyYPaIaXaEaLaAaTaE(ScratchValue change)
@@ -116,7 +128,7 @@ void looks_changeeffectbyYPaIaXaEaLaAaTaE(ScratchValue change)
 
 void looks_seteffecttoYPaIaXaEaLaAaTaE(ScratchValue set)
 {
-	EFFECT_PIXELATE = ScratchVarGetDouble(val;)
+	EFFECT_PIXELATE = ScratchVarGetDouble(set);
 }
 
 void looks_changeeffectbyYMaOaSaAaIaC(ScratchValue change)
@@ -126,7 +138,7 @@ void looks_changeeffectbyYMaOaSaAaIaC(ScratchValue change)
 
 void looks_seteffecttoYMaOaSaAaIaC(ScratchValue set)
 {
-	EFFECT_MOSAIC = ScratchVarGetDouble(val;)
+	EFFECT_MOSAIC = ScratchVarGetDouble(set);
 }
 
 void looks_changeeffectbyYBaRaIaGaHaTaNaEaSaS(ScratchValue change)
@@ -136,7 +148,7 @@ void looks_changeeffectbyYBaRaIaGaHaTaNaEaSaS(ScratchValue change)
 
 void looks_seteffecttoYBaRaIaGaHaTaNaEaSaS(ScratchValue set)
 {
-	EFFECT_BRIGHTNESS = ScratchVarGetDouble(val;)
+	EFFECT_BRIGHTNESS = ScratchVarGetDouble(set);
 }
 
 void looks_changeeffectbyYGaHaOaSaT(ScratchValue change)
@@ -146,7 +158,7 @@ void looks_changeeffectbyYGaHaOaSaT(ScratchValue change)
 
 void looks_seteffecttoYGaHaOaSaT(ScratchValue set)
 {
-	EFFECT_GHOST = ScratchVarGetDouble(val;)
+	EFFECT_GHOST = ScratchVarGetDouble(set);
 }
 
 void looks_cleargraphiceffects() 
@@ -225,7 +237,7 @@ ScratchValue looks_costume(ScratchValue id)
 			return ScratchSetDouble(i + 1);
 		}
 	}
-	return 0;
+	return ScratchSetDouble(1);
 }
 
 ScratchValue looks_backdrops(ScratchValue id)
@@ -238,5 +250,5 @@ ScratchValue looks_backdrops(ScratchValue id)
 			return ScratchSetDouble(i + 1);
 		}
 	}
-	return 0;
+	return ScratchSetDouble(1);
 }

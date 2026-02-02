@@ -29,6 +29,7 @@ ScratchValue ScratchSetString(char* s)
 
 double ScratchVarGetDouble(ScratchValue var)
 {
+	char* end;
 	switch (var.ScratchType)
 	{
 	case ScratchType_Number:
@@ -36,7 +37,6 @@ double ScratchVarGetDouble(ScratchValue var)
 	case ScratchType_Bool:
 		return var.data.Bool;
 	case ScratchType_String:
-		char* end;
 		return strtod(var.data.String, &end);
 	default:
 		return 0;

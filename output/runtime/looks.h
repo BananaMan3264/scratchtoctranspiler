@@ -1,4 +1,4 @@
-#include "runtime/types.h"
+#include "types.h"
 
 void looks_sayforsecs(ScratchValue text, ScratchValue secs);
 void looks_say(ScratchValue text);
