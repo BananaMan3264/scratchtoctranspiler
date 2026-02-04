@@ -3,41 +3,58 @@
 #include "runtime/motion.h"
 #include "runtime/looks.h"
 #include "runtime/operators.h"
+#include "runtime/control.h"
+#include "runtime/sensing.h"
 
 ScratchValue YbajaEakbba4cbaidbcbaFakdbeba8axfbaAaVgbhbamayibavaaaraiaaabalae;
-ScratchValue YKa5aHcba2jblbaSgbapjbdbkbaujbmbaqaNa8eb;
-ScratchValue Yeaanbdbabobayhbpbqbaka2alagacala8afabaH;
-ScratchValue Ybaga3ahamazjbwbtba4aaa9aOacdba4aFaQawaA;
-ScratchValue YbaFaKaoaGaKaebba8aUaDahgbgba4aiaLmbaVaV;
-ScratchValue Y7tbxbaVa9pbaiebaokbaHqbaeacaEawaOpbaOqb;
-ScratchValue YbbbaPobaAaLa2a2a2a5aUebaVrbaNaAaDaQaTak;
-ScratchValue Ybfba6tbaua0aqaBaDa7xbaYauavaEapaoebaIsb;
-ScratchValue YRahasa9nba0rbaWaLasaZaGebxbapazaiebaMaE;
-ScratchValue YZaAkbaiubxbvba1dbvblbaVaiavaZa8xbahaJlb;
-ScratchValue YAwbaRayaxuba9abaLrbaba1alaHaEaVamazjba2;
+ScratchValue YbdbabalaaaiayakgbcbayaMfbamnbaaajnbavay;
+ScratchValue YbaAwbeba8jbkbwbsbvbapaHamgbaXabgbaCalgb;
+ScratchValue YocbgbaLadaJaOa7aOaTa0asnbaqa_aAaFaraKaN;
+ScratchValue Yaa6a1ama4mbqbasabaJa_oba_aUaJkbcbasaba5;
+ScratchValue YbahmbaqaOata5aGebcbqbaDaoaIacayanubakay;
+ScratchValue YbatashbaesbamaMavfbavahaHlbaaaswbpbaZaw;
+ScratchValue YbebadaVaFdbauaRa5kbalaMcbcba6qbqbvbqba3;
+ScratchValue YzazaqayakrbagazaTaGa3aYvbaeaMobaQkbavkb;
+ScratchValue YDwbqbarauarvbayaFaRmbayaflbaNada5gbubaT;
+ScratchValue YRanafsba_xba6agaWa9asaua1anaFaOaVfbaUrb;
+ScratchValue Y1aVa6ebsbaSaBawaQaMacaFa9pbmbaka8a7amaK;
+ScratchValue YbbbakhbxbaGaaakaaaLadabauaxsbatwbaMahap;
+ScratchValue Yga_aDa8a5aTqbpbaOaqaQpbaAaEaraPamamjbaR;
+ScratchValue Y6ayabakmbasaPayvbdba8aba3aVaFaBa5a_aggb;
+ScratchValue Y4a9ebbbapdbahaAobaratnbtbaDahaCa9lbatag;
+ScratchValue YoaOaaaYaHaaaJdba5aIbbpbvbabara2anasfbaD;
+ScratchValue YsaXaHasa7a7sba9ala1adavaxaAaeaka6a8hbaw;
 
 void Init()
 {	YbajaEakbba4cbaidbcbaFakdbeba8axfbaAaVgbhbamayibavaaaraiaaabalae = ScratchSetDouble(0);
-	YKa5aHcba2jblbaSgbapjbdbkbaujbmbaqaNa8eb = ScratchSetDouble(0);
-	Yeaanbdbabobayhbpbqbaka2alagacala8afabaH = ScratchSetDouble(0);
-	Ybaga3ahamazjbwbtba4aaa9aOacdba4aFaQawaA = ScratchSetDouble(0);
-	YbaFaKaoaGaKaebba8aUaDahgbgba4aiaLmbaVaV = ScratchSetDouble(0);
-	Y7tbxbaVa9pbaiebaokbaHqbaeacaEawaOpbaOqb = ScratchSetDouble(0);
-	YbbbaPobaAaLa2a2a2a5aUebaVrbaNaAaDaQaTak = ScratchSetDouble(0);
-	Ybfba6tbaua0aqaBaDa7xbaYauavaEapaoebaIsb = ScratchSetDouble(0);
-	YRahasa9nba0rbaWaLasaZaGebxbapazaiebaMaE = ScratchSetDouble(0);
-	YZaAkbaiubxbvba1dbvblbaVaiavaZa8xbahaJlb = ScratchSetDouble(0);
-	YAwbaRayaxuba9abaLrbaba1alaHaEaVamazjba2 = ScratchSetString("test");
+	YbdbabalaaaiayakgbcbayaMfbamnbaaajnbavay = ScratchSetDouble(0);
+	YbaAwbeba8jbkbwbsbvbapaHamgbaXabgbaCalgb = ScratchSetDouble(0);
+	YocbgbaLadaJaOa7aOaTa0asnbaqa_aAaFaraKaN = ScratchSetDouble(0);
+	Yaa6a1ama4mbqbasabaJa_oba_aUaJkbcbasaba5 = ScratchSetDouble(0);
+	YbahmbaqaOata5aGebcbqbaDaoaIacayanubakay = ScratchSetDouble(0);
+	YbatashbaesbamaMavfbavahaHlbaaaswbpbaZaw = ScratchSetDouble(0);
+	YbebadaVaFdbauaRa5kbalaMcbcba6qbqbvbqba3 = ScratchSetDouble(0);
+	YzazaqayakrbagazaTaGa3aYvbaeaMobaQkbavkb = ScratchSetDouble(0);
+	YDwbqbarauarvbayaFaRmbayaflbaNada5gbubaT = ScratchSetDouble(0);
+	YRanafsba_xba6agaWa9asaua1anaFaOaVfbaUrb = ScratchSetDouble(0);
+	Y1aVa6ebsbaSaBawaQaMacaFa9pbmbaka8a7amaK = ScratchSetDouble(0);
+	YbbbakhbxbaGaaakaaaLadabauaxsbatwbaMahap = ScratchSetDouble(0);
+	Yga_aDa8a5aTqbpbaOaqaQpbaAaEaraPamamjbaR = ScratchSetDouble(0);
+	Y6ayabakmbasaPayvbdba8aba3aVaFaBa5a_aggb = ScratchSetDouble(0);
+	Y4a9ebbbapdbahaAobaratnbtbaDahaCa9lbatag = ScratchSetDouble(0);
+	YoaOaaaYaHaaaJdba5aIbbpbvbabara2anasfbaD = ScratchSetDouble(0);
+	YsaXaHasa7a7sba9ala1adavaxaAaeaka6a8hbaw = ScratchSetDouble(0);
 }
+
+void Start();
 
 void Start() 
 {
-	motion_setrotationstyleYaalalibaaaraoauanad();
 	while(1)
 	{
-		looks_setsizeto(operator_random(ScratchSetDouble(50), ScratchSetDouble(150)));
-		motion_glideto(ScratchSetDouble(1), motion_glideto_menuY_araaanadaoama_());
-		motion_pointindirection(operator_random(ScratchSetDouble(0), ScratchSetDouble(360)));
+		motion_changexby(motion_xposition());
+		motion_changeyby(motion_yposition());
+		motion_changeyby(motion_direction());
 		YIELD
 	}
 }

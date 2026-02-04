@@ -10,6 +10,71 @@
 #define NEXT(a, b) json_object_object_get(a, b)
 #define NEXT2(a, b, c) NEXT(NEXT(a,b),c)
 
+typedef struct ScratchArg
+{
+	ScratchArgData data;
+	int type;
+} ScratchArg;
+
+ScratchArg ParseArg(struct json_object* block_val, char* block_key) 
+{
+	ScratchArg arg;
+
+	struct json_object* this = block_val;
+	int a = json_object_get_int(json_object_array_get_idx(this, 0));
+	arg.type = a;
+get_by_type:
+	switch (a)
+	{
+	case 1:
+	case 2:
+		if (json_object_get_type(json_object_array_get_idx(this, 1)) == json_type_string)
+		{
+			goto three;
+		}
+		a = json_object_get_int(json_object_array_get_idx(json_object_array_get_idx(this, 1), 0));
+		this = json_object_array_get_idx(this, 1);
+		goto get_by_type;
+	three:
+	case ArgType_Pointer:
+		if (json_object_get_type(json_object_array_get_idx(this, 1)) == json_type_string)
+		{
+			struct json_object* this = block_val;
+			arg.data.idPointer = AsManagedString(json_object_get_string(json_object_array_get_idx(this, 1)));
+			arg.type = ArgType_Pointer;
+		}
+		else
+		{
+			a = json_object_get_int(json_object_array_get_idx(json_object_array_get_idx(this, 1), 0));
+			this = json_object_array_get_idx(this, 1);
+
+			goto get_by_type;
+		}
+		break;
+	case ArgType_Number:
+	case ArgType_PositiveNumber:
+	case ArgType_NegativeNumber:
+	case ArgType_Integer:
+	case ArgType_Angle:
+		arg.data.text = AsManagedString(json_object_get_string(json_object_array_get_idx(this, 1)));
+		arg.type = ArgType_Number;
+		break;
+	case ArgType_String:
+	case ArgType_Colour:
+		arg.data.text = AsManagedString(json_object_get_string(json_object_array_get_idx(this, 1)));
+		arg.type = ArgType_String;
+		break;
+	case ArgType_Variable:
+		arg.data.text = SanitiseScratchNameToC(AsManagedString(json_object_get_string(json_object_array_get_idx(this, 2))));
+		arg.type = ArgType_Variable;
+		break;
+	default:
+		printf("These argument types have not been implemented! %i\n", a);
+		exit(-1);
+	}
+	return arg;
+}
+
 ScratchBlock GetBlock(const char* id, struct json_object* blocks) 
 {
 	ScratchBlock sb;
@@ -48,6 +113,14 @@ ScratchBlock GetBlock(const char* id, struct json_object* blocks)
 		sb.argdata[0].text = AsManagedString(json_object_get_string(json_object_array_get_idx(NEXT2(block, "fields", "BACKDROP"), 0)));
 		sb.argtypes[0] = ArgType_String;
 	}
+	else if (strcmp(sb.opcode.data, "argument_reporter_string_number") == 0)
+	{
+		sb.args = 1;
+		sb.argdata = malloc(sizeof(ScratchArgData) * sb.args); if (!sb.argdata) { printf("Malloc error!"); exit(-1); }
+		sb.argtypes = malloc(sizeof(int) * sb.args); if (!sb.argtypes) { printf("Malloc error!"); exit(-1); }
+		sb.argdata[0].text = SanitiseScratchNameToC(AsManagedString(json_object_get_string(json_object_array_get_idx(NEXT2(block, "fields", "VALUE"), 0))));
+		sb.argtypes[0] = ArgType_Variable;
+	}
 	else 
 	{
 		json_object_object_foreach(fields, key, val)
@@ -63,61 +136,11 @@ ScratchBlock GetBlock(const char* id, struct json_object* blocks)
 	int i = 0;
 	json_object_object_foreach(args, block_key, block_val)
 	{
-		struct json_object* this = block_val;
-		int a = json_object_get_int(json_object_array_get_idx(this, 0));
-		sb.argtypes[i] = a;
-	get_by_type:
-		switch (a)
-		{
-		case 1:
-		case 2:
-			if (json_object_get_type(json_object_array_get_idx(this, 1)) == json_type_string)
-			{
-				goto three;
-			}
-			a = json_object_get_int(json_object_array_get_idx(json_object_array_get_idx(this, 1), 0));
-			this = json_object_array_get_idx(this, 1);
-			goto get_by_type;
-		three:
-		case ArgType_Pointer:
-			if (json_object_get_type(json_object_array_get_idx(this, 1)) == json_type_string)
-			{
-				struct json_object* this = block_val;
-				sb.argdata[i].idPointer = AsManagedString(json_object_get_string(json_object_array_get_idx(this, 1)));
-				sb.argtypes[i] = ArgType_Pointer;
-			}
-			else
-			{
-				a = json_object_get_int(json_object_array_get_idx(json_object_array_get_idx(this, 1), 0));
-				this = json_object_array_get_idx(this, 1);
+		ScratchArg a = ParseArg(block_val, block_key);
 
-				goto get_by_type;
-			}
-			break;
-		case ArgType_Number:
-		case ArgType_PositiveNumber:
-		case ArgType_NegativeNumber:
-		case ArgType_Integer:
-		case ArgType_Angle:
-			sb.argdata[i].text = AsManagedString(json_object_get_string(json_object_array_get_idx(this, 1)));
-			sb.argtypes[i] = ArgType_Number;
-			break;
-		case ArgType_String:
-			sb.argdata[i].text = AsManagedString(json_object_get_string(json_object_array_get_idx(this, 1)));
-			sb.argtypes[i] = ArgType_String;
-			break;
-		case ArgType_Variable:
-			sb.argdata[i].text = SanitiseScratchNameToC(AsManagedString(json_object_get_string(json_object_array_get_idx(this, 2))));
-			sb.argtypes[i] = ArgType_Variable;
-			break;
-		default:
-			printf("These argument types have not been implemented! %i\n", a);
-			exit(-1);
-		}
-		if (strcmp(json_object_get_string(json_object_object_get(block, "opcode")), "procedures_call") == 0)
-		{
-			sb.argtypes[i] = ArgType_Number;
-		}
+		sb.argdata[i] = a.data;
+		sb.argtypes[i] = a.type;
+
 		i++;
 	}
 	return sb;
@@ -138,8 +161,12 @@ void PushBlock(const char* id, struct json_object* blocks, vecScratchBlock* line
 		sb.argdata  = malloc(sizeof(ScratchArgData)); if(!sb.argdata ) { printf("Malloc error!"); exit(-1); } 
 		sb.argtypes = malloc(sizeof(int)		   ); if(!sb.argtypes) { printf("Malloc error!"); exit(-1); } 
 
-		sb.argdata[0].text = AsManagedString(json_object_get_string(json_object_array_get_idx(json_object_array_get_idx(NEXT2(this, "inputs", "TIMES"), 1), 1)));
-		sb.argtypes[0] = ArgType_Number;
+		struct json_object* arg_data = NEXT2(this, "inputs", "TIMES");
+
+		ScratchArg a = ParseArg(arg_data, "TIMES");
+
+		sb.argdata[0] = a.data;
+		sb.argtypes[0] = a.type;
 
 		if (lines->length + 1 > lines->allocated_size) {
 			{
@@ -328,7 +355,34 @@ vecFunction ParseText(struct json_object* blocks)
 
 			f.blocks = lines;
 
-			f.args = 0;
+			char* str = json_object_get_string(json_object_object_get(json_object_object_get(block,"mutation"), "argumentnames"));
+
+			json_object* arg_names = json_tokener_parse(str);
+
+			f.args = json_object_array_length(arg_names);
+
+			f.argids = malloc(f.args * sizeof(String));
+			f.argTypes = malloc(f.args);
+
+			char* pc = json_object_get_string(json_object_object_get(json_object_object_get(block, "mutation"), "proccode"));
+
+			for (int i = 0, idx = 0; i < f.args;) 
+			{
+				// This fails if %'s are included i proccodes. It seems as though Scratch handling is just as janky though. Just adding %s to a text portion of a proccode crashes scratch
+				if (pc[idx] == '%')
+				{
+					f.argTypes[i] = pc[idx + 1];
+					i++;
+				}
+				idx++;
+			}
+
+			for (int i = 0; i < f.args; i++) 
+			{
+				f.argids[i] = SanitiseScratchNameToC(AsManagedString(json_object_get_string(json_object_array_get_idx(arg_names, i))));
+			}
+
+			json_object_put(arg_names);
 
 			const char* parent = json_object_get_string(json_object_object_get(block, "parent"));
 

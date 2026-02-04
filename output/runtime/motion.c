@@ -37,7 +37,7 @@ void motion_turnright(ScratchValue degrees)
 
 void motion_turnleft(ScratchValue degrees)
 {
-	SD += ScratchVarGetDouble(degrees) * DEG_TO_RAD;
+	SD -= ScratchVarGetDouble(degrees) * DEG_TO_RAD;
 }
 
 void motion_goto(ScratchValue x, ScratchValue y) 
@@ -113,16 +113,22 @@ void motion_setrotationstyleYaalalibaaaraoauanad()
 void motion_ifonedgebounce()
 {
 	//TODO: Fix this when real sprite bounds work
+	//TODO: This doesn't work at all. Fix it completely
 
 	//double distLeft    = max(0, (STAGE_WIDTH  / 2) + bounds.left  );
 	//double distTop     = max(0, (STAGE_HEIGHT / 2) - bounds.top   );
 	//double distRight   = max(0, (STAGE_WIDTH  / 2) - bounds.right );
 	//double distBottom  = max(0, (STAGE_HEIGHT / 2) + bounds.bottom);
 
-	double distLeft    = max(0, (STAGE_WIDTH  / 2)); 
-	double distTop     = max(0, (STAGE_HEIGHT / 2));
-	double distRight   = max(0, (STAGE_WIDTH  / 2)); 
-	double distBottom  = max(0, (STAGE_HEIGHT / 2));
+	double distLeft    = max(0, (STAGE_WIDTH  / 2) + 50);
+	double distTop     = max(0, (STAGE_HEIGHT / 2) - 50);
+	double distRight   = max(0, (STAGE_WIDTH  / 2) - 50);
+	double distBottom  = max(0, (STAGE_HEIGHT / 2) + 50);
+
+	//double distLeft    = max(0, (STAGE_WIDTH  / 2)); 
+	//double distTop     = max(0, (STAGE_HEIGHT / 2));
+	//double distRight   = max(0, (STAGE_WIDTH  / 2)); 
+	//double distBottom  = max(0, (STAGE_HEIGHT / 2));
 
 	int nearestEdge = 0;
 	double minDist = distLeft + 1;
@@ -142,9 +148,11 @@ void motion_ifonedgebounce()
 		minDist = distBottom;
 		nearestEdge = 3; // bottom
 	}
+
 	if (minDist > 0) {
 		return; // Not touching any edge.
 	}
+
 	// Point away from the nearest edge.
 	double radians = HALF_PI - SD;
 	double dx =  cos(radians);
@@ -178,4 +186,14 @@ ScratchValue motion_yposition()
 ScratchValue motion_direction()
 {
 	return ScratchSetDouble(SD * RAD_TO_DEG);
+}
+
+ScratchValue motion_pointtowards_menuY_amaoauasaea_() 
+{
+	int mx, my;
+	SDL_GetMouseState(&mx, &my);
+
+	double m_x = (mx / (double)(WINDOW_WIDTH)-0.5) * (double)(STAGE_WIDTH), m_y = (-my / (double)(WINDOW_HEIGHT)+0.5) * (double)(STAGE_HEIGHT);
+
+	return ScratchSetDouble(-atan2(m_y-SY,m_x-SX) * RAD_TO_DEG);
 }

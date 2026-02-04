@@ -1,6 +1,7 @@
-#include<SDL2/SDL.h>
+#include <SDL2/SDL.h>
 #include <librsvg/rsvg.h>
 #include <cairo.h>
+#include <math.h>
 #include"types.h"
 #include"../data.h"
 
@@ -138,8 +139,8 @@ void draw()
 		int width = scratch_motion_SpriteSize[i] * (WINDOW_WIDTH / (double)STAGE_WIDTH);
 		int height = width;
 
-		rect.x = (scratch_motion_SpriteX[i] / 480 + 0.5) * WINDOW_WIDTH  - width  / 2;
-		rect.y = (scratch_motion_SpriteY[i] / 360 + 0.5) * WINDOW_HEIGHT - height / 2;
+		rect.x = (scratch_motion_SpriteX[i] /  480 + 0.5) * WINDOW_WIDTH  - width  / 2;
+		rect.y = (scratch_motion_SpriteY[i] / -360 + 0.5) * WINDOW_HEIGHT - height / 2;
 		rect.w = width;
 		rect.h = height;
 
@@ -156,6 +157,15 @@ void draw()
 				SDL_RenderCopy(renderer, sprite_textures[i], NULL, &rect);
 				break;
 			case RotStyle_leftright:
+				printf("%f\n", fmod(scratch_motion_SpriteDirection[i] * RAD_TO_DEG, 360.0));
+				if (fmod(scratch_motion_SpriteDirection[i] * RAD_TO_DEG, 360.0) > 180)
+				{
+					SDL_RenderCopyEx(renderer, sprite_textures[i], NULL, &rect, 0, NULL, SDL_FLIP_NONE);
+				}
+				else 
+				{
+					SDL_RenderCopyEx(renderer, sprite_textures[i], NULL, &rect, 0, NULL, SDL_FLIP_HORIZONTAL);
+				}
 				//TODO: This
 				break;
 			}

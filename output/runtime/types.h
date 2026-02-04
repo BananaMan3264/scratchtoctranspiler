@@ -33,5 +33,5 @@ enum RotationStyle
 #define WINDOW_WIDTH 1028
 #define WINDOW_HEIGHT 771
 
-#define STAGE_WIDTH 800
-#define STAGE_HEIGHT 600
+#define STAGE_WIDTH 480
+#define STAGE_HEIGHT 360

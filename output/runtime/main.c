@@ -6,13 +6,41 @@
 
 SDL_Renderer* renderer;
 
+bool keysdown[SDL_NUM_SCANCODES];
+
+Uint32 lastTime = 0;
+int frames = 0;
+float fps = 0.0f;
+
+void update_fps() {
+	Uint32 current = SDL_GetTicks();
+	frames++;
+
+	if (current > lastTime + 1000) {  // 1 second passed
+		fps = frames * 1000.0f / (current - lastTime);
+		printf("FPS: %f\n", fps);
+		lastTime = current;
+		frames = 0;
+	}
+}
+
 void Yield()
 {
+	update_fps();
+
 	SDL_Event e;
 
 	while (SDL_PollEvent(&e)) {
-		if (e.type == SDL_QUIT) {
+		switch (e.type)
+		{
+		case SDL_QUIT:
 			exit(-1);
+		case SDL_KEYDOWN:
+			keysdown[e.key.keysym.scancode] = true;
+			break;
+		case SDL_KEYUP:
+			keysdown[e.key.keysym.scancode] = false;
+			break;
 		}
 	}
 
@@ -49,7 +77,7 @@ int main()
 	renderer = SDL_CreateRenderer(
 		window,
 		-1,
-		SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC
+		SDL_RENDERER_ACCELERATED
 	);
 
 	if (!renderer)

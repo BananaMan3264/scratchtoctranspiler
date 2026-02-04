@@ -17,6 +17,7 @@ void motion_ifonedgebounce();
 ScratchValue motion_xposition();
 ScratchValue motion_yposition();
 ScratchValue motion_direction();
+ScratchValue motion_pointtowards_menuY_amaoauasaea_();
 
 #define motion_goto_menuY_araaanadaoama_() operator_random(ScratchSetDouble(-240), ScratchSetDouble(240)), operator_random(ScratchSetDouble(-180), ScratchSetDouble(180))	// Motion Menu Random
 #define motion_goto_menuY_amaoauasaea_()   sensing_mousex(), sensing_mousey()						// Motion Menu Mouse
@@ -24,8 +25,7 @@ ScratchValue motion_direction();
 #define motion_glideto_menuY_araaanadaoama_ motion_goto_menuY_araaanadaoama_						// Motion Menu Random
 #define motion_glideto_menuY_amaoauasaea_   motion_goto_menuY_amaoauasaea_							// Motion Menu Mouse
 
-#define motion_pointtowards_menuY_araaanadaoama_ motion_goto_menuY_araaanadaoama_					// Motion Menu Random
-#define motion_pointtowards_menuY_amaoauasaea_   motion_goto_menuY_amaoauasaea_						// Motion Menu Mouse
+#define motion_pointtowards_menuY_araaanadaoama_() operator_random(ScratchSetDouble(0), ScratchSetDouble(360))
 
 #define motion_gotoxy motion_goto
 #define motion_glidesecstoxy motion_glideto

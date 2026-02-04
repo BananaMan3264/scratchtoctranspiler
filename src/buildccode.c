@@ -71,7 +71,8 @@ char* GetFullProgram(struct json_object* variables, vecFunction functions, struc
 {
 	FILE* file = fopen("../../../output/output.c", "w");
 
-	fprintf(file, "#define YIELD Yield();\n#include \"runtime/scratch.h\"\n#include \"runtime/motion.h\"\n#include \"runtime/looks.h\"\n#include \"runtime/operators.h\"\n\n");
+	fprintf(file, "#define YIELD Yield();\n#include \"runtime/scratch.h\"\n#include \"runtime/motion.h\"\n#include \"runtime/looks.h\"\n#include \"runtime/operators.h\"");
+	fprintf(file, "\n#include \"runtime/control.h\"\n#include \"runtime/sensing.h\"\n\n");
 	{
 		json_object_object_foreach(variables, key, val)
 		{
@@ -120,9 +121,33 @@ char* GetFullProgram(struct json_object* variables, vecFunction functions, struc
 
 #define PRINT_INDENTATION for(int qx = 0; qx < indentation; qx++) { fprintf(file, "\t"); }
 
+	for (int i = 0; i < functions.length; i++)
+	{
+		fprintf(file, "void %s(", functions.data[i].proccode.data);
+		for (int j = 0; j < functions.data[i].args - 1; j++) 
+		{
+			fprintf(file, "ScratchValue %s, ", functions.data[i].argids[j].data);
+		}
+		if (functions.data[i].args > 0)
+		{
+			fprintf(file, "ScratchValue %s", functions.data[i].argids[functions.data[i].args - 1].data);
+		}
+		fprintf(file, ");\n");
+	}
+
+	fprintf(file, "\n");
+
 	for (int i = 0; i < functions.length; i++) 
 	{
 		PRINT_INDENTATION fprintf(file, "void %s(", functions.data[i].proccode.data);
+		for (int j = 0; j < functions.data[i].args - 1; j++)
+		{
+			fprintf(file, "ScratchValue %s, ", functions.data[i].argids[j].data);
+		}
+		if (functions.data[i].args > 0)
+		{
+			fprintf(file, "ScratchValue %s", functions.data[i].argids[functions.data[i].args - 1].data);
+		}
 		PRINT_INDENTATION fprintf(file, ") \n{\n");
 		indentation++;
 		for (int j = 0; j < functions.data[i].blocks.length; j++) 
