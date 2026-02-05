@@ -7,6 +7,8 @@
 #include "util.h"
 #include "parsejson.h"
 
+#define DEG_TO_RAD 0.0174532925199
+
 String GetArg(int argtype, ScratchArgData argdata, struct json_object* blocks);
 
 int GetFirstWhenFlagClicked(vecScratchBlock lines)
@@ -65,6 +67,240 @@ String GetArg(int argtype, ScratchArgData argdata, struct json_object* blocks)
 	case ArgType_Variable:
 		return argdata.text;
 	}
+}
+
+void PrintData(struct json_object* targets) 
+{
+#define SetAllZeros()																						\
+																											\
+for (int i = 0; i < sprites_count; i++) {																	\
+	fprintf(file, "0.0");																					\
+	if (i != sprites_count - 1) {																			\
+		fprintf(file, ", ");																				\
+	}																										\
+}																											
+#define GetAttrib(name, key)																				\
+fprintf(file, "double scratch_" name "[] = { ");															\
+for (int i = 0; i < sprites_count; i++)																		\
+{																											\
+	json_object* this = json_object_object_get(json_object_array_get_idx(targets, i), key);					\
+	if (json_object_get_type(this) == json_type_null)														\
+	{																										\
+		fprintf(file, "0.0");																				\
+	}																										\
+	else																									\
+	{																										\
+		double d = json_object_get_double(this);															\
+		fprintf(file, "%f", d);																				\
+	}																										\
+	if (i != sprites_count - 1) 																			\
+	{																										\
+		fprintf(file, ", ");																				\
+	}																										\
+}																											\
+fprintf(file, " };\n");
+
+	FILE* file = fopen("../../../output/data.c", "w");
+
+	int sprites_count = json_object_array_length(targets);
+
+	fprintf(file, "#include <stdbool.h>\n#include <stdlib.h>\n#include \"runtime/motion.h\"\n#include \"data.h\"\n\n");
+
+	GetAttrib("motion_SpriteX", "x");
+	GetAttrib("motion_SpriteY", "y");
+	fprintf(file, "double scratch_" "motion_SpriteSize" "[] = { "); for (int i = 0; i < sprites_count; i++) {
+		json_object* this = json_object_object_get(json_object_array_get_idx(targets, i), "size"); if (json_object_get_type(this) == json_type_null) {
+			fprintf(file, "100.0");
+		}
+		else {
+			double d = json_object_get_double(this); fprintf(file, "%f", d);
+		} if (i != sprites_count - 1) {
+			fprintf(file, ", ");
+		}
+	} fprintf(file, " };\n");;
+
+	fprintf(file, "double scratch_motion_SpriteWidth[] = { ");
+	SetAllZeros();
+	fprintf(file, " };\n");
+
+	fprintf(file, "double scratch_motion_SpriteHeight[] = { ");
+	SetAllZeros();
+	fprintf(file, " };\n");
+
+	fprintf(file, "double scratch_" "motion_SpriteDirection" "[] = { "); for (int i = 0; i < sprites_count; i++) {
+		json_object* this = json_object_object_get(json_object_array_get_idx(targets, i), "direction"); if (json_object_get_type(this) == json_type_null) {
+			fprintf(file, "0.0");
+		}
+		else {
+			double d = json_object_get_double(this); fprintf(file, "%f", (d - 90) * DEG_TO_RAD);
+		} if (i != sprites_count - 1) {
+			fprintf(file, ", ");
+		}
+	} fprintf(file, " };\n");;
+
+	fprintf(file, "bool scratch_" "looks_hidden" "[] = { "); 
+	for (int i = 0; i < sprites_count; i++) {
+		json_object* this = json_object_object_get(json_object_array_get_idx(targets, i), "size"); 
+		if (json_object_get_type(this) == json_type_null) {
+			fprintf(file, "false");
+		}
+		else {
+			json_bool d = json_object_get_boolean(this);
+			if (d)
+			{
+				fprintf(file, "false");
+			}
+			else
+			{
+				fprintf(file, "true");
+			}
+		} 
+		if (i != sprites_count - 1) {
+			fprintf(file, ", ");
+		}
+	} 
+	fprintf(file, " };\n");
+
+	fprintf(file, "int scratch_motion_SpriteRotStyle[] = { ");
+	for (int i = 0; i < sprites_count; i++) {
+		json_object* this = json_object_object_get(json_object_array_get_idx(targets, i), "size");
+		if (json_object_get_type(this) == json_type_null) {
+			fprintf(file, "RotStyle_allaround");
+		}
+		else {
+			char* d = json_object_get_string(this);
+			if (strcmp(d, "left-right") == 0)
+			{
+				fprintf(file, "RotStyle_leftright");
+			}
+			else if (strcmp(d, "don't rotate") == 0)
+			{
+				fprintf(file, "RotStyle_dontrotate");
+			}
+			else 
+			{
+				fprintf(file, "RotStyle_allaround");
+			}
+		}
+		if (i != sprites_count - 1) {
+			fprintf(file, ", ");
+		}
+	};
+	fprintf(file, " };\n");
+
+	fprintf(file, "int scratch_looks_CostumeIndex[] = { ");
+	for (int i = 0; i < sprites_count; i++) {
+		json_object* this = json_object_object_get(json_object_array_get_idx(targets, i), "currentCostume");
+		fprintf(file, "%i", json_object_get_int(this));
+		if (i != sprites_count - 1) {
+			fprintf(file, ", ");
+		}
+	}
+	fprintf(file, " };\n");
+
+	int max_costume_count = 0;
+
+	fprintf(file, "int scratch_looks_CostumeCounts[] = { ");
+	for (int i = 0; i < sprites_count; i++) {
+		json_object* this = json_object_object_get(json_object_array_get_idx(targets, i), "costumes");
+		int len = (int)json_object_array_length(this);
+		fprintf(file, "%i", len);
+		if (len > max_costume_count) { max_costume_count = len; }
+		if (i != sprites_count - 1) {
+			fprintf(file, ", ");
+		}
+	}
+	fprintf(file, " };\n");
+
+	fprintf(file, "char* scratch_looks_CostumeNames[SPRITES][MAX_COSTUME_LENGTH] = {\n");
+	for (int i = 0; i < sprites_count; i++) {
+		fprintf(file, "\t{ ");
+		for (int j = 0; j < max_costume_count; j++) {
+			json_object* this = json_object_object_get(json_object_array_get_idx(targets, i), "costumes");
+			json_object* this_name = json_object_object_get(json_object_array_get_idx(this, j),"name");
+			if (json_object_get_type(this_name) != json_type_null) {
+				fprintf(file, "\"%s\"", json_object_get_string(this_name));
+			}
+			else 
+			{
+				fprintf(file, "NULL");
+			}
+			if (j != max_costume_count - 1) {
+				fprintf(file, ", ");
+			}
+		}
+		if (i != sprites_count - 1) {
+			fprintf(file, " },\n");
+		}
+		else 
+		{
+			fprintf(file, " }\n");
+		}
+	}
+	fprintf(file, " };\n");
+
+	fprintf(file, "char* scratch_looks_CostumeFiles[SPRITES][MAX_COSTUME_LENGTH] = {\n");
+	for (int i = 0; i < sprites_count; i++) {
+		fprintf(file, "\t{ ");
+		for (int j = 0; j < max_costume_count; j++) {
+			json_object* this = json_object_object_get(json_object_array_get_idx(targets, i), "costumes");
+			json_object* this_name = json_object_object_get(json_object_array_get_idx(this, j), "assetId");
+			if (json_object_get_type(this_name) != json_type_null) {
+				fprintf(file, "\"%s.svg\"", json_object_get_string(this_name));
+			}
+			else
+			{
+				fprintf(file, "NULL");
+			}
+			if (j != max_costume_count - 1) {
+				fprintf(file, ", ");
+			}
+		}
+		if (i != sprites_count - 1) {
+			fprintf(file, " },\n");
+		}
+		else
+		{
+			fprintf(file, " }\n");
+		}
+	}
+	fprintf(file, " };\n");
+
+	fprintf(file, "double scratch_looks_effects_colour[] = { ");
+	SetAllZeros();
+	fprintf(file, " };\n");
+
+	fprintf(file, "double scratch_looks_effects_fisheye[] = { ");
+	SetAllZeros();
+	fprintf(file, " };\n");
+
+	fprintf(file, "double scratch_looks_effects_whirl[] = { ");
+	SetAllZeros();
+	fprintf(file, " };\n");
+
+	fprintf(file, "double scratch_looks_effects_pixelate[] = { ");
+	SetAllZeros();
+	fprintf(file, " };\n");
+
+	fprintf(file, "double scratch_looks_effects_mosaic[] = { ");
+	SetAllZeros();
+	fprintf(file, " };\n");
+
+	fprintf(file, "double scratch_looks_effects_brightness[] = { ");
+	SetAllZeros();
+	fprintf(file, " };\n");
+
+	fprintf(file, "double scratch_looks_effects_ghost[] = { ");
+	SetAllZeros();
+	fprintf(file, " };\n");
+
+	fclose(file);
+
+	FILE* header = fopen("../../../output/data.h", "w");
+
+	fprintf(header, "#define SPRITES %i\n#define MAX_COSTUME_LENGTH %i", sprites_count, max_costume_count);
+
+	fclose(header);
 }
 
 char* GetFullProgram(struct json_object* variables, vecFunction functions, struct json_object* blocks)

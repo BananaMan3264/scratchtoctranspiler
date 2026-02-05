@@ -52,9 +52,18 @@ void Start()
 {
 	while(1)
 	{
-		motion_changexby(motion_xposition());
-		motion_changeyby(motion_yposition());
-		motion_changeyby(motion_direction());
+		if(ScratchVarGetBool(sensing_keypressed(sensing_keyoptionsY1())))
+		{
+			motion_gotoxy(ScratchSetDouble(-100), ScratchSetDouble(-100));
+			motion_pointindirection(ScratchSetDouble(-42));
+			looks_setsizeto(ScratchSetDouble(200));
+		}
+		if(ScratchVarGetBool(sensing_keypressed(sensing_keyoptionsY2())))
+		{
+			motion_gotoxy(ScratchSetDouble(0), ScratchSetDouble(0));
+			motion_pointindirection(ScratchSetDouble(90));
+			looks_setsizeto(ScratchSetDouble(100));
+		}
 		YIELD
 	}
 }

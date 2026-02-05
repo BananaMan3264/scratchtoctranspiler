@@ -9,11 +9,16 @@
 
 SDL_Texture* sprite_textures[SPRITES];
 
+int activeSprite = 1;
+
 extern double scratch_motion_SpriteX[];
 extern double scratch_motion_SpriteY[];
 extern double scratch_motion_SpriteSize[];
 extern double scratch_motion_SpriteDirection[];
 extern int scratch_motion_SpriteRotStyle[];
+extern char* scratch_looks_CostumeFiles[];
+extern int scratch_motion_SpriteWidth[];
+extern int scratch_motion_SpriteHeight[];
 
 extern bool scratch_looks_hidden[];
 
@@ -39,11 +44,24 @@ void initRenderer()
 
 		GError* err = NULL;
 
-		RsvgHandle* handle = rsvg_handle_new_from_file("../../../../scratch/Project/927d672925e7b99f7813735c484c6922.svg", &err);
+		char* this = scratch_looks_CostumeFiles[i];
+
+		char* path = "../../../../scratch/Project/";
+
+		char* srtc = malloc(strlen(this) + strlen(path) + 1); 
+		if (!srtc) { printf("Malloc error!"); exit(-1); }
+
+		strcpy(srtc, path);
+
+		strcat(srtc, this);
+
+		RsvgHandle* handle = rsvg_handle_new_from_file(srtc, &err);
 		if (!handle) {
 			fprintf(stderr, "Error loading SVG: %s\n", err->message);
-			return NULL;
+			exit(-1);
 		}
+
+		free(srtc);
 
 		RsvgDimensionData dim;
 		rsvg_handle_get_dimensions(handle, &dim);
@@ -97,14 +115,17 @@ void initRenderer()
 		double maxdim = (dim.width > dim.height) ? dim.width : dim.height;
 		double s = (double)width / maxdim;   // same for height since it's square
 
-		double scaled_w = dim.width * s;
-		double scaled_h = dim.height * s;
+		double scaled_w = dim.width * (double)width / dim.width;
+		double scaled_h = dim.height * (double)height / dim.height;
+
+		scratch_motion_SpriteWidth[i] = dim.width;
+		scratch_motion_SpriteHeight[i] = dim.height;
 
 		double dx = (width - scaled_w) / 2.0;
 		double dy = (height - scaled_h) / 2.0;
 
 		cairo_translate(cr, dx, dy);
-		cairo_scale(cr, s, s);
+		cairo_scale(cr, (double)width / dim.width, (double)height / dim.height);
 
 
 		if (!rsvg_handle_render_cairo(handle, cr)) {
@@ -136,11 +157,13 @@ void draw()
 
 	for (int i = 0; i < SPRITES; i++)
 	{
-		int width = scratch_motion_SpriteSize[i] * (WINDOW_WIDTH / (double)STAGE_WIDTH);
-		int height = width;
+		double scale = scratch_motion_SpriteSize[i] * (WINDOW_WIDTH / (double)STAGE_WIDTH / 100);
 
-		rect.x = (scratch_motion_SpriteX[i] /  480 + 0.5) * WINDOW_WIDTH  - width  / 2;
-		rect.y = (scratch_motion_SpriteY[i] / -360 + 0.5) * WINDOW_HEIGHT - height / 2;
+		int width = scratch_motion_SpriteWidth[i] * scale;
+		int height = scratch_motion_SpriteHeight[i] * scale;
+
+		rect.x = (scratch_motion_SpriteX[i] /  STAGE_WIDTH  + 0.5) * WINDOW_WIDTH  - width  / 2;
+		rect.y = (scratch_motion_SpriteY[i] / -STAGE_HEIGHT + 0.5) * WINDOW_HEIGHT - height / 2;
 		rect.w = width;
 		rect.h = height;
 
@@ -170,7 +193,7 @@ void draw()
 				break;
 			}
 
-			SDL_RenderDrawRect(renderer, &rect);
+			//SDL_RenderDrawRect(renderer, &rect);
 		}
 	}
 }

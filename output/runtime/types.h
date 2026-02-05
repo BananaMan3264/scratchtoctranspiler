@@ -27,11 +27,11 @@ enum RotationStyle
 {
 	RotStyle_leftright,
 	RotStyle_dontrotate,
-	RotStyle_allaround,
+	RotStyle_allaround
 };
 
-#define WINDOW_WIDTH 1028
-#define WINDOW_HEIGHT 771
+#define WINDOW_WIDTH (480*2)
+#define WINDOW_HEIGHT (360*2)
 
 #define STAGE_WIDTH 480
 #define STAGE_HEIGHT 360

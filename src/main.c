@@ -76,6 +76,8 @@ int main(int argc, char**argv)
 
 	struct json_object* vars = json_object_object_get(json_object_array_get_idx(json_object_object_get(project, "targets"), 0), "variables");
 
+	PrintData(json_object_object_get(project, "targets"));
+
 	GetFullProgram(vars, functions, blocks);
 
 	return 0;
