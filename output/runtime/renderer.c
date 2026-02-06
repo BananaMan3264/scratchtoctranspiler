@@ -2,10 +2,13 @@
 #include <librsvg/rsvg.h>
 #include <cairo.h>
 #include <math.h>
-#include"types.h"
-#include"../sprite_data.h"
+#include "types.h"
+#include "../sprite_data.h"
 
 #define RAD_TO_DEG 57.295779513082
+
+#define FIX_X(x) ((x) / STAGE_WIDTH + 0.5) * WINDOW_WIDTH
+#define FIX_Y(y) ((y) / -STAGE_HEIGHT + 0.5) * WINDOW_HEIGHT
 
 SDL_Texture* sprite_textures[SPRITES];
 
@@ -23,6 +26,8 @@ extern int scratch_motion_SpriteHeight[];
 extern bool scratch_looks_hidden[];
 
 extern SDL_Renderer* renderer;
+
+extern PenOperations ops;
 
 /*
 According to my research the Scratch VM refreshed the screen:
@@ -147,53 +152,104 @@ void initRenderer()
 	}
 }
 
+void DrawLine(float x_1, float y_1, float x_2, float y_2, float thickness, int colour)
+{
+	float x1 = FIX_X(x_1), y1 = FIX_Y(y_1), x2 = FIX_X(x_2), y2 = FIX_Y(y_2), t = thickness * (WINDOW_WIDTH / (double)STAGE_WIDTH);
+	float dx = x2 - x1;
+	float dy = y2 - y1;
+	float length = sqrtf(dx * dx + dy * dy);
+
+	float nx = -dy / length * (t / 2);
+	float ny = dx / length * (t / 2);
+
+	unsigned char b = (colour & 0x000000ff) >>  0;
+	unsigned char g = (colour & 0x0000ff00) >>  8;
+	unsigned char r = (colour & 0x00ff0000) >> 16;
+	unsigned char a = (colour & 0xff000000) >> 24;
+
+	SDL_Vertex verts[4] = {
+		{ { x1 + nx, y1 + ny }, {r, g, b, a}, {0, 0} },
+		{ { x1 - nx, y1 - ny }, {r, g, b, a}, {0, 0} },
+		{ { x2 - nx, y2 - ny }, {r, g, b, a}, {0, 0} },
+		{ { x2 + nx, y2 + ny }, {r, g, b, a}, {0, 0} }
+	};
+
+	int indices[6] = { 0, 1, 2, 0, 2, 3 };
+
+	SDL_RenderGeometry(renderer, NULL, verts, 4, indices, 6);
+
+}
+
+void DrawSprite(double x, double y, double size, double direction, double width2, double height2, int rotstyle, int texture_index) 
+{
+	SDL_Rect rect;
+
+	double scale = size * (WINDOW_WIDTH / (double)STAGE_WIDTH / 100);
+
+	int width = width2 * scale;
+	int height = height2 * scale;
+
+	rect.x = FIX_X(x) - width / 2;
+	rect.y = FIX_Y(y) - height / 2;
+	rect.w = width;
+	rect.h = height;
+
+	switch (rotstyle)
+	{
+	case RotStyle_allaround:
+		SDL_RenderCopyEx(renderer, sprite_textures[texture_index], NULL, &rect, direction * RAD_TO_DEG, NULL, SDL_FLIP_NONE);
+		break;
+	case RotStyle_dontrotate:
+		SDL_RenderCopy(renderer, sprite_textures[texture_index], NULL, &rect);
+		break;
+	case RotStyle_leftright:
+		printf("%f\n", fmod(direction * RAD_TO_DEG, 360.0));
+		if (fmod(direction * RAD_TO_DEG, 360.0) > 180)
+		{
+			SDL_RenderCopyEx(renderer, sprite_textures[texture_index], NULL, &rect, 0, NULL, SDL_FLIP_NONE);
+		}
+		else
+		{
+			SDL_RenderCopyEx(renderer, sprite_textures[texture_index], NULL, &rect, 0, NULL, SDL_FLIP_HORIZONTAL);
+		}
+		//TODO: This
+		break;
+	}
+}
+
+void DrawPenOp(PenOperation po) 
+{
+	if (po.operation_type == Pen_Line) 
+	{
+#define P po.operation_data.line_data
+		DrawLine(P.x1, P.y1, P.x2, P.y2, P.thickness, P.colour);
+#undef P
+	}
+	else 
+	{
+		stampData sd = po.operation_data.stamp_data;
+
+		DrawSprite(sd.x, sd.y, sd.size, sd.rotation, sd.width, sd.height, sd.rot_style, sd.sprite_index);
+	}
+}
+
 void draw()
 {
 	SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 	SDL_RenderClear(renderer);
 
-	SDL_Rect rect;
-
+	for (int i = 0; i < ops.length; i++) 
+	{
+		DrawPenOp(ops.data[i]);
+	}
 
 	for (int i = 0; i < SPRITES; i++)
 	{
-		double scale = scratch_motion_SpriteSize[i] * (WINDOW_WIDTH / (double)STAGE_WIDTH / 100);
-
-		int width = scratch_motion_SpriteWidth[i] * scale;
-		int height = scratch_motion_SpriteHeight[i] * scale;
-
-		rect.x = (scratch_motion_SpriteX[i] /  STAGE_WIDTH  + 0.5) * WINDOW_WIDTH  - width  / 2;
-		rect.y = (scratch_motion_SpriteY[i] / -STAGE_HEIGHT + 0.5) * WINDOW_HEIGHT - height / 2;
-		rect.w = width;
-		rect.h = height;
-
-		SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
 
 		if (!scratch_looks_hidden[i])
 		{
-			switch (scratch_motion_SpriteRotStyle[i])
-			{
-			case RotStyle_allaround:
-				SDL_RenderCopyEx(renderer, sprite_textures[i], NULL, &rect, scratch_motion_SpriteDirection[i] * RAD_TO_DEG, NULL, SDL_FLIP_NONE);
-				break;
-			case RotStyle_dontrotate:
-				SDL_RenderCopy(renderer, sprite_textures[i], NULL, &rect);
-				break;
-			case RotStyle_leftright:
-				printf("%f\n", fmod(scratch_motion_SpriteDirection[i] * RAD_TO_DEG, 360.0));
-				if (fmod(scratch_motion_SpriteDirection[i] * RAD_TO_DEG, 360.0) > 180)
-				{
-					SDL_RenderCopyEx(renderer, sprite_textures[i], NULL, &rect, 0, NULL, SDL_FLIP_NONE);
-				}
-				else 
-				{
-					SDL_RenderCopyEx(renderer, sprite_textures[i], NULL, &rect, 0, NULL, SDL_FLIP_HORIZONTAL);
-				}
-				//TODO: This
-				break;
-			}
-
-			//SDL_RenderDrawRect(renderer, &rect);
+			DrawSprite(scratch_motion_SpriteX[i], scratch_motion_SpriteY[i], scratch_motion_SpriteSize[i], scratch_motion_SpriteDirection[i], scratch_motion_SpriteWidth[i],
+				scratch_motion_SpriteHeight[i], scratch_motion_SpriteRotStyle[i], i);
 		}
 	}
 }

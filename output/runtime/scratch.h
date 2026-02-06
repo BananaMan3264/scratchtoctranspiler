@@ -15,3 +15,4 @@ ScratchValue ScratchSetString(char* s);
 double ScratchVarGetDouble(ScratchValue var);
 bool ScratchVarGetBool(ScratchValue var);
 char* ScratchVarGetString(ScratchValue var);
+ScratchValue sensing_timer();

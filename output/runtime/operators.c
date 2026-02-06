@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "scratch.h"
+#include "types.h"
 #include "operators.h"
 
 // Note: in the actual Scratch implementation Max and Min can be flipped.
@@ -26,17 +27,24 @@ ScratchValue operator_random(ScratchValue min, ScratchValue max)
 
 ScratchValue operator_equals(ScratchValue a, ScratchValue b)
 {
+	bool out = false;
+	char* astr = ScratchVarGetString(a);
+	char* bstr = ScratchVarGetString(b);
 	switch (max(a.ScratchType,b.ScratchType)) 
 	{
-	ScratchType_Bool:
-		return ScratchSetBool(strcmp(ScratchVarGetString(a), ScratchVarGetString(b)) == 0);
-	ScratchType_Number:
-		return ScratchSetBool(strcmp(ScratchVarGetString(a), ScratchVarGetString(b)) == 0);
-	ScratchType_String:
-		return ScratchSetBool(strcmp(ScratchVarGetString(a), ScratchVarGetString(b)) == 0);
-	default:
-		return ScratchSetBool(false);
+	case ScratchType_Bool:
+		out = strcmp(ScratchVarGetString(a), ScratchVarGetString(b)) == 0;
+		break;
+	case ScratchType_Number:
+		out = strcmp(ScratchVarGetString(a), ScratchVarGetString(b)) == 0;
+		break;
+	case ScratchType_String:
+		out = strcmp(ScratchVarGetString(a), ScratchVarGetString(b)) == 0;
+		break;
 	}
+	if (a.ScratchType == ScratchType_Number) { free(astr); }
+	if (b.ScratchType == ScratchType_Number) { free(bstr); }
+	return ScratchSetBool(out);
 }
 
 ScratchValue operator_join(ScratchValue a, ScratchValue b)

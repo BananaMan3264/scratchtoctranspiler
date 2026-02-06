@@ -1,5 +1,8 @@
 #include "types.h"
 
+#define DEG_TO_RAD 0.0174532925199
+#define RAD_TO_DEG 57.295779513082
+
 inline ScratchValue operator_add(ScratchValue a, ScratchValue b) { return ScratchSetDouble(ScratchVarGetDouble(a) + ScratchVarGetDouble(b)); }
 inline ScratchValue operator_subtract(ScratchValue a, ScratchValue b) { return ScratchSetDouble(ScratchVarGetDouble(a) - ScratchVarGetDouble(b)); }
 inline ScratchValue operator_multiply(ScratchValue a, ScratchValue b) { return ScratchSetDouble(ScratchVarGetDouble(a) * ScratchVarGetDouble(b)); }
@@ -24,12 +27,12 @@ inline ScratchValue operator_mathopYaabas(ScratchValue a) { return ScratchSetDou
 inline ScratchValue operator_mathopYfalaoaoar(ScratchValue a) { return ScratchSetDouble(floor(ScratchVarGetDouble(a))); }
 inline ScratchValue operator_mathopYcaeaialaianag(ScratchValue a) { return ScratchSetDouble(ceil(ScratchVarGetDouble(a))); }
 inline ScratchValue operator_mathopYsaqarat(ScratchValue a) { return ScratchSetDouble(sqrt(ScratchVarGetDouble(a))); }
-inline ScratchValue operator_mathopYsaian(ScratchValue a) { return ScratchSetDouble(sin(ScratchVarGetDouble(a))); }
-inline ScratchValue operator_mathopYcaoas(ScratchValue a) { return ScratchSetDouble(cos(ScratchVarGetDouble(a))); }
-inline ScratchValue operator_mathopYtaaan(ScratchValue a) { return ScratchSetDouble(tan(ScratchVarGetDouble(a))); }
-inline ScratchValue operator_mathopYaasaian(ScratchValue a) { return ScratchSetDouble(asin(ScratchVarGetDouble(a))); }
-inline ScratchValue operator_mathopYaacaoas(ScratchValue a) { return ScratchSetDouble(acos(ScratchVarGetDouble(a))); }
-inline ScratchValue operator_mathopYaataaan(ScratchValue a) { return ScratchSetDouble(atan(ScratchVarGetDouble(a))); }
+inline ScratchValue operator_mathopYsaian(ScratchValue a) { return ScratchSetDouble(sin(ScratchVarGetDouble(a) * DEG_TO_RAD)); }
+inline ScratchValue operator_mathopYcaoas(ScratchValue a) { return ScratchSetDouble(cos(ScratchVarGetDouble(a) * DEG_TO_RAD)); }
+inline ScratchValue operator_mathopYtaaan(ScratchValue a) { return ScratchSetDouble(tan(ScratchVarGetDouble(a) * DEG_TO_RAD)); }
+inline ScratchValue operator_mathopYaasaian(ScratchValue a) { return ScratchSetDouble(asin(ScratchVarGetDouble(a)) * RAD_TO_DEG); }
+inline ScratchValue operator_mathopYaacaoas(ScratchValue a) { return ScratchSetDouble(acos(ScratchVarGetDouble(a)) * RAD_TO_DEG); }
+inline ScratchValue operator_mathopYaataaan(ScratchValue a) { return ScratchSetDouble(atan(ScratchVarGetDouble(a)) * RAD_TO_DEG); }
 inline ScratchValue operator_mathopYlan(ScratchValue a) { return ScratchSetDouble(log(ScratchVarGetDouble(a))); }
 inline ScratchValue operator_mathopYlaoag(ScratchValue a) { return ScratchSetDouble(log10(ScratchVarGetDouble(a))); }
 inline ScratchValue operator_mathopYeibpb(ScratchValue a) { return ScratchSetDouble(exp(ScratchVarGetDouble(a))); }

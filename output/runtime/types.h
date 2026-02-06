@@ -31,6 +31,54 @@ typedef struct ScratchList
 	size_t length;
 } ScratchList;
 
+typedef struct lineData 
+{
+	double x1;
+	double y1;
+	double x2;
+	double y2;
+	double thickness;
+	int colour;
+} lineData;
+
+typedef struct stampData 
+{
+	int sprite_index;
+	int costume_index;
+	double size;
+	double rotation;
+	double x;
+	double y;
+	double width;
+	double height;
+	int rot_style;
+} stampData;
+
+typedef union penOperationData
+{
+	stampData stamp_data;
+	lineData line_data;
+} penOperationData;
+
+typedef struct PenOperation
+{
+	int operation_type;
+	penOperationData operation_data;
+} PenOperation;
+
+typedef struct PenOperations
+{
+	PenOperation* data;
+	size_t allocated_size;
+	size_t length;
+} PenOperations;
+
+enum PenOperationType 
+{
+	Pen_Line,
+	Pen_Stamp
+};
+
 enum RotationStyle
 {
 	RotStyle_leftright,
@@ -43,3 +91,5 @@ enum RotationStyle
 
 #define STAGE_WIDTH 480
 #define STAGE_HEIGHT 360
+
+#define FPS_CAP 30

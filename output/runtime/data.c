@@ -60,7 +60,7 @@ ScratchList removeListItem(ScratchList list, int idx2)
 	{
 		return l2;
 	}
-	memmove(l2.data + idx * sizeof(ScratchValue), l2.data + idx + 1, (l2.length - idx - 1) * sizeof(ScratchValue));
+	memmove(l2.data + idx, l2.data + idx + 1, (l2.length - idx - 1) * sizeof(ScratchValue));
 	l2.length--;
 	return l2;
 }

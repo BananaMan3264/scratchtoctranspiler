@@ -4,8 +4,11 @@
 #include "scratch.h"
 #include "motion.h"
 #include "types.h"
+#include "pen.h"
 
 #pragma once
+
+extern bool PenDown;
 
 extern int activeSprite;
 
@@ -26,8 +29,13 @@ extern int scratch_motion_SpriteRotStyle[];
 void motion_movesteps(ScratchValue steps) 
 {
 	double Steps = ScratchVarGetDouble(steps);
-	SX += cos(SD) * Steps;
-	SY += sin(SD) * Steps;
+	double nx = SX + cos(SD) * Steps, ny = SY + sin(SD) * Steps;
+	if (PenDown)
+	{
+		penDrawLine(nx, ny, SX, SY);
+	}
+	SX = nx;
+	SY = ny;
 }
 
 void motion_turnright(ScratchValue degrees) 
@@ -42,8 +50,13 @@ void motion_turnleft(ScratchValue degrees)
 
 void motion_goto(ScratchValue x, ScratchValue y) 
 {
-	SX = ScratchVarGetDouble(x);
-	SY = ScratchVarGetDouble(y);
+	double nx = ScratchVarGetDouble(x), ny = ScratchVarGetDouble(y);
+	if (PenDown) 
+	{
+		penDrawLine(nx, ny, SX, SY);
+	}
+	SX = nx;
+	SY = ny;
 }
 
 void motion_glideto(ScratchValue secs, ScratchValue x, ScratchValue y) 
@@ -58,6 +71,11 @@ void motion_glideto(ScratchValue secs, ScratchValue x, ScratchValue y)
 
 		double sx = _x * t + startx * (1 - t);
 		double sy = _y * t + starty * (1 - t);
+
+		if (PenDown)
+		{
+			penDrawLine(sx, sy, SX, SY);
+		}
 
 		SX = sx;
 		SY = sy;
@@ -77,22 +95,42 @@ void motion_pointtowards(ScratchValue dir)
 
 void motion_changexby(ScratchValue x)
 {
-	SX += ScratchVarGetDouble(x);
+	double nx = SX + ScratchVarGetDouble(x);
+	if (PenDown)
+	{
+		penDrawLine(nx, SY, SX, SY);
+	}
+	SX += nx;
 }
 
 void motion_changeyby(ScratchValue y)
 {
-	SY += ScratchVarGetDouble(y);
+	double ny = SY + ScratchVarGetDouble(y);
+	if (PenDown)
+	{
+		penDrawLine(SX, ny, SX, SY);
+	}
+	SY = ny;
 }
 
 void motion_setx(ScratchValue x)
 {
-	SX = ScratchVarGetDouble(x);
+	double nx = ScratchVarGetDouble(x);
+	if (PenDown)
+	{
+		penDrawLine(nx, SY, SX, SY);
+	}
+	SX += nx;
 }
 
 void motion_sety(ScratchValue y)
 {
-	SY = ScratchVarGetDouble(y);
+	double ny = ScratchVarGetDouble(y);
+	if (PenDown)
+	{
+		penDrawLine(SX, ny, SX, SY);
+	}
+	SY = ny;
 }
 
 void motion_setrotationstyleYlaeafathbaraiagahat() 

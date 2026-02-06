@@ -1,6 +1,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <time.h>
 #include <stdbool.h>
 #include "scratch.h"
 #include "operators.h"
@@ -26,4 +27,9 @@ ScratchValue sensing_mousey()
 	SDL_GetMouseState(&mx, &my);
 
 	return ScratchSetDouble(( - my / (double)(WINDOW_HEIGHT) + 0.5)  * (double)(STAGE_HEIGHT));
+}
+
+ScratchValue sensing_timer()
+{
+	return ScratchSetDouble(clock() / (double)CLOCKS_PER_SEC);
 }

@@ -12,6 +12,9 @@ Uint32 lastTime = 0;
 int frames = 0;
 float fps = 0.0f;
 
+long long wait_duration = (1 / (double)FPS_CAP) * 1000;
+long long last_time = 0;
+
 void update_fps() {
 	Uint32 current = SDL_GetTicks();
 	frames++;
@@ -26,6 +29,16 @@ void update_fps() {
 
 void Yield()
 {
+	if (FPS_CAP != -1)
+	{
+		while (SDL_GetTicks() < last_time + wait_duration)
+		{
+
+		}
+	}
+
+	last_time += wait_duration;
+
 	update_fps();
 
 	SDL_Event e;

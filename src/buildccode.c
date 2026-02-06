@@ -140,7 +140,7 @@ fprintf(file, " };\n");
 
 	fprintf(file, "bool scratch_" "looks_hidden" "[] = { "); 
 	for (int i = 0; i < sprites_count; i++) {
-		json_object* this = json_object_object_get(json_object_array_get_idx(targets, i), "size"); 
+		json_object* this = json_object_object_get(json_object_array_get_idx(targets, i), "visible"); 
 		if (json_object_get_type(this) == json_type_null) {
 			fprintf(file, "false");
 		}
@@ -308,7 +308,7 @@ char* GetFullProgram(struct json_object* variables, struct json_object* lists, v
 	FILE* file = fopen("../../../output/output.c", "w");
 
 	fprintf(file, "#define TRUE_YIELD Yield();\n#define YIELD TRUE_YIELD;\n#include \"runtime/scratch.h\"\n#include \"runtime/motion.h\"\n#include \"runtime/looks.h\"\n");
-	fprintf(file, "#include \"runtime/operators.h\"\n#include \"runtime/control.h\"\n#include \"runtime/sensing.h\"\n#include \"runtime/data.h\"\n\n");
+	fprintf(file, "#include \"runtime/operators.h\"\n#include \"runtime/control.h\"\n#include \"runtime/sensing.h\"\n#include \"runtime/data.h\"\n#include \"runtime/pen.h\"\n\n");
 	{
 		json_object_object_foreach(variables, key, val)
 		{
@@ -326,6 +326,7 @@ char* GetFullProgram(struct json_object* variables, struct json_object* lists, v
 	{
 		json_object_object_foreach(variables, key, val)
 		{
+			int type = json_object_get_type(json_object_array_get_idx(val, 1));
 			switch (json_object_get_type(json_object_array_get_idx(val, 1)))
 			{
 			case json_type_int:
@@ -336,6 +337,9 @@ char* GetFullProgram(struct json_object* variables, struct json_object* lists, v
 				break;
 			case json_type_string:
 				fprintf(file, "\t%s = ScratchSetString(\"%s\");\n", SanitiseScratchNameToC(AsManagedString(key)).data, json_object_get_string(json_object_array_get_idx(val, 1)));
+				break;
+			case json_type_boolean:
+				fprintf(file, "\t%s = ScratchSetBool(\"%s\");\n", SanitiseScratchNameToC(AsManagedString(key)).data, json_object_get_boolean(json_object_array_get_idx(val, 1)) ? "true" : "false");
 				break;
 			default:
 				printf("Type not implemented!");
