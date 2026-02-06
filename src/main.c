@@ -78,7 +78,7 @@ int main(int argc, char**argv)
 
 	PrintData(json_object_object_get(project, "targets"));
 
-	GetFullProgram(vars, functions, blocks);
+	GetFullProgram(vars, json_object_object_get(json_object_array_get_idx(json_object_object_get(project, "targets"), 0), "lists"), functions, blocks);
 
 	return 0;
 }

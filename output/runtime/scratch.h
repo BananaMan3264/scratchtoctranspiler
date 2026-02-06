@@ -9,9 +9,6 @@
 
 #define argument_reporter_string_number(a) a
 
-#define data_setvariableto(a,b) b = a
-#define data_changevariableby(a,b) b = operator_add(a,b)
-
 ScratchValue ScratchSetDouble(double d);
 ScratchValue ScratchSetBool(bool b);
 ScratchValue ScratchSetString(char* s);

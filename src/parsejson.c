@@ -97,6 +97,33 @@ ScratchBlock GetBlock(const char* id, struct json_object* blocks)
 		sb.argdata[1].text = SanitiseScratchNameToC(AsManagedString(json_object_get_string(json_object_array_get_idx(NEXT2(block, "fields", "VARIABLE"), 1))));
 		sb.argtypes[1] = ArgType_Variable;
 	}
+	else if (	strcmp(sb.opcode.data, "data_itemoflist") == 0 || strcmp(sb.opcode.data, "data_itemnumoflist") == 0 || 
+				strcmp(sb.opcode.data, "data_addtolist") == 0 || strcmp(sb.opcode.data, "data_deleteoflist") == 0 ||
+				strcmp(sb.opcode.data, "data_listcontainsitem") == 0
+			)
+	{
+		sb.args = 2;
+		sb.argdata = malloc(sizeof(ScratchArgData) * sb.args); if (!sb.argdata) { printf("Malloc error!"); exit(-1); }
+		sb.argtypes = malloc(sizeof(int) * sb.args); if (!sb.argtypes) { printf("Malloc error!"); exit(-1); }
+		sb.argdata[1].text = SanitiseScratchNameToC(AsManagedString(json_object_get_string(json_object_array_get_idx(NEXT2(block, "fields", "LIST"), 1))));
+		sb.argtypes[1] = ArgType_Variable;
+	}
+	else if (strcmp(sb.opcode.data, "data_deletealloflist") == 0 || strcmp(sb.opcode.data, "data_lengthoflist") == 0)
+	{
+		sb.args = 1;
+		sb.argdata = malloc(sizeof(ScratchArgData) * sb.args); if (!sb.argdata) { printf("Malloc error!"); exit(-1); }
+		sb.argtypes = malloc(sizeof(int) * sb.args); if (!sb.argtypes) { printf("Malloc error!"); exit(-1); }
+		sb.argdata[0].text = SanitiseScratchNameToC(AsManagedString(json_object_get_string(json_object_array_get_idx(NEXT2(block, "fields", "LIST"), 1))));
+		sb.argtypes[0] = ArgType_Variable;
+	}
+	else if (strcmp(sb.opcode.data, "data_insertatlist") == 0 || strcmp(sb.opcode.data, "data_replaceitemoflist") == 0)
+	{
+		sb.args = 3;
+		sb.argdata = malloc(sizeof(ScratchArgData) * sb.args); if (!sb.argdata) { printf("Malloc error!"); exit(-1); }
+		sb.argtypes = malloc(sizeof(int) * sb.args); if (!sb.argtypes) { printf("Malloc error!"); exit(-1); }
+		sb.argdata[2].text = SanitiseScratchNameToC(AsManagedString(json_object_get_string(json_object_array_get_idx(NEXT2(block, "fields", "LIST"), 1))));
+		sb.argtypes[2] = ArgType_Variable;
+	}
 	else if (strcmp(sb.opcode.data, "looks_costume") == 0)
 	{
 		sb.args = 1;
@@ -390,7 +417,7 @@ vecFunction ParseText(struct json_object* blocks)
 
 			f.proccode = SanitiseScratchNameToC(AsManagedString(json_object_get_string(json_object_object_get(json_object_object_get(block, "mutation"), "proccode"))));
 
-			f.warp = false;
+			f.warp = strcmp(json_object_get_string(json_object_object_get(json_object_object_get(block, "mutation"), "warp")), "true") == 0;
 
 			std_vector_pushback(functions, f);
 		}

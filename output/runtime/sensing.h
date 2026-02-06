@@ -7,7 +7,7 @@ ScratchValue sensing_mousey();
 
 #define control_wait_until(a) while(!ScratchVarGetBool(a)) { YIELD }
 
-#define sensing_keyoptionsYuapibaaararaoaw() SDL_SCANCODE_SPACE
+#define sensing_keyoptionsYsapaaacae() SDL_SCANCODE_SPACE
 #define sensing_keyoptionsY1() SDL_SCANCODE_1
 #define sensing_keyoptionsY2() SDL_SCANCODE_2
 #define sensing_keyoptionsY3() SDL_SCANCODE_3

@@ -3,7 +3,7 @@
 #include <cairo.h>
 #include <math.h>
 #include"types.h"
-#include"../data.h"
+#include"../sprite_data.h"
 
 #define RAD_TO_DEG 57.295779513082
 

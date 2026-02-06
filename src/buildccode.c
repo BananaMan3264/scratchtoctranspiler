@@ -100,11 +100,11 @@ for (int i = 0; i < sprites_count; i++)																		\
 }																											\
 fprintf(file, " };\n");
 
-	FILE* file = fopen("../../../output/data.c", "w");
+	FILE* file = fopen("../../../output/sprite_data.c", "w");
 
 	int sprites_count = json_object_array_length(targets);
 
-	fprintf(file, "#include <stdbool.h>\n#include <stdlib.h>\n#include \"runtime/motion.h\"\n#include \"data.h\"\n\n");
+	fprintf(file, "#include <stdbool.h>\n#include <stdlib.h>\n#include \"runtime/motion.h\"\n#include \"sprite_data.h\"\n\n");
 
 	GetAttrib("motion_SpriteX", "x");
 	GetAttrib("motion_SpriteY", "y");
@@ -296,40 +296,33 @@ fprintf(file, " };\n");
 
 	fclose(file);
 
-	FILE* header = fopen("../../../output/data.h", "w");
+	FILE* header = fopen("../../../output/sprite_data.h", "w");
 
 	fprintf(header, "#define SPRITES %i\n#define MAX_COSTUME_LENGTH %i", sprites_count, max_costume_count);
 
 	fclose(header);
 }
 
-char* GetFullProgram(struct json_object* variables, vecFunction functions, struct json_object* blocks)
+char* GetFullProgram(struct json_object* variables, struct json_object* lists, vecFunction functions, struct json_object* blocks)
 {
 	FILE* file = fopen("../../../output/output.c", "w");
 
-	fprintf(file, "#define YIELD Yield();\n#include \"runtime/scratch.h\"\n#include \"runtime/motion.h\"\n#include \"runtime/looks.h\"\n#include \"runtime/operators.h\"");
-	fprintf(file, "\n#include \"runtime/control.h\"\n#include \"runtime/sensing.h\"\n\n");
+	fprintf(file, "#define TRUE_YIELD Yield();\n#define YIELD TRUE_YIELD;\n#include \"runtime/scratch.h\"\n#include \"runtime/motion.h\"\n#include \"runtime/looks.h\"\n");
+	fprintf(file, "#include \"runtime/operators.h\"\n#include \"runtime/control.h\"\n#include \"runtime/sensing.h\"\n#include \"runtime/data.h\"\n\n");
 	{
 		json_object_object_foreach(variables, key, val)
 		{
-			switch (json_object_get_type(json_object_array_get_idx(val, 1)))
-			{
-			case json_type_int:
-				fprintf(file, "ScratchValue %s;\n", SanitiseScratchNameToC(AsManagedString(key)).data);
-				break;
-			case json_type_double:
-				fprintf(file, "ScratchValue %s;\n", SanitiseScratchNameToC(AsManagedString(key)).data);
-				break;
-			case json_type_string:
-				fprintf(file, "ScratchValue %s;\n", SanitiseScratchNameToC(AsManagedString(key)).data);
-				break;
-			default:
-				printf("Type not implemented!");
-				exit(-1);
-			}
+
+			fprintf(file, "ScratchValue %s;\n", SanitiseScratchNameToC(AsManagedString(key)).data);
 		}
 	}
-	fprintf(file, "\nvoid Init()\n{");
+	{
+		json_object_object_foreach(lists, key, val)
+		{
+			fprintf(file, "ScratchList %s;\n", SanitiseScratchNameToC(AsManagedString(key)).data);
+		}
+	}
+	fprintf(file, "\nvoid Init()\n{\n");
 	{
 		json_object_object_foreach(variables, key, val)
 		{
@@ -348,6 +341,12 @@ char* GetFullProgram(struct json_object* variables, vecFunction functions, struc
 				printf("Type not implemented!");
 				exit(-1);
 			}
+		}
+	}
+	{
+		json_object_object_foreach(lists, key, val)
+		{
+			fprintf(file, "\t%s = initialiseList();\n", SanitiseScratchNameToC(AsManagedString(key)).data);
 		}
 	}
 
@@ -385,6 +384,10 @@ char* GetFullProgram(struct json_object* variables, vecFunction functions, struc
 			fprintf(file, "ScratchValue %s", functions.data[i].argids[functions.data[i].args - 1].data);
 		}
 		PRINT_INDENTATION fprintf(file, ") \n{\n");
+		if (functions.data[i].warp) 
+		{
+			fprintf(file, "#define YIELD\n");
+		}
 		indentation++;
 		for (int j = 0; j < functions.data[i].blocks.length; j++) 
 		{
@@ -445,6 +448,10 @@ char* GetFullProgram(struct json_object* variables, vecFunction functions, struc
 			}
 
 #undef THIS
+		}
+		if (functions.data[i].warp)
+		{
+			fprintf(file, "#define YIELD TRUE_YIELD\n");
 		}
 		indentation--;
 		PRINT_INDENTATION fprintf(file, "}\n\n");

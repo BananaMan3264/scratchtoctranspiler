@@ -1,24 +1,24 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include "runtime/motion.h"
-#include "data.h"
+#include "sprite_data.h"
 
-double scratch_motion_SpriteX[] = { 0.0, -100.000000 };
-double scratch_motion_SpriteY[] = { 0.0, -100.000000 };
-double scratch_motion_SpriteSize[] = { 100.0, 200.000000 };
+double scratch_motion_SpriteX[] = { 0.0, 84.000000 };
+double scratch_motion_SpriteY[] = { 0.0, -87.000000 };
+double scratch_motion_SpriteSize[] = { 100.0, 100.000000 };
 double scratch_motion_SpriteWidth[] = { 0.0, 0.0 };
 double scratch_motion_SpriteHeight[] = { 0.0, 0.0 };
-double scratch_motion_SpriteDirection[] = { 0.0, -2.303835 };
+double scratch_motion_SpriteDirection[] = { 0.0, 0.000000 };
 bool scratch_looks_hidden[] = { false, false };
 int scratch_motion_SpriteRotStyle[] = { RotStyle_allaround, RotStyle_allaround };
 int scratch_looks_CostumeIndex[] = { 0, 0 };
 int scratch_looks_CostumeCounts[] = { 1, 1 };
 char* scratch_looks_CostumeNames[SPRITES][MAX_COSTUME_LENGTH] = {
-	{ "Blue Sky" },
+	{ "backdrop1" },
 	{ "costume1" }
  };
 char* scratch_looks_CostumeFiles[SPRITES][MAX_COSTUME_LENGTH] = {
-	{ "e7c147730f19d284bcd7b3f00af19bb6.svg" },
+	{ "cd21514d0531fdffb22204e0ec5ed84a.svg" },
 	{ "927d672925e7b99f7813735c484c6922.svg" }
  };
 double scratch_looks_effects_colour[] = { 0.0, 0.0 };
