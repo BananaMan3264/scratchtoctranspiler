@@ -342,34 +342,79 @@ char* GetFullProgram(struct json_object* variables, struct json_object* lists, v
 	fclose(mainh);
 	FILE* scheduler = fopen("../../../output/schedule.c", "w");
 
-	fprintf(scheduler, "#include<libco.h>\n#include\"sprite1.h\"\n#include\"runtime/main.h\"\n\ncothread_t scheduler;\ncothread_t draw_thread;\n\n");
+	bool FunctionsPresent[FunctionEventsLength];
 
-	for (int i = 0; i < functions.length; i++)
+	for (int i = 0; i < FunctionEventsLength; i++) 
 	{
-		fprintf(scheduler, "cothread_t %s_thread;\n", functions.data[i].proccode.data);
+		FunctionsPresent[i] = false;
 	}
 
-	fprintf(scheduler, "\nvoid RunScheduler()\n{\n\tInit();\n\n\tscheduler = co_active();\n\n");
-
-	for (int i = 0; i < functions.length; i++)
+	for (int i = 0; i < functions.length; i++) 
 	{
-		fprintf(scheduler, "\t%s_thread = co_create(64 * 1024, %s);\n", functions.data[i].proccode.data, functions.data[i].proccode.data);
+		FunctionsPresent[functions.data[i].opcode] = true;
+	}
+
+	if (!FunctionsPresent) { printf("FunctionsPresent could not be initialised!"); exit(-1); }
+
+	fprintf(scheduler, "#include<SDL2/SDL.h>\n#include<libco.h>\n#include\"sprite1.h\"\n#include\"runtime/main.h\"\n#include\"runtime/types.h\"\n#include\"schedule_manager.h\"\n\n");
+	fprintf(scheduler, "extern bool keysdown[];\nThreadList threads;\ncothread_t scheduler;\ncothread_t draw_thread;\nbool delete_thread = false;\n\n");
+
+	fprintf(scheduler, "\nvoid RunScheduler()\n{\n\tInit();\n\tInitialiseThreads();\n\n\tscheduler = co_active();\n\n");
+
+	if (FunctionsPresent[event_whenflagclicked])
+	{
+		for (int i = 0; i < functions.length; i++)
+		{
+			if (functions.data[i].opcode == event_whenflagclicked)
+			{
+				fprintf(scheduler, "\tAddThread(co_create(64 * 1024, %s));\n", functions.data[i].proccode.data);
+			}
+		}
 	}
 
 	fprintf(scheduler, "\n\twhile (1)\n\t{\n");
-	for (int i = 0; i < functions.length; i++)
-	{
-		fprintf(scheduler, "\t\tco_switch(%s_thread);\n", functions.data[i].proccode.data);
-	}
+	fprintf(scheduler, "\t\tfor (int i = 0; i < threads.length; i++)\n\t\t{\n\t\t\tco_switch(threads.data[i]);\n\t\t\tif (delete_thread) { RemoveThread(i); i--;  delete_thread = false; }\n\t\t}\n");
+	
+#define addkey(scancode, event) if (FunctionsPresent[event]){fprintf(scheduler, "\t\tif (keysdown[" #scancode "])\n\t\t{\n");for (int i = 0; i < functions.length; i++){if (functions.data[i].opcode == event){fprintf(scheduler, "\t\t\tAddThread(co_create(64 * 1024, %s));\n", functions.data[i].proccode.data);}}fprintf(scheduler, "\t\t}\n");}
+
+	addkey(SDL_SCANCODE_A, event_whenkeypressed_a)
+	addkey(SDL_SCANCODE_B, event_whenkeypressed_b)
+	addkey(SDL_SCANCODE_C, event_whenkeypressed_c)
+	addkey(SDL_SCANCODE_D, event_whenkeypressed_d)
+	addkey(SDL_SCANCODE_E, event_whenkeypressed_e)
+	addkey(SDL_SCANCODE_F, event_whenkeypressed_f)
+	addkey(SDL_SCANCODE_G, event_whenkeypressed_g)
+	addkey(SDL_SCANCODE_H, event_whenkeypressed_h)
+	addkey(SDL_SCANCODE_I, event_whenkeypressed_i)
+	addkey(SDL_SCANCODE_J, event_whenkeypressed_j)
+	addkey(SDL_SCANCODE_K, event_whenkeypressed_k)
+	addkey(SDL_SCANCODE_L, event_whenkeypressed_l)
+	addkey(SDL_SCANCODE_M, event_whenkeypressed_m)
+	addkey(SDL_SCANCODE_N, event_whenkeypressed_n)
+	addkey(SDL_SCANCODE_O, event_whenkeypressed_o)
+	addkey(SDL_SCANCODE_P, event_whenkeypressed_p)
+	addkey(SDL_SCANCODE_Q, event_whenkeypressed_q)
+	addkey(SDL_SCANCODE_R, event_whenkeypressed_r)
+	addkey(SDL_SCANCODE_S, event_whenkeypressed_s)
+	addkey(SDL_SCANCODE_T, event_whenkeypressed_t)
+	addkey(SDL_SCANCODE_U, event_whenkeypressed_u)
+	addkey(SDL_SCANCODE_V, event_whenkeypressed_v)
+	addkey(SDL_SCANCODE_W, event_whenkeypressed_w)
+	addkey(SDL_SCANCODE_X, event_whenkeypressed_x)
+	addkey(SDL_SCANCODE_Y, event_whenkeypressed_y)
+	addkey(SDL_SCANCODE_Z, event_whenkeypressed_z)
+
+#undef addkey()
+
 	fprintf(scheduler, "\t\tRender();\n\t}\n}");
 
 	fclose(scheduler);
 
 	FILE* file = fopen("../../../output/sprite1.c", "w");
 
-	fprintf(file, "#define TRUE_YIELD co_switch(scheduler);\n#define YIELD TRUE_YIELD;\n#include \"runtime/scratch.h\"\n#include \"runtime/motion.h\"\n#include \"runtime/looks.h\"\n");
+	fprintf(file, "\n#define YIELD TRUE_YIELD;\n#include \"runtime/scratch.h\"\n#include \"runtime/motion.h\"\n#include \"runtime/looks.h\"\n");
 	fprintf(file, "#include \"runtime/operators.h\"\n#include \"runtime/control.h\"\n#include \"runtime/sensing.h\"\n#include \"runtime/data.h\"\n#include \"runtime/pen.h\"\n");
-	fprintf(file, "#include <libco.h>\n\nextern cothread_t scheduler;\n\n");
+	fprintf(file, "#include <libco.h>\n\nextern cothread_t scheduler;\nextern bool delete_thread; \n\n");
 	{
 		json_object_object_foreach(variables, key, val)
 		{
@@ -517,6 +562,10 @@ char* GetFullProgram(struct json_object* variables, struct json_object* lists, v
 		if (functions.data[i].warp)
 		{
 			fprintf(file, "#define YIELD TRUE_YIELD\n");
+		}
+		if (functions.data[i].opcode != procedures_prototype)
+		{
+			PRINT_INDENTATION fprintf(file, "END_THREAD\n");
 		}
 		indentation--;
 		PRINT_INDENTATION fprintf(file, "}\n\n");

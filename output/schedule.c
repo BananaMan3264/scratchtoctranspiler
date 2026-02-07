@@ -1,29 +1,49 @@
+#include<SDL2/SDL.h>
 #include<libco.h>
 #include"sprite1.h"
 #include"runtime/main.h"
+#include"runtime/types.h"
+#include"schedule_manager.h"
 
+extern bool keysdown[];
+ThreadList threads;
 cothread_t scheduler;
 cothread_t draw_thread;
+bool delete_thread = false;
 
-cothread_t Yoevent_whenflagclicked_thread;
-cothread_t Ypevent_whenflagclicked_thread;
-cothread_t Yvevent_whenflagclicked_thread;
 
 void RunScheduler()
 {
 	Init();
+	InitialiseThreads();
 
 	scheduler = co_active();
 
-	Yoevent_whenflagclicked_thread = co_create(64 * 1024, Yoevent_whenflagclicked);
-	Ypevent_whenflagclicked_thread = co_create(64 * 1024, Ypevent_whenflagclicked);
-	Yvevent_whenflagclicked_thread = co_create(64 * 1024, Yvevent_whenflagclicked);
+	AddThread(co_create(64 * 1024, Yjevent_whenflagclicked));
 
 	while (1)
 	{
-		co_switch(Yoevent_whenflagclicked_thread);
-		co_switch(Ypevent_whenflagclicked_thread);
-		co_switch(Yvevent_whenflagclicked_thread);
+		for (int i = 0; i < threads.length; i++)
+		{
+			co_switch(threads.data[i]);
+			if (delete_thread) { RemoveThread(i); i--;  delete_thread = false; }
+		}
+		if (keysdown[SDL_SCANCODE_A])
+		{
+			AddThread(co_create(64 * 1024, Yfevent_whenkeypressedYa));
+		}
+		if (keysdown[SDL_SCANCODE_D])
+		{
+			AddThread(co_create(64 * 1024, Yhevent_whenkeypressedYd));
+		}
+		if (keysdown[SDL_SCANCODE_S])
+		{
+			AddThread(co_create(64 * 1024, Ydevent_whenkeypressedYs));
+		}
+		if (keysdown[SDL_SCANCODE_W])
+		{
+			AddThread(co_create(64 * 1024, Ybevent_whenkeypressedYw));
+		}
 		Render();
 	}
 }

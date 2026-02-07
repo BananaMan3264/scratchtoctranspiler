@@ -1,4 +1,4 @@
-#define TRUE_YIELD co_switch(scheduler);
+
 #define YIELD TRUE_YIELD;
 #include "runtime/scratch.h"
 #include "runtime/motion.h"
@@ -11,6 +11,7 @@
 #include <libco.h>
 
 extern cothread_t scheduler;
+extern bool delete_thread; 
 
 ScratchValue YbajaEakbba4cbaidbcbaFakdbeba8axfbaAaVgbhbamayibavaaaraiaaabalae;
 
@@ -19,47 +20,43 @@ void Init()
 	YbajaEakbba4cbaidbcbaFakdbeba8axfbaAaVgbhbamayibavaaaraiaaabalae = ScratchSetDouble(0);
 }
 
-void Yoevent_whenflagclicked();
-void Ypevent_whenflagclicked();
-void Yvevent_whenflagclicked();
+void Ybevent_whenkeypressedYw();
+void Ydevent_whenkeypressedYs();
+void Yfevent_whenkeypressedYa();
+void Yhevent_whenkeypressedYd();
+void Yjevent_whenflagclicked();
 
-void Yoevent_whenflagclicked() 
+void Ybevent_whenkeypressedYw() 
 {
-	motion_setx(ScratchSetDouble(0));
-	while(1)
-	{
-		motion_changexby(ScratchSetDouble(10));
-		control_wait(operator_random(ScratchSetDouble(0.1), ScratchSetDouble(0.3)));
-		if(ScratchVarGetBool(operator_equals(motion_xposition(), ScratchSetString("100"))))
-		{
-			motion_setx(ScratchSetDouble(0));
-		}
-		YIELD
-	}
+	motion_changeyby(ScratchSetDouble(10));
+	END_THREAD
 }
 
-void Ypevent_whenflagclicked() 
+void Ydevent_whenkeypressedYs() 
 {
-	looks_setsizeto(ScratchSetDouble(100));
-	motion_setx(ScratchSetDouble(0));
-	while(1)
-	{
-		looks_changesizeby(ScratchSetDouble(1));
-		if(ScratchVarGetBool(operator_equals(looks_size(), ScratchSetString("200"))))
-		{
-			looks_setsizeto(ScratchSetDouble(100));
-		}
-		YIELD
-	}
+	motion_changeyby(ScratchSetDouble(-10));
+	END_THREAD
 }
 
-void Yvevent_whenflagclicked() 
+void Yfevent_whenkeypressedYa() 
 {
-	motion_pointindirection(ScratchSetDouble(90));
+	motion_changexby(ScratchSetDouble(-10));
+	END_THREAD
+}
+
+void Yhevent_whenkeypressedYd() 
+{
+	motion_changexby(ScratchSetDouble(10));
+	END_THREAD
+}
+
+void Yjevent_whenflagclicked() 
+{
 	while(1)
 	{
 		motion_turnright(ScratchSetDouble(10));
 		YIELD
 	}
+	END_THREAD
 }
 

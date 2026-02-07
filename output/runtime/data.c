@@ -34,7 +34,7 @@ ScratchList resizeList(ScratchList list, int length)
 {
 	ScratchList l2 = list;
 	l2.allocated_size = length;
-	void* temp = realloc(l2.data, l2.allocated_size * sizeof(ScratchList));
+	void* temp = realloc(l2.data, l2.allocated_size * sizeof(ScratchValue));
 	if (!temp) { exit(-1); }
 	l2.data = temp;
 	return l2;

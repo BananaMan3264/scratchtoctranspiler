@@ -372,6 +372,57 @@ vecFunction ParseText(struct json_object* blocks)
 
 			std_vector_pushback(functions, f);
 		}
+		else if (strcmp(opcode, "event_whenkeypressed") == 0)
+		{
+			Function f;
+
+
+			vecScratchBlock lines;
+
+			lines.allocated_size = 8; lines.length = 0; lines.sizeoftype = sizeof(ScratchBlock); lines.data = malloc(sizeof(ScratchBlock) * lines.allocated_size); if (!lines.data) {
+				exit(-1);
+			}
+
+			f.blocks = lines;
+
+			f.args = 0;
+			f.next = AsManagedString(json_object_get_string(json_object_object_get(block, "next")));
+
+			char* key_press = json_object_get_string(json_object_array_get_idx(json_object_object_get(json_object_object_get(block, "fields"),"KEY_OPTION"),0));
+
+			if (strcmp(key_press,"a") == 0) { f.opcode = event_whenkeypressed_a; }
+			if (strcmp(key_press,"b") == 0) { f.opcode = event_whenkeypressed_b; }
+			if (strcmp(key_press,"c") == 0) { f.opcode = event_whenkeypressed_c; }
+			if (strcmp(key_press,"d") == 0) { f.opcode = event_whenkeypressed_d; }
+			if (strcmp(key_press,"e") == 0) { f.opcode = event_whenkeypressed_e; }
+			if (strcmp(key_press,"f") == 0) { f.opcode = event_whenkeypressed_f; }
+			if (strcmp(key_press,"g") == 0) { f.opcode = event_whenkeypressed_g; }
+			if (strcmp(key_press,"h") == 0) { f.opcode = event_whenkeypressed_h; }
+			if (strcmp(key_press,"i") == 0) { f.opcode = event_whenkeypressed_i; }
+			if (strcmp(key_press,"j") == 0) { f.opcode = event_whenkeypressed_j; }
+			if (strcmp(key_press,"k") == 0) { f.opcode = event_whenkeypressed_k; }
+			if (strcmp(key_press,"l") == 0) { f.opcode = event_whenkeypressed_l; }
+			if (strcmp(key_press,"m") == 0) { f.opcode = event_whenkeypressed_m; }
+			if (strcmp(key_press,"n") == 0) { f.opcode = event_whenkeypressed_n; }
+			if (strcmp(key_press,"o") == 0) { f.opcode = event_whenkeypressed_o; }
+			if (strcmp(key_press,"p") == 0) { f.opcode = event_whenkeypressed_p; }
+			if (strcmp(key_press,"q") == 0) { f.opcode = event_whenkeypressed_q; }
+			if (strcmp(key_press,"r") == 0) { f.opcode = event_whenkeypressed_r; }
+			if (strcmp(key_press,"s") == 0) { f.opcode = event_whenkeypressed_s; }
+			if (strcmp(key_press,"t") == 0) { f.opcode = event_whenkeypressed_t; }
+			if (strcmp(key_press,"u") == 0) { f.opcode = event_whenkeypressed_u; }
+			if (strcmp(key_press,"v") == 0) { f.opcode = event_whenkeypressed_v; }
+			if (strcmp(key_press,"w") == 0) { f.opcode = event_whenkeypressed_w; }
+			if (strcmp(key_press,"x") == 0) { f.opcode = event_whenkeypressed_x; }
+			if (strcmp(key_press,"y") == 0) { f.opcode = event_whenkeypressed_y; }
+			if (strcmp(key_press,"z") == 0) { f.opcode = event_whenkeypressed_z; }
+
+			f.proccode = SafeStringMerge(SafeStringMerge(SanitiseScratchNameToC(AsManagedString(key)), AsManagedString(opcode)), SanitiseScratchNameToC(AsManagedString(key_press)));
+
+			f.warp = false;
+
+			std_vector_pushback(functions, f);
+		}
 		else if (strcmp(opcode, "procedures_prototype") == 0) 
 		{
 			Function f;

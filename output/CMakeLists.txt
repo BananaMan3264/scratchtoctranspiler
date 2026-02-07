@@ -21,13 +21,13 @@ endif()
 add_library(libco STATIC
 	libco/libco.c
 	libco/${LIBCO_BACKEND}
- "runtime/main.h")
+ "runtime/main.h" "schedule_manager.c" "schedule_manager.h")
 
 target_include_directories(libco PUBLIC libco)
 
 
 
-add_executable(scratchruntime sprite1.c "sprite_data.c" runtime/scratch.c runtime/main.c runtime/motion.c runtime/looks.c runtime/operators.c runtime/renderer.c runtime/renderer.h   "runtime/control.c" "runtime/control.h" "sprite_data.h" "runtime/sensing.c" "runtime/sensing.h" "runtime/data.c" "runtime/data.h" "runtime/pen.c" "runtime/pen.h" "schedule.c" "runtime/schedule.h" "runtime/main.h")
+add_executable(scratchruntime sprite1.c "sprite_data.c" runtime/scratch.c runtime/main.c runtime/motion.c runtime/looks.c runtime/operators.c runtime/renderer.c runtime/renderer.h   "runtime/control.c" "runtime/control.h" "sprite_data.h" "runtime/sensing.c" "runtime/sensing.h" "runtime/data.c" "runtime/data.h" "runtime/pen.c" "runtime/pen.h" "schedule.c" "runtime/schedule.h" "runtime/main.h" "schedule_manager.c" "schedule_manager.h")
 
 target_link_libraries(scratchruntime PRIVATE
 	SDL2::SDL2

@@ -1,5 +1,6 @@
 #include <stdbool.h>
 #include <stdio.h>
+#include <libco.h>
 
 #define max(a, b) (( (a) > (b) ) ? (a) : (b))
 #define min(a, b) (( (a) < (b) ) ? (a) : (b))
@@ -30,6 +31,13 @@ typedef struct ScratchList
 	size_t allocated_size;
 	size_t length;
 } ScratchList;
+
+typedef struct ThreadList 
+{
+	cothread_t* data;
+	size_t allocated_size;
+	size_t length;
+} ThreadList;
 
 typedef struct lineData 
 {

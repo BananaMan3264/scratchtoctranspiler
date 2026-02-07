@@ -17,7 +17,35 @@ enum ArgTypes
 enum FunctionEvents
 {
 	event_whenflagclicked,
-	procedures_prototype
+	event_whenkeypressed_a,
+	event_whenkeypressed_b,
+	event_whenkeypressed_c,
+	event_whenkeypressed_d,
+	event_whenkeypressed_e,
+	event_whenkeypressed_f,
+	event_whenkeypressed_g,
+	event_whenkeypressed_h,
+	event_whenkeypressed_i,
+	event_whenkeypressed_j,
+	event_whenkeypressed_k,
+	event_whenkeypressed_l,
+	event_whenkeypressed_m,
+	event_whenkeypressed_n,
+	event_whenkeypressed_o,
+	event_whenkeypressed_p,
+	event_whenkeypressed_q,
+	event_whenkeypressed_r,
+	event_whenkeypressed_s,
+	event_whenkeypressed_t,
+	event_whenkeypressed_u,
+	event_whenkeypressed_v,
+	event_whenkeypressed_w,
+	event_whenkeypressed_x,
+	event_whenkeypressed_y,
+	event_whenkeypressed_z,
+	procedures_prototype,
+
+	FunctionEventsLength
 };
 
 typedef struct String

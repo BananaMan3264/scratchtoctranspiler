@@ -3,8 +3,8 @@
 #include "runtime/motion.h"
 #include "sprite_data.h"
 
-double scratch_motion_SpriteX[] = { 0.0, 70.000000 };
-double scratch_motion_SpriteY[] = { 0.0, 0.000000 };
+double scratch_motion_SpriteX[] = { 0.0, 56.000000 };
+double scratch_motion_SpriteY[] = { 0.0, 79.000000 };
 double scratch_motion_SpriteDirection[] = { 0.0, -1.919862 };
 bool scratch_looks_hidden[] = { false, false };
 int scratch_motion_SpriteRotStyle[] = { RotStyle_allaround, RotStyle_allaround };
