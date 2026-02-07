@@ -1,6 +1,5 @@
 #include <math.h>
 #include <time.h>
-#include "main.h"
 #include "scratch.h"
 #include "motion.h"
 #include "types.h"
@@ -59,35 +58,6 @@ void motion_goto(ScratchValue x, ScratchValue y)
 	SY = ny;
 }
 
-void motion_glideto(ScratchValue secs, ScratchValue x, ScratchValue y) 
-{
-	double startTime = clock() / (double)CLOCKS_PER_SEC;
-	double _secs = ScratchVarGetDouble(secs), _x = ScratchVarGetDouble(x), _y = ScratchVarGetDouble(y);
-	double startx = SX, starty = SY;
-	double time = (clock() / (double)CLOCKS_PER_SEC);
-	while (time < startTime + _secs) 
-	{
-		double t = (time - startTime) / (_secs);
-
-		double sx = _x * t + startx * (1 - t);
-		double sy = _y * t + starty * (1 - t);
-
-		if (PenDown)
-		{
-			penDrawLine(sx, sy, SX, SY);
-		}
-
-		SX = sx;
-		SY = sy;
-
-		Yield();
-		time = (clock() / (double)CLOCKS_PER_SEC);
-	}
-
-	SX = _x;
-	SY = _y;
-}
-
 void motion_pointtowards(ScratchValue dir)
 {
 	SD = ScratchVarGetDouble(dir) * DEG_TO_RAD;
@@ -100,7 +70,7 @@ void motion_changexby(ScratchValue x)
 	{
 		penDrawLine(nx, SY, SX, SY);
 	}
-	SX += nx;
+	SX = nx;
 }
 
 void motion_changeyby(ScratchValue y)
@@ -120,7 +90,7 @@ void motion_setx(ScratchValue x)
 	{
 		penDrawLine(nx, SY, SX, SY);
 	}
-	SX += nx;
+	SX = nx;
 }
 
 void motion_sety(ScratchValue y)

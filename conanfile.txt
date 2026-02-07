@@ -1,0 +1,6 @@
+[requires]
+libdill/2.14
+
+[generators]
+CMakeDeps
+CMakeToolchain

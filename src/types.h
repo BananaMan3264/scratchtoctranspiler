@@ -14,6 +14,12 @@ enum ArgTypes
 	ArgType_Variable = 12,		// Variable
 };
 
+enum FunctionEvents
+{
+	event_whenflagclicked,
+	procedures_prototype
+};
+
 typedef struct String
 {
 	bool managed; // True if the string should not be freed.
@@ -41,6 +47,7 @@ typedef struct vecScratchBlock {
 typedef struct Function 
 {
 	String proccode;
+	int opcode;
 	int args;
 	String next;
 	char* argTypes;

@@ -64,11 +64,12 @@ bool ScratchVarGetBool(ScratchValue var)
 
 char* ScratchVarGetString(ScratchValue var) 
 {
+	char* buf;
 	switch (var.ScratchType)
 	{
 	case ScratchType_Number:
-		char* buf = malloc(20); if (!buf) { printf("Malloc error!"); exit(-1); }
-		snprintf(buf, 20, "%.20f", var.data.Number);
+		buf = malloc(20); if (!buf) { printf("Malloc error!"); exit(-1); }
+		snprintf(buf, 20, "%g", var.data.Number);
 		return buf;
 	case ScratchType_Bool:
 		return var.data.Bool ? "true" : "false";

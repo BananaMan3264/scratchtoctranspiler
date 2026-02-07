@@ -108,24 +108,6 @@ fprintf(file, " };\n");
 
 	GetAttrib("motion_SpriteX", "x");
 	GetAttrib("motion_SpriteY", "y");
-	fprintf(file, "double scratch_" "motion_SpriteSize" "[] = { "); for (int i = 0; i < sprites_count; i++) {
-		json_object* this = json_object_object_get(json_object_array_get_idx(targets, i), "size"); if (json_object_get_type(this) == json_type_null) {
-			fprintf(file, "100.0");
-		}
-		else {
-			double d = json_object_get_double(this); fprintf(file, "%f", d);
-		} if (i != sprites_count - 1) {
-			fprintf(file, ", ");
-		}
-	} fprintf(file, " };\n");;
-
-	fprintf(file, "double scratch_motion_SpriteWidth[] = { ");
-	SetAllZeros();
-	fprintf(file, " };\n");
-
-	fprintf(file, "double scratch_motion_SpriteHeight[] = { ");
-	SetAllZeros();
-	fprintf(file, " };\n");
 
 	fprintf(file, "double scratch_" "motion_SpriteDirection" "[] = { "); for (int i = 0; i < sprites_count; i++) {
 		json_object* this = json_object_object_get(json_object_array_get_idx(targets, i), "direction"); if (json_object_get_type(this) == json_type_null) {
@@ -266,6 +248,49 @@ fprintf(file, " };\n");
 	}
 	fprintf(file, " };\n");
 
+	fprintf(file, "double scratch_" "motion_SpriteSize" "[] = { "); for (int i = 0; i < sprites_count; i++) {
+		json_object* this = json_object_object_get(json_object_array_get_idx(targets, i), "size"); if (json_object_get_type(this) == json_type_null) {
+			fprintf(file, "100.0");
+		}
+		else {
+			double d = json_object_get_double(this); fprintf(file, "%f", d);
+		} if (i != sprites_count - 1) {
+			fprintf(file, ", ");
+		}
+	} fprintf(file, " };\n");;
+
+	fprintf(file, "double scratch_motion_SpriteWidth[SPRITES][MAX_COSTUME_LENGTH] = { ");
+	for (int i = 0; i < sprites_count; i++) {
+		fprintf(file, "{");
+		for (int j = 0; j < max_costume_count; j++) {
+			fprintf(file, "0.0");
+			if (j != max_costume_count - 1) {
+				fprintf(file, ", ");
+			}
+		}
+		fprintf(file, "}"); 
+		if (i != sprites_count - 1) {
+			fprintf(file, ", ");
+		}
+	}
+	fprintf(file, " };\n");
+
+	fprintf(file, "double scratch_motion_SpriteHeight[SPRITES][MAX_COSTUME_LENGTH] = { ");
+	for (int i = 0; i < sprites_count; i++) {
+		fprintf(file, "{");
+		for (int j = 0; j < max_costume_count; j++) {
+			fprintf(file, "0.0");
+			if (j != max_costume_count - 1) {
+				fprintf(file, ", ");
+			}
+		}
+		fprintf(file, "}");
+		if (i != sprites_count - 1) {
+			fprintf(file, ", ");
+		}
+	}
+	fprintf(file, " };\n");
+
 	fprintf(file, "double scratch_looks_effects_colour[] = { ");
 	SetAllZeros();
 	fprintf(file, " };\n");
@@ -305,10 +330,46 @@ fprintf(file, " };\n");
 
 char* GetFullProgram(struct json_object* variables, struct json_object* lists, vecFunction functions, struct json_object* blocks)
 {
-	FILE* file = fopen("../../../output/output.c", "w");
+	FILE* mainh = fopen("../../../output/sprite1.h", "w");
 
-	fprintf(file, "#define TRUE_YIELD Yield();\n#define YIELD TRUE_YIELD;\n#include \"runtime/scratch.h\"\n#include \"runtime/motion.h\"\n#include \"runtime/looks.h\"\n");
-	fprintf(file, "#include \"runtime/operators.h\"\n#include \"runtime/control.h\"\n#include \"runtime/sensing.h\"\n#include \"runtime/data.h\"\n#include \"runtime/pen.h\"\n\n");
+	fprintf(mainh, "void Init();\n\n");
+
+	for (int i = 0; i < functions.length; i++)
+	{
+		fprintf(mainh, "void %s();\n", functions.data[i].proccode.data);
+	}
+
+	fclose(mainh);
+	FILE* scheduler = fopen("../../../output/schedule.c", "w");
+
+	fprintf(scheduler, "#include<libco.h>\n#include\"sprite1.h\"\n#include\"runtime/main.h\"\n\ncothread_t scheduler;\ncothread_t draw_thread;\n\n");
+
+	for (int i = 0; i < functions.length; i++)
+	{
+		fprintf(scheduler, "cothread_t %s_thread;\n", functions.data[i].proccode.data);
+	}
+
+	fprintf(scheduler, "\nvoid RunScheduler()\n{\n\tInit();\n\n\tscheduler = co_active();\n\n");
+
+	for (int i = 0; i < functions.length; i++)
+	{
+		fprintf(scheduler, "\t%s_thread = co_create(64 * 1024, %s);\n", functions.data[i].proccode.data, functions.data[i].proccode.data);
+	}
+
+	fprintf(scheduler, "\n\twhile (1)\n\t{\n");
+	for (int i = 0; i < functions.length; i++)
+	{
+		fprintf(scheduler, "\t\tco_switch(%s_thread);\n", functions.data[i].proccode.data);
+	}
+	fprintf(scheduler, "\t\tRender();\n\t}\n}");
+
+	fclose(scheduler);
+
+	FILE* file = fopen("../../../output/sprite1.c", "w");
+
+	fprintf(file, "#define TRUE_YIELD co_switch(scheduler);\n#define YIELD TRUE_YIELD;\n#include \"runtime/scratch.h\"\n#include \"runtime/motion.h\"\n#include \"runtime/looks.h\"\n");
+	fprintf(file, "#include \"runtime/operators.h\"\n#include \"runtime/control.h\"\n#include \"runtime/sensing.h\"\n#include \"runtime/data.h\"\n#include \"runtime/pen.h\"\n");
+	fprintf(file, "#include <libco.h>\n\nextern cothread_t scheduler;\n\n");
 	{
 		json_object_object_foreach(variables, key, val)
 		{

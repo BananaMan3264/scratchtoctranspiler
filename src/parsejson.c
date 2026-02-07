@@ -353,6 +353,8 @@ vecFunction ParseText(struct json_object* blocks)
 		{
 			Function f;
 
+			f.opcode = event_whenflagclicked;
+
 			vecScratchBlock lines;
 
 			lines.allocated_size = 8; lines.length = 0; lines.sizeoftype = sizeof(ScratchBlock); lines.data = malloc(sizeof(ScratchBlock) * lines.allocated_size); if (!lines.data) {
@@ -364,7 +366,7 @@ vecFunction ParseText(struct json_object* blocks)
 			f.args = 0;
 			f.next = AsManagedString(json_object_get_string(json_object_object_get(block, "next")));
 
-			f.proccode = SafeStringMerge(AsManagedString("Start"), AsManagedString(""));
+			f.proccode = SafeStringMerge(SanitiseScratchNameToC(AsManagedString(key)), AsManagedString(opcode));
 
 			f.warp = false;
 
@@ -373,6 +375,8 @@ vecFunction ParseText(struct json_object* blocks)
 		else if (strcmp(opcode, "procedures_prototype") == 0) 
 		{
 			Function f;
+
+			f.opcode = procedures_prototype;
 
 			vecScratchBlock lines;
 

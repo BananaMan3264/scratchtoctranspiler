@@ -1,7 +1,7 @@
 #include<SDL2/SDL.h>
 #include<stdbool.h>
 #include"renderer.h"
-#include"output.h"
+#include"schedule.h"
 #include"types.h"
 
 SDL_Renderer* renderer;
@@ -27,7 +27,7 @@ void update_fps() {
 	}
 }
 
-void Yield()
+void Render()
 {
 	if (FPS_CAP != -1)
 	{
@@ -100,11 +100,5 @@ int main()
 	}
 
 	initRenderer();
-	Init();
-	Start();
-
-	while (1) 
-	{
-		Yield();
-	}
+	RunScheduler();
 }

@@ -33,13 +33,13 @@ ScratchValue operator_equals(ScratchValue a, ScratchValue b)
 	switch (max(a.ScratchType,b.ScratchType)) 
 	{
 	case ScratchType_Bool:
-		out = strcmp(ScratchVarGetString(a), ScratchVarGetString(b)) == 0;
+		out = strcmp(astr, bstr) == 0;
 		break;
 	case ScratchType_Number:
-		out = strcmp(ScratchVarGetString(a), ScratchVarGetString(b)) == 0;
+		out = strcmp(astr, bstr) == 0;
 		break;
 	case ScratchType_String:
-		out = strcmp(ScratchVarGetString(a), ScratchVarGetString(b)) == 0;
+		out = strcmp(astr, bstr) == 0;
 		break;
 	}
 	if (a.ScratchType == ScratchType_Number) { free(astr); }
