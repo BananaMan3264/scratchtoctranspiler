@@ -248,6 +248,124 @@ fprintf(file, " };\n");
 	}
 	fprintf(file, " };\n");
 
+	fprintf(file, "double scratch_looks_RotationCentreX[SPRITES][MAX_COSTUME_LENGTH] = {\n");
+	for (int i = 0; i < sprites_count; i++) {
+		fprintf(file, "\t{ ");
+		for (int j = 0; j < max_costume_count; j++) {
+			json_object* this = json_object_object_get(json_object_array_get_idx(targets, i), "costumes");
+			json_object* this_name = json_object_object_get(json_object_array_get_idx(this, j), "rotationCenterX");
+			if (json_object_get_type(this_name) != json_type_null) {
+				fprintf(file, "%f", json_object_get_double(this_name));
+			}
+			else
+			{
+				fprintf(file, "0.0");
+			}
+			if (j != max_costume_count - 1) {
+				fprintf(file, ", ");
+			}
+		}
+		if (i != sprites_count - 1) {
+			fprintf(file, " },\n");
+		}
+		else
+		{
+			fprintf(file, " }\n");
+		}
+	}
+	fprintf(file, " };\n");
+
+	fprintf(file, "double scratch_looks_RotationCentreY[SPRITES][MAX_COSTUME_LENGTH] = {\n");
+	for (int i = 0; i < sprites_count; i++) {
+		fprintf(file, "\t{ ");
+		for (int j = 0; j < max_costume_count; j++) {
+			json_object* this = json_object_object_get(json_object_array_get_idx(targets, i), "costumes");
+			json_object* this_name = json_object_object_get(json_object_array_get_idx(this, j), "rotationCenterY");
+			if (json_object_get_type(this_name) != json_type_null) {
+				fprintf(file, "%f", json_object_get_double(this_name));
+			}
+			else
+			{
+				fprintf(file, "0.0");
+			}
+			if (j != max_costume_count - 1) {
+				fprintf(file, ", ");
+			}
+		}
+		if (i != sprites_count - 1) {
+			fprintf(file, " },\n");
+		}
+		else
+		{
+			fprintf(file, " }\n");
+		}
+	}
+	fprintf(file, " };\n");
+
+	int max_sound_count = 0;
+
+	fprintf(file, "int scratch_sound_SoundEffectCounts[] = { ");
+	for (int i = 0; i < sprites_count; i++) {
+		json_object* this = json_object_object_get(json_object_array_get_idx(targets, i), "sounds");
+		int len = (int)json_object_array_length(this);
+		fprintf(file, "%i", len);
+		if (len > max_sound_count) { max_sound_count = len; }
+		if (i != sprites_count - 1) {
+			fprintf(file, ", ");
+		}
+	}
+	fprintf(file, " };\n");
+
+	fprintf(file, "char* scratch_sound_SoundEffectNames[SPRITES][MAX_SOUND_LENGTH] = {\n");
+	for (int i = 0; i < sprites_count; i++) {
+		fprintf(file, "\t{ ");
+		for (int j = 0; j < max_sound_count; j++) {
+			json_object* this = json_object_object_get(json_object_array_get_idx(targets, i), "sounds");
+			json_object* this_name = json_object_object_get(json_object_array_get_idx(this, j),"name");
+			if (json_object_get_type(this_name) != json_type_null) {
+				fprintf(file, "\"%s\", ", json_object_get_string(this_name));
+			}
+			else 
+			{
+				fprintf(file, "NULL, ");
+			}
+		}
+		fprintf(file, "NULL");
+		if (i != sprites_count - 1) {
+			fprintf(file, " },\n");
+		}
+		else 
+		{
+			fprintf(file, " }\n");
+		}
+	}
+	fprintf(file, " };\n");
+
+	fprintf(file, "char* scratch_sound_SoundEffectFiles[SPRITES][MAX_SOUND_LENGTH] = {\n");
+	for (int i = 0; i < sprites_count; i++) {
+		fprintf(file, "\t{ ");
+		for (int j = 0; j < max_sound_count; j++) {
+			json_object* this = json_object_object_get(json_object_array_get_idx(targets, i), "sounds");
+			json_object* this_name = json_object_object_get(json_object_array_get_idx(this, j), "assetId");
+			if (json_object_get_type(this_name) != json_type_null) {
+				fprintf(file, "\"%s.wav\", ", json_object_get_string(this_name));
+			}
+			else
+			{
+				fprintf(file, "NULL, ");
+			}
+		}
+		fprintf(file, "NULL");
+		if (i != sprites_count - 1) {
+			fprintf(file, " },\n");
+		}
+		else
+		{
+			fprintf(file, " }\n");
+		}
+	}
+	fprintf(file, " };\n");
+
 	fprintf(file, "double scratch_" "motion_SpriteSize" "[] = { "); for (int i = 0; i < sprites_count; i++) {
 		json_object* this = json_object_object_get(json_object_array_get_idx(targets, i), "size"); if (json_object_get_type(this) == json_type_null) {
 			fprintf(file, "100.0");
@@ -323,7 +441,7 @@ fprintf(file, " };\n");
 
 	FILE* header = fopen("../../../output/sprite_data.h", "w");
 
-	fprintf(header, "#define SPRITES %i\n#define MAX_COSTUME_LENGTH %i", sprites_count, max_costume_count);
+	fprintf(header, "#define SPRITES %i\n#define MAX_COSTUME_LENGTH %i\n#define MAX_SOUND_LENGTH %i", sprites_count, max_costume_count, max_sound_count + 1);
 
 	fclose(header);
 }
@@ -357,7 +475,7 @@ char* GetFullProgram(struct json_object* variables, struct json_object* lists, v
 	if (!FunctionsPresent) { printf("FunctionsPresent could not be initialised!"); exit(-1); }
 
 	fprintf(scheduler, "#include<SDL2/SDL.h>\n#include<libco.h>\n#include\"sprite1.h\"\n#include\"runtime/main.h\"\n#include\"runtime/types.h\"\n#include\"schedule_manager.h\"\n\n");
-	fprintf(scheduler, "extern bool keysdown[];\nThreadList threads;\ncothread_t scheduler;\ncothread_t draw_thread;\nbool delete_thread = false;\n\n");
+	fprintf(scheduler, "extern bool keysdown[];\nextern int keysdownheld[];\nThreadList threads;\ncothread_t scheduler;\ncothread_t draw_thread;\nbool delete_thread = false;\n\n");
 
 	fprintf(scheduler, "\nvoid RunScheduler()\n{\n\tInit();\n\tInitialiseThreads();\n\n\tscheduler = co_active();\n\n");
 
@@ -375,7 +493,7 @@ char* GetFullProgram(struct json_object* variables, struct json_object* lists, v
 	fprintf(scheduler, "\n\twhile (1)\n\t{\n");
 	fprintf(scheduler, "\t\tfor (int i = 0; i < threads.length; i++)\n\t\t{\n\t\t\tco_switch(threads.data[i]);\n\t\t\tif (delete_thread) { RemoveThread(i); i--;  delete_thread = false; }\n\t\t}\n");
 	
-#define addkey(scancode, event) if (FunctionsPresent[event]){fprintf(scheduler, "\t\tif (keysdown[" #scancode "])\n\t\t{\n");for (int i = 0; i < functions.length; i++){if (functions.data[i].opcode == event){fprintf(scheduler, "\t\t\tAddThread(co_create(64 * 1024, %s));\n", functions.data[i].proccode.data);}}fprintf(scheduler, "\t\t}\n");}
+#define addkey(scancode, event) if (FunctionsPresent[event]){fprintf(scheduler, "\t\tif (keysdownheld[" #scancode "] == 1)\n\t\t{\n");for (int i = 0; i < functions.length; i++){if (functions.data[i].opcode == event){fprintf(scheduler, "\t\t\tAddThread(co_create(64 * 1024, %s));\n", functions.data[i].proccode.data);}}fprintf(scheduler, "\t\t}\n");}
 
 	addkey(SDL_SCANCODE_A, event_whenkeypressed_a)
 	addkey(SDL_SCANCODE_B, event_whenkeypressed_b)
@@ -404,6 +522,17 @@ char* GetFullProgram(struct json_object* variables, struct json_object* lists, v
 	addkey(SDL_SCANCODE_Y, event_whenkeypressed_y)
 	addkey(SDL_SCANCODE_Z, event_whenkeypressed_z)
 
+	addkey(SDL_SCANCODE_0, event_whenkeypressed_0)
+	addkey(SDL_SCANCODE_1, event_whenkeypressed_1)
+	addkey(SDL_SCANCODE_2, event_whenkeypressed_2)
+	addkey(SDL_SCANCODE_3, event_whenkeypressed_3)
+	addkey(SDL_SCANCODE_4, event_whenkeypressed_4)
+	addkey(SDL_SCANCODE_5, event_whenkeypressed_5)
+	addkey(SDL_SCANCODE_6, event_whenkeypressed_6)
+	addkey(SDL_SCANCODE_7, event_whenkeypressed_7)
+	addkey(SDL_SCANCODE_8, event_whenkeypressed_8)
+	addkey(SDL_SCANCODE_9, event_whenkeypressed_9)
+
 #undef addkey()
 
 	fprintf(scheduler, "\t\tRender();\n\t}\n}");
@@ -412,7 +541,7 @@ char* GetFullProgram(struct json_object* variables, struct json_object* lists, v
 
 	FILE* file = fopen("../../../output/sprite1.c", "w");
 
-	fprintf(file, "\n#define YIELD TRUE_YIELD;\n#include \"runtime/scratch.h\"\n#include \"runtime/motion.h\"\n#include \"runtime/looks.h\"\n");
+	fprintf(file, "\n#define YIELD TRUE_YIELD;\n#include \"runtime/scratch.h\"\n#include \"runtime/motion.h\"\n#include \"runtime/looks.h\"\n#include \"runtime/sound.h\"\n");
 	fprintf(file, "#include \"runtime/operators.h\"\n#include \"runtime/control.h\"\n#include \"runtime/sensing.h\"\n#include \"runtime/data.h\"\n#include \"runtime/pen.h\"\n");
 	fprintf(file, "#include <libco.h>\n\nextern cothread_t scheduler;\nextern bool delete_thread; \n\n");
 	{

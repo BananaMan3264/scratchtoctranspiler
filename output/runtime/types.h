@@ -60,6 +60,8 @@ typedef struct stampData
 	double width;
 	double height;
 	int rot_style;
+
+	double ghost_effect;
 } stampData;
 
 typedef union penOperationData

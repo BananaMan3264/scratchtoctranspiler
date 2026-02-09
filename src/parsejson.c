@@ -124,6 +124,22 @@ ScratchBlock GetBlock(const char* id, struct json_object* blocks)
 		sb.argdata[2].text = SanitiseScratchNameToC(AsManagedString(json_object_get_string(json_object_array_get_idx(NEXT2(block, "fields", "LIST"), 1))));
 		sb.argtypes[2] = ArgType_Variable;
 	}
+	else if (strcmp(sb.opcode.data, "sound_sounds_menu") == 0)
+	{
+		sb.args = 1;
+		sb.argdata = malloc(sizeof(ScratchArgData) * sb.args); if (!sb.argdata) { printf("Malloc error!"); exit(-1); }
+		sb.argtypes = malloc(sizeof(int) * sb.args); if (!sb.argtypes) { printf("Malloc error!"); exit(-1); }
+		sb.argdata[0].text = AsManagedString(json_object_get_string(json_object_array_get_idx(NEXT2(block, "fields", "SOUND_MENU"), 0)));
+		sb.argtypes[0] = ArgType_String;
+	}
+	else if (strcmp(sb.opcode.data, "looks_costume") == 0)
+	{
+		sb.args = 1;
+		sb.argdata = malloc(sizeof(ScratchArgData) * sb.args); if (!sb.argdata) { printf("Malloc error!"); exit(-1); }
+		sb.argtypes = malloc(sizeof(int) * sb.args); if (!sb.argtypes) { printf("Malloc error!"); exit(-1); }
+		sb.argdata[0].text = AsManagedString(json_object_get_string(json_object_array_get_idx(NEXT2(block, "fields", "COSTUME"), 0)));
+		sb.argtypes[0] = ArgType_String;
+	}
 	else if (strcmp(sb.opcode.data, "looks_costume") == 0)
 	{
 		sb.args = 1;
@@ -339,7 +355,7 @@ void PushBlock(const char* id, struct json_object* blocks, vecScratchBlock* line
 vecFunction ParseText(struct json_object* blocks)
 {
 	vecFunction functions;
-
+	
 	functions.allocated_size = 8; functions.length = 0; functions.sizeoftype = sizeof(Function); functions.data = malloc(sizeof(Function) * functions.allocated_size);
 	if (!functions.data) {
 		exit(-1);
@@ -416,6 +432,17 @@ vecFunction ParseText(struct json_object* blocks)
 			if (strcmp(key_press,"x") == 0) { f.opcode = event_whenkeypressed_x; }
 			if (strcmp(key_press,"y") == 0) { f.opcode = event_whenkeypressed_y; }
 			if (strcmp(key_press,"z") == 0) { f.opcode = event_whenkeypressed_z; }
+
+			if (strcmp(key_press, "0") == 0) { f.opcode = event_whenkeypressed_0; }
+			if (strcmp(key_press, "1") == 0) { f.opcode = event_whenkeypressed_1; }
+			if (strcmp(key_press, "2") == 0) { f.opcode = event_whenkeypressed_2; }
+			if (strcmp(key_press, "3") == 0) { f.opcode = event_whenkeypressed_3; }
+			if (strcmp(key_press, "4") == 0) { f.opcode = event_whenkeypressed_4; }
+			if (strcmp(key_press, "5") == 0) { f.opcode = event_whenkeypressed_5; }
+			if (strcmp(key_press, "6") == 0) { f.opcode = event_whenkeypressed_6; }
+			if (strcmp(key_press, "7") == 0) { f.opcode = event_whenkeypressed_7; }
+			if (strcmp(key_press, "8") == 0) { f.opcode = event_whenkeypressed_8; }
+			if (strcmp(key_press, "9") == 0) { f.opcode = event_whenkeypressed_9; }
 
 			f.proccode = SafeStringMerge(SafeStringMerge(SanitiseScratchNameToC(AsManagedString(key)), AsManagedString(opcode)), SanitiseScratchNameToC(AsManagedString(key_press)));
 

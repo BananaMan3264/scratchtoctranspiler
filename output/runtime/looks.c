@@ -3,12 +3,13 @@
 #include "scratch.h"
 #include "looks.h"
 #include "types.h"
+#include "../sprite_data.h"
 
 
 extern double scratch_motion_SpriteSize[];
 extern int scratch_looks_CostumeIndex[];
 extern int scratch_looks_CostumeCounts[];
-extern char* scratch_looks_CostumeNames[3][3];
+extern char* scratch_looks_CostumeNames[SPRITES][MAX_COSTUME_LENGTH];
 
 extern double scratch_looks_effects_colour[];
 extern double scratch_looks_effects_fisheye[];

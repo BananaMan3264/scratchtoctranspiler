@@ -1,12 +1,15 @@
 #include<SDL2/SDL.h>
+#include<SDL2/SDL_mixer.h>
 #include<stdbool.h>
 #include"renderer.h"
 #include"schedule.h"
 #include"types.h"
+#include"sound.h"
 
 SDL_Renderer* renderer;
 
 bool keysdown[SDL_NUM_SCANCODES];
+int keysdownheld[SDL_NUM_SCANCODES];
 
 Uint32 lastTime = 0;
 int frames = 0;
@@ -53,7 +56,16 @@ void Render()
 			break;
 		case SDL_KEYUP:
 			keysdown[e.key.keysym.scancode] = false;
+			keysdownheld[e.key.keysym.scancode] = 0;
 			break;
+		}
+	}
+
+	for (int i = 0; i < SDL_NUM_SCANCODES; i++)
+	{
+		if (keysdown[i])
+		{
+			keysdownheld[i]++;
 		}
 	}
 
@@ -64,11 +76,19 @@ void Render()
 
 int main()
 {
-	if (SDL_Init(SDL_INIT_VIDEO))
+	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO))
 	{
 		printf("Unable to initialise SDL: %s", SDL_GetError());
 		exit(-1);
 	}
+
+	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 8, 2048)) 
+	{
+		printf("Unable to initialise audio.");
+		exit(-1);
+	}
+
+	InitSounds();
 
 	SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "2");
 

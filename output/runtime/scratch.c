@@ -37,6 +37,14 @@ double ScratchVarGetDouble(ScratchValue var)
 	case ScratchType_Bool:
 		return var.data.Bool;
 	case ScratchType_String:
+		if (var.data.String[0] == '#' && strlen(var.data.String) > 1) 
+		{
+			char* num = malloc(strlen(var.data.String) + 3); if (!num) { printf("Malloc error!"); exit(-1); }
+			snprintf(num, strlen(var.data.String) + 3, "0x%s", var.data.String + 1);
+			double out = strtod(num, &end);
+			free(num);
+			return out;
+		}
 		return strtod(var.data.String, &end);
 	default:
 		return 0;

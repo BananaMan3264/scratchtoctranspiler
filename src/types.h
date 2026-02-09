@@ -43,6 +43,18 @@ enum FunctionEvents
 	event_whenkeypressed_x,
 	event_whenkeypressed_y,
 	event_whenkeypressed_z,
+
+	event_whenkeypressed_0,
+	event_whenkeypressed_1,
+	event_whenkeypressed_2,
+	event_whenkeypressed_3,
+	event_whenkeypressed_4,
+	event_whenkeypressed_5,
+	event_whenkeypressed_6,
+	event_whenkeypressed_7,
+	event_whenkeypressed_8,
+	event_whenkeypressed_9,
+
 	procedures_prototype,
 
 	FunctionEventsLength

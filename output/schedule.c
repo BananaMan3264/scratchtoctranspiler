@@ -6,6 +6,7 @@
 #include"schedule_manager.h"
 
 extern bool keysdown[];
+extern int keysdownheld[];
 ThreadList threads;
 cothread_t scheduler;
 cothread_t draw_thread;
@@ -19,7 +20,8 @@ void RunScheduler()
 
 	scheduler = co_active();
 
-	AddThread(co_create(64 * 1024, Yjevent_whenflagclicked));
+	AddThread(co_create(64 * 1024, Ybubevent_whenflagclicked));
+	AddThread(co_create(64 * 1024, YhaWevent_whenflagclicked));
 
 	while (1)
 	{
@@ -27,22 +29,6 @@ void RunScheduler()
 		{
 			co_switch(threads.data[i]);
 			if (delete_thread) { RemoveThread(i); i--;  delete_thread = false; }
-		}
-		if (keysdown[SDL_SCANCODE_A])
-		{
-			AddThread(co_create(64 * 1024, Yfevent_whenkeypressedYa));
-		}
-		if (keysdown[SDL_SCANCODE_D])
-		{
-			AddThread(co_create(64 * 1024, Yhevent_whenkeypressedYd));
-		}
-		if (keysdown[SDL_SCANCODE_S])
-		{
-			AddThread(co_create(64 * 1024, Ydevent_whenkeypressedYs));
-		}
-		if (keysdown[SDL_SCANCODE_W])
-		{
-			AddThread(co_create(64 * 1024, Ybevent_whenkeypressedYw));
 		}
 		Render();
 	}

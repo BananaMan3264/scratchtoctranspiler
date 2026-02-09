@@ -1,5 +1,6 @@
 #include <libco.h>
 #include <SDL2/SDL.h>
+#include <SDL2/SDL2_gfxPrimitives.h>
 #include <librsvg/rsvg.h>
 #include <cairo.h>
 #include <math.h>
@@ -23,7 +24,11 @@ extern int scratch_motion_SpriteRotStyle[];
 extern char* scratch_looks_CostumeFiles[SPRITES][MAX_COSTUME_LENGTH];
 extern double scratch_motion_SpriteWidth[SPRITES][MAX_COSTUME_LENGTH];
 extern double scratch_motion_SpriteHeight[SPRITES][MAX_COSTUME_LENGTH];
+extern double scratch_looks_RotationCentreX[SPRITES][MAX_COSTUME_LENGTH];
+extern double scratch_looks_RotationCentreY[SPRITES][MAX_COSTUME_LENGTH];
 extern int scratch_looks_CostumeIndex[];
+
+extern double scratch_looks_effects_ghost[];
 
 extern bool scratch_looks_hidden[];
 
@@ -46,8 +51,8 @@ According to my research the Scratch VM refreshed the screen:
 
 SDL_Texture* GetSprite(char* name, int* width_out, int* height_out) 
 {
-	int width = 2048;
-	int height = 2048;
+	int width = 256;
+	int height = 256;
 
 	GError* err = NULL;
 
@@ -70,7 +75,8 @@ SDL_Texture* GetSprite(char* name, int* width_out, int* height_out)
 	RsvgHandle* handle = rsvg_handle_new_from_file(srtc, &err);
 	if (!handle) {
 		fprintf(stderr, "Error loading SVG: %s\n", err->message);
-		exit(-1);
+		return sprite_textures[0][0];
+		//exit(-1);
 	}
 
 	free(srtc);
@@ -187,21 +193,18 @@ void DrawLine(float x_1, float y_1, float x_2, float y_2, float thickness, int c
 	unsigned char g = (colour & 0x0000ff00) >>  8;
 	unsigned char r = (colour & 0x00ff0000) >> 16;
 	unsigned char a = (colour & 0xff000000) >> 24;
+	if (a == 0) { a = 255; }
 
-	SDL_Vertex verts[4] = {
-		{ { x1 + nx, y1 + ny }, {r, g, b, a}, {0, 0} },
-		{ { x1 - nx, y1 - ny }, {r, g, b, a}, {0, 0} },
-		{ { x2 - nx, y2 - ny }, {r, g, b, a}, {0, 0} },
-		{ { x2 + nx, y2 + ny }, {r, g, b, a}, {0, 0} }
-	};
+	if (!(x_1 == x_2 && y_1 == y_2))
+	{
+		thickLineRGBA(renderer, x1, y1, x2, y2, t, r, g, b, a);
+		filledCircleRGBA(renderer, x1, y1, t / 2, r, g, b, a);
+	}
 
-	int indices[6] = { 0, 1, 2, 0, 2, 3 };
-
-	SDL_RenderGeometry(renderer, NULL, verts, 4, indices, 6);
-
+	filledCircleRGBA(renderer, x2, y2, t / 2, r, g, b, a);
 }
 
-void DrawSprite(double x, double y, double size, double direction, double width2, double height2, int rotstyle, int sprite, int costume) 
+void DrawSprite(double x, double y, double size, double direction, double width2, double height2, int rotstyle, int sprite, int costume, double ghost_effect) 
 {
 	SDL_Rect rect;
 
@@ -210,28 +213,35 @@ void DrawSprite(double x, double y, double size, double direction, double width2
 	int width = width2 * scale;
 	int height = height2 * scale;
 
-	rect.x = FIX_X(x) - width / 2;
-	rect.y = FIX_Y(y) - height / 2;
+	double x_fixed = FIX_X(x);
+	double y_fixed = FIX_Y(y);
+
+	SDL_Point centre = { (scratch_looks_RotationCentreX[sprite][costume]) * (WINDOW_WIDTH / (double)STAGE_WIDTH) * (size / 100.0), (scratch_looks_RotationCentreY[sprite][costume]) * (WINDOW_HEIGHT / (double)STAGE_HEIGHT) * (size / 100.0) };
+
+	rect.x = x_fixed - centre.x;
+	rect.y = y_fixed - centre.y;
 	rect.w = width;
 	rect.h = height;
+
+	SDL_SetTextureAlphaMod(sprite_textures[sprite][costume], (100 - min(max(ghost_effect,0),100)) * 2.55);
 
 	switch (rotstyle)
 	{
 	case RotStyle_allaround:
-		SDL_RenderCopyEx(renderer, sprite_textures[sprite][costume], NULL, &rect, direction * RAD_TO_DEG, NULL, SDL_FLIP_NONE);
+		SDL_RenderCopyEx(renderer, sprite_textures[sprite][costume], NULL, &rect, direction * RAD_TO_DEG, &centre, SDL_FLIP_NONE);
 		break;
 	case RotStyle_dontrotate:
-		SDL_RenderCopy(renderer, sprite_textures[sprite][costume], NULL, &rect);
+		SDL_RenderCopy(renderer, sprite_textures[sprite][costume], &centre, &rect);
 		break;
 	case RotStyle_leftright:
 		printf("%f\n", fmod(direction * RAD_TO_DEG, 360.0));
 		if (fmod(direction * RAD_TO_DEG, 360.0) > 180)
 		{
-			SDL_RenderCopyEx(renderer, sprite_textures[sprite][costume], NULL, &rect, 0, NULL, SDL_FLIP_NONE);
+			SDL_RenderCopyEx(renderer, sprite_textures[sprite][costume], NULL, &rect, 0, &centre, SDL_FLIP_NONE);
 		}
 		else
 		{
-			SDL_RenderCopyEx(renderer, sprite_textures[sprite][costume], NULL, &rect, 0, NULL, SDL_FLIP_HORIZONTAL);
+			SDL_RenderCopyEx(renderer, sprite_textures[sprite][costume], NULL, &rect, 0, &centre, SDL_FLIP_HORIZONTAL);
 		}
 		//TODO: This
 		break;
@@ -250,7 +260,7 @@ void DrawPenOp(PenOperation po)
 	{
 		stampData sd = po.operation_data.stamp_data;
 
-		DrawSprite(sd.x, sd.y, sd.size, sd.rotation, sd.width, sd.height, sd.rot_style, sd.sprite_index, 0);
+		DrawSprite(sd.x, sd.y, sd.size, sd.rotation, sd.width, sd.height, sd.rot_style, sd.sprite_index, sd.costume_index, sd.ghost_effect);
 	}
 }
 
@@ -273,7 +283,8 @@ void draw()
 			DrawSprite(scratch_motion_SpriteX[i], scratch_motion_SpriteY[i], scratch_motion_SpriteSize[i], scratch_motion_SpriteDirection[i],
 				scratch_motion_SpriteWidth[i][scratch_looks_CostumeIndex[i]],
 				scratch_motion_SpriteHeight[i][scratch_looks_CostumeIndex[i]],
-				scratch_motion_SpriteRotStyle[i], i, scratch_looks_CostumeIndex[i]);
+				scratch_motion_SpriteRotStyle[i], i, scratch_looks_CostumeIndex[i],
+				scratch_looks_effects_ghost[i]);
 		}
 	}
 }
