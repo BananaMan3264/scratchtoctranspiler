@@ -20,8 +20,7 @@ void RunScheduler()
 
 	scheduler = co_active();
 
-	AddThread(co_create(64 * 1024, Ybubevent_whenflagclicked));
-	AddThread(co_create(64 * 1024, YhaWevent_whenflagclicked));
+	AddThread(co_create(64 * 1024, YfaWevent_whenflagclicked));
 
 	while (1)
 	{

@@ -14,827 +14,647 @@
 extern cothread_t scheduler;
 extern bool delete_thread; 
 
-ScratchValue YbaQazvbubnbara7afaxaWaLa9aupbava0ubaNa1;
-ScratchValue Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2;
-ScratchValue YdgbaNaaaCaEayanaYqbbbgbubgbaevbanawa4ax;
-ScratchValue Yba2aEa8bbaSrbaEaHa8dba8alubxbcbaiaEayan;
-ScratchValue YbaTaVawaMauanamafaMatasaDcbaEubgba7aVaY;
-ScratchValue YKcbmblbatrbauaIaTa6vbaVaUnbataCaWaDapab;
-ScratchValue YbaPaoafaYaJaErbalaPaka9aAaNa7ajaCapcbaC;
-ScratchValue YxaUhbrbqbaapba6aJaGa2awwbajcbvbaAqbaqfb;
-ScratchList YYabakanaoaepbqba0jbcbqbafa2dbaTaQaBaUdb;
-ScratchList YqaombaMa5aQaEajrbauwbasebtbaNxbalaAfbaR;
-ScratchList Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa;
-ScratchList Yba7aGbbkbasaYa0dbaGaGa_aba3aDaCaAaIagap;
-ScratchList YhaFapobaCarasaOaOaZlbaHaca5hba6amaEgbtb;
-ScratchList Y7aeaOa1ahubaqaxobhbvbaGeba0hbgbaJala5a3;
+ScratchValue YiaQlbaUaAaGrbaVaQsbada0awapaMaWaiwba1an;
+ScratchValue Y9aDakaWobqbaDaRaCa0aBaCaMawjbrba0avaXaQ;
+ScratchValue YbobahalsbaPababdba6a_dba7a7nbauobpbtba_;
+ScratchValue YZcbaKahxbaiaIawaOxbaPebaqnba0dbmbqbaNas;
+ScratchValue YYaRa0abaPazamaSa4agsbafaNazawbbaKakaxaA;
+ScratchValue Y9fbaOaVaXaaa2axobadlbaSablbabanaHaYaQa4;
+ScratchValue YbaKaxanlbadataaaCaSebaaaKaoaOa8a3a7gbaz;
+ScratchValue YWqba0fbaHaralawaMaCajauaraNa8aWebrbgba0;
+ScratchValue YbapaKobrbaVaLaMpbnbaNwba9abaWa0aTrbaiaM;
+ScratchValue YgcbkbebebtbadjbhbwbqbaoubaSaZhbamwblbhb;
+ScratchValue Ybaga7axaDagaYafa5aeaIaasbagubobaua4aQwb;
+ScratchValue YbaladaWaNaoaba7obqbsbxbabacrbaYamaxaSbb;
+ScratchValue Ybawa9aIalaAeba_aWbbaCqbaAa0ahaka_aNpbtb;
+ScratchValue YFebaOaKaJalabtbaMacaFaPaEaTaBawa4aeaUaD;
+ScratchValue YJasa2aOnbaxalagaWanazpbaadbara9gbgbagnb;
+ScratchValue Y4a6alaIa1fbaSdbrbdbkbadqbaIakaIa4wbebaU;
+ScratchValue YbaHajubanaTavaTa7aqa8abaSapaNakabaFa8ak;
+ScratchValue Yoa5akangbjbaapbaYava3akqbcbcbhbpba0araV;
+ScratchValue Yba8obaXoba7aqa3aZjbaiebobwbpbaAvbaJausb;
+ScratchValue Yzuba8a8aJdba4aragacobaKeba5rbaIgbaiaUam;
+ScratchValue YHaGhbqbapa3a8aEaXaxaCaxaRaoamanaEampbaF;
+ScratchValue YCaDlbaCaMadaGacdbaMa5wbnbpbasaKaEaJkbar;
+ScratchValue YLa9aTnbajajdbaparata8aIagaAazaQababaZub;
+ScratchValue Y2anaUebakaRrbkbaQqbcba7abaIa0dbtbsbagaq;
+ScratchValue Ybaqa6akaxubaNbbwbxbxbawara_aSa2xbaOabay;
+ScratchValue Ybubpba1adaoalaYaJasaHanaga9aFaSaiaCa_az;
+ScratchValue YGaFa6aHa9avkba8aNa5tbadcbaPwba4apaaa6ao;
+ScratchValue Ygapa2adbbqbapaKaOalaAuba9a7a9aBmbaPdbrb;
+ScratchValue YRahaKaHaWvbaTa1aHaEawaLdbwbataBa_aJaRaz;
+ScratchValue YFaXa7ama3atjbaegbaKaYavazaNauaKaFnbmbar;
+ScratchValue YbaAxbaJahaFaldbsba9aqasalaahba2sbcbaKa5;
+ScratchValue YOapkbaga8aeaBa0aiawaha2aQaUamawaZrblbaY;
+ScratchValue YbaLadcbgbantbawaUuba0aDaKvbsbalaUa1aZaT;
+ScratchValue YbrbhbaMjbaIaYaVacaExbaIaaaIa5aEazrbaAaS;
+ScratchValue Yba8dbaoaiaQa8cbdbamaNa3aTaiaIaTtbaBaavb;
+ScratchValue Y6aLcbnba7qbacaYaZgbfbpbaRa2fbbba3ahamax;
+ScratchValue YbcbaBauaXaNebhbabazaFqbaraPaqaIaeavaGay;
+ScratchValue YbaBaKaNaJaSqbaqawaYauebaOaMhbcbaFcbaeaI;
+ScratchValue YBaeaBaaahcbaFaua6fbaGaljbaOagqbaFadaia_;
+ScratchValue YcaQaFaVaLfbaWoba7fbaiaxaCazaBaJauhba0aC;
+ScratchValue YhaXaza3a3abaCa_ebaqaBaxjbwbdbaHwbakkbaA;
+ScratchValue Y8lbqbabasaDarkblbaIarabobmbfbacabaEayad;
+ScratchValue YbaambanvbaHkbanauacaiaanbaArbbbuba2cbab;
+ScratchValue YsaLlbawaFaEa1aua6audbaHazxbagahxbaeaAcb;
+ScratchValue YbrbaraWaHama5aTa7aaqbfbaaaLnbcbaoatpbaG;
+ScratchValue YtajaJaxafaTaiaAa3qbampbahaYawcbaIahaLao;
+ScratchValue YbaAqbalaGaSaXaombaWaRaiaOa0aDobaXaoardb;
+ScratchValue YLaFaQakayacaNaZaGxbqbaEmbagaoaGrbbbawrb;
+ScratchValue Yoana1aNazaBaprbgba1aEnba_a1ayaba2dba2aP;
+ScratchValue Yka3aEnbapgbaaa0alabkbaaaflbaffbabhbaFwb;
+ScratchValue YKbbwbaWubaoadhbqbabaYadapaDajnba_apaoaD;
+ScratchValue YgahaQa5a2xbobdbaHaMpbgbawaNebkbaZa0anal;
+ScratchValue Y0hbaCa3xbaSvbadaLauaGdbaWayasdbaKobajaw;
+ScratchValue YCaCabdbwbaYaHa_aZwbcbdbaWahamaIdbaKjbam;
+ScratchValue YbaUsbaeaBrba7amaQavahara0aJazaJebobaba9;
+ScratchValue Y0a_awaYaYaJa2gbaYa9aHaQdbpbebebjbafcbaw;
+ScratchValue YPnba7aSankbaAamaFaAajdbfbmbhbazaba5aYaD;
+ScratchValue YcaFfbaoanaplbalaMsbaFaoubjbapfbobafqbaU;
+ScratchValue Ybdbgbxba2aorbfbaVafauaRaFubakdbaMakhbak;
+ScratchValue Yba6vbadaDa8a4ata2aZa8hbfbaKabaCaYtbrbaB;
+ScratchValue YbkbaHa_fbdbpbdbaLobvba5aaayaDaYvbpbasaa;
+ScratchValue YfaUpbaWa7aAaFajamnbabata5a7aGa1eblbaJa1;
+ScratchValue YyanebaYana1ahagaKjbaba8ajaMagqbaeqbalaC;
+ScratchValue Yba8aZaNcbcbadaPubapaMawajaAaKcbaCa3bbaF;
+ScratchValue YthbgbaAaraAaSaccbrbmbnbaUafa0qbaFdba9cb;
+ScratchValue YNaiagobaZaMalaXwbaadbaJagaOamlba7aZhbaW;
+ScratchValue YHaHasubaPaIahaYazlbqbbbaoa0a4ebsbaOa4eb;
+ScratchValue YSaJaOazrba9aGaFaKaqaJvbazafaOaohbaFaGmb;
+ScratchList YtaEaMaQaZa6qbpbaRxbobrbaGhbaCa9aUaXobaU;
+ScratchList Yba5avcbaPamapubqbtbkbawakaaaaaYxbhbalbb;
+ScratchList YbaspbaRkbadaAaTxbasa1aBacada6aZaEdbgbaU;
+ScratchList Yga7obqbaNaha3aLaQabauaRmbavaraclbanaoar;
+ScratchList YZaoaBaraRa0mbaffbaxaNubaaebacaroba9aGqb;
+ScratchList YbagwbabasaKcbuba4avaSaSaRaxkbaYajaJaTa8;
+ScratchList Y5avaBazaHadnbapa_bbaLa3abdbkbebhbmbobwb;
+ScratchList YLafpbagjbaflbaTawtbayacagcbaOdbqbaoxba5;
 
 void Init()
 {
-	YbaQazvbubnbara7afaxaWaLa9aupbava0ubaNa1 = ScratchSetDouble(958);
-	Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2 = ScratchSetDouble(0);
-	YdgbaNaaaCaEayanaYqbbbgbubgbaevbanawa4ax = ScratchSetDouble(-100);
-	Yba2aEa8bbaSrbaEaHa8dba8alubxbcbaiaEayan = ScratchSetDouble(-10);
-	YbaTaVawaMauanamafaMatasaDcbaEubgba7aVaY = ScratchSetDouble(0);
-	YKcbmblbatrbauaIaTa6vbaVaUnbataCaWaDapab = ScratchSetDouble(0);
-	YbaPaoafaYaJaErbalaPaka9aAaNa7ajaCapcbaC = ScratchSetDouble(0);
-	YxaUhbrbqbaapba6aJaGa2awwbajcbvbaAqbaqfb = ScratchSetDouble(550);
-	YYabakanaoaepbqba0jbcbqbafa2dbaTaQaBaUdb = initialiseList();
-	YqaombaMa5aQaEajrbauwbasebtbaNxbalaAfbaR = initialiseList();
-	Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa = initialiseList();
-	Yba7aGbbkbasaYa0dbaGaGa_aba3aDaCaAaIagap = initialiseList();
-	YhaFapobaCarasaOaOaZlbaHaca5hba6amaEgbtb = initialiseList();
-	Y7aeaOa1ahubaqaxobhbvbaGeba0hbgbaJala5a3 = initialiseList();
+	YiaQlbaUaAaGrbaVaQsbada0awapaMaWaiwba1an = ScratchSetDouble(0);
+	Y9aDakaWobqbaDaRaCa0aBaCaMawjbrba0avaXaQ = ScratchSetDouble(-0.971632);
+	YbobahalsbaPababdba6a_dba7a7nbauobpbtba_ = ScratchSetDouble(0);
+	YZcbaKahxbaiaIawaOxbaPebaqnba0dbmbqbaNas = ScratchSetDouble(1);
+	YYaRa0abaPazamaSa4agsbafaNazawbbaKakaxaA = ScratchSetDouble(-0.236499);
+	Y9fbaOaVaXaaa2axobadlbaSablbabanaHaYaQa4 = ScratchSetDouble(1);
+	YbaKaxanlbadataaaCaSebaaaKaoaOa8a3a7gbaz = ScratchSetDouble(-1.418994);
+	YWqba0fbaHaralawaMaCajauaraNa8aWebrbgba0 = ScratchSetDouble(-5);
+	YbapaKobrbaVaLaMpbnbaNwba9abaWa0aTrbaiaM = ScratchSetDouble(18.829790);
+	YgcbkbebebtbadjbhbwbqbaoubaSaZhbamwblbhb = ScratchSetDouble(172800);
+	Ybaga7axaDagaYafa5aeaIaasbagubobaua4aQwb = ScratchSetDouble(3);
+	YbaladaWaNaoaba7obqbsbxbabacrbaYamaxaSbb = ScratchSetDouble(-4.521539);
+	Ybawa9aIalaAeba_aWbbaCqbaAa0ahaka_aNpbtb = ScratchSetDouble(-24.980308);
+	YFebaOaKaJalabtbaMacaFaPaEaTaBawa4aeaUaD = ScratchSetDouble(-30.203544);
+	YJasa2aOnbaxalagaWanazpbaadbara9gbgbagnb = ScratchSetDouble(-15.932201);
+	Y4a6alaIa1fbaSdbrbdbkbadqbaIakaIa4wbebaU = ScratchSetDouble(-17.230688);
+	YbaHajubanaTavaTa7aqa8abaSapaNakabaFa8ak = ScratchSetDouble(-25.904485);
+	Yoa5akangbjbaapbaYava3akqbcbcbhbpba0araV = ScratchSetDouble(-7.865583);
+	Yba8obaXoba7aqa3aZjbaiebobwbpbaAvbaJausb = ScratchSetDouble(-17.230688);
+	Yzuba8a8aJdba4aragacobaKeba5rbaIgbaiaUam = ScratchSetDouble(0.869790);
+	YHaGhbqbapa3a8aEaXaxaCaxaRaoamanaEampbaF = ScratchSetDouble(0.602186);
+	YCaDlbaCaMadaGacdbaMa5wbnbpbasaKaEaJkbar = ScratchSetDouble(-24.783874);
+	YLa9aTnbajajdbaparata8aIagaAazaQababaZub = ScratchSetDouble(-7.025501);
+	Y2anaUebakaRrbkbaQqbcba7abaIa0dbtbsbagaq = ScratchSetDouble(0);
+	Ybaqa6akaxubaNbbwbxbxbawara_aSa2xbaOabay = ScratchSetDouble(2.575338);
+	Ybubpba1adaoalaYaJasaHanaga9aFaSaiaCa_az = ScratchSetDouble(-25);
+	YGaFa6aHa9avkba8aNa5tbadcbaPwba4apaaa6ao = ScratchSetDouble(-10);
+	Ygapa2adbbqbapaKaOalaAuba9a7a9aBmbaPdbrb = ScratchSetDouble(0);
+	YRahaKaHaWvbaTa1aHaEawaLdbwbataBa_aJaRaz = ScratchSetDouble(1);
+	YFaXa7ama3atjbaegbaKaYavazaNauaKaFnbmbar = ScratchSetDouble(1);
+	YbaAxbaJahaFaldbsba9aqasalaahba2sbcbaKa5 = ScratchSetDouble(1);
+	YOapkbaga8aeaBa0aiawaha2aQaUamawaZrblbaY = ScratchSetDouble(1);
+	YbaLadcbgbantbawaUuba0aDaKvbsbalaUa1aZaT = ScratchSetDouble(0.130210);
+	YbrbhbaMjbaIaYaVacaExbaIaaaIa5aEazrbaAaS = ScratchSetDouble(0);
+	Yba8dbaoaiaQa8cbdbamaNa3aTaiaIaTtbaBaavb = ScratchSetDouble(0.869790);
+	Y6aLcbnba7qbacaYaZgbfbpbaRa2fbbba3ahamax = ScratchSetDouble(0.115290);
+	YbcbaBauaXaNebhbabazaFqbaraPaqaIaeavaGay = ScratchSetDouble(0);
+	YbaBaKaNaJaSqbaqawaYauebaOaMhbcbaFcbaeaI = ScratchSetDouble(1);
+	YBaeaBaaahcbaFaua6fbaGaljbaOagqbaFadaia_ = ScratchSetDouble(0.097499);
+	YcaQaFaVaLfbaWoba7fbaiaxaCazaBaJauhba0aC = ScratchSetDouble(1.037608);
+	YhaXaza3a3abaCa_ebaqaBaxjbwbdbaHwbakkbaA = ScratchSetDouble(0.902501);
+	Y8lbqbabasaDarkblbaIarabobmbfbacabaEayad = ScratchSetDouble(0.100278);
+	YbaambanvbaHkbanauacaiaanbaArbbbuba2cbab = ScratchSetDouble(-0.100278);
+	YsaLlbawaFaEa1aua6audbaHazxbagahxbaeaAcb = ScratchSetDouble(1);
+	YbrbaraWaHama5aTa7aaqbfbaaaLnbcbaoatpbaG = ScratchSetDouble(0.197777);
+	YtajaJaxafaTaiaAa3qbampbahaYawcbaIahaLao = ScratchSetDouble(0.922318);
+	YbaAqbalaGaSaXaombaWaRaiaOa0aDobaXaoardb = ScratchSetDouble(0.802223);
+	YLaFaQakayacaNaZaGxbqbaEmbagaoaGrbbbawrb = ScratchSetDouble(-0.053482);
+	Yoana1aNazaBaprbgba1aEnba_a1ayaba2dba2aP = ScratchSetDouble(-0.008006);
+	Yka3aEnbapgbaaa0alabkbaaaflbaffbabhbaFwb = ScratchSetDouble(0.197777);
+	YKbbwbaWubaoadhbqbabaYadapaDajnba_apaoaD = ScratchSetDouble(0.802223);
+	YgahaQa5a2xbobdbaHaMpbgbawaNebkbaZa0anal = ScratchSetDouble(18.829790);
+	Y0hbaCa3xbaSvbadaLauaGdbaWayasdbaKobajaw = ScratchSetDouble(17.410796);
+	YCaCabdbwbaYaHa_aZwbcbdbaWahamaIdbaKjbam = ScratchSetDouble(11.581006);
+	YbaUsbaeaBrba7amaQavahara0aJazaJebobaba9 = ScratchSetDouble(17.885929);
+	Y0a_awaYaYaJa2gbaYa9aHaQdbpbebebjbafcbaw = ScratchSetDouble(0.672115);
+	YPnba7aSankbaAamaFaAajdbfbmbhbazaba5aYaD = ScratchSetDouble(0.726893);
+	YcaFfbaoanaplbalaMsbaFaoubjbapfbobafqbaU = ScratchSetDouble(17.630042);
+	Ybdbgbxba2aorbfbaVafauaRaFubakdbaMakhbak = ScratchSetDouble(18.123043);
+	Yba6vbadaDa8a4ata2aZa8hbfbaKabaCaYtbrbaB = ScratchSetDouble(16.957927);
+	YbkbaHa_fbdbpbdbaLobvba5aaayaDaYvbpbasaa = ScratchSetDouble(17.396150);
+	YfaUpbaWa7aAaFajamnbabata5a7aGa1eblbaJa1 = ScratchSetDouble(17.396150);
+	YyanebaYana1ahagaKjbaba8ajaMagqbaeqbalaC = ScratchSetDouble(0.029215);
+	Yba8aZaNcbcbadaPubapaMawajaAaKcbaCa3bbaF = ScratchSetDouble(1);
+	YthbgbaAaraAaSaccbrbmbnbaUafa0qbaFdba9cb = ScratchSetDouble(60);
+	YNaiagobaZaMalaXwbaadbaJagaOamlba7aZhbaW = ScratchSetDouble(240);
+	YHaHasubaPaIahaYazlbqbbbaoa0a4ebsbaOa4eb = ScratchSetDouble(180);
+	YSaJaOazrba9aGaFaKaqaJvbazafaOaohbaFaGmb = ScratchSetDouble(-16.904485);
+	YtaEaMaQaZa6qbpbaRxbobrbaGhbaCa9aUaXobaU = initialiseList();
+	Yba5avcbaPamapubqbtbkbawakaaaaaYxbhbalbb = initialiseList();
+	YbaspbaRkbadaAaTxbasa1aBacada6aZaEdbgbaU = initialiseList();
+	Yga7obqbaNaha3aLaQabauaRmbavaraclbanaoar = initialiseList();
+	YZaoaBaraRa0mbaffbaxaNubaaebacaroba9aGqb = initialiseList();
+	YbagwbabasaKcbuba4avaSaSaRaxkbaYajaJaTa8 = initialiseList();
+	Y5avaBazaHadnbapa_bbaLa3abdbkbebhbmbobwb = initialiseList();
+	YLafpbagjbaflbaTawtbayacagcbaOdbqbaoxba5 = initialiseList();
 }
 
-void Ybubevent_whenflagclicked();
-void YTaiacakibaIanatarao();
-void YRauanibaAanaiamiblbasiblbas(ScratchValue Ysataaarat, ScratchValue Ylaeanagatah);
-void YDaraaawibaBaaacakagaraoauanadibaCaoamaeatas();
-void YTaiacakibaCaoamaeatas();
-void YhaWevent_whenflagclicked();
-void YTaiacakibaGaaamae();
-void YIanapauat();
-void YRauanibaPalaaayaearibaBaualalaeatas();
-void YPalaaayaearibaBaualalaeatiblbasiblbasiblbasiblbas(ScratchValue Yx, ScratchValue Yy, ScratchValue Yvax, ScratchValue Yvay);
-void YAadadaEanaeamayiblbasiblbasiblbasiblbasiblbas(ScratchValue Yx, ScratchValue Yy, ScratchValue Ytayapae, ScratchValue Yvax, ScratchValue Yvay);
-void YRauanaEanaeamaiaeas();
-void YCaoalalaiasaiaoaniblbasiblbasiblbasiblbasiblbasiblbasiblbas(ScratchValue Yxa1, ScratchValue Yya1, ScratchValue Yxa2, ScratchValue Yya2, ScratchValue Ywaiadatah, ScratchValue Yhaeaiagahat, ScratchValue Ysacaaalae);
-void YAadadaFaiaraeabaaalaliblbasiblbasiblbas(ScratchValue Yx, ScratchValue Yy, ScratchValue Ytayapae);
-void YRauanaFaiaraeabaaalalas();
-void YAadadaEanaeamayaBaualalaeatiblbasiblbas(ScratchValue Yx, ScratchValue Yy);
-void YRauanibaEanaeamayibaBaualalaeatas();
-void YAadadaWaaavaeiblbasiblbas(ScratchValue Ymaeadaiauam, ScratchValue Ybaiag);
-void YRauanibaWaaavae();
-void YTaiacakaLaoasae();
-void YDaraaawibaPaoaianatas();
-void YTaiacakaWaian();
+void YfaWevent_whenflagclicked();
+void YSaeatibaMaoadaealibaMaaataraiaxkbibaPaoasiblbasiblbasiblbasibaSacaaalaeiblbasiblbasiblbasibaRaoataaataiaoaniblbasiblbasiblbas(ScratchValue Ypax, ScratchValue Ypay, ScratchValue Ypaz, ScratchValue Ysax, ScratchValue Ysay, ScratchValue Ysaz, ScratchValue Yrax, ScratchValue Yray, ScratchValue Yraz);
+void YAapapalayibaMaoadaealibaMaaataraiax();
+void YDaraaawibaTaraiaaanagalaeas();
+void YRaaasataearaiasaeibaTaraiaaanagalaeiblbasiblbasiblbasiblbasiblbasiblbasiblbasiblbasiblbasiblbasiblbasiblbasiblbasiblbasiblbas(ScratchValue Yxa1, ScratchValue Yya1, ScratchValue Yxa2, ScratchValue Yya2, ScratchValue Yxa3, ScratchValue Yya3, ScratchValue Yua1, ScratchValue Yua2, ScratchValue Yua3, ScratchValue Yva1, ScratchValue Yva2, ScratchValue Yva3, ScratchValue Yza1, ScratchValue Yza2, ScratchValue Yza3);
+void YSaeatibaCaoalaoauariblbasiblbas(ScratchValue Yu, ScratchValue Yv);
+void YSaeataCaoalaoauaraBayaDaiasataaanacaeiblbas(ScratchValue Yd);
+void YSaeataZaBauafafaeariblbasiblbasiblbas(ScratchValue Yx, ScratchValue Yy, ScratchValue Yz);
+void YSaeataCaoalaBauafafaeariblbasiblbasiblbas(ScratchValue Yx, ScratchValue Yy, ScratchValue YCaoal);
+void YCalaeaaaribaBauafafaearas();
+void YDaraaawaRaaasataear();
 
-void Ybubevent_whenflagclicked() 
-{
-	data_setvariableto(ScratchSetString("0"), YxaUhbrbqbaapba6aJaGa2awwbajcbvbaAqbaqfb);
-	data_setvariableto(ScratchSetString("0"), YbaPaoafaYaJaErbalaPaka9aAaNa7ajaCapcbaC);
-	data_setvariableto(ScratchSetString("0"), YbaQazvbubnbara7afaxaWaLa9aupbava0ubaNa1);
-	data_deletealloflist(Y7aeaOa1ahubaqaxobhbvbaGeba0hbgbaJala5a3);
-	data_deletealloflist(YYabakanaoaepbqba0jbcbqbafa2dbaTaQaBaUdb);
-	data_deletealloflist(YqaombaMa5aQaEajrbauwbasebtbaNxbalaAfbaR);
-	data_deletealloflist(Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa);
-	data_deletealloflist(YhaFapobaCarasaOaOaZlbaHaca5hba6amaEgbtb);
-	data_deletealloflist(Yba7aGbbkbasaYa0dbaGaGa_aba3aDaCaAaIagap);
-	data_setvariableto(ScratchSetString("-160"), YdgbaNaaaCaEayanaYqbbbgbubgbaevbanawa4ax);
-	data_setvariableto(ScratchSetString("0"), Yba2aEa8bbaSrbaEaHa8dba8alubxbcbaiaEayan);
-	YAadadaWaaavaeiblbasiblbas(ScratchSetString("3"), ScratchSetString("0"));
-	YAadadaWaaavaeiblbasiblbas(ScratchSetString("7"), ScratchSetString("0"));
-	YAadadaWaaavaeiblbasiblbas(ScratchSetString("0"), ScratchSetString("1"));
-	YAadadaWaaavaeiblbasiblbas(ScratchSetString("0"), ScratchSetString("3"));
-	data_setvariableto(ScratchSetString("0"), YbaQazvbubnbara7afaxaWaLa9aupbava0ubaNa1);
-	for(int i1 = 0; i1 < (int)ScratchVarGetDouble(ScratchSetDouble(180)); i1++)
-	{
-		YTaiacakibaIanatarao();
-		YIELD
-	}
-	while(!(ScratchVarGetBool(operator_or(operator_equals(data_lengthoflist(Y7aeaOa1ahubaqaxobhbvbaGeba0hbgbaJala5a3), ScratchSetString("0")), operator_equals(YbaPaoafaYaJaErbalaPaka9aAaNa7ajaCapcbaC, ScratchSetString("1"))))))
-	{
-		YTaiacakibaGaaamae();
-		YIELD
-	}
-	if(ScratchVarGetBool(operator_equals(YbaPaoafaYaJaErbalaPaka9aAaNa7ajaCapcbaC, ScratchSetString("1"))))
-	{
-		data_setvariableto(ScratchSetString("0"), YbaQazvbubnbara7afaxaWaLa9aupbava0ubaNa1);
-		//control_stopYoatahaearibasacaraiapatasibaianibasaparaiatae();
-		sound_stopallsounds();
-		sound_play(sound_sounds_menu(ScratchSetString("pow2")));
-		while(1)
-		{
-			YTaiacakaLaoasae();
-			YIELD
-		}
-	}
-	else
-	{
-		//control_stopYoatahaearibasacaraiapatasibaianibasaparaiatae();
-		sound_stopallsounds();
-		sound_play(sound_sounds_menu(ScratchSetString("win2")));
-		while(1)
-		{
-			YTaiacakaWaian();
-			YIELD
-		}
-	}
-	END_THREAD
-}
-
-void YTaiacakibaIanatarao() 
-{
-#define YIELD
-	YTaiacakibaCaoamaeatas();
-	pen_clear();
-	looks_switchcostumeto(looks_costume(ScratchSetString("Fazbear Background")));
-	motion_gotoxy(ScratchSetDouble(0), ScratchSetDouble(0));
-	looks_setsizeto(ScratchSetDouble(100));
-	pen_stamp();
-	YRauanibaAanaiamiblbasiblbas(ScratchSetString("4"), ScratchSetString("14"));
-	motion_gotoxy(ScratchSetDouble(0), ScratchSetDouble(-55));
-	looks_setsizeto(ScratchSetDouble(75));
-	pen_stamp();
-	data_changevariableby(ScratchSetDouble(1), YbaQazvbubnbara7afaxaWaLa9aupbava0ubaNa1);
-	motion_gotoxy(ScratchSetDouble(0), ScratchSetDouble(100));
-	if(ScratchVarGetBool(operator_lt(YbaQazvbubnbara7afaxaWaLa9aupbava0ubaNa1, ScratchSetString("121"))))
-	{
-		looks_switchcostumeto(looks_costume(ScratchSetString("Get Ready!")));
-		if(ScratchVarGetBool(operator_gt(operator_mod(YbaQazvbubnbara7afaxaWaLa9aupbava0ubaNa1, ScratchSetDouble(30)), ScratchSetString("15"))))
-		{
-			pen_stamp();
-		}
-	}
-	else
-	{
-		looks_switchcostumeto(looks_costume(ScratchSetString("GO!!!")));
-		if(ScratchVarGetBool(operator_gt(operator_mod(YbaQazvbubnbara7afaxaWaLa9aupbava0ubaNa1, ScratchSetDouble(15)), ScratchSetString("8"))))
-		{
-			pen_stamp();
-		}
-	}
-	pen_setPenColorToColor(ScratchSetString("#000000"));
-	pen_setPenSizeTo(ScratchSetDouble(1000));
-	pen_setPenColorParamTo(pen_menu_colorParamYtaraaanasapaaaraeanacay(), operator_subtract(ScratchSetDouble(100), operator_multiply(operator_divide(operator_subtract(YbaQazvbubnbara7afaxaWaLa9aupbava0ubaNa1, ScratchSetDouble(120)), ScratchSetDouble(60)), ScratchSetDouble(100))));
-	pen_penDown();
-	pen_penUp();
-	looks_seteffecttoYGaHaOaSaT(operator_subtract(ScratchSetDouble(100), operator_multiply(operator_divide(operator_subtract(YbaQazvbubnbara7afaxaWaLa9aupbava0ubaNa1, ScratchSetDouble(120)), ScratchSetDouble(60)), ScratchSetDouble(100))));
-	YDaraaawibaBaaacakagaraoauanadibaCaoamaeatas();
-	looks_switchcostumeto(looks_costume(ScratchSetString("JJ Cockpit")));
-	looks_setsizeto(ScratchSetDouble(30));
-	motion_gotoxy(ScratchSetDouble(-160), ScratchSetDouble(0));
-	pen_stamp();
-	looks_seteffecttoYGaHaOaSaT(ScratchSetDouble(0));
-	looks_setsizeto(ScratchSetDouble(100));
-#define YIELD TRUE_YIELD
-}
-
-void YRauanibaAanaiamiblbasiblbas(ScratchValue Ysataaarat, ScratchValue Ylaeanagatah) 
-{
-#define YIELD
-	looks_switchcostumeto(operator_add(argument_reporter_string_number(Ysataaarat), operator_mod(YbaQazvbubnbara7afaxaWaLa9aupbava0ubaNa1, argument_reporter_string_number(Ylaeanagatah))));
-#define YIELD TRUE_YIELD
-}
-
-void YDaraaawibaBaaacakagaraoauanadibaCaoamaeatas() 
-{
-#define YIELD
-	looks_setsizeto(ScratchSetDouble(25));
-	data_setvariableto(ScratchSetString("1"), Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2);
-	for(int i1 = 0; i1 < (int)ScratchVarGetDouble(operator_divide(data_lengthoflist(YYabakanaoaepbqba0jbcbqbafa2dbaTaQaBaUdb), ScratchSetDouble(3))); i1++)
-	{
-		looks_switchcostumeto(looks_costume(ScratchSetString("Fazbear Background")));
-		motion_gotoxy(data_itemoflist(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, YYabakanaoaepbqba0jbcbqbafa2dbaTaQaBaUdb), data_itemoflist(operator_add(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, ScratchSetDouble(1)), YYabakanaoaepbqba0jbcbqbafa2dbaTaQaBaUdb));
-		looks_switchcostumeto(operator_add(data_itemoflist(operator_add(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, ScratchSetDouble(2)), YYabakanaoaepbqba0jbcbqbafa2dbaTaQaBaUdb), ScratchSetDouble(37)));
-		pen_stamp();
-		data_changevariableby(ScratchSetDouble(3), Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2);
-		YIELD
-	}
-	looks_setsizeto(ScratchSetDouble(100));
-#define YIELD TRUE_YIELD
-}
-
-void YTaiacakibaCaoamaeatas() 
-{
-#define YIELD
-	if(ScratchVarGetBool(operator_equals(operator_random(ScratchSetDouble(1), ScratchSetDouble(10)), ScratchSetString("1"))))
-	{
-		data_addtolist(ScratchSetString("300"), YYabakanaoaepbqba0jbcbqbafa2dbaTaQaBaUdb);
-		data_addtolist(operator_random(ScratchSetDouble(-180), ScratchSetDouble(180)), YYabakanaoaepbqba0jbcbqbafa2dbaTaQaBaUdb);
-		data_addtolist(operator_random(ScratchSetDouble(0), ScratchSetDouble(2)), YYabakanaoaepbqba0jbcbqbafa2dbaTaQaBaUdb);
-	}
-	data_setvariableto(ScratchSetString("1"), Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2);
-	for(int i1 = 0; i1 < (int)ScratchVarGetDouble(operator_divide(data_lengthoflist(YYabakanaoaepbqba0jbcbqbafa2dbaTaQaBaUdb), ScratchSetDouble(3))); i1++)
-	{
-		data_replaceitemoflist(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, operator_subtract(data_itemoflist(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, YYabakanaoaepbqba0jbcbqbafa2dbaTaQaBaUdb), ScratchSetDouble(10)), YYabakanaoaepbqba0jbcbqbafa2dbaTaQaBaUdb);
-		if(ScratchVarGetBool(operator_lt(data_itemoflist(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, YYabakanaoaepbqba0jbcbqbafa2dbaTaQaBaUdb), ScratchSetString("-300"))))
-		{
-			data_deleteoflist(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, YYabakanaoaepbqba0jbcbqbafa2dbaTaQaBaUdb);
-			data_deleteoflist(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, YYabakanaoaepbqba0jbcbqbafa2dbaTaQaBaUdb);
-			data_deleteoflist(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, YYabakanaoaepbqba0jbcbqbafa2dbaTaQaBaUdb);
-		}
-		else
-		{
-			data_changevariableby(ScratchSetDouble(3), Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2);
-		}
-		YIELD
-	}
-#define YIELD TRUE_YIELD
-}
-
-void YhaWevent_whenflagclicked() 
+void YfaWevent_whenflagclicked() 
 {
 	while(1)
 	{
-		sound_playuntildone(sound_sounds_menu(ScratchSetString("Music")));
+		data_deletealloflist(Yga7obqbaNaha3aLaQabauaRmbavaraclbanaoar);
+		data_deletealloflist(YtaEaMaQaZa6qbpbaRxbobrbaGhbaCa9aUaXobaU);
+		data_deletealloflist(Yba5avcbaPamapubqbtbkbawakaaaaaYxbhbalbb);
+		data_deletealloflist(YbaspbaRkbadaAaTxbasa1aBacada6aZaEdbgbaU);
+		data_deletealloflist(YZaoaBaraRa0mbaffbaxaNubaaebacaroba9aGqb);
+		data_deletealloflist(YbagwbabasaKcbuba4avaSaSaRaxkbaYajaJaTa8);
+		YSaeatibaMaoadaealibaMaaataraiaxkbibaPaoasiblbasiblbasiblbasibaSacaaalaeiblbasiblbasiblbasibaRaoataaataiaoaniblbasiblbasiblbas(ScratchSetString("0"), ScratchSetString("-5"), ScratchSetString("13"), ScratchSetString("6"), ScratchSetString("6"), ScratchSetString("6"), ScratchSetString("0"), operator_multiply(sensing_timer(), ScratchSetDouble(90)), ScratchSetString("0"));
+		data_addtolist(ScratchSetString("0"), YtaEaMaQaZa6qbpbaRxbobrbaGhbaCa9aUaXobaU);
+		data_addtolist(ScratchSetString("0"), Yba5avcbaPamapubqbtbkbawakaaaaaYxbhbalbb);
+		data_addtolist(ScratchSetString("0"), YbaspbaRkbadaAaTxbasa1aBacada6aZaEdbgbaU);
+		data_addtolist(ScratchSetString("1"), YZaoaBaraRa0mbaffbaxaNubaaebacaroba9aGqb);
+		data_addtolist(ScratchSetString("1"), YbagwbabasaKcbuba4avaSaSaRaxkbaYajaJaTa8);
+		data_addtolist(ScratchSetString("0"), YtaEaMaQaZa6qbpbaRxbobrbaGhbaCa9aUaXobaU);
+		data_addtolist(ScratchSetString("0"), Yba5avcbaPamapubqbtbkbawakaaaaaYxbhbalbb);
+		data_addtolist(ScratchSetString("1"), YbaspbaRkbadaAaTxbasa1aBacada6aZaEdbgbaU);
+		data_addtolist(ScratchSetString("1"), YZaoaBaraRa0mbaffbaxaNubaaebacaroba9aGqb);
+		data_addtolist(ScratchSetString("0"), YbagwbabasaKcbuba4avaSaSaRaxkbaYajaJaTa8);
+		data_addtolist(ScratchSetString("1"), YtaEaMaQaZa6qbpbaRxbobrbaGhbaCa9aUaXobaU);
+		data_addtolist(ScratchSetString("0"), Yba5avcbaPamapubqbtbkbawakaaaaaYxbhbalbb);
+		data_addtolist(ScratchSetString("0"), YbaspbaRkbadaAaTxbasa1aBacada6aZaEdbgbaU);
+		data_addtolist(ScratchSetString("0"), YZaoaBaraRa0mbaffbaxaNubaaebacaroba9aGqb);
+		data_addtolist(ScratchSetString("1"), YbagwbabasaKcbuba4avaSaSaRaxkbaYajaJaTa8);
+		//();
+		data_addtolist(ScratchSetString("1"), YtaEaMaQaZa6qbpbaRxbobrbaGhbaCa9aUaXobaU);
+		data_addtolist(ScratchSetString("0"), Yba5avcbaPamapubqbtbkbawakaaaaaYxbhbalbb);
+		data_addtolist(ScratchSetString("1"), YbaspbaRkbadaAaTxbasa1aBacada6aZaEdbgbaU);
+		data_addtolist(ScratchSetString("1"), YZaoaBaraRa0mbaffbaxaNubaaebacaroba9aGqb);
+		data_addtolist(ScratchSetString("1"), YbagwbabasaKcbuba4avaSaSaRaxkbaYajaJaTa8);
+		data_addtolist(ScratchSetString("0"), YtaEaMaQaZa6qbpbaRxbobrbaGhbaCa9aUaXobaU);
+		data_addtolist(ScratchSetString("0"), Yba5avcbaPamapubqbtbkbawakaaaaaYxbhbalbb);
+		data_addtolist(ScratchSetString("1"), YbaspbaRkbadaAaTxbasa1aBacada6aZaEdbgbaU);
+		data_addtolist(ScratchSetString("1"), YZaoaBaraRa0mbaffbaxaNubaaebacaroba9aGqb);
+		data_addtolist(ScratchSetString("0"), YbagwbabasaKcbuba4avaSaSaRaxkbaYajaJaTa8);
+		data_addtolist(ScratchSetString("1"), YtaEaMaQaZa6qbpbaRxbobrbaGhbaCa9aUaXobaU);
+		data_addtolist(ScratchSetString("0"), Yba5avcbaPamapubqbtbkbawakaaaaaYxbhbalbb);
+		data_addtolist(ScratchSetString("0"), YbaspbaRkbadaAaTxbasa1aBacada6aZaEdbgbaU);
+		data_addtolist(ScratchSetString("0"), YZaoaBaraRa0mbaffbaxaNubaaebacaroba9aGqb);
+		data_addtolist(ScratchSetString("1"), YbagwbabasaKcbuba4avaSaSaRaxkbaYajaJaTa8);
+		//();
+		YAapapalayibaMaoadaealibaMaaataraiax();
+		data_setvariableto(operator_divide(ScratchSetDouble(180), Yba8aZaNcbcbadaPubapaMawajaAaKcbaCa3bbaF), YHaHasubaPaIahaYazlbqbbbaoa0a4ebsbaOa4eb);
+		data_setvariableto(operator_divide(ScratchSetDouble(240), Yba8aZaNcbcbadaPubapaMawajaAaKcbaCa3bbaF), YNaiagobaZaMalaXwbaadbaJagaOamlba7aZhbaW);
+		YCalaeaaaribaBauafafaearas();
+		YDaraaawibaTaraiaaanagalaeas();
+		YDaraaawaRaaasataear();
 		YIELD
 	}
 	END_THREAD
 }
 
-void YTaiacakibaGaaamae() 
+void YSaeatibaMaoadaealibaMaaataraiaxkbibaPaoasiblbasiblbasiblbasibaSacaaalaeiblbasiblbasiblbasibaRaoataaataiaoaniblbasiblbasiblbas(ScratchValue Ypax, ScratchValue Ypay, ScratchValue Ypaz, ScratchValue Ysax, ScratchValue Ysay, ScratchValue Ysaz, ScratchValue Yrax, ScratchValue Yray, ScratchValue Yraz) 
 {
 #define YIELD
-	data_changevariableby(ScratchSetDouble(1), YbaQazvbubnbara7afaxaWaLa9aupbava0ubaNa1);
-	motion_gotoxy(ScratchSetDouble(0), ScratchSetDouble(0));
-	pen_clear();
-	pen_setPenColorToColor(ScratchSetString("#000000"));
-	pen_setPenSizeTo(ScratchSetDouble(1000));
-	pen_penDown();
-	pen_penUp();
-	pen_setPenSizeTo(ScratchSetDouble(1));
-	YTaiacakibaCaoamaeatas();
-	YDaraaawibaBaaacakagaraoauanadibaCaoamaeatas();
-	YIanapauat();
-	YRauanibaPalaaayaearibaBaualalaeatas();
-	YRauanibaEanaeamayibaBaualalaeatas();
-	YRauanaEanaeamaiaeas();
-	YRauanaFaiaraeabaaalalas();
-	YDaraaawibaPaoaianatas();
-	looks_switchcostumeto(looks_costume(ScratchSetString("JJ Cockpit")));
-	looks_setsizeto(ScratchSetDouble(30));
-	motion_gotoxy(YdgbaNaaaCaEayanaYqbbbgbubgbaevbanawa4ax, Yba2aEa8bbaSrbaEaHa8dba8alubxbcbaiaEayan);
-	pen_stamp();
-	looks_setsizeto(ScratchSetDouble(100));
-	if(ScratchVarGetBool(operator_equals(operator_mod(YbaQazvbubnbara7afaxaWaLa9aupbava0ubaNa1, ScratchSetDouble(15)), ScratchSetString("0"))))
-	{
-		YRauanibaWaaavae();
-	}
-	if(ScratchVarGetBool(operator_lt(YbaQazvbubnbara7afaxaWaLa9aupbava0ubaNa1, ScratchSetString("210"))))
-	{
-		looks_switchcostumeto(looks_costume(ScratchSetString("Controls")));
-		looks_setsizeto(ScratchSetDouble(100));
-		motion_gotoxy(ScratchSetDouble(0), ScratchSetDouble(0));
-		pen_stamp();
-	}
+	data_setvariableto(operator_mathopYsaian(argument_reporter_string_number(Yrax)), YiaQlbaUaAaGrbaVaQsbada0awapaMaWaiwba1an);
+	data_setvariableto(operator_mathopYsaian(argument_reporter_string_number(Yray)), Y9aDakaWobqbaDaRaCa0aBaCaMawjbrba0avaXaQ);
+	data_setvariableto(operator_mathopYsaian(argument_reporter_string_number(Yraz)), YbobahalsbaPababdba6a_dba7a7nbauobpbtba_);
+	data_setvariableto(operator_mathopYcaoas(argument_reporter_string_number(Yrax)), YZcbaKahxbaiaIawaOxbaPebaqnba0dbmbqbaNas);
+	data_setvariableto(operator_mathopYcaoas(argument_reporter_string_number(Yray)), YYaRa0abaPazamaSa4agsbafaNazawbbaKakaxaA);
+	data_setvariableto(operator_mathopYcaoas(argument_reporter_string_number(Yraz)), Y9fbaOaVaXaaa2axobadlbaSablbabanaHaYaQa4);
+	data_deletealloflist(Yga7obqbaNaha3aLaQabauaRmbavaraclbanaoar);
+	data_addtolist(operator_multiply(operator_multiply(YYaRa0abaPazamaSa4agsbafaNazawbbaKakaxaA, Y9fbaOaVaXaaa2axobadlbaSablbabanaHaYaQa4), argument_reporter_string_number(Ysax)), Yga7obqbaNaha3aLaQabauaRmbavaraclbanaoar);
+	data_addtolist(operator_multiply(argument_reporter_string_number(Ysay), operator_subtract(operator_multiply(operator_multiply(YiaQlbaUaAaGrbaVaQsbada0awapaMaWaiwba1an, Y9aDakaWobqbaDaRaCa0aBaCaMawjbrba0avaXaQ), Y9fbaOaVaXaaa2axobadlbaSablbabanaHaYaQa4), operator_multiply(YZcbaKahxbaiaIawaOxbaPebaqnba0dbmbqbaNas, YbobahalsbaPababdba6a_dba7a7nbauobpbtba_))), Yga7obqbaNaha3aLaQabauaRmbavaraclbanaoar);
+	data_addtolist(operator_multiply(argument_reporter_string_number(Ysaz), operator_add(operator_multiply(operator_multiply(YZcbaKahxbaiaIawaOxbaPebaqnba0dbmbqbaNas, Y9aDakaWobqbaDaRaCa0aBaCaMawjbrba0avaXaQ), Y9fbaOaVaXaaa2axobadlbaSablbabanaHaYaQa4), operator_multiply(YiaQlbaUaAaGrbaVaQsbada0awapaMaWaiwba1an, YbobahalsbaPababdba6a_dba7a7nbauobpbtba_))), Yga7obqbaNaha3aLaQabauaRmbavaraclbanaoar);
+	data_addtolist(argument_reporter_string_number(Ypax), Yga7obqbaNaha3aLaQabauaRmbavaraclbanaoar);
+	data_addtolist(operator_multiply(operator_multiply(YYaRa0abaPazamaSa4agsbafaNazawbbaKakaxaA, YbobahalsbaPababdba6a_dba7a7nbauobpbtba_), argument_reporter_string_number(Ysax)), Yga7obqbaNaha3aLaQabauaRmbavaraclbanaoar);
+	data_addtolist(operator_multiply(argument_reporter_string_number(Ysay), operator_add(operator_multiply(operator_multiply(YiaQlbaUaAaGrbaVaQsbada0awapaMaWaiwba1an, Y9aDakaWobqbaDaRaCa0aBaCaMawjbrba0avaXaQ), YbobahalsbaPababdba6a_dba7a7nbauobpbtba_), operator_multiply(YZcbaKahxbaiaIawaOxbaPebaqnba0dbmbqbaNas, Y9fbaOaVaXaaa2axobadlbaSablbabanaHaYaQa4))), Yga7obqbaNaha3aLaQabauaRmbavaraclbanaoar);
+	data_addtolist(operator_multiply(argument_reporter_string_number(Ysaz), operator_subtract(operator_multiply(operator_multiply(YZcbaKahxbaiaIawaOxbaPebaqnba0dbmbqbaNas, Y9aDakaWobqbaDaRaCa0aBaCaMawjbrba0avaXaQ), YbobahalsbaPababdba6a_dba7a7nbauobpbtba_), operator_multiply(YiaQlbaUaAaGrbaVaQsbada0awapaMaWaiwba1an, Y9fbaOaVaXaaa2axobadlbaSablbabanaHaYaQa4))), Yga7obqbaNaha3aLaQabauaRmbavaraclbanaoar);
+	data_addtolist(argument_reporter_string_number(Ypay), Yga7obqbaNaha3aLaQabauaRmbavaraclbanaoar);
+	data_addtolist(operator_multiply(operator_subtract(ScratchSetDouble(0), Y9aDakaWobqbaDaRaCa0aBaCaMawjbrba0avaXaQ), argument_reporter_string_number(Ysax)), Yga7obqbaNaha3aLaQabauaRmbavaraclbanaoar);
+	data_addtolist(operator_multiply(operator_multiply(YiaQlbaUaAaGrbaVaQsbada0awapaMaWaiwba1an, YYaRa0abaPazamaSa4agsbafaNazawbbaKakaxaA), argument_reporter_string_number(Ysay)), Yga7obqbaNaha3aLaQabauaRmbavaraclbanaoar);
+	data_addtolist(operator_multiply(operator_multiply(YZcbaKahxbaiaIawaOxbaPebaqnba0dbmbqbaNas, YYaRa0abaPazamaSa4agsbafaNazawbbaKakaxaA), argument_reporter_string_number(Ysaz)), Yga7obqbaNaha3aLaQabauaRmbavaraclbanaoar);
+	data_addtolist(argument_reporter_string_number(Ypaz), Yga7obqbaNaha3aLaQabauaRmbavaraclbanaoar);
 #define YIELD TRUE_YIELD
 }
 
-void YIanapauat() 
+void YAapapalayibaMaoadaealibaMaaataraiax() 
 {
 #define YIELD
-	if(ScratchVarGetBool(sensing_keypressed(sensing_keyoptionsYw())))
+	data_setvariableto(ScratchSetString("1"), YgcbkbebebtbadjbhbwbqbaoubaSaZhbamwblbhb);
+	for(int i1 = 0; i1 < (int)ScratchVarGetDouble(data_lengthoflist(YtaEaMaQaZa6qbpbaRxbobrbaGhbaCa9aUaXobaU)); i1++)
 	{
-		data_changevariableby(ScratchSetDouble(10), Yba2aEa8bbaSrbaEaHa8dba8alubxbcbaiaEayan);
-	}
-	if(ScratchVarGetBool(sensing_keypressed(sensing_keyoptionsYs())))
-	{
-		data_changevariableby(ScratchSetDouble(-10), Yba2aEa8bbaSrbaEaHa8dba8alubxbcbaiaEayan);
-	}
-	if(ScratchVarGetBool(sensing_keypressed(sensing_keyoptionsYa())))
-	{
-		data_changevariableby(ScratchSetDouble(-10), YdgbaNaaaCaEayanaYqbbbgbubgbaevbanawa4ax);
-	}
-	if(ScratchVarGetBool(sensing_keypressed(sensing_keyoptionsYd())))
-	{
-		data_changevariableby(ScratchSetDouble(10), YdgbaNaaaCaEayanaYqbbbgbubgbaevbanawa4ax);
-	}
-	if(ScratchVarGetBool(sensing_keypressed(sensing_keyoptionsYsahaiafat())))
-	{
-		if(ScratchVarGetBool(operator_equals(operator_mod(YbaQazvbubnbara7afaxaWaLa9aupbava0ubaNa1, ScratchSetDouble(3)), ScratchSetString("0"))))
-		{
-			sound_play(sound_sounds_menu(ScratchSetString("laser")));
-			YPalaaayaearibaBaualalaeatiblbasiblbasiblbasiblbas(YdgbaNaaaCaEayanaYqbbbgbubgbaevbanawa4ax, Yba2aEa8bbaSrbaEaHa8dba8alubxbcbaiaEayan, ScratchSetString("15"), ScratchSetString("5"));
-			YPalaaayaearibaBaualalaeatiblbasiblbasiblbasiblbas(YdgbaNaaaCaEayanaYqbbbgbubgbaevbanawa4ax, Yba2aEa8bbaSrbaEaHa8dba8alubxbcbaiaEayan, ScratchSetString("15"), ScratchSetString("0"));
-			YPalaaayaearibaBaualalaeatiblbasiblbasiblbasiblbas(YdgbaNaaaCaEayanaYqbbbgbubgbaevbanawa4ax, Yba2aEa8bbaSrbaEaHa8dba8alubxbcbaiaEayan, ScratchSetString("15"), ScratchSetString("-5"));
-		}
-	}
-	if(ScratchVarGetBool(operator_lt(ScratchSetString("220"), YdgbaNaaaCaEayanaYqbbbgbubgbaevbanawa4ax)))
-	{
-		data_setvariableto(ScratchSetString("220"), YdgbaNaaaCaEayanaYqbbbgbubgbaevbanawa4ax);
-	}
-	if(ScratchVarGetBool(operator_lt(YdgbaNaaaCaEayanaYqbbbgbubgbaevbanawa4ax, ScratchSetString("-220"))))
-	{
-		data_setvariableto(ScratchSetString("-220"), YdgbaNaaaCaEayanaYqbbbgbubgbaevbanawa4ax);
-	}
-	if(ScratchVarGetBool(operator_lt(ScratchSetString("160"), Yba2aEa8bbaSrbaEaHa8dba8alubxbcbaiaEayan)))
-	{
-		data_setvariableto(ScratchSetString("160"), Yba2aEa8bbaSrbaEaHa8dba8alubxbcbaiaEayan);
-	}
-	if(ScratchVarGetBool(operator_lt(Yba2aEa8bbaSrbaEaHa8dba8alubxbcbaiaEayan, ScratchSetString("-160"))))
-	{
-		data_setvariableto(ScratchSetString("-160"), Yba2aEa8bbaSrbaEaHa8dba8alubxbcbaiaEayan);
-	}
-#define YIELD TRUE_YIELD
-}
-
-void YRauanibaPalaaayaearibaBaualalaeatas() 
-{
-#define YIELD
-	data_setvariableto(ScratchSetString("1"), Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2);
-	for(int i1 = 0; i1 < (int)ScratchVarGetDouble(operator_divide(data_lengthoflist(YqaombaMa5aQaEajrbauwbasebtbaNxbalaAfbaR), ScratchSetDouble(4))); i1++)
-	{
-		looks_switchcostumeto(looks_costume(ScratchSetString("Fazbear Background")));
-		motion_gotoxy(data_itemoflist(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, YqaombaMa5aQaEajrbauwbasebtbaNxbalaAfbaR), data_itemoflist(operator_add(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, ScratchSetDouble(1)), YqaombaMa5aQaEajrbauwbasebtbaNxbalaAfbaR));
-		data_replaceitemoflist(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, operator_add(data_itemoflist(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, YqaombaMa5aQaEajrbauwbasebtbaNxbalaAfbaR), data_itemoflist(operator_add(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, ScratchSetDouble(2)), YqaombaMa5aQaEajrbauwbasebtbaNxbalaAfbaR)), YqaombaMa5aQaEajrbauwbasebtbaNxbalaAfbaR);
-		data_replaceitemoflist(operator_add(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, ScratchSetDouble(1)), operator_add(data_itemoflist(operator_add(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, ScratchSetDouble(1)), YqaombaMa5aQaEajrbauwbasebtbaNxbalaAfbaR), data_itemoflist(operator_add(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, ScratchSetDouble(3)), YqaombaMa5aQaEajrbauwbasebtbaNxbalaAfbaR)), YqaombaMa5aQaEajrbauwbasebtbaNxbalaAfbaR);
-		looks_switchcostumeto(looks_costume(ScratchSetString("Player Bullet")));
-		looks_setsizeto(ScratchSetDouble(30));
-		pen_stamp();
-		if(ScratchVarGetBool(operator_or(operator_gt(data_itemoflist(operator_add(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, ScratchSetDouble(1)), YqaombaMa5aQaEajrbauwbasebtbaNxbalaAfbaR), ScratchSetString("300")), operator_gt(data_itemoflist(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, YqaombaMa5aQaEajrbauwbasebtbaNxbalaAfbaR), ScratchSetString("300")))))
-		{
-			data_deleteoflist(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, YqaombaMa5aQaEajrbauwbasebtbaNxbalaAfbaR);
-			data_deleteoflist(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, YqaombaMa5aQaEajrbauwbasebtbaNxbalaAfbaR);
-			data_deleteoflist(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, YqaombaMa5aQaEajrbauwbasebtbaNxbalaAfbaR);
-			data_deleteoflist(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, YqaombaMa5aQaEajrbauwbasebtbaNxbalaAfbaR);
-		}
-		else
-		{
-			data_changevariableby(ScratchSetDouble(4), Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2);
-		}
+		data_setvariableto(operator_add(operator_add(data_itemoflist(ScratchSetDouble(4), Yga7obqbaNaha3aLaQabauaRmbavaraclbanaoar), operator_multiply(data_itemoflist(ScratchSetDouble(1), Yga7obqbaNaha3aLaQabauaRmbavaraclbanaoar), data_itemoflist(YgcbkbebebtbadjbhbwbqbaoubaSaZhbamwblbhb, YtaEaMaQaZa6qbpbaRxbobrbaGhbaCa9aUaXobaU))), operator_add(operator_multiply(data_itemoflist(ScratchSetDouble(2), Yga7obqbaNaha3aLaQabauaRmbavaraclbanaoar), data_itemoflist(YgcbkbebebtbadjbhbwbqbaoubaSaZhbamwblbhb, Yba5avcbaPamapubqbtbkbawakaaaaaYxbhbalbb)), operator_multiply(data_itemoflist(ScratchSetDouble(3), Yga7obqbaNaha3aLaQabauaRmbavaraclbanaoar), data_itemoflist(YgcbkbebebtbadjbhbwbqbaoubaSaZhbamwblbhb, YbaspbaRkbadaAaTxbasa1aBacada6aZaEdbgbaU)))), YbaKaxanlbadataaaCaSebaaaKaoaOa8a3a7gbaz);
+		data_setvariableto(operator_add(operator_add(data_itemoflist(ScratchSetDouble(8), Yga7obqbaNaha3aLaQabauaRmbavaraclbanaoar), operator_multiply(data_itemoflist(ScratchSetDouble(5), Yga7obqbaNaha3aLaQabauaRmbavaraclbanaoar), data_itemoflist(YgcbkbebebtbadjbhbwbqbaoubaSaZhbamwblbhb, YtaEaMaQaZa6qbpbaRxbobrbaGhbaCa9aUaXobaU))), operator_add(operator_multiply(data_itemoflist(ScratchSetDouble(6), Yga7obqbaNaha3aLaQabauaRmbavaraclbanaoar), data_itemoflist(YgcbkbebebtbadjbhbwbqbaoubaSaZhbamwblbhb, Yba5avcbaPamapubqbtbkbawakaaaaaYxbhbalbb)), operator_multiply(data_itemoflist(ScratchSetDouble(7), Yga7obqbaNaha3aLaQabauaRmbavaraclbanaoar), data_itemoflist(YgcbkbebebtbadjbhbwbqbaoubaSaZhbamwblbhb, YbaspbaRkbadaAaTxbasa1aBacada6aZaEdbgbaU)))), YWqba0fbaHaralawaMaCajauaraNa8aWebrbgba0);
+		data_setvariableto(operator_add(operator_add(data_itemoflist(ScratchSetDouble(12), Yga7obqbaNaha3aLaQabauaRmbavaraclbanaoar), operator_multiply(data_itemoflist(ScratchSetDouble(9), Yga7obqbaNaha3aLaQabauaRmbavaraclbanaoar), data_itemoflist(YgcbkbebebtbadjbhbwbqbaoubaSaZhbamwblbhb, YtaEaMaQaZa6qbpbaRxbobrbaGhbaCa9aUaXobaU))), operator_add(operator_multiply(data_itemoflist(ScratchSetDouble(10), Yga7obqbaNaha3aLaQabauaRmbavaraclbanaoar), data_itemoflist(YgcbkbebebtbadjbhbwbqbaoubaSaZhbamwblbhb, Yba5avcbaPamapubqbtbkbawakaaaaaYxbhbalbb)), operator_multiply(data_itemoflist(ScratchSetDouble(11), Yga7obqbaNaha3aLaQabauaRmbavaraclbanaoar), data_itemoflist(YgcbkbebebtbadjbhbwbqbaoubaSaZhbamwblbhb, YbaspbaRkbadaAaTxbasa1aBacada6aZaEdbgbaU)))), YbapaKobrbaVaLaMpbnbaNwba9abaWa0aTrbaiaM);
+		data_replaceitemoflist(YgcbkbebebtbadjbhbwbqbaoubaSaZhbamwblbhb, YbaKaxanlbadataaaCaSebaaaKaoaOa8a3a7gbaz, YtaEaMaQaZa6qbpbaRxbobrbaGhbaCa9aUaXobaU);
+		data_replaceitemoflist(YgcbkbebebtbadjbhbwbqbaoubaSaZhbamwblbhb, YWqba0fbaHaralawaMaCajauaraNa8aWebrbgba0, Yba5avcbaPamapubqbtbkbawakaaaaaYxbhbalbb);
+		data_replaceitemoflist(YgcbkbebebtbadjbhbwbqbaoubaSaZhbamwblbhb, YbapaKobrbaVaLaMpbnbaNwba9abaWa0aTrbaiaM, YbaspbaRkbadaAaTxbasa1aBacada6aZaEdbgbaU);
+		data_changevariableby(ScratchSetDouble(1), YgcbkbebebtbadjbhbwbqbaoubaSaZhbamwblbhb);
 		YIELD
 	}
-	looks_setsizeto(ScratchSetDouble(100));
 #define YIELD TRUE_YIELD
 }
 
-void YPalaaayaearibaBaualalaeatiblbasiblbasiblbasiblbas(ScratchValue Yx, ScratchValue Yy, ScratchValue Yvax, ScratchValue Yvay) 
+void YDaraaawibaTaraiaaanagalaeas() 
 {
 #define YIELD
-	data_addtolist(argument_reporter_string_number(Yx), YqaombaMa5aQaEajrbauwbasebtbaNxbalaAfbaR);
-	data_addtolist(argument_reporter_string_number(Yy), YqaombaMa5aQaEajrbauwbasebtbaNxbalaAfbaR);
-	data_addtolist(argument_reporter_string_number(Yvax), YqaombaMa5aQaEajrbauwbasebtbaNxbalaAfbaR);
-	data_addtolist(argument_reporter_string_number(Yvay), YqaombaMa5aQaEajrbauwbasebtbaNxbalaAfbaR);
-#define YIELD TRUE_YIELD
-}
-
-void YAadadaEanaeamayiblbasiblbasiblbasiblbasiblbas(ScratchValue Yx, ScratchValue Yy, ScratchValue Ytayapae, ScratchValue Yvax, ScratchValue Yvay) 
-{
-#define YIELD
-	data_addtolist(argument_reporter_string_number(Yx), Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa);
-	data_addtolist(argument_reporter_string_number(Yy), Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa);
-	data_addtolist(argument_reporter_string_number(Ytayapae), Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa);
-	if(ScratchVarGetBool(operator_equals(argument_reporter_string_number(Ytayapae), ScratchSetString("0"))))
+	data_setvariableto(operator_divide(ScratchSetDouble(60), Yba8aZaNcbcbadaPubapaMawajaAaKcbaCa3bbaF), YthbgbaAaraAaSaccbrbmbnbaUafa0qbaFdba9cb);
+	data_setvariableto(ScratchSetString("1"), YgcbkbebebtbadjbhbwbqbaoubaSaZhbamwblbhb);
+	for(int i1 = 0; i1 < (int)ScratchVarGetDouble(operator_divide(data_lengthoflist(YtaEaMaQaZa6qbpbaRxbobrbaGhbaCa9aUaXobaU), ScratchSetDouble(3))); i1++)
 	{
-		data_addtolist(ScratchSetString("1"), Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa);
+		YRaaasataearaiasaeibaTaraiaaanagalaeiblbasiblbasiblbasiblbasiblbasiblbasiblbasiblbasiblbasiblbasiblbasiblbasiblbasiblbasiblbas(operator_multiply(operator_divide(data_itemoflist(operator_add(YgcbkbebebtbadjbhbwbqbaoubaSaZhbamwblbhb, ScratchSetDouble(0)), YtaEaMaQaZa6qbpbaRxbobrbaGhbaCa9aUaXobaU), data_itemoflist(operator_add(YgcbkbebebtbadjbhbwbqbaoubaSaZhbamwblbhb, ScratchSetDouble(0)), YbaspbaRkbadaAaTxbasa1aBacada6aZaEdbgbaU)), YthbgbaAaraAaSaccbrbmbnbaUafa0qbaFdba9cb), operator_multiply(operator_divide(data_itemoflist(operator_add(YgcbkbebebtbadjbhbwbqbaoubaSaZhbamwblbhb, ScratchSetDouble(0)), Yba5avcbaPamapubqbtbkbawakaaaaaYxbhbalbb), data_itemoflist(operator_add(YgcbkbebebtbadjbhbwbqbaoubaSaZhbamwblbhb, ScratchSetDouble(0)), YbaspbaRkbadaAaTxbasa1aBacada6aZaEdbgbaU)), YthbgbaAaraAaSaccbrbmbnbaUafa0qbaFdba9cb), operator_multiply(operator_divide(data_itemoflist(operator_add(YgcbkbebebtbadjbhbwbqbaoubaSaZhbamwblbhb, ScratchSetDouble(1)), YtaEaMaQaZa6qbpbaRxbobrbaGhbaCa9aUaXobaU), data_itemoflist(operator_add(YgcbkbebebtbadjbhbwbqbaoubaSaZhbamwblbhb, ScratchSetDouble(1)), YbaspbaRkbadaAaTxbasa1aBacada6aZaEdbgbaU)), YthbgbaAaraAaSaccbrbmbnbaUafa0qbaFdba9cb), operator_multiply(operator_divide(data_itemoflist(operator_add(YgcbkbebebtbadjbhbwbqbaoubaSaZhbamwblbhb, ScratchSetDouble(1)), Yba5avcbaPamapubqbtbkbawakaaaaaYxbhbalbb), data_itemoflist(operator_add(YgcbkbebebtbadjbhbwbqbaoubaSaZhbamwblbhb, ScratchSetDouble(1)), YbaspbaRkbadaAaTxbasa1aBacada6aZaEdbgbaU)), YthbgbaAaraAaSaccbrbmbnbaUafa0qbaFdba9cb), operator_multiply(operator_divide(data_itemoflist(operator_add(YgcbkbebebtbadjbhbwbqbaoubaSaZhbamwblbhb, ScratchSetDouble(2)), YtaEaMaQaZa6qbpbaRxbobrbaGhbaCa9aUaXobaU), data_itemoflist(operator_add(YgcbkbebebtbadjbhbwbqbaoubaSaZhbamwblbhb, ScratchSetDouble(2)), YbaspbaRkbadaAaTxbasa1aBacada6aZaEdbgbaU)), YthbgbaAaraAaSaccbrbmbnbaUafa0qbaFdba9cb), operator_multiply(operator_divide(data_itemoflist(operator_add(YgcbkbebebtbadjbhbwbqbaoubaSaZhbamwblbhb, ScratchSetDouble(2)), Yba5avcbaPamapubqbtbkbawakaaaaaYxbhbalbb), data_itemoflist(operator_add(YgcbkbebebtbadjbhbwbqbaoubaSaZhbamwblbhb, ScratchSetDouble(2)), YbaspbaRkbadaAaTxbasa1aBacada6aZaEdbgbaU)), YthbgbaAaraAaSaccbrbmbnbaUafa0qbaFdba9cb), data_itemoflist(operator_add(YgcbkbebebtbadjbhbwbqbaoubaSaZhbamwblbhb, ScratchSetDouble(0)), YZaoaBaraRa0mbaffbaxaNubaaebacaroba9aGqb), data_itemoflist(operator_add(YgcbkbebebtbadjbhbwbqbaoubaSaZhbamwblbhb, ScratchSetDouble(1)), YZaoaBaraRa0mbaffbaxaNubaaebacaroba9aGqb), data_itemoflist(operator_add(YgcbkbebebtbadjbhbwbqbaoubaSaZhbamwblbhb, ScratchSetDouble(2)), YZaoaBaraRa0mbaffbaxaNubaaebacaroba9aGqb), data_itemoflist(operator_add(YgcbkbebebtbadjbhbwbqbaoubaSaZhbamwblbhb, ScratchSetDouble(0)), YbagwbabasaKcbuba4avaSaSaRaxkbaYajaJaTa8), data_itemoflist(operator_add(YgcbkbebebtbadjbhbwbqbaoubaSaZhbamwblbhb, ScratchSetDouble(1)), YbagwbabasaKcbuba4avaSaSaRaxkbaYajaJaTa8), data_itemoflist(operator_add(YgcbkbebebtbadjbhbwbqbaoubaSaZhbamwblbhb, ScratchSetDouble(2)), YbagwbabasaKcbuba4avaSaSaRaxkbaYajaJaTa8), data_itemoflist(operator_add(YgcbkbebebtbadjbhbwbqbaoubaSaZhbamwblbhb, ScratchSetDouble(0)), YbaspbaRkbadaAaTxbasa1aBacada6aZaEdbgbaU), data_itemoflist(operator_add(YgcbkbebebtbadjbhbwbqbaoubaSaZhbamwblbhb, ScratchSetDouble(1)), YbaspbaRkbadaAaTxbasa1aBacada6aZaEdbgbaU), data_itemoflist(operator_add(YgcbkbebebtbadjbhbwbqbaoubaSaZhbamwblbhb, ScratchSetDouble(2)), YbaspbaRkbadaAaTxbasa1aBacada6aZaEdbgbaU));
+		data_changevariableby(ScratchSetDouble(3), YgcbkbebebtbadjbhbwbqbaoubaSaZhbamwblbhb);
+		YIELD
 	}
-	else
+#define YIELD TRUE_YIELD
+}
+
+void YRaaasataearaiasaeibaTaraiaaanagalaeiblbasiblbasiblbasiblbasiblbasiblbasiblbasiblbasiblbasiblbasiblbasiblbasiblbasiblbasiblbas(ScratchValue Yxa1, ScratchValue Yya1, ScratchValue Yxa2, ScratchValue Yya2, ScratchValue Yxa3, ScratchValue Yya3, ScratchValue Yua1, ScratchValue Yua2, ScratchValue Yua3, ScratchValue Yva1, ScratchValue Yva2, ScratchValue Yva3, ScratchValue Yza1, ScratchValue Yza2, ScratchValue Yza3) 
+{
+#define YIELD
+	if(ScratchVarGetBool(operator_and(operator_lt(argument_reporter_string_number(Yya3), argument_reporter_string_number(Yya1)), operator_lt(argument_reporter_string_number(Yya2), argument_reporter_string_number(Yya1)))))
 	{
-		if(ScratchVarGetBool(operator_equals(argument_reporter_string_number(Ytayapae), ScratchSetString("1"))))
+		data_setvariableto(ScratchSetString("1"), Ybaga7axaDagaYafa5aeaIaasbagubobaua4aQwb);
+		data_setvariableto(argument_reporter_string_number(Yya1), YJasa2aOnbaxalagaWanazpbaadbara9gbgbagnb);
+		data_setvariableto(argument_reporter_string_number(Yxa1), YbaladaWaNaoaba7obqbsbxbabacrbaYamaxaSbb);
+		data_setvariableto(argument_reporter_string_number(Yua1), Ygapa2adbbqbapaKaOalaAuba9a7a9aBmbaPdbrb);
+		data_setvariableto(argument_reporter_string_number(Yva1), YFaXa7ama3atjbaegbaKaYavazaNauaKaFnbmbar);
+		data_setvariableto(argument_reporter_string_number(Yza1), YgahaQa5a2xbobdbaHaMpbgbawaNebkbaZa0anal);
+		if(ScratchVarGetBool(operator_lt(argument_reporter_string_number(Yya3), argument_reporter_string_number(Yya2))))
 		{
-			data_addtolist(ScratchSetString("15"), Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa);
+			data_setvariableto(argument_reporter_string_number(Yya2), Y4a6alaIa1fbaSdbrbdbkbadqbaIakaIa4wbebaU);
+			data_setvariableto(argument_reporter_string_number(Yxa2), Ybawa9aIalaAeba_aWbbaCqbaAa0ahaka_aNpbtb);
+			data_setvariableto(argument_reporter_string_number(Yua2), YRahaKaHaWvbaTa1aHaEawaLdbwbataBa_aJaRaz);
+			data_setvariableto(argument_reporter_string_number(Yva2), YbaAxbaJahaFaldbsba9aqasalaahba2sbcbaKa5);
+			data_setvariableto(argument_reporter_string_number(Yza2), Y0hbaCa3xbaSvbadaLauaGdbaWayasdbaKobajaw);
+			//();
+			data_setvariableto(argument_reporter_string_number(Yya3), YbaHajubanaTavaTa7aqa8abaSapaNakabaFa8ak);
+			data_setvariableto(argument_reporter_string_number(Yxa3), YFebaOaKaJalabtbaMacaFaPaEaTaBawa4aeaUaD);
+			data_setvariableto(argument_reporter_string_number(Yua3), YOapkbaga8aeaBa0aiawaha2aQaUamawaZrblbaY);
+			data_setvariableto(argument_reporter_string_number(Yva3), YbrbhbaMjbaIaYaVacaExbaIaaaIa5aEazrbaAaS);
+			data_setvariableto(argument_reporter_string_number(Yza3), YCaCabdbwbaYaHa_aZwbcbdbaWahamaIdbaKjbam);
 		}
 		else
 		{
-			data_addtolist(ScratchSetString("45"), Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa);
+			data_setvariableto(argument_reporter_string_number(Yya2), YbaHajubanaTavaTa7aqa8abaSapaNakabaFa8ak);
+			data_setvariableto(argument_reporter_string_number(Yxa2), YFebaOaKaJalabtbaMacaFaPaEaTaBawa4aeaUaD);
+			data_setvariableto(argument_reporter_string_number(Yua2), YOapkbaga8aeaBa0aiawaha2aQaUamawaZrblbaY);
+			data_setvariableto(argument_reporter_string_number(Yva2), YbrbhbaMjbaIaYaVacaExbaIaaaIa5aEazrbaAaS);
+			data_setvariableto(argument_reporter_string_number(Yza2), YCaCabdbwbaYaHa_aZwbcbdbaWahamaIdbaKjbam);
+			//();
+			data_setvariableto(argument_reporter_string_number(Yya3), Y4a6alaIa1fbaSdbrbdbkbadqbaIakaIa4wbebaU);
+			data_setvariableto(argument_reporter_string_number(Yxa3), Ybawa9aIalaAeba_aWbbaCqbaAa0ahaka_aNpbtb);
+			data_setvariableto(argument_reporter_string_number(Yua3), YRahaKaHaWvbaTa1aHaEawaLdbwbataBa_aJaRaz);
+			data_setvariableto(argument_reporter_string_number(Yva3), YbaAxbaJahaFaldbsba9aqasalaahba2sbcbaKa5);
+			data_setvariableto(argument_reporter_string_number(Yza3), Y0hbaCa3xbaSvbadaLauaGdbaWayasdbaKobajaw);
 		}
 	}
-	data_addtolist(argument_reporter_string_number(Yvax), Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa);
-	data_addtolist(argument_reporter_string_number(Yvay), Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa);
-#define YIELD TRUE_YIELD
-}
-
-void YRauanaEanaeamaiaeas() 
-{
-#define YIELD
-	data_setvariableto(ScratchSetString("1"), Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2);
-	for(int i1 = 0; i1 < (int)ScratchVarGetDouble(operator_divide(data_lengthoflist(Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa), ScratchSetDouble(6))); i1++)
+	if(ScratchVarGetBool(operator_and(operator_lt(argument_reporter_string_number(Yya3), argument_reporter_string_number(Yya2)), operator_lt(argument_reporter_string_number(Yya1), argument_reporter_string_number(Yya2)))))
 	{
-		if(ScratchVarGetBool(operator_equals(operator_random(ScratchSetDouble(0), ScratchSetDouble(59)), ScratchSetString("0"))))
+		data_setvariableto(ScratchSetString("2"), Ybaga7axaDagaYafa5aeaIaasbagubobaua4aQwb);
+		data_setvariableto(argument_reporter_string_number(Yya2), YJasa2aOnbaxalagaWanazpbaadbara9gbgbagnb);
+		data_setvariableto(argument_reporter_string_number(Yxa2), YbaladaWaNaoaba7obqbsbxbabacrbaYamaxaSbb);
+		data_setvariableto(argument_reporter_string_number(Yua2), Ygapa2adbbqbapaKaOalaAuba9a7a9aBmbaPdbrb);
+		data_setvariableto(argument_reporter_string_number(Yva2), YFaXa7ama3atjbaegbaKaYavazaNauaKaFnbmbar);
+		data_setvariableto(argument_reporter_string_number(Yza2), YgahaQa5a2xbobdbaHaMpbgbawaNebkbaZa0anal);
+		if(ScratchVarGetBool(operator_lt(argument_reporter_string_number(Yya3), argument_reporter_string_number(Yya1))))
 		{
-			YAadadaEanaeamayaBaualalaeatiblbasiblbas(data_itemoflist(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa), data_itemoflist(operator_add(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, ScratchSetDouble(1)), Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa));
+			data_setvariableto(argument_reporter_string_number(Yya1), Y4a6alaIa1fbaSdbrbdbkbadqbaIakaIa4wbebaU);
+			data_setvariableto(argument_reporter_string_number(Yxa1), Ybawa9aIalaAeba_aWbbaCqbaAa0ahaka_aNpbtb);
+			data_setvariableto(argument_reporter_string_number(Yua1), YRahaKaHaWvbaTa1aHaEawaLdbwbataBa_aJaRaz);
+			data_setvariableto(argument_reporter_string_number(Yva1), YbaAxbaJahaFaldbsba9aqasalaahba2sbcbaKa5);
+			data_setvariableto(argument_reporter_string_number(Yza1), Y0hbaCa3xbaSvbadaLauaGdbaWayasdbaKobajaw);
+			//();
+			data_setvariableto(argument_reporter_string_number(Yya3), YbaHajubanaTavaTa7aqa8abaSapaNakabaFa8ak);
+			data_setvariableto(argument_reporter_string_number(Yxa3), YFebaOaKaJalabtbaMacaFaPaEaTaBawa4aeaUaD);
+			data_setvariableto(argument_reporter_string_number(Yua3), YOapkbaga8aeaBa0aiawaha2aQaUamawaZrblbaY);
+			data_setvariableto(argument_reporter_string_number(Yva3), YbrbhbaMjbaIaYaVacaExbaIaaaIa5aEazrbaAaS);
+			data_setvariableto(argument_reporter_string_number(Yza3), YCaCabdbwbaYaHa_aZwbcbdbaWahamaIdbaKjbam);
 		}
-		looks_switchcostumeto(looks_costume(ScratchSetString("Fazbear Background")));
-		motion_gotoxy(data_itemoflist(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa), data_itemoflist(operator_add(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, ScratchSetDouble(1)), Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa));
-		if(ScratchVarGetBool(operator_equals(data_itemoflist(operator_add(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, ScratchSetDouble(2)), Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa), ScratchSetString("0"))))
+		else
 		{
-			YCaoalalaiasaiaoaniblbasiblbasiblbasiblbasiblbasiblbasiblbas(data_itemoflist(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa), data_itemoflist(operator_add(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, ScratchSetDouble(1)), Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa), YdgbaNaaaCaEayanaYqbbbgbubgbaevbanawa4ax, Yba2aEa8bbaSrbaEaHa8dba8alubxbcbaiaEayan, operator_add(ScratchSetDouble(72), ScratchSetDouble(60)), operator_add(ScratchSetDouble(86), ScratchSetDouble(54)), ScratchSetString("0.3"));
-			if(ScratchVarGetBool(operator_equals(YKcbmblbatrbauaIaTa6vbaVaUnbataCaWaDapab, ScratchSetString("1"))))
+			data_setvariableto(argument_reporter_string_number(Yya1), YbaHajubanaTavaTa7aqa8abaSapaNakabaFa8ak);
+			data_setvariableto(argument_reporter_string_number(Yxa1), YFebaOaKaJalabtbaMacaFaPaEaTaBawa4aeaUaD);
+			data_setvariableto(argument_reporter_string_number(Yua1), YOapkbaga8aeaBa0aiawaha2aQaUamawaZrblbaY);
+			data_setvariableto(argument_reporter_string_number(Yva1), YbrbhbaMjbaIaYaVacaExbaIaaaIa5aEazrbaAaS);
+			data_setvariableto(argument_reporter_string_number(Yza1), YCaCabdbwbaYaHa_aZwbcbdbaWahamaIdbaKjbam);
+			//();
+			data_setvariableto(argument_reporter_string_number(Yya3), Y4a6alaIa1fbaSdbrbdbkbadqbaIakaIa4wbebaU);
+			data_setvariableto(argument_reporter_string_number(Yxa3), Ybawa9aIalaAeba_aWbbaCqbaAa0ahaka_aNpbtb);
+			data_setvariableto(argument_reporter_string_number(Yua3), YRahaKaHaWvbaTa1aHaEawaLdbwbataBa_aJaRaz);
+			data_setvariableto(argument_reporter_string_number(Yva3), YbaAxbaJahaFaldbsba9aqasalaahba2sbcbaKa5);
+			data_setvariableto(argument_reporter_string_number(Yza3), Y0hbaCa3xbaSvbadaLauaGdbaWayasdbaKobajaw);
+		}
+	}
+	if(ScratchVarGetBool(operator_and(operator_lt(argument_reporter_string_number(Yya2), argument_reporter_string_number(Yya3)), operator_lt(argument_reporter_string_number(Yya1), argument_reporter_string_number(Yya3)))))
+	{
+		data_setvariableto(ScratchSetString("3"), Ybaga7axaDagaYafa5aeaIaasbagubobaua4aQwb);
+		data_setvariableto(argument_reporter_string_number(Yya3), YJasa2aOnbaxalagaWanazpbaadbara9gbgbagnb);
+		data_setvariableto(argument_reporter_string_number(Yxa3), YbaladaWaNaoaba7obqbsbxbabacrbaYamaxaSbb);
+		data_setvariableto(argument_reporter_string_number(Yua3), Ygapa2adbbqbapaKaOalaAuba9a7a9aBmbaPdbrb);
+		data_setvariableto(argument_reporter_string_number(Yva3), YFaXa7ama3atjbaegbaKaYavazaNauaKaFnbmbar);
+		data_setvariableto(argument_reporter_string_number(Yza3), YgahaQa5a2xbobdbaHaMpbgbawaNebkbaZa0anal);
+		if(ScratchVarGetBool(operator_lt(argument_reporter_string_number(Yya2), argument_reporter_string_number(Yya1))))
+		{
+			data_setvariableto(argument_reporter_string_number(Yya1), Y4a6alaIa1fbaSdbrbdbkbadqbaIakaIa4wbebaU);
+			data_setvariableto(argument_reporter_string_number(Yxa1), Ybawa9aIalaAeba_aWbbaCqbaAa0ahaka_aNpbtb);
+			data_setvariableto(argument_reporter_string_number(Yua1), YRahaKaHaWvbaTa1aHaEawaLdbwbataBa_aJaRaz);
+			data_setvariableto(argument_reporter_string_number(Yva1), YbaAxbaJahaFaldbsba9aqasalaahba2sbcbaKa5);
+			data_setvariableto(argument_reporter_string_number(Yza1), Y0hbaCa3xbaSvbadaLauaGdbaWayasdbaKobajaw);
+			//();
+			data_setvariableto(argument_reporter_string_number(Yya2), YbaHajubanaTavaTa7aqa8abaSapaNakabaFa8ak);
+			data_setvariableto(argument_reporter_string_number(Yxa2), YFebaOaKaJalabtbaMacaFaPaEaTaBawa4aeaUaD);
+			data_setvariableto(argument_reporter_string_number(Yua2), YOapkbaga8aeaBa0aiawaha2aQaUamawaZrblbaY);
+			data_setvariableto(argument_reporter_string_number(Yva2), YbrbhbaMjbaIaYaVacaExbaIaaaIa5aEazrbaAaS);
+			data_setvariableto(argument_reporter_string_number(Yza2), YCaCabdbwbaYaHa_aZwbcbdbaWahamaIdbaKjbam);
+		}
+		else
+		{
+			data_setvariableto(argument_reporter_string_number(Yya1), YbaHajubanaTavaTa7aqa8abaSapaNakabaFa8ak);
+			data_setvariableto(argument_reporter_string_number(Yxa1), YFebaOaKaJalabtbaMacaFaPaEaTaBawa4aeaUaD);
+			data_setvariableto(argument_reporter_string_number(Yua1), YOapkbaga8aeaBa0aiawaha2aQaUamawaZrblbaY);
+			data_setvariableto(argument_reporter_string_number(Yva1), YbrbhbaMjbaIaYaVacaExbaIaaaIa5aEazrbaAaS);
+			data_setvariableto(argument_reporter_string_number(Yza1), YCaCabdbwbaYaHa_aZwbcbdbaWahamaIdbaKjbam);
+			//();
+			data_setvariableto(argument_reporter_string_number(Yya2), Y4a6alaIa1fbaSdbrbdbkbadqbaIakaIa4wbebaU);
+			data_setvariableto(argument_reporter_string_number(Yxa2), Ybawa9aIalaAeba_aWbbaCqbaAa0ahaka_aNpbtb);
+			data_setvariableto(argument_reporter_string_number(Yua2), YRahaKaHaWvbaTa1aHaEawaLdbwbataBa_aJaRaz);
+			data_setvariableto(argument_reporter_string_number(Yva2), YbaAxbaJahaFaldbsba9aqasalaahba2sbcbaKa5);
+			data_setvariableto(argument_reporter_string_number(Yza2), Y0hbaCa3xbaSvbadaLauaGdbaWayasdbaKobajaw);
+		}
+	}
+	data_setvariableto(operator_divide(operator_subtract(Y4a6alaIa1fbaSdbrbdbkbadqbaIakaIa4wbebaU, YbaHajubanaTavaTa7aqa8abaSapaNakabaFa8ak), operator_subtract(YJasa2aOnbaxalagaWanazpbaadbara9gbgbagnb, YbaHajubanaTavaTa7aqa8abaSapaNakabaFa8ak)), Yzuba8a8aJdba4aragacobaKeba5rbaIgbaiaUam);
+	data_setvariableto(operator_add(operator_multiply(Yzuba8a8aJdba4aragacobaKeba5rbaIgbaiaUam, operator_subtract(YbaladaWaNaoaba7obqbsbxbabacrbaYamaxaSbb, YFebaOaKaJalabtbaMacaFaPaEaTaBawa4aeaUaD)), YFebaOaKaJalabtbaMacaFaPaEaTaBawa4aeaUaD), Yoa5akangbjbaapbaYava3akqbcbcbhbpba0araV);
+	data_setvariableto(Y4a6alaIa1fbaSdbrbdbkbadqbaIakaIa4wbebaU, Yba8obaXoba7aqa3aZjbaiebobwbpbaAvbaJausb);
+	data_setvariableto(operator_add(operator_multiply(Yzuba8a8aJdba4aragacobaKeba5rbaIgbaiaUam, operator_subtract(Ygapa2adbbqbapaKaOalaAuba9a7a9aBmbaPdbrb, YOapkbaga8aeaBa0aiawaha2aQaUamawaZrblbaY)), YOapkbaga8aeaBa0aiawaha2aQaUamawaZrblbaY), YbaLadcbgbantbawaUuba0aDaKvbsbalaUa1aZaT);
+	data_setvariableto(operator_add(operator_multiply(Yzuba8a8aJdba4aragacobaKeba5rbaIgbaiaUam, operator_subtract(YFaXa7ama3atjbaegbaKaYavazaNauaKaFnbmbar, YbrbhbaMjbaIaYaVacaExbaIaaaIa5aEazrbaAaS)), YbrbhbaMjbaIaYaVacaExbaIaaaIa5aEazrbaAaS), Yba8dbaoaiaQa8cbdbamaNa3aTaiaIaTtbaBaavb);
+	data_setvariableto(operator_add(operator_multiply(Yzuba8a8aJdba4aragacobaKeba5rbaIgbaiaUam, operator_subtract(YgahaQa5a2xbobdbaHaMpbgbawaNebkbaZa0anal, YCaCabdbwbaYaHa_aZwbcbdbaWahamaIdbaKjbam)), YCaCabdbwbaYaHa_aZwbcbdbaWahamaIdbaKjbam), YbaUsbaeaBrba7amaQavahara0aJazaJebobaba9);
+	//();
+	if(ScratchVarGetBool(operator_not(operator_equals(Y4a6alaIa1fbaSdbrbdbkbadqbaIakaIa4wbebaU, YJasa2aOnbaxalagaWanazpbaadbara9gbgbagnb))))
+	{
+		data_setvariableto(operator_subtract(ScratchSetDouble(0), operator_divide(operator_subtract(Ybawa9aIalaAeba_aWbbaCqbaAa0ahaka_aNpbtb, YbaladaWaNaoaba7obqbsbxbabacrbaYamaxaSbb), operator_subtract(Y4a6alaIa1fbaSdbrbdbkbadqbaIakaIa4wbebaU, YJasa2aOnbaxalagaWanazpbaadbara9gbgbagnb))), YHaGhbqbapa3a8aEaXaxaCaxaRaoamanaEampbaF);
+		data_setvariableto(operator_subtract(ScratchSetDouble(0), operator_divide(operator_subtract(Yoa5akangbjbaapbaYava3akqbcbcbhbpba0araV, YbaladaWaNaoaba7obqbsbxbabacrbaYamaxaSbb), operator_subtract(Yba8obaXoba7aqa3aZjbaiebobwbpbaAvbaJausb, YJasa2aOnbaxalagaWanazpbaadbara9gbgbagnb))), Ybaqa6akaxubaNbbwbxbxbawara_aSa2xbaOabay);
+		data_setvariableto(operator_subtract(ScratchSetDouble(0), operator_divide(operator_subtract(YbaAxbaJahaFaldbsba9aqasalaahba2sbcbaKa5, YFaXa7ama3atjbaegbaKaYavazaNauaKaFnbmbar), operator_subtract(Y4a6alaIa1fbaSdbrbdbkbadqbaIakaIa4wbebaU, YJasa2aOnbaxalagaWanazpbaadbara9gbgbagnb))), Y6aLcbnba7qbacaYaZgbfbpbaRa2fbbba3ahamax);
+		data_setvariableto(operator_subtract(ScratchSetDouble(0), operator_divide(operator_subtract(YRahaKaHaWvbaTa1aHaEawaLdbwbataBa_aJaRaz, Ygapa2adbbqbapaKaOalaAuba9a7a9aBmbaPdbrb), operator_subtract(Y4a6alaIa1fbaSdbrbdbkbadqbaIakaIa4wbebaU, YJasa2aOnbaxalagaWanazpbaadbara9gbgbagnb))), YbcbaBauaXaNebhbabazaFqbaraPaqaIaeavaGay);
+		data_setvariableto(operator_subtract(ScratchSetDouble(0), operator_divide(operator_subtract(Yba8dbaoaiaQa8cbdbamaNa3aTaiaIaTtbaBaavb, YFaXa7ama3atjbaegbaKaYavazaNauaKaFnbmbar), operator_subtract(Y4a6alaIa1fbaSdbrbdbkbadqbaIakaIa4wbebaU, YJasa2aOnbaxalagaWanazpbaadbara9gbgbagnb))), Y8lbqbabasaDarkblbaIarabobmbfbacabaEayad);
+		data_setvariableto(operator_subtract(ScratchSetDouble(0), operator_divide(operator_subtract(YbaLadcbgbantbawaUuba0aDaKvbsbalaUa1aZaT, Ygapa2adbbqbapaKaOalaAuba9a7a9aBmbaPdbrb), operator_subtract(Y4a6alaIa1fbaSdbrbdbkbadqbaIakaIa4wbebaU, YJasa2aOnbaxalagaWanazpbaadbara9gbgbagnb))), YbaambanvbaHkbanauacaiaanbaArbbbuba2cbab);
+		data_setvariableto(operator_subtract(ScratchSetDouble(0), operator_divide(operator_subtract(Y0hbaCa3xbaSvbadaLauaGdbaWayasdbaKobajaw, YgahaQa5a2xbobdbaHaMpbgbawaNebkbaZa0anal), operator_subtract(Y4a6alaIa1fbaSdbrbdbkbadqbaIakaIa4wbebaU, YJasa2aOnbaxalagaWanazpbaadbara9gbgbagnb))), Y0a_awaYaYaJa2gbaYa9aHaQdbpbebebjbafcbaw);
+		data_setvariableto(operator_subtract(ScratchSetDouble(0), operator_divide(operator_subtract(YbaUsbaeaBrba7amaQavahara0aJazaJebobaba9, YgahaQa5a2xbobdbaHaMpbgbawaNebkbaZa0anal), operator_subtract(Y4a6alaIa1fbaSdbrbdbkbadqbaIakaIa4wbebaU, YJasa2aOnbaxalagaWanazpbaadbara9gbgbagnb))), YPnba7aSankbaAamaFaAajdbfbmbhbazaba5aYaD);
+		data_setvariableto(YbaladaWaNaoaba7obqbsbxbabacrbaYamaxaSbb, YCaDlbaCaMadaGacdbaMa5wbnbpbasaKaEaJkbar);
+		data_setvariableto(YbaladaWaNaoaba7obqbsbxbabacrbaYamaxaSbb, YLa9aTnbajajdbaparata8aIagaAazaQababaZub);
+		data_setvariableto(Ygapa2adbbqbapaKaOalaAuba9a7a9aBmbaPdbrb, YbaBaKaNaJaSqbaqawaYauebaOaMhbcbaFcbaeaI);
+		data_setvariableto(Ygapa2adbbqbapaKaOalaAuba9a7a9aBmbaPdbrb, YBaeaBaaahcbaFaua6fbaGaljbaOagqbaFadaia_);
+		data_setvariableto(YFaXa7ama3atjbaegbaKaYavazaNauaKaFnbmbar, YcaQaFaVaLfbaWoba7fbaiaxaCazaBaJauhba0aC);
+		data_setvariableto(YFaXa7ama3atjbaegbaKaYavazaNauaKaFnbmbar, YhaXaza3a3abaCa_ebaqaBaxjbwbdbaHwbakkbaA);
+		data_setvariableto(YgahaQa5a2xbobdbaHaMpbgbawaNebkbaZa0anal, YcaFfbaoanaplbalaMsbaFaoubjbapfbobafqbaU);
+		data_setvariableto(YgahaQa5a2xbobdbaHaMpbgbawaNebkbaZa0anal, Ybdbgbxba2aorbfbaVafauaRaFubakdbaMakhbak);
+		data_setvariableto(YJasa2aOnbaxalagaWanazpbaadbara9gbgbagnb, YSaJaOazrba9aGaFaKaqaJvbazafaOaohbaFaGmb);
+		for(int i2 = 0; i2 < (int)ScratchVarGetDouble(operator_add(ScratchSetDouble(1), operator_subtract(YJasa2aOnbaxalagaWanazpbaadbara9gbgbagnb, Yba8obaXoba7aqa3aZjbaiebobwbpbaAvbaJausb))); i2++)
+		{
+			data_setvariableto(operator_round(YLa9aTnbajajdbaparata8aIagaAazaQababaZub), Ybubpba1adaoalaYaJasaHanaga9aFaSaiaCa_az);
+			data_setvariableto(operator_round(YCaDlbaCaMadaGacdbaMa5wbnbpbasaKaEaJkbar), YGaFa6aHa9avkba8aNa5tbadcbaPwba4apaaa6ao);
+			data_setvariableto(YBaeaBaaahcbaFaua6fbaGaljbaOagqbaFadaia_, YsaLlbawaFaEa1aua6audbaHazxbagahxbaeaAcb);
+			data_setvariableto(YbaBaKaNaJaSqbaqawaYauebaOaMhbcbaFcbaeaI, YbrbaraWaHama5aTa7aaqbfbaaaLnbcbaoatpbaG);
+			data_setvariableto(YhaXaza3a3abaCa_ebaqaBaxjbwbdbaHwbakkbaA, YtajaJaxafaTaiaAa3qbampbahaYawcbaIahaLao);
+			data_setvariableto(YcaQaFaVaLfbaWoba7fbaiaxaCazaBaJauhba0aC, YbaAqbalaGaSaXaombaWaRaiaOa0aDobaXaoardb);
+			data_setvariableto(Ybdbgbxba2aorbfbaVafauaRaFubakdbaMakhbak, Yba6vbadaDa8a4ata2aZa8hbfbaKabaCaYtbrbaB);
+			data_setvariableto(YcaFfbaoanaplbalaMsbaFaoubjbapfbobafqbaU, YbkbaHa_fbdbpbdbaLobvba5aaayaDaYvbpbasaa);
+			if(ScratchVarGetBool(operator_lt(YGaFa6aHa9avkba8aNa5tbadcbaPwba4apaaa6ao, Ybubpba1adaoalaYaJasaHanaga9aFaSaiaCa_az)))
 			{
-				data_setvariableto(ScratchSetString("1"), YbaPaoafaYaJaErbalaPaka9aAaNa7ajaCapcbaC);
+				data_setvariableto(operator_round(YCaDlbaCaMadaGacdbaMa5wbnbpbasaKaEaJkbar), Ybubpba1adaoalaYaJasaHanaga9aFaSaiaCa_az);
+				data_setvariableto(operator_round(YLa9aTnbajajdbaparata8aIagaAazaQababaZub), YGaFa6aHa9avkba8aNa5tbadcbaPwba4apaaa6ao);
+				data_setvariableto(YbaBaKaNaJaSqbaqawaYauebaOaMhbcbaFcbaeaI, YsaLlbawaFaEa1aua6audbaHazxbagahxbaeaAcb);
+				data_setvariableto(YBaeaBaaahcbaFaua6fbaGaljbaOagqbaFadaia_, YbrbaraWaHama5aTa7aaqbfbaaaLnbcbaoatpbaG);
+				data_setvariableto(YcaQaFaVaLfbaWoba7fbaiaxaCazaBaJauhba0aC, YtajaJaxafaTaiaAa3qbampbahaYawcbaIahaLao);
+				data_setvariableto(YhaXaza3a3abaCa_ebaqaBaxjbwbdbaHwbakkbaA, YbaAqbalaGaSaXaombaWaRaiaOa0aDobaXaoardb);
+				data_setvariableto(YcaFfbaoanaplbalaMsbaFaoubjbapfbobafqbaU, Yba6vbadaDa8a4ata2aZa8hbfbaKabaCaYtbrbaB);
+				data_setvariableto(Ybdbgbxba2aorbfbaVafauaRaFubakdbaMakhbak, YbkbaHa_fbdbpbdbaLobvba5aaayaDaYvbpbasaa);
 			}
-			YRauanibaAanaiamiblbasiblbas(ScratchSetString("67"), ScratchSetString("16"));
-			looks_setsizeto(ScratchSetDouble(30));
-			pen_stamp();
-			data_setvariableto(operator_mathopYaataaan(operator_divide(operator_subtract(Yba2aEa8bbaSrbaEaHa8dba8alubxbcbaiaEayan, data_itemoflist(operator_add(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, ScratchSetDouble(1)), Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa)), operator_subtract(YdgbaNaaaCaEayanaYqbbbgbubgbaevbanawa4ax, data_itemoflist(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa)))), YbaTaVawaMauanamafaMatasaDcbaEubgba7aVaY);
-			if(ScratchVarGetBool(operator_gt(data_itemoflist(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa), YdgbaNaaaCaEayanaYqbbbgbubgbaevbanawa4ax)))
+			data_setvariableto(YsaLlbawaFaEa1aua6audbaHazxbagahxbaeaAcb, Yka3aEnbapgbaaa0alabkbaaaflbaffbabhbaFwb);
+			data_setvariableto(operator_divide(operator_subtract(YbrbaraWaHama5aTa7aaqbfbaaaLnbcbaoatpbaG, YsaLlbawaFaEa1aua6audbaHazxbagahxbaeaAcb), operator_subtract(YGaFa6aHa9avkba8aNa5tbadcbaPwba4apaaa6ao, Ybubpba1adaoalaYaJasaHanaga9aFaSaiaCa_az)), YLaFaQakayacaNaZaGxbqbaEmbagaoaGrbbbawrb);
+			data_setvariableto(YtajaJaxafaTaiaAa3qbampbahaYawcbaIahaLao, YKbbwbaWubaoadhbqbabaYadapaDajnba_apaoaD);
+			data_setvariableto(operator_divide(operator_subtract(YbaAqbalaGaSaXaombaWaRaiaOa0aDobaXaoardb, YtajaJaxafaTaiaAa3qbampbahaYawcbaIahaLao), operator_subtract(YGaFa6aHa9avkba8aNa5tbadcbaPwba4apaaa6ao, Ybubpba1adaoalaYaJasaHanaga9aFaSaiaCa_az)), Yoana1aNazaBaprbgba1aEnba_a1ayaba2dba2aP);
+			data_setvariableto(Yba6vbadaDa8a4ata2aZa8hbfbaKabaCaYtbrbaB, YfaUpbaWa7aAaFajamnbabata5a7aGa1eblbaJa1);
+			data_setvariableto(operator_divide(operator_subtract(YbkbaHa_fbdbpbdbaLobvba5aaayaDaYvbpbasaa, Yba6vbadaDa8a4ata2aZa8hbfbaKabaCaYtbrbaB), operator_subtract(YGaFa6aHa9avkba8aNa5tbadcbaPwba4apaaa6ao, Ybubpba1adaoalaYaJasaHanaga9aFaSaiaCa_az)), YyanebaYana1ahagaKjbaba8ajaMagqbaeqbalaC);
+			motion_gotoxy(operator_round(Ybubpba1adaoalaYaJasaHanaga9aFaSaiaCa_az), operator_round(YSaJaOazrba9aGaFaKaqaJvbazafaOaohbaFaGmb));
+			for(int i3 = 0; i3 < (int)ScratchVarGetDouble(operator_subtract(YGaFa6aHa9avkba8aNa5tbadcbaPwba4apaaa6ao, Ybubpba1adaoalaYaJasaHanaga9aFaSaiaCa_az)); i3++)
 			{
-				data_changevariableby(ScratchSetDouble(180), YbaTaVawaMauanamafaMatasaDcbaEubgba7aVaY);
-			}
-			data_replaceitemoflist(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, operator_add(data_itemoflist(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa), data_itemoflist(operator_add(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, ScratchSetDouble(4)), Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa)), Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa);
-			data_replaceitemoflist(operator_add(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, ScratchSetDouble(1)), operator_add(data_itemoflist(operator_add(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, ScratchSetDouble(1)), Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa), data_itemoflist(operator_add(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, ScratchSetDouble(5)), Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa)), Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa);
-			data_setvariableto(ScratchSetString("1"), YbaTaVawaMauanamafaMatasaDcbaEubgba7aVaY);
-			for(int i3 = 0; i3 < (int)ScratchVarGetDouble(operator_divide(data_lengthoflist(YqaombaMa5aQaEajrbauwbasebtbaNxbalaAfbaR), ScratchSetDouble(4))); i3++)
-			{
-				YCaoalalaiasaiaoaniblbasiblbasiblbasiblbasiblbasiblbasiblbas(data_itemoflist(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa), data_itemoflist(operator_add(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, ScratchSetDouble(1)), Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa), data_itemoflist(YbaTaVawaMauanamafaMatasaDcbaEubgba7aVaY, YqaombaMa5aQaEajrbauwbasebtbaNxbalaAfbaR), data_itemoflist(operator_add(YbaTaVawaMauanamafaMatasaDcbaEubgba7aVaY, ScratchSetDouble(1)), YqaombaMa5aQaEajrbauwbasebtbaNxbalaAfbaR), ScratchSetString("124"), ScratchSetString("340"), ScratchSetString("0.3"));
-				if(ScratchVarGetBool(operator_equals(YKcbmblbatrbauaIaTa6vbaVaUnbataCaWaDapab, ScratchSetString("1"))))
+				YSaeatibaCaoalaoauariblbasiblbas(Yka3aEnbapgbaaa0alabkbaaaflbaffbabhbaFwb, YKbbwbaWubaoadhbqbabaYadapaDajnba_apaoaD);
+				motion_changexby(ScratchSetDouble(1));
+				data_changevariableby(YLaFaQakayacaNaZaGxbqbaEmbagaoaGrbbbawrb, Yka3aEnbapgbaaa0alabkbaaaflbaffbabhbaFwb);
+				data_changevariableby(Yoana1aNazaBaprbgba1aEnba_a1ayaba2dba2aP, YKbbwbaWubaoadhbqbabaYadapaDajnba_apaoaD);
+				data_changevariableby(YyanebaYana1ahagaKjbaba8ajaMagqbaeqbalaC, YfaUpbaWa7aAaFajamnbabata5a7aGa1eblbaJa1);
+				if(ScratchVarGetBool(operator_lt(ScratchSetString("1"), Yka3aEnbapgbaaa0alabkbaaaflbaffbabhbaFwb)))
 				{
-					YAadadaFaiaraeabaaalaliblbasiblbasiblbas(data_itemoflist(YbaTaVawaMauanamafaMatasaDcbaEubgba7aVaY, YqaombaMa5aQaEajrbauwbasebtbaNxbalaAfbaR), data_itemoflist(operator_add(YbaTaVawaMauanamafaMatasaDcbaEubgba7aVaY, ScratchSetDouble(1)), YqaombaMa5aQaEajrbauwbasebtbaNxbalaAfbaR), ScratchSetString("small"));
-					data_deleteoflist(YbaTaVawaMauanamafaMatasaDcbaEubgba7aVaY, YqaombaMa5aQaEajrbauwbasebtbaNxbalaAfbaR);
-					data_deleteoflist(YbaTaVawaMauanamafaMatasaDcbaEubgba7aVaY, YqaombaMa5aQaEajrbauwbasebtbaNxbalaAfbaR);
-					data_deleteoflist(YbaTaVawaMauanamafaMatasaDcbaEubgba7aVaY, YqaombaMa5aQaEajrbauwbasebtbaNxbalaAfbaR);
-					data_deleteoflist(YbaTaVawaMauanamafaMatasaDcbaEubgba7aVaY, YqaombaMa5aQaEajrbauwbasebtbaNxbalaAfbaR);
-					data_replaceitemoflist(operator_add(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, ScratchSetDouble(3)), operator_subtract(data_itemoflist(operator_add(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, ScratchSetDouble(3)), Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa), ScratchSetDouble(1)), Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa);
+					data_setvariableto(ScratchSetString("1"), Yka3aEnbapgbaaa0alabkbaaaflbaffbabhbaFwb);
 				}
-				else
+				if(ScratchVarGetBool(operator_lt(ScratchSetString("1"), YKbbwbaWubaoadhbqbabaYadapaDajnba_apaoaD)))
 				{
-					data_changevariableby(ScratchSetDouble(4), YbaTaVawaMauanamafaMatasaDcbaEubgba7aVaY);
+					data_setvariableto(ScratchSetString("1"), YKbbwbaWubaoadhbqbabaYadapaDajnba_apaoaD);
 				}
 				YIELD
 			}
-			if(ScratchVarGetBool(operator_or(operator_lt(data_itemoflist(operator_add(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, ScratchSetDouble(3)), Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa), ScratchSetString("1")), operator_or(operator_or(operator_lt(data_itemoflist(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa), ScratchSetString("-300")), operator_lt(ScratchSetString("300"), data_itemoflist(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa))), operator_or(operator_lt(data_itemoflist(operator_add(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, ScratchSetDouble(1)), Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa), ScratchSetString("-300")), operator_lt(ScratchSetString("300"), data_itemoflist(operator_add(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, ScratchSetDouble(1)), Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa)))))))
-			{
-				data_deleteoflist(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa);
-				data_deleteoflist(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa);
-				data_deleteoflist(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa);
-				data_deleteoflist(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa);
-				data_deleteoflist(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa);
-				data_deleteoflist(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa);
-				if(ScratchVarGetBool(operator_lt(data_itemoflist(operator_add(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, ScratchSetDouble(3)), Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa), ScratchSetString("1"))))
-				{
-					data_changevariableby(ScratchSetDouble(50), YxaUhbrbqbaapba6aJaGa2awwbajcbvbaAqbaqfb);
-					sound_play(sound_sounds_menu(ScratchSetString("SmallExplode")));
-				}
-				data_changevariableby(ScratchSetDouble(-6), Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2);
-			}
-		}
-		else
-		{
-			if(ScratchVarGetBool(operator_equals(data_itemoflist(operator_add(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, ScratchSetDouble(2)), Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa), ScratchSetString("1"))))
-			{
-				YCaoalalaiasaiaoaniblbasiblbasiblbasiblbasiblbasiblbasiblbas(data_itemoflist(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa), data_itemoflist(operator_add(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, ScratchSetDouble(1)), Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa), YdgbaNaaaCaEayanaYqbbbgbubgbaevbanawa4ax, Yba2aEa8bbaSrbaEaHa8dba8alubxbcbaiaEayan, operator_add(ScratchSetDouble(124), ScratchSetDouble(60)), operator_add(ScratchSetDouble(340), ScratchSetDouble(54)), ScratchSetString("0.3"));
-				if(ScratchVarGetBool(operator_equals(YKcbmblbatrbauaIaTa6vbaVaUnbataCaWaDapab, ScratchSetString("1"))))
-				{
-					data_setvariableto(ScratchSetString("1"), YbaPaoafaYaJaErbalaPaka9aAaNa7ajaCapcbaC);
-				}
-				YRauanibaAanaiamiblbasiblbas(ScratchSetString("41"), ScratchSetString("4"));
-				looks_setsizeto(ScratchSetDouble(30));
-				pen_stamp();
-				data_setvariableto(operator_mathopYaataaan(operator_divide(operator_subtract(Yba2aEa8bbaSrbaEaHa8dba8alubxbcbaiaEayan, data_itemoflist(operator_add(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, ScratchSetDouble(1)), Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa)), operator_subtract(YdgbaNaaaCaEayanaYqbbbgbubgbaevbanawa4ax, data_itemoflist(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa)))), YbaTaVawaMauanamafaMatasaDcbaEubgba7aVaY);
-				if(ScratchVarGetBool(operator_gt(data_itemoflist(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa), YdgbaNaaaCaEayanaYqbbbgbubgbaevbanawa4ax)))
-				{
-					data_changevariableby(ScratchSetDouble(180), YbaTaVawaMauanamafaMatasaDcbaEubgba7aVaY);
-				}
-				data_replaceitemoflist(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, operator_add(data_itemoflist(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa), operator_multiply(operator_mathopYcaoas(YbaTaVawaMauanamafaMatasaDcbaEubgba7aVaY), ScratchSetDouble(3))), Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa);
-				data_replaceitemoflist(operator_add(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, ScratchSetDouble(1)), operator_add(data_itemoflist(operator_add(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, ScratchSetDouble(1)), Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa), operator_multiply(operator_mathopYsaian(YbaTaVawaMauanamafaMatasaDcbaEubgba7aVaY), ScratchSetDouble(3))), Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa);
-				data_setvariableto(ScratchSetString("1"), YbaTaVawaMauanamafaMatasaDcbaEubgba7aVaY);
-				for(int i4 = 0; i4 < (int)ScratchVarGetDouble(operator_divide(data_lengthoflist(YqaombaMa5aQaEajrbauwbasebtbaNxbalaAfbaR), ScratchSetDouble(4))); i4++)
-				{
-					YCaoalalaiasaiaoaniblbasiblbasiblbasiblbasiblbasiblbasiblbas(data_itemoflist(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa), data_itemoflist(operator_add(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, ScratchSetDouble(1)), Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa), data_itemoflist(YbaTaVawaMauanamafaMatasaDcbaEubgba7aVaY, YqaombaMa5aQaEajrbauwbasebtbaNxbalaAfbaR), data_itemoflist(operator_add(YbaTaVawaMauanamafaMatasaDcbaEubgba7aVaY, ScratchSetDouble(1)), YqaombaMa5aQaEajrbauwbasebtbaNxbalaAfbaR), ScratchSetString("124"), ScratchSetString("340"), ScratchSetString("0.3"));
-					if(ScratchVarGetBool(operator_equals(YKcbmblbatrbauaIaTa6vbaVaUnbataCaWaDapab, ScratchSetString("1"))))
-					{
-						YAadadaFaiaraeabaaalaliblbasiblbasiblbas(data_itemoflist(YbaTaVawaMauanamafaMatasaDcbaEubgba7aVaY, YqaombaMa5aQaEajrbauwbasebtbaNxbalaAfbaR), data_itemoflist(operator_add(YbaTaVawaMauanamafaMatasaDcbaEubgba7aVaY, ScratchSetDouble(1)), YqaombaMa5aQaEajrbauwbasebtbaNxbalaAfbaR), ScratchSetString("small"));
-						data_deleteoflist(YbaTaVawaMauanamafaMatasaDcbaEubgba7aVaY, YqaombaMa5aQaEajrbauwbasebtbaNxbalaAfbaR);
-						data_deleteoflist(YbaTaVawaMauanamafaMatasaDcbaEubgba7aVaY, YqaombaMa5aQaEajrbauwbasebtbaNxbalaAfbaR);
-						data_deleteoflist(YbaTaVawaMauanamafaMatasaDcbaEubgba7aVaY, YqaombaMa5aQaEajrbauwbasebtbaNxbalaAfbaR);
-						data_deleteoflist(YbaTaVawaMauanamafaMatasaDcbaEubgba7aVaY, YqaombaMa5aQaEajrbauwbasebtbaNxbalaAfbaR);
-						data_replaceitemoflist(operator_add(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, ScratchSetDouble(3)), operator_subtract(data_itemoflist(operator_add(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, ScratchSetDouble(3)), Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa), ScratchSetDouble(1)), Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa);
-					}
-					else
-					{
-						data_changevariableby(ScratchSetDouble(4), YbaTaVawaMauanamafaMatasaDcbaEubgba7aVaY);
-					}
-					YIELD
-				}
-				if(ScratchVarGetBool(operator_lt(data_itemoflist(operator_add(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, ScratchSetDouble(3)), Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa), ScratchSetString("1"))))
-				{
-					YAadadaFaiaraeabaaalaliblbasiblbasiblbas(data_itemoflist(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa), data_itemoflist(operator_add(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, ScratchSetDouble(1)), Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa), ScratchSetString("big"));
-					YAadadaEanaeamayiblbasiblbasiblbasiblbasiblbas(data_itemoflist(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa), data_itemoflist(operator_add(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, ScratchSetDouble(1)), Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa), ScratchSetString("0"), ScratchSetString("2.1"), ScratchSetString("2.1"));
-					YAadadaEanaeamayiblbasiblbasiblbasiblbasiblbas(data_itemoflist(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa), data_itemoflist(operator_add(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, ScratchSetDouble(1)), Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa), ScratchSetString("0"), ScratchSetString("-2.1"), ScratchSetString("-2.1"));
-					YAadadaEanaeamayiblbasiblbasiblbasiblbasiblbas(data_itemoflist(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa), data_itemoflist(operator_add(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, ScratchSetDouble(1)), Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa), ScratchSetString("0"), ScratchSetString("-2.1"), ScratchSetString("2.1"));
-					YAadadaEanaeamayiblbasiblbasiblbasiblbasiblbas(data_itemoflist(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa), data_itemoflist(operator_add(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, ScratchSetDouble(1)), Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa), ScratchSetString("0"), ScratchSetString("2.1"), ScratchSetString("-2.1"));
-					YAadadaEanaeamayiblbasiblbasiblbasiblbasiblbas(data_itemoflist(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa), data_itemoflist(operator_add(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, ScratchSetDouble(1)), Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa), ScratchSetString("0"), ScratchSetString("0"), ScratchSetString("3"));
-					YAadadaEanaeamayiblbasiblbasiblbasiblbasiblbas(data_itemoflist(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa), data_itemoflist(operator_add(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, ScratchSetDouble(1)), Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa), ScratchSetString("0"), ScratchSetString("0"), ScratchSetString("-3"));
-					YAadadaEanaeamayiblbasiblbasiblbasiblbasiblbas(data_itemoflist(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa), data_itemoflist(operator_add(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, ScratchSetDouble(1)), Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa), ScratchSetString("0"), ScratchSetString("3"), ScratchSetString("0"));
-					YAadadaEanaeamayiblbasiblbasiblbasiblbasiblbas(data_itemoflist(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa), data_itemoflist(operator_add(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, ScratchSetDouble(1)), Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa), ScratchSetString("0"), ScratchSetString("-3"), ScratchSetString("0"));
-					data_deleteoflist(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa);
-					data_deleteoflist(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa);
-					data_deleteoflist(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa);
-					data_deleteoflist(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa);
-					data_deleteoflist(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa);
-					data_deleteoflist(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa);
-					data_changevariableby(ScratchSetDouble(100), YxaUhbrbqbaapba6aJaGa2awwbajcbvbaAqbaqfb);
-					data_changevariableby(ScratchSetDouble(-6), Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2);
-					sound_play(sound_sounds_menu(ScratchSetString("BigExplode")));
-				}
-			}
-			else
-			{
-				YCaoalalaiasaiaoaniblbasiblbasiblbasiblbasiblbasiblbasiblbas(data_itemoflist(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa), data_itemoflist(operator_add(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, ScratchSetDouble(1)), Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa), YdgbaNaaaCaEayanaYqbbbgbubgbaevbanawa4ax, Yba2aEa8bbaSrbaEaHa8dba8alubxbcbaiaEayan, operator_add(ScratchSetDouble(124), ScratchSetDouble(60)), operator_add(ScratchSetDouble(340), ScratchSetDouble(54)), ScratchSetString("0.3"));
-				if(ScratchVarGetBool(operator_equals(YKcbmblbatrbauaIaTa6vbaVaUnbataCaWaDapab, ScratchSetString("1"))))
-				{
-					data_setvariableto(ScratchSetString("1"), YbaPaoafaYaJaErbalaPaka9aAaNa7ajaCapcbaC);
-				}
-				YRauanibaAanaiamiblbasiblbas(ScratchSetString("83"), ScratchSetString("4"));
-				looks_setsizeto(ScratchSetDouble(60));
-				pen_stamp();
-				data_setvariableto(operator_mathopYaataaan(operator_divide(operator_subtract(Yba2aEa8bbaSrbaEaHa8dba8alubxbcbaiaEayan, data_itemoflist(operator_add(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, ScratchSetDouble(1)), Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa)), operator_subtract(YdgbaNaaaCaEayanaYqbbbgbubgbaevbanawa4ax, data_itemoflist(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa)))), YbaTaVawaMauanamafaMatasaDcbaEubgba7aVaY);
-				if(ScratchVarGetBool(operator_gt(data_itemoflist(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa), YdgbaNaaaCaEayanaYqbbbgbubgbaevbanawa4ax)))
-				{
-					data_changevariableby(ScratchSetDouble(180), YbaTaVawaMauanamafaMatasaDcbaEubgba7aVaY);
-				}
-				data_replaceitemoflist(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, operator_add(data_itemoflist(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa), operator_multiply(operator_mathopYcaoas(YbaTaVawaMauanamafaMatasaDcbaEubgba7aVaY), ScratchSetDouble(3))), Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa);
-				data_replaceitemoflist(operator_add(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, ScratchSetDouble(1)), operator_add(data_itemoflist(operator_add(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, ScratchSetDouble(1)), Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa), operator_multiply(operator_mathopYsaian(YbaTaVawaMauanamafaMatasaDcbaEubgba7aVaY), ScratchSetDouble(3))), Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa);
-				data_setvariableto(ScratchSetString("1"), YbaTaVawaMauanamafaMatasaDcbaEubgba7aVaY);
-				for(int i4 = 0; i4 < (int)ScratchVarGetDouble(operator_divide(data_lengthoflist(YqaombaMa5aQaEajrbauwbasebtbaNxbalaAfbaR), ScratchSetDouble(4))); i4++)
-				{
-					YCaoalalaiasaiaoaniblbasiblbasiblbasiblbasiblbasiblbasiblbas(data_itemoflist(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa), data_itemoflist(operator_add(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, ScratchSetDouble(1)), Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa), data_itemoflist(YbaTaVawaMauanamafaMatasaDcbaEubgba7aVaY, YqaombaMa5aQaEajrbauwbasebtbaNxbalaAfbaR), data_itemoflist(operator_add(YbaTaVawaMauanamafaMatasaDcbaEubgba7aVaY, ScratchSetDouble(1)), YqaombaMa5aQaEajrbauwbasebtbaNxbalaAfbaR), ScratchSetString("124"), ScratchSetString("340"), ScratchSetString("0.3"));
-					if(ScratchVarGetBool(operator_equals(YKcbmblbatrbauaIaTa6vbaVaUnbataCaWaDapab, ScratchSetString("1"))))
-					{
-						YAadadaFaiaraeabaaalaliblbasiblbasiblbas(data_itemoflist(YbaTaVawaMauanamafaMatasaDcbaEubgba7aVaY, YqaombaMa5aQaEajrbauwbasebtbaNxbalaAfbaR), data_itemoflist(operator_add(YbaTaVawaMauanamafaMatasaDcbaEubgba7aVaY, ScratchSetDouble(1)), YqaombaMa5aQaEajrbauwbasebtbaNxbalaAfbaR), ScratchSetString("small"));
-						data_deleteoflist(YbaTaVawaMauanamafaMatasaDcbaEubgba7aVaY, YqaombaMa5aQaEajrbauwbasebtbaNxbalaAfbaR);
-						data_deleteoflist(YbaTaVawaMauanamafaMatasaDcbaEubgba7aVaY, YqaombaMa5aQaEajrbauwbasebtbaNxbalaAfbaR);
-						data_deleteoflist(YbaTaVawaMauanamafaMatasaDcbaEubgba7aVaY, YqaombaMa5aQaEajrbauwbasebtbaNxbalaAfbaR);
-						data_deleteoflist(YbaTaVawaMauanamafaMatasaDcbaEubgba7aVaY, YqaombaMa5aQaEajrbauwbasebtbaNxbalaAfbaR);
-						data_replaceitemoflist(operator_add(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, ScratchSetDouble(3)), operator_subtract(data_itemoflist(operator_add(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, ScratchSetDouble(3)), Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa), ScratchSetDouble(1)), Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa);
-					}
-					else
-					{
-						data_changevariableby(ScratchSetDouble(4), YbaTaVawaMauanamafaMatasaDcbaEubgba7aVaY);
-					}
-					YIELD
-				}
-				if(ScratchVarGetBool(operator_lt(data_itemoflist(operator_add(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, ScratchSetDouble(3)), Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa), ScratchSetString("1"))))
-				{
-					YAadadaFaiaraeabaaalaliblbasiblbasiblbas(data_itemoflist(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa), data_itemoflist(operator_add(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, ScratchSetDouble(1)), Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa), ScratchSetString("big"));
-					YAadadaEanaeamayiblbasiblbasiblbasiblbasiblbas(data_itemoflist(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa), operator_add(data_itemoflist(operator_add(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, ScratchSetDouble(1)), Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa), ScratchSetDouble(40)), ScratchSetString("1"), ScratchSetString("2.1"), ScratchSetString("2.1"));
-					YAadadaEanaeamayiblbasiblbasiblbasiblbasiblbas(operator_add(data_itemoflist(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa), ScratchSetDouble(40)), data_itemoflist(operator_add(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, ScratchSetDouble(1)), Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa), ScratchSetString("1"), ScratchSetString("-2.1"), ScratchSetString("-2.1"));
-					YAadadaEanaeamayiblbasiblbasiblbasiblbasiblbas(operator_subtract(data_itemoflist(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa), ScratchSetDouble(40)), data_itemoflist(operator_add(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, ScratchSetDouble(1)), Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa), ScratchSetString("1"), ScratchSetString("-2.1"), ScratchSetString("2.1"));
-					data_deleteoflist(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa);
-					data_deleteoflist(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa);
-					data_deleteoflist(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa);
-					data_deleteoflist(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa);
-					data_deleteoflist(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa);
-					data_deleteoflist(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa);
-					data_changevariableby(ScratchSetDouble(1000), YxaUhbrbqbaapba6aJaGa2awwbajcbvbaAqbaqfb);
-					data_changevariableby(ScratchSetDouble(-6), Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2);
-					sound_play(sound_sounds_menu(ScratchSetString("BigExplode")));
-				}
-			}
-		}
-		data_changevariableby(ScratchSetDouble(6), Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2);
-		YIELD
-	}
-	looks_setsizeto(ScratchSetDouble(100));
-#define YIELD TRUE_YIELD
-}
-
-void YCaoalalaiasaiaoaniblbasiblbasiblbasiblbasiblbasiblbasiblbas(ScratchValue Yxa1, ScratchValue Yya1, ScratchValue Yxa2, ScratchValue Yya2, ScratchValue Ywaiadatah, ScratchValue Yhaeaiagahat, ScratchValue Ysacaaalae) 
-{
-#define YIELD
-	if(ScratchVarGetBool(operator_and(operator_and(operator_lt(operator_subtract(argument_reporter_string_number(Yxa1), operator_multiply(operator_divide(argument_reporter_string_number(Ywaiadatah), ScratchSetDouble(2)), argument_reporter_string_number(Ysacaaalae))), argument_reporter_string_number(Yxa2)), operator_lt(argument_reporter_string_number(Yxa2), operator_add(argument_reporter_string_number(Yxa1), operator_multiply(operator_divide(argument_reporter_string_number(Ywaiadatah), ScratchSetDouble(2)), argument_reporter_string_number(Ysacaaalae))))), operator_and(operator_lt(operator_subtract(argument_reporter_string_number(Yya1), operator_multiply(operator_divide(argument_reporter_string_number(Yhaeaiagahat), ScratchSetDouble(2)), argument_reporter_string_number(Ysacaaalae))), argument_reporter_string_number(Yya2)), operator_lt(argument_reporter_string_number(Yya2), operator_add(argument_reporter_string_number(Yya1), operator_multiply(operator_divide(argument_reporter_string_number(Yhaeaiagahat), ScratchSetDouble(2)), argument_reporter_string_number(Ysacaaalae))))))))
-	{
-		data_setvariableto(ScratchSetString("1"), YKcbmblbatrbauaIaTa6vbaVaUnbataCaWaDapab);
-	}
-	else
-	{
-		data_setvariableto(ScratchSetString("0"), YKcbmblbatrbauaIaTa6vbaVaUnbataCaWaDapab);
-	}
-#define YIELD TRUE_YIELD
-}
-
-void YAadadaFaiaraeabaaalaliblbasiblbasiblbas(ScratchValue Yx, ScratchValue Yy, ScratchValue Ytayapae) 
-{
-#define YIELD
-	if(ScratchVarGetBool(operator_equals(argument_reporter_string_number(Ytayapae), ScratchSetString("big"))))
-	{
-		data_addtolist(argument_reporter_string_number(Yx), Yba7aGbbkbasaYa0dbaGaGa_aba3aDaCaAaIagap);
-		data_addtolist(argument_reporter_string_number(Yy), Yba7aGbbkbasaYa0dbaGaGa_aba3aDaCaAaIagap);
-		data_addtolist(ScratchSetString("45"), Yba7aGbbkbasaYa0dbaGaGa_aba3aDaCaAaIagap);
-	}
-	else
-	{
-		data_addtolist(argument_reporter_string_number(Yx), Yba7aGbbkbasaYa0dbaGaGa_aba3aDaCaAaIagap);
-		data_addtolist(argument_reporter_string_number(Yy), Yba7aGbbkbasaYa0dbaGaGa_aba3aDaCaAaIagap);
-		data_addtolist(ScratchSetString("56"), Yba7aGbbkbasaYa0dbaGaGa_aba3aDaCaAaIagap);
-	}
-#define YIELD TRUE_YIELD
-}
-
-void YRauanaFaiaraeabaaalalas() 
-{
-#define YIELD
-	data_setvariableto(ScratchSetString("1"), Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2);
-	for(int i1 = 0; i1 < (int)ScratchVarGetDouble(operator_divide(data_lengthoflist(Yba7aGbbkbasaYa0dbaGaGa_aba3aDaCaAaIagap), ScratchSetDouble(3))); i1++)
-	{
-		motion_gotoxy(data_itemoflist(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, Yba7aGbbkbasaYa0dbaGaGa_aba3aDaCaAaIagap), data_itemoflist(operator_add(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, ScratchSetDouble(1)), Yba7aGbbkbasaYa0dbaGaGa_aba3aDaCaAaIagap));
-		looks_switchcostumeto(data_itemoflist(operator_add(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, ScratchSetDouble(2)), Yba7aGbbkbasaYa0dbaGaGa_aba3aDaCaAaIagap));
-		looks_setsizeto(ScratchSetDouble(30));
-		pen_stamp();
-		data_replaceitemoflist(operator_add(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, ScratchSetDouble(2)), operator_add(data_itemoflist(operator_add(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, ScratchSetDouble(2)), Yba7aGbbkbasaYa0dbaGaGa_aba3aDaCaAaIagap), ScratchSetDouble(1)), Yba7aGbbkbasaYa0dbaGaGa_aba3aDaCaAaIagap);
-		if(ScratchVarGetBool(operator_or(operator_equals(data_itemoflist(operator_add(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, ScratchSetDouble(2)), Yba7aGbbkbasaYa0dbaGaGa_aba3aDaCaAaIagap), ScratchSetString("55")), operator_or(operator_equals(data_itemoflist(operator_add(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, ScratchSetDouble(2)), Yba7aGbbkbasaYa0dbaGaGa_aba3aDaCaAaIagap), ScratchSetString("66")), operator_gt(data_itemoflist(operator_add(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, ScratchSetDouble(2)), Yba7aGbbkbasaYa0dbaGaGa_aba3aDaCaAaIagap), ScratchSetString("100"))))))
-		{
-			data_deleteoflist(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, Yba7aGbbkbasaYa0dbaGaGa_aba3aDaCaAaIagap);
-			data_deleteoflist(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, Yba7aGbbkbasaYa0dbaGaGa_aba3aDaCaAaIagap);
-			data_deleteoflist(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, Yba7aGbbkbasaYa0dbaGaGa_aba3aDaCaAaIagap);
-		}
-		else
-		{
-			data_changevariableby(ScratchSetDouble(3), Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2);
-		}
-		YIELD
-	}
-	looks_setsizeto(ScratchSetDouble(100));
-#define YIELD TRUE_YIELD
-}
-
-void YAadadaEanaeamayaBaualalaeatiblbasiblbas(ScratchValue Yx, ScratchValue Yy) 
-{
-#define YIELD
-	data_addtolist(argument_reporter_string_number(Yx), YhaFapobaCarasaOaOaZlbaHaca5hba6amaEgbtb);
-	data_addtolist(argument_reporter_string_number(Yy), YhaFapobaCarasaOaOaZlbaHaca5hba6amaEgbtb);
-	if(ScratchVarGetBool(operator_lt(argument_reporter_string_number(Yx), YdgbaNaaaCaEayanaYqbbbgbubgbaevbanawa4ax)))
-	{
-		data_addtolist(operator_multiply(operator_mathopYcaoas(operator_mathopYaataaan(operator_divide(operator_subtract(Yba2aEa8bbaSrbaEaHa8dba8alubxbcbaiaEayan, argument_reporter_string_number(Yy)), operator_subtract(YdgbaNaaaCaEayanaYqbbbgbubgbaevbanawa4ax, argument_reporter_string_number(Yx))))), ScratchSetDouble(5)), YhaFapobaCarasaOaOaZlbaHaca5hba6amaEgbtb);
-		data_addtolist(operator_multiply(operator_mathopYsaian(operator_mathopYaataaan(operator_divide(operator_subtract(Yba2aEa8bbaSrbaEaHa8dba8alubxbcbaiaEayan, argument_reporter_string_number(Yy)), operator_subtract(YdgbaNaaaCaEayanaYqbbbgbubgbaevbanawa4ax, argument_reporter_string_number(Yx))))), ScratchSetDouble(5)), YhaFapobaCarasaOaOaZlbaHaca5hba6amaEgbtb);
-	}
-	else
-	{
-		data_addtolist(operator_multiply(operator_mathopYcaoas(operator_add(ScratchSetDouble(180), operator_mathopYaataaan(operator_divide(operator_subtract(Yba2aEa8bbaSrbaEaHa8dba8alubxbcbaiaEayan, argument_reporter_string_number(Yy)), operator_subtract(YdgbaNaaaCaEayanaYqbbbgbubgbaevbanawa4ax, argument_reporter_string_number(Yx)))))), ScratchSetDouble(5)), YhaFapobaCarasaOaOaZlbaHaca5hba6amaEgbtb);
-		data_addtolist(operator_multiply(operator_mathopYsaian(operator_add(ScratchSetDouble(180), operator_mathopYaataaan(operator_divide(operator_subtract(Yba2aEa8bbaSrbaEaHa8dba8alubxbcbaiaEayan, argument_reporter_string_number(Yy)), operator_subtract(YdgbaNaaaCaEayanaYqbbbgbubgbaevbanawa4ax, argument_reporter_string_number(Yx)))))), ScratchSetDouble(5)), YhaFapobaCarasaOaOaZlbaHaca5hba6amaEgbtb);
-	}
-#define YIELD TRUE_YIELD
-}
-
-void YRauanibaEanaeamayibaBaualalaeatas() 
-{
-#define YIELD
-	looks_switchcostumeto(looks_costume(ScratchSetString("Fazbear Background")));
-	data_setvariableto(ScratchSetString("1"), Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2);
-	for(int i1 = 0; i1 < (int)ScratchVarGetDouble(operator_divide(data_lengthoflist(YhaFapobaCarasaOaOaZlbaHaca5hba6amaEgbtb), ScratchSetDouble(4))); i1++)
-	{
-		motion_gotoxy(data_itemoflist(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, YhaFapobaCarasaOaOaZlbaHaca5hba6amaEgbtb), data_itemoflist(operator_add(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, ScratchSetDouble(1)), YhaFapobaCarasaOaOaZlbaHaca5hba6amaEgbtb));
-		data_setvariableto(operator_random(ScratchSetDouble(0), ScratchSetDouble(3)), YbaTaVawaMauanamafaMatasaDcbaEubgba7aVaY);
-		if(ScratchVarGetBool(operator_equals(YbaTaVawaMauanamafaMatasaDcbaEubgba7aVaY, ScratchSetString("0"))))
-		{
-			pen_setPenColorToColor(ScratchSetString("#ffffff"));
-		}
-		if(ScratchVarGetBool(operator_equals(YbaTaVawaMauanamafaMatasaDcbaEubgba7aVaY, ScratchSetString("1"))))
-		{
-			pen_setPenColorToColor(ScratchSetString("#ff0000"));
-		}
-		if(ScratchVarGetBool(operator_equals(YbaTaVawaMauanamafaMatasaDcbaEubgba7aVaY, ScratchSetString("2"))))
-		{
-			pen_setPenColorToColor(ScratchSetString("#ffff00"));
-		}
-		if(ScratchVarGetBool(operator_equals(YbaTaVawaMauanamafaMatasaDcbaEubgba7aVaY, ScratchSetString("3"))))
-		{
-			pen_setPenColorToColor(ScratchSetString("#ff8000"));
-		}
-		pen_setPenSizeTo(ScratchSetDouble(10));
-		pen_penDown();
-		pen_penUp();
-		YCaoalalaiasaiaoaniblbasiblbasiblbasiblbasiblbasiblbasiblbas(YdgbaNaaaCaEayanaYqbbbgbubgbaevbanawa4ax, Yba2aEa8bbaSrbaEaHa8dba8alubxbcbaiaEayan, data_itemoflist(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, YhaFapobaCarasaOaOaZlbaHaca5hba6amaEgbtb), data_itemoflist(operator_add(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, ScratchSetDouble(1)), YhaFapobaCarasaOaOaZlbaHaca5hba6amaEgbtb), operator_add(ScratchSetDouble(60), ScratchSetDouble(30)), operator_add(ScratchSetDouble(54), ScratchSetDouble(30)), ScratchSetString(".3"));
-		if(ScratchVarGetBool(operator_equals(YKcbmblbatrbauaIaTa6vbaVaUnbataCaWaDapab, ScratchSetString("1"))))
-		{
-			data_setvariableto(ScratchSetString("1"), YbaPaoafaYaJaErbalaPaka9aAaNa7ajaCapcbaC);
-		}
-		data_replaceitemoflist(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, operator_add(data_itemoflist(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, YhaFapobaCarasaOaOaZlbaHaca5hba6amaEgbtb), data_itemoflist(operator_add(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, ScratchSetDouble(2)), YhaFapobaCarasaOaOaZlbaHaca5hba6amaEgbtb)), YhaFapobaCarasaOaOaZlbaHaca5hba6amaEgbtb);
-		data_replaceitemoflist(operator_add(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, ScratchSetDouble(1)), operator_add(data_itemoflist(operator_add(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, ScratchSetDouble(1)), YhaFapobaCarasaOaOaZlbaHaca5hba6amaEgbtb), data_itemoflist(operator_add(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, ScratchSetDouble(3)), YhaFapobaCarasaOaOaZlbaHaca5hba6amaEgbtb)), YhaFapobaCarasaOaOaZlbaHaca5hba6amaEgbtb);
-		if(ScratchVarGetBool(operator_or(operator_or(operator_lt(data_itemoflist(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, YhaFapobaCarasaOaOaZlbaHaca5hba6amaEgbtb), ScratchSetString("-300")), operator_lt(ScratchSetString("300"), data_itemoflist(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, YhaFapobaCarasaOaOaZlbaHaca5hba6amaEgbtb))), operator_or(operator_lt(data_itemoflist(operator_add(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, ScratchSetDouble(1)), YhaFapobaCarasaOaOaZlbaHaca5hba6amaEgbtb), ScratchSetString("-300")), operator_lt(ScratchSetString("300"), data_itemoflist(operator_add(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, ScratchSetDouble(1)), YhaFapobaCarasaOaOaZlbaHaca5hba6amaEgbtb))))))
-		{
-			data_deleteoflist(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, YhaFapobaCarasaOaOaZlbaHaca5hba6amaEgbtb);
-			data_deleteoflist(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, YhaFapobaCarasaOaOaZlbaHaca5hba6amaEgbtb);
-			data_deleteoflist(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, YhaFapobaCarasaOaOaZlbaHaca5hba6amaEgbtb);
-			data_deleteoflist(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, YhaFapobaCarasaOaOaZlbaHaca5hba6amaEgbtb);
-		}
-		else
-		{
-			data_changevariableby(ScratchSetDouble(4), Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2);
-		}
-		YIELD
-	}
-#define YIELD TRUE_YIELD
-}
-
-void YAadadaWaaavaeiblbasiblbas(ScratchValue Ymaeadaiauam, ScratchValue Ybaiag) 
-{
-#define YIELD
-	data_addtolist(argument_reporter_string_number(Ymaeadaiauam), Y7aeaOa1ahubaqaxobhbvbaGeba0hbgbaJala5a3);
-	data_addtolist(argument_reporter_string_number(Ybaiag), Y7aeaOa1ahubaqaxobhbvbaGeba0hbgbaJala5a3);
-#define YIELD TRUE_YIELD
-}
-
-void YRauanibaWaaavae() 
-{
-#define YIELD
-	if(ScratchVarGetBool(operator_equals(data_itemoflist(ScratchSetDouble(2), Y7aeaOa1ahubaqaxobhbvbaGeba0hbgbaJala5a3), ScratchSetString("0"))))
-	{
-		if(ScratchVarGetBool(operator_equals(data_itemoflist(ScratchSetDouble(1), Y7aeaOa1ahubaqaxobhbvbaGeba0hbgbaJala5a3), ScratchSetString("0"))))
-		{
-			if(ScratchVarGetBool(operator_and(operator_equals(data_lengthoflist(Yaa1aFmbebaFaIaBalakrbnbauaUaFapaPa7a7aa), ScratchSetString("0")), operator_equals(data_lengthoflist(YhaFapobaCarasaOaOaZlbaHaca5hba6amaEgbtb), ScratchSetString("0")))))
-			{
-				data_deleteoflist(ScratchSetDouble(1), Y7aeaOa1ahubaqaxobhbvbaGeba0hbgbaJala5a3);
-				data_deleteoflist(ScratchSetDouble(1), Y7aeaOa1ahubaqaxobhbvbaGeba0hbgbaJala5a3);
-			}
-		}
-		else
-		{
-			data_replaceitemoflist(ScratchSetDouble(1), operator_subtract(data_itemoflist(ScratchSetDouble(1), Y7aeaOa1ahubaqaxobhbvbaGeba0hbgbaJala5a3), ScratchSetDouble(1)), Y7aeaOa1ahubaqaxobhbvbaGeba0hbgbaJala5a3);
-			YAadadaEanaeamayiblbasiblbasiblbasiblbasiblbas(ScratchSetString("240"), operator_random(ScratchSetDouble(-180), ScratchSetDouble(180)), ScratchSetString("1"), ScratchSetString("0"), ScratchSetString("0"));
-		}
-	}
-	else
-	{
-		data_replaceitemoflist(ScratchSetDouble(2), operator_subtract(data_itemoflist(ScratchSetDouble(2), Y7aeaOa1ahubaqaxobhbvbaGeba0hbgbaJala5a3), ScratchSetDouble(1)), Y7aeaOa1ahubaqaxobhbvbaGeba0hbgbaJala5a3);
-		YAadadaEanaeamayiblbasiblbasiblbasiblbasiblbas(ScratchSetString("240"), operator_random(ScratchSetDouble(-180), ScratchSetDouble(180)), ScratchSetString("2"), ScratchSetString("0"), ScratchSetString("0"));
-	}
-#define YIELD TRUE_YIELD
-}
-
-void YTaiacakaLaoasae() 
-{
-#define YIELD
-	if(ScratchVarGetBool(operator_lt(YbaQazvbubnbara7afaxaWaLa9aupbava0ubaNa1, ScratchSetString("11"))))
-	{
-		pen_clear();
-		motion_gotoxy(ScratchSetDouble(0), ScratchSetDouble(0));
-		pen_clear();
-		pen_setPenColorToColor(ScratchSetString("#000000"));
-		pen_setPenSizeTo(ScratchSetDouble(1000));
-		pen_penDown();
-		pen_penUp();
-		pen_setPenSizeTo(ScratchSetDouble(1));
-		YTaiacakibaCaoamaeatas();
-		YDaraaawibaBaaacakagaraoauanadibaCaoamaeatas();
-		motion_gotoxy(YdgbaNaaaCaEayanaYqbbbgbubgbaevbanawa4ax, Yba2aEa8bbaSrbaEaHa8dba8alubxbcbaiaEayan);
-		looks_switchcostumeto(operator_add(YbaQazvbubnbara7afaxaWaLa9aupbava0ubaNa1, ScratchSetDouble(45)));
-		looks_setsizeto(ScratchSetDouble(30));
-		pen_stamp();
-		looks_setsizeto(ScratchSetDouble(100));
-		YDaraaawibaPaoaianatas();
-	}
-	else
-	{
-		pen_clear();
-		looks_switchcostumeto(looks_costume(ScratchSetString("Fazbear Background")));
-		motion_gotoxy(ScratchSetDouble(0), ScratchSetDouble(0));
-		looks_setsizeto(ScratchSetDouble(100));
-		pen_stamp();
-		if(ScratchVarGetBool(operator_lt(YbaQazvbubnbara7afaxaWaLa9aupbava0ubaNa1, ScratchSetString("30"))))
-		{
-			looks_switchcostumeto(operator_add(ScratchSetDouble(18), operator_subtract(YbaQazvbubnbara7afaxaWaLa9aupbava0ubaNa1, ScratchSetDouble(12))));
-		}
-		else
-		{
-			looks_switchcostumeto(looks_costume(ScratchSetString("GravityVortexFall//2339")));
-		}
-		motion_gotoxy(ScratchSetDouble(0), ScratchSetDouble(-55));
-		looks_setsizeto(ScratchSetDouble(75));
-		pen_stamp();
-		looks_seteffecttoYGaHaOaSaT(operator_multiply(operator_mathopYsaian(operator_multiply(YbaQazvbubnbara7afaxaWaLa9aupbava0ubaNa1, ScratchSetDouble(50))), ScratchSetDouble(100)));
-		YDaraaawibaPaoaianatas();
-		looks_seteffecttoYGaHaOaSaT(ScratchSetDouble(0));
-	}
-	data_changevariableby(ScratchSetDouble(1), YbaQazvbubnbara7afaxaWaLa9aupbava0ubaNa1);
-#define YIELD TRUE_YIELD
-}
-
-void YDaraaawibaPaoaianatas() 
-{
-#define YIELD
-	data_setvariableto(YxaUhbrbqbaapba6aJaGa2awwbajcbvbaAqbaqfb, Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2);
-	if(ScratchVarGetBool(operator_equals(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, ScratchSetString("0"))))
-	{
-		motion_gotoxy(ScratchSetDouble(220), ScratchSetDouble(160));
-		looks_switchcostumeto(operator_add(ScratchSetDouble(0), ScratchSetDouble(87)));
-		looks_setsizeto(ScratchSetDouble(30));
-		pen_stamp();
-	}
-	else
-	{
-		motion_gotoxy(ScratchSetDouble(220), ScratchSetDouble(160));
-		for(int i2 = 0; i2 < (int)ScratchVarGetDouble(ScratchSetDouble(4)); i2++)
-		{
-			looks_switchcostumeto(operator_add(operator_mod(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, ScratchSetDouble(10)), ScratchSetDouble(87)));
-			looks_setsizeto(ScratchSetDouble(30));
-			if(ScratchVarGetBool(operator_not(operator_equals(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, ScratchSetString("0")))))
-			{
-				pen_stamp();
-			}
-			data_setvariableto(operator_mathopYfalaoaoar(operator_divide(Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2, ScratchSetDouble(10))), Y1aRhbgbathbaovbaJobaKkbsbdbwbaRakaCaja2);
-			motion_changexby(ScratchSetDouble(-20));
+			data_changevariableby(ScratchSetDouble(-1), YSaJaOazrba9aGaFaKaqaJvbazafaOaohbaFaGmb);
+			data_changevariableby(YHaGhbqbapa3a8aEaXaxaCaxaRaoamanaEampbaF, YCaDlbaCaMadaGacdbaMa5wbnbpbasaKaEaJkbar);
+			data_changevariableby(Ybaqa6akaxubaNbbwbxbxbawara_aSa2xbaOabay, YLa9aTnbajajdbaparata8aIagaAazaQababaZub);
+			data_changevariableby(Y6aLcbnba7qbacaYaZgbfbpbaRa2fbbba3ahamax, YcaQaFaVaLfbaWoba7fbaiaxaCazaBaJauhba0aC);
+			data_changevariableby(YbcbaBauaXaNebhbabazaFqbaraPaqaIaeavaGay, YbaBaKaNaJaSqbaqawaYauebaOaMhbcbaFcbaeaI);
+			data_changevariableby(Y8lbqbabasaDarkblbaIarabobmbfbacabaEayad, YhaXaza3a3abaCa_ebaqaBaxjbwbdbaHwbakkbaA);
+			data_changevariableby(YbaambanvbaHkbanauacaiaanbaArbbbuba2cbab, YBaeaBaaahcbaFaua6fbaGaljbaOagqbaFadaia_);
+			data_changevariableby(Y0a_awaYaYaJa2gbaYa9aHaQdbpbebebjbafcbaw, YcaFfbaoanaplbalaMsbaFaoubjbapfbobafqbaU);
+			data_changevariableby(YPnba7aSankbaAamaFaAajdbfbmbhbazaba5aYaD, Ybdbgbxba2aorbfbaVafauaRaFubakdbaMakhbak);
 			YIELD
 		}
 	}
-	looks_setsizeto(ScratchSetDouble(100));
+	//();
+	if(ScratchVarGetBool(operator_not(operator_equals(Y4a6alaIa1fbaSdbrbdbkbadqbaIakaIa4wbebaU, YbaHajubanaTavaTa7aqa8abaSapaNakabaFa8ak))))
+	{
+		data_setvariableto(operator_divide(operator_subtract(Ybawa9aIalaAeba_aWbbaCqbaAa0ahaka_aNpbtb, YFebaOaKaJalabtbaMacaFaPaEaTaBawa4aeaUaD), operator_subtract(Y4a6alaIa1fbaSdbrbdbkbadqbaIakaIa4wbebaU, YbaHajubanaTavaTa7aqa8abaSapaNakabaFa8ak)), YHaGhbqbapa3a8aEaXaxaCaxaRaoamanaEampbaF);
+		data_setvariableto(operator_divide(operator_subtract(Yoa5akangbjbaapbaYava3akqbcbcbhbpba0araV, YFebaOaKaJalabtbaMacaFaPaEaTaBawa4aeaUaD), operator_subtract(Yba8obaXoba7aqa3aZjbaiebobwbpbaAvbaJausb, YbaHajubanaTavaTa7aqa8abaSapaNakabaFa8ak)), Ybaqa6akaxubaNbbwbxbxbawara_aSa2xbaOabay);
+		data_setvariableto(operator_divide(operator_subtract(YbaAxbaJahaFaldbsba9aqasalaahba2sbcbaKa5, YbrbhbaMjbaIaYaVacaExbaIaaaIa5aEazrbaAaS), operator_subtract(Y4a6alaIa1fbaSdbrbdbkbadqbaIakaIa4wbebaU, YbaHajubanaTavaTa7aqa8abaSapaNakabaFa8ak)), Y6aLcbnba7qbacaYaZgbfbpbaRa2fbbba3ahamax);
+		data_setvariableto(operator_divide(operator_subtract(YRahaKaHaWvbaTa1aHaEawaLdbwbataBa_aJaRaz, YOapkbaga8aeaBa0aiawaha2aQaUamawaZrblbaY), operator_subtract(Y4a6alaIa1fbaSdbrbdbkbadqbaIakaIa4wbebaU, YbaHajubanaTavaTa7aqa8abaSapaNakabaFa8ak)), YbcbaBauaXaNebhbabazaFqbaraPaqaIaeavaGay);
+		data_setvariableto(operator_divide(operator_subtract(Yba8dbaoaiaQa8cbdbamaNa3aTaiaIaTtbaBaavb, YbrbhbaMjbaIaYaVacaExbaIaaaIa5aEazrbaAaS), operator_subtract(Yba8obaXoba7aqa3aZjbaiebobwbpbaAvbaJausb, YbaHajubanaTavaTa7aqa8abaSapaNakabaFa8ak)), Y8lbqbabasaDarkblbaIarabobmbfbacabaEayad);
+		data_setvariableto(operator_divide(operator_subtract(YbaLadcbgbantbawaUuba0aDaKvbsbalaUa1aZaT, YOapkbaga8aeaBa0aiawaha2aQaUamawaZrblbaY), operator_subtract(Yba8obaXoba7aqa3aZjbaiebobwbpbaAvbaJausb, YbaHajubanaTavaTa7aqa8abaSapaNakabaFa8ak)), YbaambanvbaHkbanauacaiaanbaArbbbuba2cbab);
+		data_setvariableto(operator_divide(operator_subtract(Y0hbaCa3xbaSvbadaLauaGdbaWayasdbaKobajaw, YCaCabdbwbaYaHa_aZwbcbdbaWahamaIdbaKjbam), operator_subtract(Y4a6alaIa1fbaSdbrbdbkbadqbaIakaIa4wbebaU, YbaHajubanaTavaTa7aqa8abaSapaNakabaFa8ak)), Y0a_awaYaYaJa2gbaYa9aHaQdbpbebebjbafcbaw);
+		data_setvariableto(operator_divide(operator_subtract(YbaUsbaeaBrba7amaQavahara0aJazaJebobaba9, YCaCabdbwbaYaHa_aZwbcbdbaWahamaIdbaKjbam), operator_subtract(Yba8obaXoba7aqa3aZjbaiebobwbpbaAvbaJausb, YbaHajubanaTavaTa7aqa8abaSapaNakabaFa8ak)), YPnba7aSankbaAamaFaAajdbfbmbhbazaba5aYaD);
+		data_setvariableto(YFebaOaKaJalabtbaMacaFaPaEaTaBawa4aeaUaD, YCaDlbaCaMadaGacdbaMa5wbnbpbasaKaEaJkbar);
+		data_setvariableto(YFebaOaKaJalabtbaMacaFaPaEaTaBawa4aeaUaD, YLa9aTnbajajdbaparata8aIagaAazaQababaZub);
+		data_setvariableto(YOapkbaga8aeaBa0aiawaha2aQaUamawaZrblbaY, YbaBaKaNaJaSqbaqawaYauebaOaMhbcbaFcbaeaI);
+		data_setvariableto(YOapkbaga8aeaBa0aiawaha2aQaUamawaZrblbaY, YBaeaBaaahcbaFaua6fbaGaljbaOagqbaFadaia_);
+		data_setvariableto(YbrbhbaMjbaIaYaVacaExbaIaaaIa5aEazrbaAaS, YcaQaFaVaLfbaWoba7fbaiaxaCazaBaJauhba0aC);
+		data_setvariableto(YbrbhbaMjbaIaYaVacaExbaIaaaIa5aEazrbaAaS, YhaXaza3a3abaCa_ebaqaBaxjbwbdbaHwbakkbaA);
+		data_setvariableto(YCaCabdbwbaYaHa_aZwbcbdbaWahamaIdbaKjbam, YcaFfbaoanaplbalaMsbaFaoubjbapfbobafqbaU);
+		data_setvariableto(YCaCabdbwbaYaHa_aZwbcbdbaWahamaIdbaKjbam, Ybdbgbxba2aorbfbaVafauaRaFubakdbaMakhbak);
+		data_setvariableto(YbaHajubanaTavaTa7aqa8abaSapaNakabaFa8ak, YSaJaOazrba9aGaFaKaqaJvbazafaOaohbaFaGmb);
+		for(int i2 = 0; i2 < (int)ScratchVarGetDouble(operator_add(ScratchSetDouble(0), operator_mathopYcaeaialaianag(operator_subtract(Yba8obaXoba7aqa3aZjbaiebobwbpbaAvbaJausb, YbaHajubanaTavaTa7aqa8abaSapaNakabaFa8ak)))); i2++)
+		{
+			data_setvariableto(operator_round(YLa9aTnbajajdbaparata8aIagaAazaQababaZub), Ybubpba1adaoalaYaJasaHanaga9aFaSaiaCa_az);
+			data_setvariableto(operator_round(YCaDlbaCaMadaGacdbaMa5wbnbpbasaKaEaJkbar), YGaFa6aHa9avkba8aNa5tbadcbaPwba4apaaa6ao);
+			data_setvariableto(YBaeaBaaahcbaFaua6fbaGaljbaOagqbaFadaia_, YsaLlbawaFaEa1aua6audbaHazxbagahxbaeaAcb);
+			data_setvariableto(YbaBaKaNaJaSqbaqawaYauebaOaMhbcbaFcbaeaI, YbrbaraWaHama5aTa7aaqbfbaaaLnbcbaoatpbaG);
+			data_setvariableto(YhaXaza3a3abaCa_ebaqaBaxjbwbdbaHwbakkbaA, YtajaJaxafaTaiaAa3qbampbahaYawcbaIahaLao);
+			data_setvariableto(YcaQaFaVaLfbaWoba7fbaiaxaCazaBaJauhba0aC, YbaAqbalaGaSaXaombaWaRaiaOa0aDobaXaoardb);
+			data_setvariableto(Ybdbgbxba2aorbfbaVafauaRaFubakdbaMakhbak, Yba6vbadaDa8a4ata2aZa8hbfbaKabaCaYtbrbaB);
+			data_setvariableto(YcaFfbaoanaplbalaMsbaFaoubjbapfbobafqbaU, YbkbaHa_fbdbpbdbaLobvba5aaayaDaYvbpbasaa);
+			if(ScratchVarGetBool(operator_lt(YGaFa6aHa9avkba8aNa5tbadcbaPwba4apaaa6ao, Ybubpba1adaoalaYaJasaHanaga9aFaSaiaCa_az)))
+			{
+				data_setvariableto(operator_round(YCaDlbaCaMadaGacdbaMa5wbnbpbasaKaEaJkbar), Ybubpba1adaoalaYaJasaHanaga9aFaSaiaCa_az);
+				data_setvariableto(operator_round(YLa9aTnbajajdbaparata8aIagaAazaQababaZub), YGaFa6aHa9avkba8aNa5tbadcbaPwba4apaaa6ao);
+				data_setvariableto(YbaBaKaNaJaSqbaqawaYauebaOaMhbcbaFcbaeaI, YsaLlbawaFaEa1aua6audbaHazxbagahxbaeaAcb);
+				data_setvariableto(YBaeaBaaahcbaFaua6fbaGaljbaOagqbaFadaia_, YbrbaraWaHama5aTa7aaqbfbaaaLnbcbaoatpbaG);
+				data_setvariableto(YcaQaFaVaLfbaWoba7fbaiaxaCazaBaJauhba0aC, YtajaJaxafaTaiaAa3qbampbahaYawcbaIahaLao);
+				data_setvariableto(YhaXaza3a3abaCa_ebaqaBaxjbwbdbaHwbakkbaA, YbaAqbalaGaSaXaombaWaRaiaOa0aDobaXaoardb);
+				data_setvariableto(YcaFfbaoanaplbalaMsbaFaoubjbapfbobafqbaU, Yba6vbadaDa8a4ata2aZa8hbfbaKabaCaYtbrbaB);
+				data_setvariableto(Ybdbgbxba2aorbfbaVafauaRaFubakdbaMakhbak, YbkbaHa_fbdbpbdbaLobvba5aaayaDaYvbpbasaa);
+			}
+			data_setvariableto(YsaLlbawaFaEa1aua6audbaHazxbagahxbaeaAcb, Yka3aEnbapgbaaa0alabkbaaaflbaffbabhbaFwb);
+			data_setvariableto(operator_divide(operator_subtract(YbrbaraWaHama5aTa7aaqbfbaaaLnbcbaoatpbaG, YsaLlbawaFaEa1aua6audbaHazxbagahxbaeaAcb), operator_subtract(YGaFa6aHa9avkba8aNa5tbadcbaPwba4apaaa6ao, Ybubpba1adaoalaYaJasaHanaga9aFaSaiaCa_az)), YLaFaQakayacaNaZaGxbqbaEmbagaoaGrbbbawrb);
+			data_setvariableto(YtajaJaxafaTaiaAa3qbampbahaYawcbaIahaLao, YKbbwbaWubaoadhbqbabaYadapaDajnba_apaoaD);
+			data_setvariableto(operator_divide(operator_subtract(YbaAqbalaGaSaXaombaWaRaiaOa0aDobaXaoardb, YtajaJaxafaTaiaAa3qbampbahaYawcbaIahaLao), operator_subtract(YGaFa6aHa9avkba8aNa5tbadcbaPwba4apaaa6ao, Ybubpba1adaoalaYaJasaHanaga9aFaSaiaCa_az)), Yoana1aNazaBaprbgba1aEnba_a1ayaba2dba2aP);
+			data_setvariableto(Yba6vbadaDa8a4ata2aZa8hbfbaKabaCaYtbrbaB, YfaUpbaWa7aAaFajamnbabata5a7aGa1eblbaJa1);
+			data_setvariableto(operator_divide(operator_subtract(YbkbaHa_fbdbpbdbaLobvba5aaayaDaYvbpbasaa, Yba6vbadaDa8a4ata2aZa8hbfbaKabaCaYtbrbaB), operator_subtract(YGaFa6aHa9avkba8aNa5tbadcbaPwba4apaaa6ao, Ybubpba1adaoalaYaJasaHanaga9aFaSaiaCa_az)), YyanebaYana1ahagaKjbaba8ajaMagqbaeqbalaC);
+			motion_gotoxy(Ybubpba1adaoalaYaJasaHanaga9aFaSaiaCa_az, operator_round(YSaJaOazrba9aGaFaKaqaJvbazafaOaohbaFaGmb));
+			YSaeatibaCaoalaoauariblbasiblbas(Yka3aEnbapgbaaa0alabkbaaaflbaffbabhbaFwb, YKbbwbaWubaoadhbqbabaYadapaDajnba_apaoaD);
+			for(int i3 = 0; i3 < (int)ScratchVarGetDouble(operator_subtract(YGaFa6aHa9avkba8aNa5tbadcbaPwba4apaaa6ao, Ybubpba1adaoalaYaJasaHanaga9aFaSaiaCa_az)); i3++)
+			{
+				YSaeatibaCaoalaoauariblbasiblbas(Yka3aEnbapgbaaa0alabkbaaaflbaffbabhbaFwb, YKbbwbaWubaoadhbqbabaYadapaDajnba_apaoaD);
+				motion_changexby(ScratchSetDouble(1));
+				data_changevariableby(YLaFaQakayacaNaZaGxbqbaEmbagaoaGrbbbawrb, Yka3aEnbapgbaaa0alabkbaaaflbaffbabhbaFwb);
+				data_changevariableby(Yoana1aNazaBaprbgba1aEnba_a1ayaba2dba2aP, YKbbwbaWubaoadhbqbabaYadapaDajnba_apaoaD);
+				data_changevariableby(YyanebaYana1ahagaKjbaba8ajaMagqbaeqbalaC, YfaUpbaWa7aAaFajamnbabata5a7aGa1eblbaJa1);
+				if(ScratchVarGetBool(operator_lt(ScratchSetString("1"), Yka3aEnbapgbaaa0alabkbaaaflbaffbabhbaFwb)))
+				{
+					data_setvariableto(ScratchSetString("1"), Yka3aEnbapgbaaa0alabkbaaaflbaffbabhbaFwb);
+				}
+				if(ScratchVarGetBool(operator_lt(ScratchSetString("1"), YKbbwbaWubaoadhbqbabaYadapaDajnba_apaoaD)))
+				{
+					data_setvariableto(ScratchSetString("1"), YKbbwbaWubaoadhbqbabaYadapaDajnba_apaoaD);
+				}
+				YIELD
+			}
+			data_changevariableby(YHaGhbqbapa3a8aEaXaxaCaxaRaoamanaEampbaF, YCaDlbaCaMadaGacdbaMa5wbnbpbasaKaEaJkbar);
+			data_changevariableby(Ybaqa6akaxubaNbbwbxbxbawara_aSa2xbaOabay, YLa9aTnbajajdbaparata8aIagaAazaQababaZub);
+			data_changevariableby(Y6aLcbnba7qbacaYaZgbfbpbaRa2fbbba3ahamax, YcaQaFaVaLfbaWoba7fbaiaxaCazaBaJauhba0aC);
+			data_changevariableby(YbcbaBauaXaNebhbabazaFqbaraPaqaIaeavaGay, YbaBaKaNaJaSqbaqawaYauebaOaMhbcbaFcbaeaI);
+			data_changevariableby(Y8lbqbabasaDarkblbaIarabobmbfbacabaEayad, YhaXaza3a3abaCa_ebaqaBaxjbwbdbaHwbakkbaA);
+			data_changevariableby(YbaambanvbaHkbanauacaiaanbaArbbbuba2cbab, YBaeaBaaahcbaFaua6fbaGaljbaOagqbaFadaia_);
+			data_changevariableby(Y0a_awaYaYaJa2gbaYa9aHaQdbpbebebjbafcbaw, YcaFfbaoanaplbalaMsbaFaoubjbapfbobafqbaU);
+			data_changevariableby(YPnba7aSankbaAamaFaAajdbfbmbhbazaba5aYaD, Ybdbgbxba2aorbfbaVafauaRaFubakdbaMakhbak);
+			data_changevariableby(ScratchSetDouble(1), YSaJaOazrba9aGaFaKaqaJvbazafaOaohbaFaGmb);
+			YIELD
+		}
+	}
 #define YIELD TRUE_YIELD
 }
 
-void YTaiacakaWaian() 
+void YSaeatibaCaoalaoauariblbasiblbas(ScratchValue Yu, ScratchValue Yv) 
 {
+#define YIELD
+	YSaeataCaoalaBauafafaeariblbasiblbasiblbas(motion_xposition(), motion_yposition(), operator_add(operator_multiply(operator_multiply(operator_round(operator_multiply(argument_reporter_string_number(Yu), ScratchSetDouble(255))), ScratchSetDouble(256)), ScratchSetDouble(256)), operator_multiply(operator_round(operator_multiply(argument_reporter_string_number(Yv), ScratchSetDouble(255))), ScratchSetDouble(256))));
+#define YIELD TRUE_YIELD
+}
+
+void YSaeataCaoalaoauaraBayaDaiasataaanacaeiblbas(ScratchValue Yd) 
+{
+#define YIELD
+	pen_setPenColorToColor(operator_add(operator_multiply(operator_mod(operator_round(operator_multiply(operator_divide(ScratchSetDouble(4), argument_reporter_string_number(Yd)), ScratchSetDouble(255))), ScratchSetDouble(256)), operator_multiply(ScratchSetDouble(256), ScratchSetDouble(256))), operator_add(operator_multiply(operator_mod(operator_round(operator_multiply(operator_divide(ScratchSetDouble(4), argument_reporter_string_number(Yd)), ScratchSetDouble(255))), ScratchSetDouble(256)), ScratchSetDouble(256)), operator_mod(operator_round(operator_multiply(operator_divide(ScratchSetDouble(4), argument_reporter_string_number(Yd)), ScratchSetDouble(255))), ScratchSetDouble(256)))));
+#define YIELD TRUE_YIELD
+}
+
+void YSaeataZaBauafafaeariblbasiblbasiblbas(ScratchValue Yx, ScratchValue Yy, ScratchValue Yz) 
+{
+#define YIELD
+	data_replaceitemoflist(operator_add(operator_multiply(operator_add(argument_reporter_string_number(Yx), YNaiagobaZaMalaXwbaadbaJagaOamlba7aZhbaW), operator_add(YHaHasubaPaIahaYazlbqbbbaoa0a4ebsbaOa4eb, YHaHasubaPaIahaYazlbqbbbaoa0a4ebsbaOa4eb)), operator_add(argument_reporter_string_number(Yy), YHaHasubaPaIahaYazlbqbbbaoa0a4ebsbaOa4eb)), argument_reporter_string_number(Yz), YLafpbagjbaflbaTawtbayacagcbaOdbqbaoxba5);
+#define YIELD TRUE_YIELD
+}
+
+void YSaeataCaoalaBauafafaeariblbasiblbasiblbas(ScratchValue Yx, ScratchValue Yy, ScratchValue YCaoal) 
+{
+#define YIELD
+	data_replaceitemoflist(operator_add(operator_multiply(operator_add(argument_reporter_string_number(Yx), YNaiagobaZaMalaXwbaadbaJagaOamlba7aZhbaW), operator_add(YHaHasubaPaIahaYazlbqbbbaoa0a4ebsbaOa4eb, YHaHasubaPaIahaYazlbqbbbaoa0a4ebsbaOa4eb)), operator_add(argument_reporter_string_number(Yy), YHaHasubaPaIahaYazlbqbbbaoa0a4ebsbaOa4eb)), argument_reporter_string_number(YCaoal), YLafpbagjbaflbaTawtbayacagcbaOdbqbaoxba5);
+#define YIELD TRUE_YIELD
+}
+
+void YCalaeaaaribaBauafafaearas() 
+{
+#define YIELD
+	ScratchValue zero = ScratchSetDouble(0);
+	ScratchValue infinity = ScratchSetString("infinity");
+	data_deletealloflist(Y5avaBazaHadnbapa_bbaLa3abdbkbebhbmbobwb);
+	data_deletealloflist(YLafpbagjbaflbaTawtbayacagcbaOdbqbaoxba5);
+	for(int i1 = 0; i1 < (int)ScratchVarGetDouble(operator_add(YNaiagobaZaMalaXwbaadbaJagaOamlba7aZhbaW, YNaiagobaZaMalaXwbaadbaJagaOamlba7aZhbaW)); i1++)
+	{
+		for(int i2 = 0; i2 < (int)ScratchVarGetDouble(operator_add(YHaHasubaPaIahaYazlbqbbbaoa0a4ebsbaOa4eb, YHaHasubaPaIahaYazlbqbbbaoa0a4ebsbaOa4eb)); i2++)
+		{
+			data_addtolist(zero, YLafpbagjbaflbaTawtbayacagcbaOdbqbaoxba5);
+			data_addtolist(infinity, Y5avaBazaHadnbapa_bbaLa3abdbkbebhbmbobwb);
+			YIELD
+		}
+		YIELD
+	}
+#define YIELD TRUE_YIELD
+}
+
+void YDaraaawaRaaasataear() 
+{
+#define YIELD
 	pen_clear();
-	motion_gotoxy(ScratchSetDouble(0), ScratchSetDouble(0));
 	pen_setPenColorToColor(ScratchSetString("#000000"));
 	pen_setPenSizeTo(ScratchSetDouble(1000));
 	pen_penDown();
 	pen_penUp();
-	pen_setPenSizeTo(ScratchSetDouble(1));
-	YTaiacakibaCaoamaeatas();
-	YDaraaawibaBaaacakagaraoauanadibaCaoamaeatas();
-	looks_switchcostumeto(looks_costume(ScratchSetString("JJ Cockpit")));
-	looks_setsizeto(ScratchSetDouble(30));
-	motion_gotoxy(YdgbaNaaaCaEayanaYqbbbgbubgbaevbanawa4ax, Yba2aEa8bbaSrbaEaHa8dba8alubxbcbaiaEayan);
-	pen_stamp();
-	looks_seteffecttoYGaHaOaSaT(operator_multiply(operator_mathopYsaian(operator_multiply(YbaQazvbubnbara7afaxaWaLa9aupbava0ubaNa1, ScratchSetDouble(50))), ScratchSetDouble(100)));
-	YDaraaawibaPaoaianatas();
-	looks_seteffecttoYGaHaOaSaT(ScratchSetDouble(0));
-	motion_gotoxy(ScratchSetDouble(0), ScratchSetDouble(0));
-	looks_setsizeto(ScratchSetDouble(50));
-	looks_switchcostumeto(looks_costume(ScratchSetString("Great!")));
-	pen_stamp();
-	data_changevariableby(ScratchSetDouble(1), YbaQazvbubnbara7afaxaWaLa9aupbava0ubaNa1);
+	if(ScratchVarGetBool(operator_equals(Yba8aZaNcbcbadaPubapaMawajaAaKcbaCa3bbaF, ScratchSetString("1"))))
+	{
+		pen_setPenSizeTo(ScratchSetDouble(1));
+	}
+	else
+	{
+		pen_setPenSizeTo(operator_multiply(Yba8aZaNcbcbadaPubapaMawajaAaKcbaCa3bbaF, ScratchSetDouble(1.5)));
+		motion_changexby(Yba8aZaNcbcbadaPubapaMawajaAaKcbaCa3bbaF);
+		motion_changeyby(Yba8aZaNcbcbadaPubapaMawajaAaKcbaCa3bbaF);
+	}
+	data_setvariableto(ScratchSetString("0"), YgcbkbebebtbadjbhbwbqbaoubaSaZhbamwblbhb);
+	motion_gotoxy(ScratchSetDouble(-240), ScratchSetDouble(-180));
+	for(int i1 = 0; i1 < (int)ScratchVarGetDouble(operator_add(YNaiagobaZaMalaXwbaadbaJagaOamlba7aZhbaW, YNaiagobaZaMalaXwbaadbaJagaOamlba7aZhbaW)); i1++)
+	{
+		motion_sety(ScratchSetDouble(-180));
+		for(int i2 = 0; i2 < (int)ScratchVarGetDouble(operator_add(YHaHasubaPaIahaYazlbqbbbaoa0a4ebsbaOa4eb, YHaHasubaPaIahaYazlbqbbbaoa0a4ebsbaOa4eb)); i2++)
+		{
+			data_changevariableby(ScratchSetDouble(1), YgcbkbebebtbadjbhbwbqbaoubaSaZhbamwblbhb);
+			pen_setPenColorToColor(data_itemoflist(YgcbkbebebtbadjbhbwbqbaoubaSaZhbamwblbhb, YLafpbagjbaflbaTawtbayacagcbaOdbqbaoxba5));
+			pen_penDown();
+			pen_penUp();
+			motion_changeyby(Yba8aZaNcbcbadaPubapaMawajaAaKcbaCa3bbaF);
+			YIELD
+		}
+		motion_changexby(Yba8aZaNcbcbadaPubapaMawajaAaKcbaCa3bbaF);
+		YIELD
+	}
+#define YIELD TRUE_YIELD
 }
 

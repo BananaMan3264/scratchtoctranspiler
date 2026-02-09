@@ -102,4 +102,4 @@ enum RotationStyle
 #define STAGE_WIDTH 480
 #define STAGE_HEIGHT 360
 
-#define FPS_CAP 30
+#define FPS_CAP -1

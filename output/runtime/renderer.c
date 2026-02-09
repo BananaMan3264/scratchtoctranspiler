@@ -197,11 +197,20 @@ void DrawLine(float x_1, float y_1, float x_2, float y_2, float thickness, int c
 
 	if (!(x_1 == x_2 && y_1 == y_2))
 	{
-		thickLineRGBA(renderer, x1, y1, x2, y2, t, r, g, b, a);
-		filledCircleRGBA(renderer, x1, y1, t / 2, r, g, b, a);
+		SDL_Vertex verts[4] = {
+			{ { x1 + nx, y1 + ny }, {r, g, b, a}, {0, 0} },
+			{ { x1 - nx, y1 - ny }, {r, g, b, a}, {0, 0} },
+			{ { x2 - nx, y2 - ny }, {r, g, b, a}, {0, 0} },
+			{ { x2 + nx, y2 + ny }, {r, g, b, a}, {0, 0} }
+		};
+
+		int indices[6] = { 0, 1, 2, 0, 2, 3 };
+
+		SDL_RenderGeometry(renderer, NULL, verts, 4, indices, 6);
+		//filledCircleRGBA(renderer, x1, y1, t / 2, r, g, b, a);
 	}
 
-	filledCircleRGBA(renderer, x2, y2, t / 2, r, g, b, a);
+	//filledCircleRGBA(renderer, x2, y2, t / 2, r, g, b, a);
 }
 
 void DrawSprite(double x, double y, double size, double direction, double width2, double height2, int rotstyle, int sprite, int costume, double ghost_effect) 
