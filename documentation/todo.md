@@ -1,0 +1,32 @@
+# List of Things That Need to be Done Before the Project is Finished
+
+- All sound loading (MP3s cannot load, some types of WAV file don't work for some reason)
+- Finally implement a garbage collector
+- Make empty functions work properly
+- Make TurboWarp log / warn / error work properly
+- Go to, glide to, and point towards menu handling for other sprites
+- Say / Think blocks
+- All graphics effects except Ghost
+- An actual layering system
+- Pitch / Pan sound effects
+- Event blocks
+	- When this sprite clicked
+	- When backdrop switches to
+	- When loudness >
+	- A lot of keys for the 'When key pressed' event
+- The entire messaging system
+- The entire clone system
+- Collision system
+	- Touching mouse / sprite / edge
+	- Touching colour
+	- Colour is touching colour
+- Ask / answer system
+- A lot of keys for the key pressed block
+- Set drag mode
+- Loudness reporter
+- Backdrop # of stage reporter
+- current <> reporter
+- days since 2000
+- username
+- Addons?
+- Better error handling / error messages
