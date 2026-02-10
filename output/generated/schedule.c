@@ -11,6 +11,8 @@ ThreadList threads;
 cothread_t scheduler;
 cothread_t draw_thread;
 bool delete_thread = false;
+bool stop_all = false;
+bool stop_other = false;
 extern int activeSprite;
 
 
@@ -22,11 +24,6 @@ void RunScheduler()
 
 	_0_Init();
 	_1_Init();
-	_2_Init();
-	_3_Init();
-	AddThread(THREAD(co_create(64 * 1024, _1_Ykevent_whenflagclicked),1));
-	AddThread(THREAD(co_create(64 * 1024, _2_Ymevent_whenflagclicked),2));
-	AddThread(THREAD(co_create(64 * 1024, _3_Yqevent_whenflagclicked),3));
 
 	while (1)
 	{
@@ -35,10 +32,12 @@ void RunScheduler()
 			activeSprite = threads.data[i].index;
 			co_switch(threads.data[i].thread);
 			if (delete_thread) { RemoveThread(i); i--;  delete_thread = false; }
+			if (stop_all) { while (threads.length) { RemoveThread(0); } stop_all = false; }
+			if (stop_other) { cothread_t this = threads.data[i].thread; int this_index = threads.data[i].index; for (int i = 0; i < threads.length; i++) { if (threads.data[i].index == this_index && threads.data[i].thread != this) { RemoveThread(i--); } } stop_other = false; }
 		}
-		if (keysdownheld[SDL_SCANCODE_A] == 1)
+		if (keysdownheld[SDL_SCANCODE_W] == 1)
 		{
-			AddThread(THREAD(co_create(64 * 1024, _2_Yoevent_whenkeypressed),2));
+			AddThread(THREAD(co_create(64 * 1024, _1_Yaevent_whenkeypressed),1));
 		}
 		Render();
 	}

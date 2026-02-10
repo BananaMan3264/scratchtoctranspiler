@@ -1,5 +1,6 @@
 #include<SDL2/SDL.h>
 #include<SDL2/SDL_mixer.h>
+#include<SDL2/SDL_image.h>
 #include<stdbool.h>
 #include"renderer.h"
 #include"schedule.h"
@@ -92,6 +93,8 @@ int main()
 		printf("Unable to initialise SDL: %s", SDL_GetError());
 		exit(-1);
 	}
+
+	IMG_Init(IMG_INIT_PNG);
 
 	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 8, 2048)) 
 	{

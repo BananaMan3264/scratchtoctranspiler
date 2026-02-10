@@ -5,6 +5,7 @@ find_package(SDL2 CONFIG REQUIRED)
 find_package(SDL2_mixer CONFIG REQUIRED)
 find_package(PkgConfig REQUIRED)
 find_package(SDL2-gfx CONFIG REQUIRED)
+find_package(SDL2_image CONFIG REQUIRED)
 
 pkg_check_modules(RSVG REQUIRED IMPORTED_TARGET librsvg-2.0)
 pkg_check_modules(CAIRO REQUIRED IMPORTED_TARGET cairo)
@@ -35,6 +36,7 @@ target_link_libraries(scratchruntime PRIVATE
 	SDL2::SDL2
 	SDL2::SDL2main
 	SDL2::SDL2_gfx
+	SDL2_image::SDL2_image
 	SDL2_mixer::SDL2_mixer
 	PkgConfig::RSVG
 	PkgConfig::CAIRO

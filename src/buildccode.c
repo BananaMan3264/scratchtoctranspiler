@@ -2,6 +2,7 @@
 #include <string.h>
 #include <json-c/json.h>
 #include <stdbool.h>
+#include <sys/stat.h>
 #include "std_vector.h"
 #include "types.h"
 #include "util.h"
@@ -223,6 +224,13 @@ fprintf(file, " };\n");
 	}
 	fprintf(file, " };\n");
 
+	bool** isPNG = malloc(sizeof(bool*) * sprites_count); if (!isPNG) { printf("Malloc error!"); exit(-1); }
+
+	for (int i = 0; i < sprites_count; i++) 
+	{
+		isPNG[i] = malloc(sizeof(bool) * max_costume_count); if (!isPNG[i]) { printf("Malloc error!"); exit(-1); }
+	}
+
 	fprintf(file, "char* scratch_looks_CostumeFiles[SPRITES][MAX_COSTUME_LENGTH] = {\n");
 	for (int i = 0; i < sprites_count; i++) {
 		fprintf(file, "\t{ ");
@@ -230,7 +238,23 @@ fprintf(file, " };\n");
 			json_object* this = json_object_object_get(json_object_array_get_idx(targets, i), "costumes");
 			json_object* this_name = json_object_object_get(json_object_array_get_idx(this, j), "assetId");
 			if (json_object_get_type(this_name) != json_type_null) {
-				fprintf(file, "\"%s.svg\"", json_object_get_string(this_name));
+
+				char data_this[70];
+
+				snprintf(data_this, 70, "../../../scratch/Project/%s.svg", json_object_get_string(this_name));
+
+				struct stat buffer;
+
+				if (stat(data_this, &buffer) == 0)
+				{
+					fprintf(file, "\"%s.svg\"", json_object_get_string(this_name));
+					isPNG[i][j] = false;
+				}
+				else 
+				{
+					fprintf(file, "\"%s.png\"", json_object_get_string(this_name));
+					isPNG[i][j] = true;
+				}
 			}
 			else
 			{
@@ -257,7 +281,14 @@ fprintf(file, " };\n");
 			json_object* this = json_object_object_get(json_object_array_get_idx(targets, i), "costumes");
 			json_object* this_name = json_object_object_get(json_object_array_get_idx(this, j), "rotationCenterX");
 			if (json_object_get_type(this_name) != json_type_null) {
-				fprintf(file, "%f", json_object_get_double(this_name));
+				if (isPNG[i][j])
+				{
+					fprintf(file, "%f", json_object_get_double(this_name) / 2);
+				}
+				else 
+				{
+					fprintf(file, "%f", json_object_get_double(this_name));
+				}
 			}
 			else
 			{
@@ -284,7 +315,14 @@ fprintf(file, " };\n");
 			json_object* this = json_object_object_get(json_object_array_get_idx(targets, i), "costumes");
 			json_object* this_name = json_object_object_get(json_object_array_get_idx(this, j), "rotationCenterY");
 			if (json_object_get_type(this_name) != json_type_null) {
-				fprintf(file, "%f", json_object_get_double(this_name));
+				if (isPNG[i][j])
+				{
+					fprintf(file, "%f", json_object_get_double(this_name) / 2);
+				}
+				else
+				{
+					fprintf(file, "%f", json_object_get_double(this_name));
+				}
 			}
 			else
 			{
@@ -303,6 +341,12 @@ fprintf(file, " };\n");
 		}
 	}
 	fprintf(file, " };\n");
+
+	for (int i = 0; i < sprites_count; i++)
+	{
+		free(isPNG[i]);
+	}
+	free(isPNG);
 
 	int max_sound_count = 0;
 
@@ -451,7 +495,7 @@ fprintf(file, " };\n");
 char* GetFullProgram(FILE* header_file, FILE* source_file, FILE* scheduler, struct json_object* variables, struct json_object* lists, vecFunction functions, struct json_object* blocks)
 {
 
-	fprintf(header_file, "void Init_%s_();\n", sprite_index);
+	fprintf(header_file, "void _%s_Init();\n", sprite_index);
 	for (int i = 0; i < functions.length; i++)
 	{
 		fprintf(header_file, "void %s(", functions.data[i].proccode.data);

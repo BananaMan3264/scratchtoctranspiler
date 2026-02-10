@@ -1,6 +1,7 @@
 #include <libco.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL2_gfxPrimitives.h>
+#include <SDL2/SDL_image.h>
 #include <librsvg/rsvg.h>
 #include <cairo.h>
 #include <math.h>
@@ -49,7 +50,37 @@ According to my research the Scratch VM refreshed the screen:
 - After each `ask <> and wait`
 */
 
-SDL_Texture* GetSprite(char* name, int* width_out, int* height_out) 
+SDL_Texture* GetPNGSprite(char* name, int* width_out, int* height_out) 
+{
+	char* path = "../../../../scratch/Project/";
+
+	char* srtc = malloc(strlen(name) + strlen(path) + 1);
+	if (!srtc) { printf("Malloc error!"); exit(-1); }
+
+	strcpy(srtc, path);
+
+	strcat(srtc, name);
+
+	SDL_Surface* surface = IMG_Load(srtc);
+	if (!surface) 
+	{
+		printf("Could not load image %s.\n", srtc);
+		exit(-1);
+	}
+
+	free(srtc);
+
+	SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
+	
+	*width_out  = surface->w / 2;
+	*height_out = surface->h / 2;
+
+	SDL_FreeSurface(surface);
+
+	return texture;
+}
+
+SDL_Texture* GetSVGSprite(char* name, int* width_out, int* height_out) 
 {
 	int width = 256;
 	int height = 256;
@@ -71,6 +102,8 @@ SDL_Texture* GetSprite(char* name, int* width_out, int* height_out)
 	strcpy(srtc, path);
 
 	strcat(srtc, this);
+
+	//if()
 
 	RsvgHandle* handle = rsvg_handle_new_from_file(srtc, &err);
 	if (!handle) {
@@ -133,7 +166,7 @@ SDL_Texture* GetSprite(char* name, int* width_out, int* height_out)
 	double maxdim = (dim.width > dim.height) ? dim.width : dim.height;
 	double s = (double)width / maxdim;   // same for height since it's square
 
-	double scaled_w = dim.width * (double)width / dim.width;
+	double scaled_w = dim.width  * (double)width  /  dim.width;
 	double scaled_h = dim.height * (double)height / dim.height;
 
 	*width_out  = dim. width;
@@ -172,7 +205,19 @@ void initRenderer()
 		for (int j = 0; j < MAX_COSTUME_LENGTH; j++) 
 		{
 			int width = 0, height = 0;
-			sprite_textures[i][j] = GetSprite(scratch_looks_CostumeFiles[i][j], &width, &height);
+			if (scratch_looks_CostumeFiles[i][j] == NULL) 
+			{
+				continue;
+			}
+			char c = scratch_looks_CostumeFiles[i][j][strlen(scratch_looks_CostumeFiles[i][j]) - 2];
+			if (c == 'n') 
+			{
+				sprite_textures[i][j] = GetPNGSprite(scratch_looks_CostumeFiles[i][j], &width, &height);
+			}
+			else
+			{
+				sprite_textures[i][j] = GetSVGSprite(scratch_looks_CostumeFiles[i][j], &width, &height);
+			}
 			scratch_motion_SpriteWidth [i][j] =  width;
 			scratch_motion_SpriteHeight[i][j] = height;
 		}
@@ -195,7 +240,7 @@ void DrawLine(float x_1, float y_1, float x_2, float y_2, float thickness, int c
 	unsigned char a = (colour & 0xff000000) >> 24;
 	if (a == 0) { a = 255; }
 
-	if (x_1 == x_2)
+	if (x_1 == x_2 && y_1 != y_2)
 	{
 		SDL_Rect rect;
 		rect.x = x1;

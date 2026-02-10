@@ -76,11 +76,13 @@ int main(int argc, char**argv)
 
 	fprintf(output, "#define YIELD TRUE_YIELD;\n#include \"../runtime/scratch.h\"\n#include \"../runtime/motion.h\"\n#include \"../runtime/looks.h\"\n#include \"../runtime/sound.h\"\n");
 	fprintf(output, "#include \"../runtime/operators.h\"\n#include \"../runtime/control.h\"\n#include \"../runtime/sensing.h\"\n#include \"../runtime/data.h\"\n#include \"../runtime/pen.h\"\n");
-	fprintf(output, "#include <libco.h>\n\nextern cothread_t scheduler;\nextern bool delete_thread; \n\n");
+	fprintf(output, "#include <libco.h>\n\nextern cothread_t scheduler;\nextern bool delete_thread;\nextern bool stop_all;\nextern bool stop_other;\n\n");
 
 	fprintf(scheduler, "#include<SDL2/SDL.h>\n#include<libco.h>\n#include\"output.h\"\n#include\"../runtime/main.h\"\n#include\"../runtime/types.h\"\n#include\"../schedule_manager.h\"\n\n");
-	fprintf(scheduler, "extern bool keysdown[];\nextern int keysdownheld[];\nThreadList threads;\ncothread_t scheduler;\ncothread_t draw_thread;\nbool delete_thread = false;\nextern int activeSprite;\n\n");
+	fprintf(scheduler, "extern bool keysdown[];\nextern int keysdownheld[];\nThreadList threads;\ncothread_t scheduler;\ncothread_t draw_thread;\nbool delete_thread = false;\nbool stop_all = false;\nbool stop_other = false;\nextern int activeSprite;\n\n");
 	fprintf(scheduler, "\nvoid RunScheduler()\n{\n\tInitialiseThreads();\n\n\tscheduler = co_active();\n\n");
+
+	fprintf(mainh, "#include \"../runtime/types.h\"\n");
 
 	vecFunction* functions_arr = malloc(sizeof(vecFunction) * spritecount);
 
@@ -149,7 +151,10 @@ int main(int argc, char**argv)
 		}
 	}
 	fprintf(scheduler, "\n\twhile (1)\n\t{\n");
-	fprintf(scheduler, "\t\tfor (int i = 0; i < threads.length; i++)\n\t\t{\n\t\t\tactiveSprite = threads.data[i].index;\n\t\t\tco_switch(threads.data[i].thread);\n\t\t\tif (delete_thread) { RemoveThread(i); i--;  delete_thread = false; }\n\t\t}\n");
+	fprintf(scheduler, "\t\tfor (int i = 0; i < threads.length; i++)\n\t\t{\n\t\t\tactiveSprite = threads.data[i].index;\n\t\t\tco_switch(threads.data[i].thread);\n\t\t\tif (delete_thread) { RemoveThread(i); i--;  delete_thread = false; }\n");
+	fprintf(scheduler, "\t\t\tif (stop_all) { while (threads.length) { RemoveThread(0); } stop_all = false; }\n");
+	fprintf(scheduler, "\t\t\tif (stop_other) { cothread_t this = threads.data[i].thread; int this_index = threads.data[i].index; for (int i = 0; i < threads.length; i++) { if (threads.data[i].index == this_index && threads.data[i].thread != this) { RemoveThread(i--); } } stop_other = false; }\n");
+	fprintf(scheduler, "\t\t}\n");
 
 	for (int j = 0; j < spritecount; j++)
 	{

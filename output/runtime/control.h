@@ -12,4 +12,5 @@
 		YIELD												\
 		time = (clock() / (double)CLOCKS_PER_SEC);			\
 	}														\
-}															
+}											
+#define control_stopYoatahaearibasacaraiapatasibaianibasaparaiatae() stop_other = true

@@ -1,3 +1,3 @@
-#define SPRITES 4
+#define SPRITES 2
 #define MAX_COSTUME_LENGTH 3
-#define MAX_SOUND_LENGTH 2
+#define MAX_SOUND_LENGTH 1

@@ -490,9 +490,7 @@ vecFunction ParseText(struct json_object* blocks)
 
 			char* pc2 = json_object_get_string(json_object_object_get(json_object_object_get(block, "mutation"), "proccode"));
 
-			char* pc = SafeStringMerge(AsManagedString(sprite_index), AsManagedString(pc)).data;
-
-			free(pc2);
+			char* pc = SafeStringMerge(AsManagedString(sprite_index), AsManagedString(pc2)).data;
 
 			for (int i = 0, idx = 0; i < f.args;) 
 			{
