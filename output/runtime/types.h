@@ -7,6 +7,12 @@
 
 #pragma once
 
+typedef struct Thread 
+{
+	int index;
+	cothread_t thread;
+} Thread;
+
 enum ScratchType
 {
 	ScratchType_Bool,
@@ -34,7 +40,7 @@ typedef struct ScratchList
 
 typedef struct ThreadList 
 {
-	cothread_t* data;
+	Thread* data;
 	size_t allocated_size;
 	size_t length;
 } ThreadList;
@@ -102,4 +108,4 @@ enum RotationStyle
 #define STAGE_WIDTH 480
 #define STAGE_HEIGHT 360
 
-#define FPS_CAP -1
+#define FPS_CAP 30

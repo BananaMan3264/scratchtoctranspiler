@@ -1,5 +1,7 @@
 #include <time.h>
 #include "types.h"
+
+#define control_wait_until(a) while(!ScratchVarGetBool(a)) { YIELD }
 #define control_wait(secs)									\
 {															\
 	double startTime = clock() / (double)CLOCKS_PER_SEC;	\

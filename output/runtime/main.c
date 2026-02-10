@@ -5,11 +5,14 @@
 #include"schedule.h"
 #include"types.h"
 #include"sound.h"
+#include"scratch.h"
 
 SDL_Renderer* renderer;
 
 bool keysdown[SDL_NUM_SCANCODES];
 int keysdownheld[SDL_NUM_SCANCODES];
+
+ScratchValue mouseDown;
 
 Uint32 lastTime = 0;
 int frames = 0;
@@ -58,6 +61,12 @@ void Render()
 			keysdown[e.key.keysym.scancode] = false;
 			keysdownheld[e.key.keysym.scancode] = 0;
 			break;
+		case SDL_MOUSEBUTTONDOWN:
+			mouseDown = ScratchSetBool(true);
+			break;
+		case SDL_MOUSEBUTTONUP:
+			mouseDown = ScratchSetBool(false);
+			break;
 		}
 	}
 
@@ -76,6 +85,8 @@ void Render()
 
 int main()
 {
+	mouseDown = ScratchSetBool(false);
+
 	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO))
 	{
 		printf("Unable to initialise SDL: %s", SDL_GetError());

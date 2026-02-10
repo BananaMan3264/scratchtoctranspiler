@@ -9,6 +9,8 @@
 
 #define DEG_TO_RAD 0.0174532925199
 
+extern char* sprite_index;
+
 String GetArg(int argtype, ScratchArgData argdata, struct json_object* blocks);
 
 int GetFirstWhenFlagClicked(vecScratchBlock lines)
@@ -100,11 +102,11 @@ for (int i = 0; i < sprites_count; i++)																		\
 }																											\
 fprintf(file, " };\n");
 
-	FILE* file = fopen("../../../output/sprite_data.c", "w");
+	FILE* file = fopen("../../../output/generated/sprite_data.c", "w");
 
 	int sprites_count = json_object_array_length(targets);
 
-	fprintf(file, "#include <stdbool.h>\n#include <stdlib.h>\n#include \"runtime/motion.h\"\n#include \"sprite_data.h\"\n\n");
+	fprintf(file, "#include <stdbool.h>\n#include <stdlib.h>\n#include \"../runtime/motion.h\"\n#include \"../sprite_data.h\"\n\n");
 
 	GetAttrib("motion_SpriteX", "x");
 	GetAttrib("motion_SpriteY", "y");
@@ -446,118 +448,40 @@ fprintf(file, " };\n");
 	fclose(header);
 }
 
-char* GetFullProgram(struct json_object* variables, struct json_object* lists, vecFunction functions, struct json_object* blocks)
+char* GetFullProgram(FILE* header_file, FILE* source_file, FILE* scheduler, struct json_object* variables, struct json_object* lists, vecFunction functions, struct json_object* blocks)
 {
-	FILE* mainh = fopen("../../../output/sprite1.h", "w");
 
-	fprintf(mainh, "void Init();\n\n");
-
+	fprintf(header_file, "void Init_%s_();\n", sprite_index);
 	for (int i = 0; i < functions.length; i++)
 	{
-		fprintf(mainh, "void %s();\n", functions.data[i].proccode.data);
-	}
-
-	fclose(mainh);
-	FILE* scheduler = fopen("../../../output/schedule.c", "w");
-
-	bool FunctionsPresent[FunctionEventsLength];
-
-	for (int i = 0; i < FunctionEventsLength; i++) 
-	{
-		FunctionsPresent[i] = false;
-	}
-
-	for (int i = 0; i < functions.length; i++) 
-	{
-		FunctionsPresent[functions.data[i].opcode] = true;
-	}
-
-	if (!FunctionsPresent) { printf("FunctionsPresent could not be initialised!"); exit(-1); }
-
-	fprintf(scheduler, "#include<SDL2/SDL.h>\n#include<libco.h>\n#include\"sprite1.h\"\n#include\"runtime/main.h\"\n#include\"runtime/types.h\"\n#include\"schedule_manager.h\"\n\n");
-	fprintf(scheduler, "extern bool keysdown[];\nextern int keysdownheld[];\nThreadList threads;\ncothread_t scheduler;\ncothread_t draw_thread;\nbool delete_thread = false;\n\n");
-
-	fprintf(scheduler, "\nvoid RunScheduler()\n{\n\tInit();\n\tInitialiseThreads();\n\n\tscheduler = co_active();\n\n");
-
-	if (FunctionsPresent[event_whenflagclicked])
-	{
-		for (int i = 0; i < functions.length; i++)
+		fprintf(header_file, "void %s(", functions.data[i].proccode.data);
+		for (int j = 0; j < functions.data[i].args - 1; j++)
 		{
-			if (functions.data[i].opcode == event_whenflagclicked)
-			{
-				fprintf(scheduler, "\tAddThread(co_create(64 * 1024, %s));\n", functions.data[i].proccode.data);
-			}
+			fprintf(header_file, "ScratchValue %s, ", functions.data[i].argids[j].data);
 		}
+		if (functions.data[i].args > 0)
+		{
+			fprintf(header_file, "ScratchValue %s", functions.data[i].argids[functions.data[i].args - 1].data);
+		}
+		fprintf(header_file, ");\n");
 	}
 
-	fprintf(scheduler, "\n\twhile (1)\n\t{\n");
-	fprintf(scheduler, "\t\tfor (int i = 0; i < threads.length; i++)\n\t\t{\n\t\t\tco_switch(threads.data[i]);\n\t\t\tif (delete_thread) { RemoveThread(i); i--;  delete_thread = false; }\n\t\t}\n");
-	
-#define addkey(scancode, event) if (FunctionsPresent[event]){fprintf(scheduler, "\t\tif (keysdownheld[" #scancode "] == 1)\n\t\t{\n");for (int i = 0; i < functions.length; i++){if (functions.data[i].opcode == event){fprintf(scheduler, "\t\t\tAddThread(co_create(64 * 1024, %s));\n", functions.data[i].proccode.data);}}fprintf(scheduler, "\t\t}\n");}
-
-	addkey(SDL_SCANCODE_A, event_whenkeypressed_a)
-	addkey(SDL_SCANCODE_B, event_whenkeypressed_b)
-	addkey(SDL_SCANCODE_C, event_whenkeypressed_c)
-	addkey(SDL_SCANCODE_D, event_whenkeypressed_d)
-	addkey(SDL_SCANCODE_E, event_whenkeypressed_e)
-	addkey(SDL_SCANCODE_F, event_whenkeypressed_f)
-	addkey(SDL_SCANCODE_G, event_whenkeypressed_g)
-	addkey(SDL_SCANCODE_H, event_whenkeypressed_h)
-	addkey(SDL_SCANCODE_I, event_whenkeypressed_i)
-	addkey(SDL_SCANCODE_J, event_whenkeypressed_j)
-	addkey(SDL_SCANCODE_K, event_whenkeypressed_k)
-	addkey(SDL_SCANCODE_L, event_whenkeypressed_l)
-	addkey(SDL_SCANCODE_M, event_whenkeypressed_m)
-	addkey(SDL_SCANCODE_N, event_whenkeypressed_n)
-	addkey(SDL_SCANCODE_O, event_whenkeypressed_o)
-	addkey(SDL_SCANCODE_P, event_whenkeypressed_p)
-	addkey(SDL_SCANCODE_Q, event_whenkeypressed_q)
-	addkey(SDL_SCANCODE_R, event_whenkeypressed_r)
-	addkey(SDL_SCANCODE_S, event_whenkeypressed_s)
-	addkey(SDL_SCANCODE_T, event_whenkeypressed_t)
-	addkey(SDL_SCANCODE_U, event_whenkeypressed_u)
-	addkey(SDL_SCANCODE_V, event_whenkeypressed_v)
-	addkey(SDL_SCANCODE_W, event_whenkeypressed_w)
-	addkey(SDL_SCANCODE_X, event_whenkeypressed_x)
-	addkey(SDL_SCANCODE_Y, event_whenkeypressed_y)
-	addkey(SDL_SCANCODE_Z, event_whenkeypressed_z)
-
-	addkey(SDL_SCANCODE_0, event_whenkeypressed_0)
-	addkey(SDL_SCANCODE_1, event_whenkeypressed_1)
-	addkey(SDL_SCANCODE_2, event_whenkeypressed_2)
-	addkey(SDL_SCANCODE_3, event_whenkeypressed_3)
-	addkey(SDL_SCANCODE_4, event_whenkeypressed_4)
-	addkey(SDL_SCANCODE_5, event_whenkeypressed_5)
-	addkey(SDL_SCANCODE_6, event_whenkeypressed_6)
-	addkey(SDL_SCANCODE_7, event_whenkeypressed_7)
-	addkey(SDL_SCANCODE_8, event_whenkeypressed_8)
-	addkey(SDL_SCANCODE_9, event_whenkeypressed_9)
-
-#undef addkey()
-
-	fprintf(scheduler, "\t\tRender();\n\t}\n}");
-
-	fclose(scheduler);
-
-	FILE* file = fopen("../../../output/sprite1.c", "w");
-
-	fprintf(file, "\n#define YIELD TRUE_YIELD;\n#include \"runtime/scratch.h\"\n#include \"runtime/motion.h\"\n#include \"runtime/looks.h\"\n#include \"runtime/sound.h\"\n");
-	fprintf(file, "#include \"runtime/operators.h\"\n#include \"runtime/control.h\"\n#include \"runtime/sensing.h\"\n#include \"runtime/data.h\"\n#include \"runtime/pen.h\"\n");
-	fprintf(file, "#include <libco.h>\n\nextern cothread_t scheduler;\nextern bool delete_thread; \n\n");
 	{
 		json_object_object_foreach(variables, key, val)
 		{
 
-			fprintf(file, "ScratchValue %s;\n", SanitiseScratchNameToC(AsManagedString(key)).data);
+			fprintf(source_file, "ScratchValue %s;\n", SanitiseScratchNameToC(AsManagedString(key)).data);
 		}
 	}
+
+	int a = json_object_get_type(lists);
 	{
 		json_object_object_foreach(lists, key, val)
 		{
-			fprintf(file, "ScratchList %s;\n", SanitiseScratchNameToC(AsManagedString(key)).data);
+			fprintf(source_file, "ScratchList %s;\n", SanitiseScratchNameToC(AsManagedString(key)).data);
 		}
 	}
-	fprintf(file, "\nvoid Init()\n{\n");
+	fprintf(source_file, "\nvoid _%s_Init()\n{\n", sprite_index);
 	{
 		json_object_object_foreach(variables, key, val)
 		{
@@ -565,16 +489,16 @@ char* GetFullProgram(struct json_object* variables, struct json_object* lists, v
 			switch (json_object_get_type(json_object_array_get_idx(val, 1)))
 			{
 			case json_type_int:
-				fprintf(file, "\t%s = ScratchSetDouble(%i);\n", SanitiseScratchNameToC(AsManagedString(key)).data, json_object_get_int(json_object_array_get_idx(val, 1)));
+				fprintf(source_file, "\t%s = ScratchSetDouble(%i);\n", SanitiseScratchNameToC(AsManagedString(key)).data, json_object_get_int(json_object_array_get_idx(val, 1)));
 				break;
 			case json_type_double:
-				fprintf(file, "\t%s = ScratchSetDouble(%f);\n", SanitiseScratchNameToC(AsManagedString(key)).data, json_object_get_double(json_object_array_get_idx(val, 1)));
+				fprintf(source_file, "\t%s = ScratchSetDouble(%f);\n", SanitiseScratchNameToC(AsManagedString(key)).data, json_object_get_double(json_object_array_get_idx(val, 1)));
 				break;
 			case json_type_string:
-				fprintf(file, "\t%s = ScratchSetString(\"%s\");\n", SanitiseScratchNameToC(AsManagedString(key)).data, json_object_get_string(json_object_array_get_idx(val, 1)));
+				fprintf(source_file, "\t%s = ScratchSetString(\"%s\");\n", SanitiseScratchNameToC(AsManagedString(key)).data, json_object_get_string(json_object_array_get_idx(val, 1)));
 				break;
 			case json_type_boolean:
-				fprintf(file, "\t%s = ScratchSetBool(\"%s\");\n", SanitiseScratchNameToC(AsManagedString(key)).data, json_object_get_boolean(json_object_array_get_idx(val, 1)) ? "true" : "false");
+				fprintf(source_file, "\t%s = ScratchSetBool(\"%s\");\n", SanitiseScratchNameToC(AsManagedString(key)).data, json_object_get_boolean(json_object_array_get_idx(val, 1)) ? "true" : "false");
 				break;
 			default:
 				printf("Type not implemented!");
@@ -585,47 +509,47 @@ char* GetFullProgram(struct json_object* variables, struct json_object* lists, v
 	{
 		json_object_object_foreach(lists, key, val)
 		{
-			fprintf(file, "\t%s = initialiseList();\n", SanitiseScratchNameToC(AsManagedString(key)).data);
+			fprintf(source_file, "\t%s = initialiseList();\n", SanitiseScratchNameToC(AsManagedString(key)).data);
 		}
 	}
 
-	fprintf(file, "}\n\n");
+	fprintf(source_file, "}\n\n");
 
 	int indentation = 0;
 
-#define PRINT_INDENTATION for(int qx = 0; qx < indentation; qx++) { fprintf(file, "\t"); }
+#define PRINT_INDENTATION for(int qx = 0; qx < indentation; qx++) { fprintf(source_file, "\t"); }
 
 	for (int i = 0; i < functions.length; i++)
 	{
-		fprintf(file, "void %s(", functions.data[i].proccode.data);
+		fprintf(source_file, "void %s(", functions.data[i].proccode.data);
 		for (int j = 0; j < functions.data[i].args - 1; j++) 
 		{
-			fprintf(file, "ScratchValue %s, ", functions.data[i].argids[j].data);
+			fprintf(source_file, "ScratchValue %s, ", functions.data[i].argids[j].data);
 		}
 		if (functions.data[i].args > 0)
 		{
-			fprintf(file, "ScratchValue %s", functions.data[i].argids[functions.data[i].args - 1].data);
+			fprintf(source_file, "ScratchValue %s", functions.data[i].argids[functions.data[i].args - 1].data);
 		}
-		fprintf(file, ");\n");
+		fprintf(source_file, ");\n");
 	}
 
-	fprintf(file, "\n");
+	fprintf(source_file, "\n");
 
 	for (int i = 0; i < functions.length; i++) 
 	{
-		PRINT_INDENTATION fprintf(file, "void %s(", functions.data[i].proccode.data);
+		PRINT_INDENTATION fprintf(source_file, "void %s(", functions.data[i].proccode.data);
 		for (int j = 0; j < functions.data[i].args - 1; j++)
 		{
-			fprintf(file, "ScratchValue %s, ", functions.data[i].argids[j].data);
+			fprintf(source_file, "ScratchValue %s, ", functions.data[i].argids[j].data);
 		}
 		if (functions.data[i].args > 0)
 		{
-			fprintf(file, "ScratchValue %s", functions.data[i].argids[functions.data[i].args - 1].data);
+			fprintf(source_file, "ScratchValue %s", functions.data[i].argids[functions.data[i].args - 1].data);
 		}
-		PRINT_INDENTATION fprintf(file, ") \n{\n");
+		PRINT_INDENTATION fprintf(source_file, ") \n{\n");
 		if (functions.data[i].warp) 
 		{
-			fprintf(file, "#define YIELD\n");
+			fprintf(source_file, "#define YIELD\n");
 		}
 		indentation++;
 		for (int j = 0; j < functions.data[i].blocks.length; j++) 
@@ -634,72 +558,70 @@ char* GetFullProgram(struct json_object* variables, struct json_object* lists, v
 
 			if (strcmp(THIS.opcode.data, "control_repeat") == 0)
 			{
-				PRINT_INDENTATION fprintf(file, "for(int i%i = 0; i%i < (int)ScratchVarGetDouble(%s); i%i++)\n", indentation, indentation, GetArg(THIS.argtypes[0], THIS.argdata[0], blocks).data, indentation);
-				PRINT_INDENTATION fprintf(file, "{\n");
+				PRINT_INDENTATION fprintf(source_file, "for(int i%i = 0; i%i < (int)ScratchVarGetDouble(%s); i%i++)\n", indentation, indentation, GetArg(THIS.argtypes[0], THIS.argdata[0], blocks).data, indentation);
+				PRINT_INDENTATION fprintf(source_file, "{\n");
 				indentation++;
 			}
 			else if (strcmp(THIS.opcode.data, "control_if") == 0) 
 			{
-				PRINT_INDENTATION fprintf(file, "if(ScratchVarGetBool(%s))\n", GetArg(THIS.argtypes[0], THIS.argdata[0], blocks).data);
-				PRINT_INDENTATION fprintf(file, "{\n");
+				PRINT_INDENTATION fprintf(source_file, "if(ScratchVarGetBool(%s))\n", GetArg(THIS.argtypes[0], THIS.argdata[0], blocks).data);
+				PRINT_INDENTATION fprintf(source_file, "{\n");
 				indentation++;
 			}
 			else if (strcmp(THIS.opcode.data, "control_repeat_until") == 0)
 			{
-				PRINT_INDENTATION fprintf(file, "while(!(ScratchVarGetBool(%s)))\n", GetArg(THIS.argtypes[0], THIS.argdata[0], blocks).data);
-				PRINT_INDENTATION fprintf(file, "{\n");
+				PRINT_INDENTATION fprintf(source_file, "while(!(ScratchVarGetBool(%s)))\n", GetArg(THIS.argtypes[0], THIS.argdata[0], blocks).data);
+				PRINT_INDENTATION fprintf(source_file, "{\n");
 				indentation++;
 			}
 			else if (strcmp(THIS.opcode.data, "control_while") == 0)
 			{
-				PRINT_INDENTATION fprintf(file, "while(ScratchVarGetBool(%s))\n", GetArg(THIS.argtypes[0], THIS.argdata[0], blocks).data);
-				PRINT_INDENTATION fprintf(file, "{\n");
+				PRINT_INDENTATION fprintf(source_file, "while(ScratchVarGetBool(%s))\n", GetArg(THIS.argtypes[0], THIS.argdata[0], blocks).data);
+				PRINT_INDENTATION fprintf(source_file, "{\n");
 				indentation++;
 			}
 			else if (strcmp(THIS.opcode.data, "control_forever") == 0)
 			{
-				PRINT_INDENTATION fprintf(file, "while(1)\n");
-				PRINT_INDENTATION fprintf(file, "{\n");
+				PRINT_INDENTATION fprintf(source_file, "while(1)\n");
+				PRINT_INDENTATION fprintf(source_file, "{\n");
 				indentation++;
 			}
 			else if (strcmp(THIS.opcode.data, "control_loop_end") == 0)
 			{
-				PRINT_INDENTATION fprintf(file, "YIELD\n");
+				PRINT_INDENTATION fprintf(source_file, "YIELD\n");
 				indentation--;
-				PRINT_INDENTATION fprintf(file, "}\n");
+				PRINT_INDENTATION fprintf(source_file, "}\n");
 			}
 			else if (strcmp(THIS.opcode.data, "control_if_end") == 0)
 			{
 				indentation--;
-				PRINT_INDENTATION fprintf(file, "}\n");
+				PRINT_INDENTATION fprintf(source_file, "}\n");
 			}
 			else if (strcmp(THIS.opcode.data, "control_else") == 0)
 			{
 				indentation--;
-				PRINT_INDENTATION fprintf(file, "}\n");
-				PRINT_INDENTATION fprintf(file, "else\n");
-				PRINT_INDENTATION fprintf(file, "{\n");
+				PRINT_INDENTATION fprintf(source_file, "}\n");
+				PRINT_INDENTATION fprintf(source_file, "else\n");
+				PRINT_INDENTATION fprintf(source_file, "{\n");
 				indentation++;
 			}
 			else
 			{
-				PRINT_INDENTATION fprintf(file, "%s\n", LineToBlock(THIS, blocks, true).data);
+				PRINT_INDENTATION fprintf(source_file, "%s\n", LineToBlock(THIS, blocks, true).data);
 			}
 
 #undef THIS
 		}
 		if (functions.data[i].warp)
 		{
-			fprintf(file, "#define YIELD TRUE_YIELD\n");
+			fprintf(source_file, "#define YIELD TRUE_YIELD\n");
 		}
 		if (functions.data[i].opcode != procedures_prototype)
 		{
-			PRINT_INDENTATION fprintf(file, "END_THREAD\n");
+			PRINT_INDENTATION fprintf(source_file, "END_THREAD\n");
 		}
 		indentation--;
-		PRINT_INDENTATION fprintf(file, "}\n\n");
+		PRINT_INDENTATION fprintf(source_file, "}\n\n");
 
 	}
-
-	fclose(file);
 }

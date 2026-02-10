@@ -120,6 +120,9 @@ String SanitiseScratchNameToC(String varName)
 		case '\'':
 			str.data[j] = 'y'; j++;
 			goto next;
+		case '\"':
+			str.data[j] = 'z'; j++;
+			goto next;
 		next:
 			str.data[j] = 'b'; j++;
 			break;

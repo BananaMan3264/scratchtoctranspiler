@@ -8,9 +8,23 @@
 
 extern bool keysdown[512];
 
-ScratchValue sensing_keypressed(int key) 
+ScratchValue sensing_keypressed(int key)
 {
-	return ScratchSetBool(keysdown[key]);
+	if (key == -1000)
+	{
+		for (int i = 0; i < 512; i++) 
+		{
+			if (keysdown[i]) 
+			{
+				return ScratchSetBool(true);
+			}
+		}
+		return ScratchSetBool(false);
+	}
+	else
+	{
+		return ScratchSetBool(keysdown[key]);
+	}
 }
 
 ScratchValue sensing_mousex() 

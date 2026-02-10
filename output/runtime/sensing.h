@@ -5,7 +5,9 @@ ScratchValue sensing_keypressed(int key);
 ScratchValue sensing_mousex();
 ScratchValue sensing_mousey();
 
-#define control_wait_until(a) while(!ScratchVarGetBool(a)) { YIELD }
+extern ScratchValue mouseDown;
+
+#define sensing_mousedown() mouseDown
 
 #define sensing_keyoptionsYsapaaacae() SDL_SCANCODE_SPACE
 #define sensing_keyoptionsYsahaiafat() SDL_SCANCODE_LSHIFT
@@ -46,3 +48,10 @@ ScratchValue sensing_mousey();
 #define sensing_keyoptionsYx() SDL_SCANCODE_X
 #define sensing_keyoptionsYy() SDL_SCANCODE_Y
 #define sensing_keyoptionsYz() SDL_SCANCODE_Z
+
+#define sensing_keyoptionsYuapibaaararaoaw() SDL_SCANCODE_UP
+#define sensing_keyoptionsYdaoawanibaaararaoaw() SDL_SCANCODE_DOWN
+#define sensing_keyoptionsYlaeafatibaaararaoaw() SDL_SCANCODE_LEFT
+#define sensing_keyoptionsYraiagahatibaaararaoaw() SDL_SCANCODE_RIGHT
+
+#define sensing_keyoptionsYaanay() -1000

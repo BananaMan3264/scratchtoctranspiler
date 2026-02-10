@@ -10,6 +10,8 @@
 #define NEXT(a, b) json_object_object_get(a, b)
 #define NEXT2(a, b, c) NEXT(NEXT(a,b),c)
 
+extern char* sprite_index;
+
 typedef struct ScratchArg
 {
 	ScratchArgData data;
@@ -382,7 +384,15 @@ vecFunction ParseText(struct json_object* blocks)
 			f.args = 0;
 			f.next = AsManagedString(json_object_get_string(json_object_object_get(block, "next")));
 
-			f.proccode = SafeStringMerge(SanitiseScratchNameToC(AsManagedString(key)), AsManagedString(opcode));
+			String str2 = SanitiseScratchNameToC(AsManagedString(key));
+
+			int length = strlen(str2.data) + strlen(opcode) + strlen(sprite_index) + 3;
+
+			f.proccode = AsUnmanagedString(malloc(length));
+
+			snprintf(f.proccode.data, length, "_%s_%s%s", sprite_index, str2.data, opcode);
+
+			free(str2.data);
 
 			f.warp = false;
 
@@ -443,8 +453,13 @@ vecFunction ParseText(struct json_object* blocks)
 			if (strcmp(key_press, "7") == 0) { f.opcode = event_whenkeypressed_7; }
 			if (strcmp(key_press, "8") == 0) { f.opcode = event_whenkeypressed_8; }
 			if (strcmp(key_press, "9") == 0) { f.opcode = event_whenkeypressed_9; }
+			String str2 = SanitiseScratchNameToC(AsManagedString(key));
 
-			f.proccode = SafeStringMerge(SafeStringMerge(SanitiseScratchNameToC(AsManagedString(key)), AsManagedString(opcode)), SanitiseScratchNameToC(AsManagedString(key_press)));
+			int length = strlen(str2.data) + strlen(opcode) + strlen(sprite_index) + 3;
+
+			f.proccode = AsUnmanagedString(malloc(length));
+
+			snprintf(f.proccode.data, length, "_%s_%s%s", sprite_index, str2.data, opcode);
 
 			f.warp = false;
 
@@ -473,7 +488,11 @@ vecFunction ParseText(struct json_object* blocks)
 			f.argids = malloc(f.args * sizeof(String));
 			f.argTypes = malloc(f.args);
 
-			char* pc = json_object_get_string(json_object_object_get(json_object_object_get(block, "mutation"), "proccode"));
+			char* pc2 = json_object_get_string(json_object_object_get(json_object_object_get(block, "mutation"), "proccode"));
+
+			char* pc = SafeStringMerge(AsManagedString(sprite_index), AsManagedString(pc)).data;
+
+			free(pc2);
 
 			for (int i = 0, idx = 0; i < f.args;) 
 			{
