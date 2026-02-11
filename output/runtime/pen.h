@@ -7,4 +7,4 @@ void pen_setPenColorToColor(ScratchValue color);
 void pen_setPenSizeTo(ScratchValue size);
 void pen_setPenColorParamTo(ScratchValue param, ScratchValue value);
 
-#define pen_menu_colorParamYtaraaanasapaaaraeanacay() ScratchSetDouble(3)
+#define pen_menu_colorParamYataraaanasapaaaraeanacay() ScratchSetDouble(3)

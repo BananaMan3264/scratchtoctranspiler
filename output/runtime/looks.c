@@ -92,72 +92,72 @@ void looks_setsizeto(ScratchValue val)
 	SS = ScratchVarGetDouble(val);
 }
 
-void looks_changeeffectbyYCaOaLaOaR(ScratchValue change) 
+void looks_changeeffectbyYaCaOaLaOaR(ScratchValue change) 
 {
 	EFFECT_COLOUR += ScratchVarGetDouble(change);
 }
 
-void looks_seteffecttoYCaOaLaOaR(ScratchValue set) 
+void looks_seteffecttoYaCaOaLaOaR(ScratchValue set) 
 {
 	EFFECT_COLOUR = ScratchVarGetDouble(set);
 }
 
-void looks_changeeffectbyYFaIaSaHaEaYaE(ScratchValue change)
+void looks_changeeffectbyYaFaIaSaHaEaYaE(ScratchValue change)
 {
 	EFFECT_FISHEYE += ScratchVarGetDouble(change);
 }
 
-void looks_seteffecttoYFaIaSaHaEaYaE(ScratchValue set)
+void looks_seteffecttoYaFaIaSaHaEaYaE(ScratchValue set)
 {
 	EFFECT_FISHEYE = ScratchVarGetDouble(set);
 }
 
-void looks_changeeffectbyYWaHaIaRaL(ScratchValue change)
+void looks_changeeffectbyYaWaHaIaRaL(ScratchValue change)
 {
 	EFFECT_WHIRL += ScratchVarGetDouble(change);
 }
 
-void looks_seteffecttoYWaHaIaRaL(ScratchValue set)
+void looks_seteffecttoYaWaHaIaRaL(ScratchValue set)
 {
 	EFFECT_WHIRL = ScratchVarGetDouble(set);
 }
 
-void looks_changeeffectbyYPaIaXaEaLaAaTaE(ScratchValue change)
+void looks_changeeffectbyYaPaIaXaEaLaAaTaE(ScratchValue change)
 {
 	EFFECT_PIXELATE += ScratchVarGetDouble(change);
 }
 
-void looks_seteffecttoYPaIaXaEaLaAaTaE(ScratchValue set)
+void looks_seteffecttoYaPaIaXaEaLaAaTaE(ScratchValue set)
 {
 	EFFECT_PIXELATE = ScratchVarGetDouble(set);
 }
 
-void looks_changeeffectbyYMaOaSaAaIaC(ScratchValue change)
+void looks_changeeffectbyYaMaOaSaAaIaC(ScratchValue change)
 {
 	EFFECT_MOSAIC += ScratchVarGetDouble(change);
 }
 
-void looks_seteffecttoYMaOaSaAaIaC(ScratchValue set)
+void looks_seteffecttoYaMaOaSaAaIaC(ScratchValue set)
 {
 	EFFECT_MOSAIC = ScratchVarGetDouble(set);
 }
 
-void looks_changeeffectbyYBaRaIaGaHaTaNaEaSaS(ScratchValue change)
+void looks_changeeffectbyYaBaRaIaGaHaTaNaEaSaS(ScratchValue change)
 {
 	EFFECT_BRIGHTNESS += ScratchVarGetDouble(change);
 }
 
-void looks_seteffecttoYBaRaIaGaHaTaNaEaSaS(ScratchValue set)
+void looks_seteffecttoYaBaRaIaGaHaTaNaEaSaS(ScratchValue set)
 {
 	EFFECT_BRIGHTNESS = ScratchVarGetDouble(set);
 }
 
-void looks_changeeffectbyYGaHaOaSaT(ScratchValue change)
+void looks_changeeffectbyYaGaHaOaSaT(ScratchValue change)
 {
 	EFFECT_GHOST += ScratchVarGetDouble(change);
 }
 
-void looks_seteffecttoYGaHaOaSaT(ScratchValue set)
+void looks_seteffecttoYaGaHaOaSaT(ScratchValue set)
 {
 	EFFECT_GHOST = ScratchVarGetDouble(set);
 }
@@ -193,32 +193,32 @@ void looks_gotofrontbackYbaaacak()
 	// TODO: layering system
 }
 
-void looks_goforwardbackwardlayersYfaoarawaaarad(ScratchValue layers)
+void looks_goforwardbackwardlayersYafaoarawaaarad(ScratchValue layers)
 {
 	// TODO: layering system
 }
 
-void looks_goforwardbackwardlayersYbaaacakawaaarad(ScratchValue layers)
+void looks_goforwardbackwardlayersYabaaacakawaaarad(ScratchValue layers)
 {
 	// TODO: layering system
 }
 
-ScratchValue looks_costumenumbernameYnauamabaear() 
+ScratchValue looks_costumenumbernameYanauamabaear() 
 {
 	return ScratchSetDouble(SCI + 1);
 }
 
-ScratchValue looks_costumenumbernameYnaaamae() 
+ScratchValue looks_costumenumbernameYanaaamae() 
 {
 	return ScratchSetString(SCN[SCI]);
 }
 
-ScratchValue looks_backdropnumbernameYnauamabaear()
+ScratchValue looks_backdropnumbernameYanauamabaear()
 {
 	return ScratchSetDouble(scratch_looks_CostumeIndex[0]);
 }
 
-ScratchValue looks_backdropnumbernameYnaaamae()
+ScratchValue looks_backdropnumbernameYanaaamae()
 {
 	return ScratchSetString(scratch_looks_CostumeNames[0][scratch_looks_CostumeIndex[0]]);
 }

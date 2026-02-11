@@ -2,8 +2,6 @@
 
 - All sound loading (MP3s cannot load, some types of WAV file don't work for some reason)
 - Finally implement a garbage collector
-- Make empty functions work properly
-- Make TurboWarp log / warn / error work properly
 - Go to, glide to, and point towards menu handling for other sprites
 - Say / Think blocks
 - All graphics effects except Ghost
@@ -13,7 +11,6 @@
 	- When this sprite clicked
 	- When backdrop switches to
 	- When loudness >
-	- A lot of keys for the 'When key pressed' event
 - The entire messaging system
 - The entire clone system
 - Collision system
@@ -30,3 +27,6 @@
 - username
 - Addons?
 - Better error handling / error messages
+- Track down that one discrepancy between math blocks (I wish I had more details, I don't.)
+- Optimise pen
+- Optimise the `fix.bat` step, potentially include it in `scratchcompiler`?

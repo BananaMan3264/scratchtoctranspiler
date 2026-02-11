@@ -76,6 +76,7 @@ int main(int argc, char**argv)
 
 	fprintf(output, "#define YIELD TRUE_YIELD;\n#include \"../runtime/scratch.h\"\n#include \"../runtime/motion.h\"\n#include \"../runtime/looks.h\"\n#include \"../runtime/sound.h\"\n");
 	fprintf(output, "#include \"../runtime/operators.h\"\n#include \"../runtime/control.h\"\n#include \"../runtime/sensing.h\"\n#include \"../runtime/data.h\"\n#include \"../runtime/pen.h\"\n");
+	fprintf(output, "#include \"../runtime/turbowarp.h\"\n");
 	fprintf(output, "#include <libco.h>\n\nextern cothread_t scheduler;\nextern bool delete_thread;\nextern bool stop_all;\nextern bool stop_other;\n\n");
 
 	fprintf(scheduler, "#include<SDL2/SDL.h>\n#include<libco.h>\n#include\"output.h\"\n#include\"../runtime/main.h\"\n#include\"../runtime/types.h\"\n#include\"../schedule_manager.h\"\n\n");
@@ -169,46 +170,104 @@ int main(int argc, char**argv)
 		}
 
 #define addkey(scancode, event) if (FunctionsPresent[j][event]){fprintf(scheduler, "\t\tif (keysdownheld[" #scancode "] == 1)\n\t\t{\n");for (int i = 0; i < functions_arr[j].length; i++){if (functions_arr[j].data[i].opcode == event){fprintf(scheduler, "\t\t\tAddThread(THREAD(co_create(64 * 1024, %s),%i));\n", functions_arr[j].data[i].proccode.data, j);}}fprintf(scheduler, "\t\t}\n");}
+#define addkeysh(scancode, event) if (FunctionsPresent[j][event]){fprintf(scheduler, "\t\tif (keysdownheld[" #scancode "] == 1 && ( keysdown[SDL_SCANCODE_LSHIFT] == 1 || keysdown[SDL_SCANCODE_RSHIFT] == 1))\n\t\t{\n");for (int i = 0; i < functions_arr[j].length; i++){if (functions_arr[j].data[i].opcode == event){fprintf(scheduler, "\t\t\tAddThread(THREAD(co_create(64 * 1024, %s),%i));\n", functions_arr[j].data[i].proccode.data, j);}}fprintf(scheduler, "\t\t}\n");}
+#define addkeynosh(scancode, event) if (FunctionsPresent[j][event]){fprintf(scheduler, "\t\tif (keysdownheld[" #scancode "] == 1 && !( keysdown[SDL_SCANCODE_LSHIFT] == 1 || keysdown[SDL_SCANCODE_RSHIFT] == 1))\n\t\t{\n");for (int i = 0; i < functions_arr[j].length; i++){if (functions_arr[j].data[i].opcode == event){fprintf(scheduler, "\t\t\tAddThread(THREAD(co_create(64 * 1024, %s),%i));\n", functions_arr[j].data[i].proccode.data, j);}}fprintf(scheduler, "\t\t}\n");}
+#define addkey2(scancode1, scancode2, event) if (FunctionsPresent[j][event]){fprintf(scheduler, "\t\tif (keysdownheld[" #scancode1 "] == 1 || keysdownheld[" #scancode2 "] == 1)\n\t\t{\n");for (int i = 0; i < functions_arr[j].length; i++){if (functions_arr[j].data[i].opcode == event){fprintf(scheduler, "\t\t\tAddThread(THREAD(co_create(64 * 1024, %s),%i));\n", functions_arr[j].data[i].proccode.data, j);}}fprintf(scheduler, "\t\t}\n");}
 
-		addkey(SDL_SCANCODE_A, event_whenkeypressed_a)
-		addkey(SDL_SCANCODE_B, event_whenkeypressed_b)
-		addkey(SDL_SCANCODE_C, event_whenkeypressed_c)
-		addkey(SDL_SCANCODE_D, event_whenkeypressed_d)
-		addkey(SDL_SCANCODE_E, event_whenkeypressed_e)
-		addkey(SDL_SCANCODE_F, event_whenkeypressed_f)
-		addkey(SDL_SCANCODE_G, event_whenkeypressed_g)
-		addkey(SDL_SCANCODE_H, event_whenkeypressed_h)
-		addkey(SDL_SCANCODE_I, event_whenkeypressed_i)
-		addkey(SDL_SCANCODE_J, event_whenkeypressed_j)
-		addkey(SDL_SCANCODE_K, event_whenkeypressed_k)
-		addkey(SDL_SCANCODE_L, event_whenkeypressed_l)
-		addkey(SDL_SCANCODE_M, event_whenkeypressed_m)
-		addkey(SDL_SCANCODE_N, event_whenkeypressed_n)
-		addkey(SDL_SCANCODE_O, event_whenkeypressed_o)
-		addkey(SDL_SCANCODE_P, event_whenkeypressed_p)
-		addkey(SDL_SCANCODE_Q, event_whenkeypressed_q)
-		addkey(SDL_SCANCODE_R, event_whenkeypressed_r)
-		addkey(SDL_SCANCODE_S, event_whenkeypressed_s)
-		addkey(SDL_SCANCODE_T, event_whenkeypressed_t)
-		addkey(SDL_SCANCODE_U, event_whenkeypressed_u)
-		addkey(SDL_SCANCODE_V, event_whenkeypressed_v)
-		addkey(SDL_SCANCODE_W, event_whenkeypressed_w)
-		addkey(SDL_SCANCODE_X, event_whenkeypressed_x)
-		addkey(SDL_SCANCODE_Y, event_whenkeypressed_y)
-		addkey(SDL_SCANCODE_Z, event_whenkeypressed_z)
+		addkey(SDL_SCANCODE_SPACE, event_whenkeypressed_space);
+		addkey(SDL_SCANCODE_UP, event_whenkeypressed_up_arrow);
+		addkey(SDL_SCANCODE_RIGHT, event_whenkeypressed_right_arrow);
+		addkey(SDL_SCANCODE_LEFT, event_whenkeypressed_left_arrow);
+		addkey(SDL_SCANCODE_DOWN, event_whenkeypressed_down_arrow);
+		addkey(SDL_SCANCODE_RETURN, event_whenkeypressed_enter);
 
-		addkey(SDL_SCANCODE_0, event_whenkeypressed_0)
-		addkey(SDL_SCANCODE_1, event_whenkeypressed_1)
-		addkey(SDL_SCANCODE_2, event_whenkeypressed_2)
-		addkey(SDL_SCANCODE_3, event_whenkeypressed_3)
-		addkey(SDL_SCANCODE_4, event_whenkeypressed_4)
-		addkey(SDL_SCANCODE_5, event_whenkeypressed_5)
-		addkey(SDL_SCANCODE_6, event_whenkeypressed_6)
-		addkey(SDL_SCANCODE_7, event_whenkeypressed_7)
-		addkey(SDL_SCANCODE_8, event_whenkeypressed_8)
-		addkey(SDL_SCANCODE_9, event_whenkeypressed_9)
+		addkey(SDL_SCANCODE_A, event_whenkeypressed_a);
+		addkey(SDL_SCANCODE_B, event_whenkeypressed_b);
+		addkey(SDL_SCANCODE_C, event_whenkeypressed_c);
+		addkey(SDL_SCANCODE_D, event_whenkeypressed_d);
+		addkey(SDL_SCANCODE_E, event_whenkeypressed_e);
+		addkey(SDL_SCANCODE_F, event_whenkeypressed_f);
+		addkey(SDL_SCANCODE_G, event_whenkeypressed_g);
+		addkey(SDL_SCANCODE_H, event_whenkeypressed_h);
+		addkey(SDL_SCANCODE_I, event_whenkeypressed_i);
+		addkey(SDL_SCANCODE_J, event_whenkeypressed_j);
+		addkey(SDL_SCANCODE_K, event_whenkeypressed_k);
+		addkey(SDL_SCANCODE_L, event_whenkeypressed_l);
+		addkey(SDL_SCANCODE_M, event_whenkeypressed_m);
+		addkey(SDL_SCANCODE_N, event_whenkeypressed_n);
+		addkey(SDL_SCANCODE_O, event_whenkeypressed_o);
+		addkey(SDL_SCANCODE_P, event_whenkeypressed_p);
+		addkey(SDL_SCANCODE_Q, event_whenkeypressed_q);
+		addkey(SDL_SCANCODE_R, event_whenkeypressed_r);
+		addkey(SDL_SCANCODE_S, event_whenkeypressed_s);
+		addkey(SDL_SCANCODE_T, event_whenkeypressed_t);
+		addkey(SDL_SCANCODE_U, event_whenkeypressed_u);
+		addkey(SDL_SCANCODE_V, event_whenkeypressed_v);
+		addkey(SDL_SCANCODE_W, event_whenkeypressed_w);
+		addkey(SDL_SCANCODE_X, event_whenkeypressed_x);
+		addkey(SDL_SCANCODE_Y, event_whenkeypressed_y);
+		addkey(SDL_SCANCODE_Z, event_whenkeypressed_z);
+
+		addkeynosh(SDL_SCANCODE_0, event_whenkeypressed_0);
+		addkeynosh(SDL_SCANCODE_1, event_whenkeypressed_1);
+		addkeynosh(SDL_SCANCODE_2, event_whenkeypressed_2);
+		addkeynosh(SDL_SCANCODE_3, event_whenkeypressed_3);
+		addkeynosh(SDL_SCANCODE_4, event_whenkeypressed_4);
+		addkeynosh(SDL_SCANCODE_5, event_whenkeypressed_5);
+		addkeynosh(SDL_SCANCODE_6, event_whenkeypressed_6);
+		addkeynosh(SDL_SCANCODE_7, event_whenkeypressed_7);
+		addkeynosh(SDL_SCANCODE_8, event_whenkeypressed_8);
+		addkeynosh(SDL_SCANCODE_9, event_whenkeypressed_9);
+		addkeynosh(SDL_SCANCODE_MINUS, event_whenkeypressed_minus);
+		addkeynosh(SDL_SCANCODE_COMMA, event_whenkeypressed_comma);
+		addkeynosh(SDL_SCANCODE_PERIOD, event_whenkeypressed_full_stop);
+		addkeynosh(SDL_SCANCODE_GRAVE, event_whenkeypressed_back_tick);
+		addkeynosh(SDL_SCANCODE_EQUALS, event_whenkeypressed_equals);
+		addkeynosh(SDL_SCANCODE_LEFTBRACKET, event_whenkeypressed_left_bracket);
+		addkeynosh(SDL_SCANCODE_RIGHTBRACKET, event_whenkeypressed_right_bracket);
+		addkeynosh(SDL_SCANCODE_BACKSLASH, event_whenkeypressed_backslash);
+		addkeynosh(SDL_SCANCODE_SEMICOLON, event_whenkeypressed_semicolon);
+		addkeynosh(SDL_SCANCODE_APOSTROPHE, event_whenkeypressed_single_quote);
+		addkeynosh(SDL_SCANCODE_SLASH, event_whenkeypressed_solidus);
+		addkeysh(SDL_SCANCODE_0, event_whenkeypressed_exclamation_mark);
+		addkeysh(SDL_SCANCODE_1, event_whenkeypressed_at_sign);
+		addkeysh(SDL_SCANCODE_2, event_whenkeypressed_pound);
+		addkeysh(SDL_SCANCODE_3, event_whenkeypressed_dollar);
+		addkeysh(SDL_SCANCODE_4, event_whenkeypressed_percent);
+		addkeysh(SDL_SCANCODE_5, event_whenkeypressed_caret);
+		addkeysh(SDL_SCANCODE_6, event_whenkeypressed_ampersand);
+		addkeysh(SDL_SCANCODE_7, event_whenkeypressed_star);
+		addkeysh(SDL_SCANCODE_8, event_whenkeypressed_left_parenth);
+		addkeysh(SDL_SCANCODE_9, event_whenkeypressed_right_parenth);
+		addkeysh(SDL_SCANCODE_MINUS, event_whenkeypressed_underscore);
+		addkeysh(SDL_SCANCODE_EQUALS, event_whenkeypressed_plus);
+		addkeysh(SDL_SCANCODE_LEFTBRACKET, event_whenkeypressed_left_brace);
+		addkeysh(SDL_SCANCODE_RIGHTBRACKET, event_whenkeypressed_right_brace);
+		addkeysh(SDL_SCANCODE_BACKSLASH, event_whenkeypressed_pipe);
+		addkeysh(SDL_SCANCODE_SEMICOLON, event_whenkeypressed_colon);
+		addkeysh(SDL_SCANCODE_APOSTROPHE, event_whenkeypressed_double_quote);
+		addkeysh(SDL_SCANCODE_SLASH, event_whenkeypressed_question_mark);
+		addkeysh(SDL_SCANCODE_COMMA, event_whenkeypressed_left_triangle_bracket);
+		addkeysh(SDL_SCANCODE_PERIOD, event_whenkeypressed_right_traingle_bracket);
+		addkeysh(SDL_SCANCODE_GRAVE, event_whenkeypressed_tilda);
+
+		addkey(SDL_SCANCODE_BACKSPACE,event_whenkeypressed_backspace);
+		addkey(SDL_SCANCODE_DELETE,event_whenkeypressed_delete);
+		addkey2(SDL_SCANCODE_LSHIFT, SDL_SCANCODE_RSHIFT, event_whenkeypressed_shift);
+		addkey(SDL_SCANCODE_CAPSLOCK,event_whenkeypressed_caps_lock);
+		addkey(SDL_SCANCODE_SCROLLLOCK,event_whenkeypressed_scroll_lock);
+		addkey2(SDL_SCANCODE_LCTRL, SDL_SCANCODE_RCTRL,event_whenkeypressed_control);
+		addkey(SDL_SCANCODE_ESCAPE,event_whenkeypressed_escape);
+		addkey(SDL_SCANCODE_INSERT,event_whenkeypressed_insert);
+		addkey(SDL_SCANCODE_HOME,event_whenkeypressed_home);
+		addkey(SDL_SCANCODE_END,event_whenkeypressed_end);
+		addkey(SDL_SCANCODE_PAGEUP,event_whenkeypressed_page_up);
+		addkey(SDL_SCANCODE_PAGEDOWN,event_whenkeypressed_page_down);
 
 #undef addkey()
+#undef addkeysh()
+#undef addkeynosh()
+#undef addkey2()
 	}
 	fprintf(scheduler, "\t\tRender();\n\t}\n}\n");
 

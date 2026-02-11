@@ -416,6 +416,13 @@ vecFunction ParseText(struct json_object* blocks)
 
 			char* key_press = json_object_get_string(json_object_array_get_idx(json_object_object_get(json_object_object_get(block, "fields"),"KEY_OPTION"),0));
 
+			if (strcmp(key_press,"space"		) == 0) { f.opcode = event_whenkeypressed_space;		}
+			if (strcmp(key_press,"up arrow"		) == 0) { f.opcode = event_whenkeypressed_up_arrow;		}
+			if (strcmp(key_press,"down arrow"	) == 0) { f.opcode = event_whenkeypressed_down_arrow;	}
+			if (strcmp(key_press,"left arrow"	) == 0) { f.opcode = event_whenkeypressed_left_arrow;	}
+			if (strcmp(key_press,"right arrow"	) == 0) { f.opcode = event_whenkeypressed_right_arrow;	}
+			if (strcmp(key_press,"enter"		) == 0) { f.opcode = event_whenkeypressed_enter;		}
+
 			if (strcmp(key_press,"a") == 0) { f.opcode = event_whenkeypressed_a; }
 			if (strcmp(key_press,"b") == 0) { f.opcode = event_whenkeypressed_b; }
 			if (strcmp(key_press,"c") == 0) { f.opcode = event_whenkeypressed_c; }
@@ -453,6 +460,55 @@ vecFunction ParseText(struct json_object* blocks)
 			if (strcmp(key_press, "7") == 0) { f.opcode = event_whenkeypressed_7; }
 			if (strcmp(key_press, "8") == 0) { f.opcode = event_whenkeypressed_8; }
 			if (strcmp(key_press, "9") == 0) { f.opcode = event_whenkeypressed_9; }
+
+			if (strcmp(key_press, "-") == 0) { f.opcode = event_whenkeypressed_minus;				   }
+			if (strcmp(key_press, ",") == 0) { f.opcode = event_whenkeypressed_comma;				   }
+			if (strcmp(key_press, ".") == 0) { f.opcode = event_whenkeypressed_full_stop;			   }
+			if (strcmp(key_press, "`") == 0) { f.opcode = event_whenkeypressed_back_tick;			   }
+			if (strcmp(key_press, "=") == 0) { f.opcode = event_whenkeypressed_equals;				   }
+			if (strcmp(key_press, "[") == 0) { f.opcode = event_whenkeypressed_left_bracket;		   }
+			if (strcmp(key_press, "]") == 0) { f.opcode = event_whenkeypressed_right_bracket;		   }
+			if (strcmp(key_press,"\\") == 0) { f.opcode = event_whenkeypressed_backslash;			   }
+			if (strcmp(key_press, ";") == 0) { f.opcode = event_whenkeypressed_semicolon;			   }
+			if (strcmp(key_press, "'") == 0) { f.opcode = event_whenkeypressed_single_quote;		   }
+			if (strcmp(key_press, "/") == 0) { f.opcode = event_whenkeypressed_solidus;				   }
+			if (strcmp(key_press, "!") == 0) { f.opcode = event_whenkeypressed_exclamation_mark;	   }
+			if (strcmp(key_press, "@") == 0) { f.opcode = event_whenkeypressed_at_sign;				   }
+			if (strcmp(key_press, "#") == 0) { f.opcode = event_whenkeypressed_pound;				   }
+			if (strcmp(key_press, "$") == 0) { f.opcode = event_whenkeypressed_dollar;				   }
+			if (strcmp(key_press, "%") == 0) { f.opcode = event_whenkeypressed_percent;				   }
+			if (strcmp(key_press, "^") == 0) { f.opcode = event_whenkeypressed_caret;				   }
+			if (strcmp(key_press, "&") == 0) { f.opcode = event_whenkeypressed_ampersand;			   }
+			if (strcmp(key_press, "*") == 0) { f.opcode = event_whenkeypressed_star;				   }
+			if (strcmp(key_press, "(") == 0) { f.opcode = event_whenkeypressed_left_parenth;		   }
+			if (strcmp(key_press, ")") == 0) { f.opcode = event_whenkeypressed_right_parenth;		   }
+			if (strcmp(key_press, "_") == 0) { f.opcode = event_whenkeypressed_underscore;			   }
+			if (strcmp(key_press, "+") == 0) { f.opcode = event_whenkeypressed_plus;				   }
+			if (strcmp(key_press, "{") == 0) { f.opcode = event_whenkeypressed_left_brace;			   }
+			if (strcmp(key_press, "}") == 0) { f.opcode = event_whenkeypressed_right_brace;			   }
+			if (strcmp(key_press, "|") == 0) { f.opcode = event_whenkeypressed_pipe;				   }
+			if (strcmp(key_press, ":") == 0) { f.opcode = event_whenkeypressed_colon;				   }
+			if (strcmp(key_press,"\"") == 0) { f.opcode = event_whenkeypressed_double_quote;		   }
+			if (strcmp(key_press, "?") == 0) { f.opcode = event_whenkeypressed_question_mark;		   }
+			if (strcmp(key_press, "<") == 0) { f.opcode = event_whenkeypressed_left_triangle_bracket;  }
+			if (strcmp(key_press, ">") == 0) { f.opcode = event_whenkeypressed_right_traingle_bracket; }
+			if (strcmp(key_press, "~") == 0) { f.opcode = event_whenkeypressed_tilda; }
+
+			if (strcmp(key_press, "backspace"		) == 0) { f.opcode = event_whenkeypressed_backspace;   }
+			if (strcmp(key_press, "delete"			) == 0) { f.opcode = event_whenkeypressed_delete;	   }
+			if (strcmp(key_press, "shift"			) == 0) { f.opcode = event_whenkeypressed_shift;	   }
+			if (strcmp(key_press, "caps lock"		) == 0) { f.opcode = event_whenkeypressed_caps_lock;   }
+			if (strcmp(key_press, "scroll lock"		) == 0) { f.opcode = event_whenkeypressed_scroll_lock; }
+			if (strcmp(key_press, "control"			) == 0) { f.opcode = event_whenkeypressed_control;	   }
+			if (strcmp(key_press, "escape"			) == 0) { f.opcode = event_whenkeypressed_escape;	   }
+			if (strcmp(key_press, "insert"			) == 0) { f.opcode = event_whenkeypressed_insert;	   }
+			if (strcmp(key_press, "home"			) == 0) { f.opcode = event_whenkeypressed_home;		   }
+			if (strcmp(key_press, "end"				) == 0) { f.opcode = event_whenkeypressed_end;		   }
+			if (strcmp(key_press, "page up"			) == 0) { f.opcode = event_whenkeypressed_page_up;	   }
+			if (strcmp(key_press, "page down"		) == 0) { f.opcode = event_whenkeypressed_page_down;   }
+
+
+
 			String str2 = SanitiseScratchNameToC(AsManagedString(key));
 
 			int length = strlen(str2.data) + strlen(opcode) + strlen(sprite_index) + 3;

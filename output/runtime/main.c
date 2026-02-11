@@ -28,7 +28,7 @@ void update_fps() {
 
 	if (current > lastTime + 1000) {  // 1 second passed
 		fps = frames * 1000.0f / (current - lastTime);
-		printf("FPS: %f\n", fps);
+		//printf("FPS: %f\n", fps);
 		lastTime = current;
 		frames = 0;
 	}

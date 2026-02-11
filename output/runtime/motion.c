@@ -103,17 +103,17 @@ void motion_sety(ScratchValue y)
 	SY = ny;
 }
 
-void motion_setrotationstyleYlaeafathbaraiagahat() 
+void motion_setrotationstyleYalaeafathbaraiagahat() 
 {
 	SR = RotStyle_leftright;
 }
 
-void motion_setrotationstyleYdaoanybatibaraoataaatae()
+void motion_setrotationstyleYadaoanybatibaraoataaatae()
 {
 	SR = RotStyle_dontrotate;
 }
 
-void motion_setrotationstyleYaalalibaaaraoauanad()
+void motion_setrotationstyleYaaalalibaaaraoauanad()
 {
 	SR = RotStyle_allaround;
 }

@@ -13,4 +13,4 @@
 		time = (clock() / (double)CLOCKS_PER_SEC);			\
 	}														\
 }											
-#define control_stopYoatahaearibasacaraiapatasibaianibasaparaiatae() stop_other = true
+#define control_stopYaoatahaearibasacaraiapatasibaianibasaparaiatae() stop_other = true

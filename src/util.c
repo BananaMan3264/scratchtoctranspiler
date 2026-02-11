@@ -32,15 +32,22 @@ String SafeStringMerge(String a, String b)
 
 String SanitiseScratchNameToC(String varName)
 {
-	String str = AsUnmanagedString(malloc(strlen(varName.data) * 2 + 1));
+	String str = AsUnmanagedString(malloc(strlen(varName.data) * 2 + 2));
 	if (!str.data) { printf("Malloc Error!"); exit(-1); }
 
-	for (int i = 0, j = 0; i < strlen(varName.data); i++)
+	for (int i = 0, j = 1; i < strlen(varName.data); i++)
 	{
+		unsigned char c = varName.data[i];
+		if (c > 127) 
+		{
+			str.data[j] = ((c & 0b11110000) >> 4) + 'b'; j++;
+			str.data[j] = (c & 0b00001111) + 'b'; j++;
+			continue;
+		}
 		switch (varName.data[i])
 		{
 		case '`':
-			str.data[j] = 'a'; j++;
+			str.data[j] = 'A'; j++;
 			goto next;
 		case '@':
 			str.data[j] = 'b'; j++;
@@ -53,9 +60,6 @@ String SanitiseScratchNameToC(String varName)
 			goto next;
 		case '#':
 			str.data[j] = 'c'; j++;
-			goto next;
-		case '?':
-			str.data[j] = 'd'; j++;
 			goto next;
 		case '(':
 			str.data[j] = 'e'; j++;
@@ -123,6 +127,9 @@ String SanitiseScratchNameToC(String varName)
 		case '\"':
 			str.data[j] = 'z'; j++;
 			goto next;
+		case '?':
+			str.data[j] = '1'; j++;
+			goto next;
 		next:
 			str.data[j] = 'b'; j++;
 			break;
@@ -134,7 +141,7 @@ String SanitiseScratchNameToC(String varName)
 	}
 	str.data[0] = 'Y';
 
-	str.data[strlen(varName.data) * 2] = '\0';
+	str.data[strlen(varName.data) * 2 + 1] = '\0';
 	freeIfUnmanaged(varName);
 
 	return str;
