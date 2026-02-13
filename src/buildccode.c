@@ -527,21 +527,8 @@ char* GetFullProgram(FILE* header_file, FILE* source_file, FILE* scheduler, stru
 		fprintf(header_file, ");\n");
 	}
 
-	{
-		json_object_object_foreach(variables, key, val)
-		{
-
-			fprintf(source_file, "ScratchValue %s;\n", SanitiseScratchNameToC(AsManagedString(key)).data);
-		}
-	}
-
 	int a = json_object_get_type(lists);
-	{
-		json_object_object_foreach(lists, key, val)
-		{
-			fprintf(source_file, "ScratchList %s;\n", SanitiseScratchNameToC(AsManagedString(key)).data);
-		}
-	}
+
 	fprintf(source_file, "\nvoid _%s_Init()\n{\n", sprite_index);
 	{
 		json_object_object_foreach(variables, key, val)
@@ -612,6 +599,10 @@ char* GetFullProgram(FILE* header_file, FILE* source_file, FILE* scheduler, stru
 		{
 			fprintf(source_file, "#define YIELD\n");
 		}
+		else 
+		{
+			fprintf(source_file, "#define YIELD FUNCTION_YIELD\n");
+		}
 		indentation++;
 		for (int j = 0; j < functions.data[i].blocks.length; j++) 
 		{
@@ -673,10 +664,7 @@ char* GetFullProgram(FILE* header_file, FILE* source_file, FILE* scheduler, stru
 
 #undef THIS
 		}
-		if (functions.data[i].warp)
-		{
-			fprintf(source_file, "#define YIELD TRUE_YIELD\n");
-		}
+		fprintf(source_file, "#define YIELD TRUE_YIELD\n");
 		if (functions.data[i].opcode != procedures_prototype)
 		{
 			PRINT_INDENTATION fprintf(source_file, "END_THREAD\n");

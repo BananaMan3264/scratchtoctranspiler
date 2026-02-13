@@ -1,7 +1,6 @@
 # List of Things That Need to be Done Before the Project is Finished
 
 - All sound loading (MP3s cannot load, some types of WAV file don't work for some reason)
-- Finally implement a garbage collector
 - Go to, glide to, and point towards menu handling for other sprites
 - Say / Think blocks
 - All graphics effects except Ghost

@@ -4,6 +4,7 @@
 #include "scratch.h"
 #include "types.h"
 #include "operators.h"
+#include "garbagecollector.h"
 
 // Note: in the actual Scratch implementation Max and Min can be flipped.
 ScratchValue operator_random(ScratchValue min, ScratchValue max)
@@ -42,8 +43,6 @@ ScratchValue operator_equals(ScratchValue a, ScratchValue b)
 		out = strcmp(astr, bstr) == 0;
 		break;
 	}
-	if (a.ScratchType == ScratchType_Number) { free(astr); }
-	if (b.ScratchType == ScratchType_Number) { free(bstr); }
 	return ScratchSetBool(out);
 }
 
@@ -52,7 +51,7 @@ ScratchValue operator_join(ScratchValue a, ScratchValue b)
 	char* A = ScratchVarGetString(a);
 	char* B = ScratchVarGetString(b);
 
-	char* join = malloc(strlen(A) + strlen(B) + 1); if (!join) { printf("Malloc error!"); exit(-1); }
+	char* join = gc_malloc(strlen(A) + strlen(B) + 1); if (!join) { printf("Malloc error!"); exit(-1); }
 
 	strcpy(join, A);
 	strcat(join, B);
@@ -68,7 +67,7 @@ ScratchValue operator_letter_of(ScratchValue index, ScratchValue string)
 	{
 		return ScratchSetString("");
 	}
-	char* out = malloc(2); if (!out) { printf("Malloc error!"); exit(-1); }
+	char* out = gc_malloc(2); if (!out) { printf("Malloc error!"); exit(-1); }
 	out[1] = '\0';
 	out[0] = str[idx];
 	return ScratchSetString(out);

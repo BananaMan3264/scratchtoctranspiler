@@ -245,7 +245,7 @@ void DrawLine(float x_1, float y_1, float x_2, float y_2, float thickness, int c
 		SDL_Rect rect;
 		rect.x = x1;
 		rect.y = min(y1,y2);
-		rect.w = t;
+		rect.w = t * 2;
 		rect.h = fabsf(y2 - y1);
 
 		SDL_SetRenderDrawColor(renderer, r, g, b, a);

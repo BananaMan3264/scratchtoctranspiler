@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "scratch.h"
+#include "garbagecollector.h"
 
 ScratchValue ScratchSetDouble(double d) 
 {
@@ -76,7 +77,7 @@ char* ScratchVarGetString(ScratchValue var)
 	switch (var.ScratchType)
 	{
 	case ScratchType_Number:
-		buf = malloc(20); if (!buf) { printf("Malloc error!"); exit(-1); }
+		buf = gc_malloc(20); if (!buf) { printf("Malloc error!"); exit(-1); }
 		snprintf(buf, 20, "%g", var.data.Number);
 		return buf;
 	case ScratchType_Bool:

@@ -3,6 +3,7 @@
 #include <string.h>
 #include "types.h"
 #include "scratch.h"
+#include "garbagecollector.h"
 
 bool operator_equals_t(ScratchValue a, ScratchValue b)
 {

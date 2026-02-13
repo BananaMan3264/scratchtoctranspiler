@@ -40,8 +40,8 @@ String SanitiseScratchNameToC(String varName)
 		unsigned char c = varName.data[i];
 		if (c > 127) 
 		{
-			str.data[j] = ((c & 0b11110000) >> 4) + 'b'; j++;
-			str.data[j] = (c & 0b00001111) + 'b'; j++;
+			str.data[j] = ((c & 0b11110000) >> 4) + 'c'; j++;
+			str.data[j] = (c & 0b00001111) + 'c'; j++;
 			continue;
 		}
 		switch (varName.data[i])

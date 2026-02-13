@@ -7,6 +7,7 @@
 #include"types.h"
 #include"sound.h"
 #include"scratch.h"
+#include"garbagecollector.h"
 
 SDL_Renderer* renderer;
 
@@ -22,13 +23,17 @@ float fps = 0.0f;
 long long wait_duration = (1 / (double)FPS_CAP) * 1000;
 long long last_time = 0;
 
+int gc_count = 0;
+
+bool gc_enabled = true;
+
 void update_fps() {
 	Uint32 current = SDL_GetTicks();
 	frames++;
 
 	if (current > lastTime + 1000) {  // 1 second passed
 		fps = frames * 1000.0f / (current - lastTime);
-		//printf("FPS: %f\n", fps);
+		printf("FPS: %f\n", fps);
 		lastTime = current;
 		frames = 0;
 	}
@@ -81,12 +86,25 @@ void Render()
 
 	draw();
 
+	gc_count++;
+
+	if (gc_count == 30)
+	{
+		gc_count = 0;
+		if (gc_enabled)
+		{
+			gc_tick();
+		}
+	}
+
 	SDL_RenderPresent(renderer);
 }
 
 int main()
 {
 	mouseDown = ScratchSetBool(false);
+
+	gc_init();
 
 	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO))
 	{

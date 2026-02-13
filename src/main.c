@@ -77,7 +77,7 @@ int main(int argc, char**argv)
 	fprintf(output, "#define YIELD TRUE_YIELD;\n#include \"../runtime/scratch.h\"\n#include \"../runtime/motion.h\"\n#include \"../runtime/looks.h\"\n#include \"../runtime/sound.h\"\n");
 	fprintf(output, "#include \"../runtime/operators.h\"\n#include \"../runtime/control.h\"\n#include \"../runtime/sensing.h\"\n#include \"../runtime/data.h\"\n#include \"../runtime/pen.h\"\n");
 	fprintf(output, "#include \"../runtime/turbowarp.h\"\n");
-	fprintf(output, "#include <libco.h>\n\nextern cothread_t scheduler;\nextern bool delete_thread;\nextern bool stop_all;\nextern bool stop_other;\n\n");
+	fprintf(output, "#include <libco.h>\n\nextern cothread_t scheduler;\nextern bool delete_thread;\nextern bool stop_all;\nextern bool stop_other;\nextern bool gc_enabled;\n\n");
 
 	fprintf(scheduler, "#include<SDL2/SDL.h>\n#include<libco.h>\n#include\"output.h\"\n#include\"../runtime/main.h\"\n#include\"../runtime/types.h\"\n#include\"../schedule_manager.h\"\n\n");
 	fprintf(scheduler, "extern bool keysdown[];\nextern int keysdownheld[];\nThreadList threads;\ncothread_t scheduler;\ncothread_t draw_thread;\nbool delete_thread = false;\nbool stop_all = false;\nbool stop_other = false;\nextern int activeSprite;\n\n");
@@ -86,6 +86,85 @@ int main(int argc, char**argv)
 	fprintf(mainh, "#include \"../runtime/types.h\"\n");
 
 	vecFunction* functions_arr = malloc(sizeof(vecFunction) * spritecount);
+
+	int vars_count = 0;
+	for (int i = 0; i < spritecount; i++)
+	{
+		struct json_object* vars = json_object_object_get(json_object_array_get_idx(json_object_object_get(project, "targets"), i), "variables");
+
+		json_object_object_foreach(vars, key, val)
+		{
+			vars_count++;
+		}
+	}
+	for (int i = 0; i < spritecount; i++) 
+	{
+		struct json_object* vars = json_object_object_get(json_object_array_get_idx(json_object_object_get(project, "targets"), i), "variables");
+		
+		json_object_object_foreach(vars, key, val)
+		{
+			fprintf(output, "ScratchValue %s;\n", SanitiseScratchNameToC(AsManagedString(key)).data);
+		}
+	}
+	if (vars_count)
+	{
+		fprintf(output, "\nScratchValue* vars[] = \n{");
+		for (int i = 0; i < spritecount; i++)
+		{
+			struct json_object* vars = json_object_object_get(json_object_array_get_idx(json_object_object_get(project, "targets"), i), "variables");
+
+			json_object_object_foreach(vars, key, val)
+			{
+				fprintf(output, "\t&%s,\n", SanitiseScratchNameToC(AsManagedString(key)).data);
+			}
+		}
+		fprintf(output, "};\n\n");
+	}
+	else 
+	{
+		fprintf(output, "\nScratchValue* vars[] = { NULL };\n\n");
+	}
+
+	int lists_count = 0;
+	for (int i = 0; i < spritecount; i++)
+	{
+		struct json_object* vars = json_object_object_get(json_object_array_get_idx(json_object_object_get(project, "targets"), i), "lists");
+
+		json_object_object_foreach(vars, key, val)
+		{
+			lists_count++;
+		}
+	}
+
+	for (int i = 0; i < spritecount; i++)
+	{
+		struct json_object* vars = json_object_object_get(json_object_array_get_idx(json_object_object_get(project, "targets"), i), "lists");
+
+		json_object_object_foreach(vars, key, val)
+		{
+			fprintf(output, "ScratchList %s;\n", SanitiseScratchNameToC(AsManagedString(key)).data);
+		}
+	}
+	if (lists_count)
+	{
+		fprintf(output, "\nScratchList* lists[] = \n{");
+		for (int i = 0; i < spritecount; i++)
+		{
+			struct json_object* vars = json_object_object_get(json_object_array_get_idx(json_object_object_get(project, "targets"), i), "lists");
+
+			json_object_object_foreach(vars, key, val)
+			{
+				fprintf(output, "\t&%s,\n", SanitiseScratchNameToC(AsManagedString(key)).data);
+			}
+		}
+		fprintf(output, "};\n\n");
+	}
+	else
+	{
+		fprintf(output, "\nScratchList* lists[] = { NULL };\n\n");
+	}
+
+	fprintf(output, "int vars_length = %i, lists_length = %i;\n", vars_count, lists_count);
 
 	for (int i = 0; i < spritecount; i++)
 	{
