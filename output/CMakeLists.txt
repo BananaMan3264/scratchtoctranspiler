@@ -24,13 +24,13 @@ endif()
 add_library(libco STATIC
 	libco/libco.c
 	libco/${LIBCO_BACKEND}
-)
+ "runtime/event.h")
 
 target_include_directories(libco PUBLIC libco)
 
 
 
-add_executable(scratchruntime runtime/garbagecollector.c "runtime/main.h" "schedule_manager.c" "schedule_manager.h" "runtime/sound.c" "runtime/sound.h" "generated/sprite_data.c" "generated/output.c" runtime/scratch.c runtime/main.c runtime/motion.c runtime/looks.c runtime/operators.c runtime/renderer.c runtime/renderer.h   "runtime/control.c" "runtime/control.h" "generated/sprite_data.h" "runtime/sensing.c" "runtime/sensing.h" "runtime/data.c" "runtime/data.h" "runtime/pen.c" "runtime/pen.h" "generated/schedule.c" "runtime/schedule.h" "runtime/main.h" "schedule_manager.c" "schedule_manager.h" "runtime/sound.c" "runtime/sound.h")
+add_executable(scratchruntime runtime/garbagecollector.c "runtime/main.h" "schedule_manager.c" "schedule_manager.h" "runtime/sound.c" "runtime/sound.h" "generated/sprite_data.c" "generated/output.c" runtime/scratch.c runtime/main.c runtime/motion.c runtime/looks.c runtime/operators.c runtime/renderer.c runtime/renderer.h   "runtime/control.c" "runtime/control.h" "generated/sprite_data.h" "runtime/sensing.c" "runtime/sensing.h" "runtime/data.c" "runtime/data.h" "runtime/pen.c" "runtime/pen.h" "generated/schedule.c" "runtime/schedule.h" "runtime/main.h" "schedule_manager.c" "schedule_manager.h" "runtime/sound.c" "runtime/sound.h" "runtime/event.h")
 
 target_link_libraries(scratchruntime PRIVATE
 	SDL2::SDL2

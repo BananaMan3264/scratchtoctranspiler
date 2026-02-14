@@ -66,6 +66,7 @@ get_by_type:
 		arg.data.text = AsManagedString(json_object_get_string(json_object_array_get_idx(this, 1)));
 		arg.type = ArgType_String;
 		break;
+	case 11:
 	case ArgType_Variable:
 		arg.data.text = SanitiseScratchNameToC(AsManagedString(json_object_get_string(json_object_array_get_idx(this, 2))));
 		arg.type = ArgType_Variable;
@@ -391,6 +392,43 @@ vecFunction ParseText(struct json_object* blocks)
 			f.proccode = AsUnmanagedString(malloc(length));
 
 			snprintf(f.proccode.data, length, "_%s_%s%s", sprite_index, str2.data, opcode);
+
+			free(str2.data);
+
+			f.warp = false;
+
+			std_vector_pushback(functions, f);
+		}
+		else if (strcmp(opcode, "event_whenbroadcastreceived") == 0)
+		{
+			Function f;
+
+			f.opcode = event_whenbroadcastreceived;
+
+			vecScratchBlock lines;
+
+			lines.allocated_size = 8; lines.length = 0; lines.sizeoftype = sizeof(ScratchBlock); lines.data = malloc(sizeof(ScratchBlock) * lines.allocated_size); if (!lines.data) {
+				exit(-1);
+			}
+
+			f.blocks = lines;
+
+			f.args = 0;
+			f.next = AsManagedString(json_object_get_string(json_object_object_get(block, "next")));
+
+			String str2 = SanitiseScratchNameToC(AsManagedString(key));
+
+			char* broadcast = SanitiseScratchNameToC(AsManagedString(json_object_get_string(json_object_array_get_idx(json_object_object_get(json_object_object_get(block, "fields"), "BROADCAST_OPTION"),1)))).data;
+
+			int length = strlen(str2.data) + strlen(opcode) + strlen(sprite_index) + strlen(broadcast) + 4;
+			
+			f.proccode = AsUnmanagedString(malloc(length));
+
+			f.argids = malloc(sizeof(String));
+
+			f.argids[0] = SafeStringMerge(AsManagedString(broadcast), AsManagedString(""));
+
+			snprintf(f.proccode.data, length, "_%s_%s%s_%s", sprite_index, str2.data, opcode, broadcast);
 
 			free(str2.data);
 

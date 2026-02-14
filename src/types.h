@@ -25,6 +25,8 @@ enum FunctionEvents
 	event_whenkeypressed_right_arrow,
 	event_whenkeypressed_enter,
 
+	event_whenbroadcastreceived,
+
 	event_whenkeypressed_a,
 	event_whenkeypressed_b,
 	event_whenkeypressed_c,

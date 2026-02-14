@@ -10,7 +10,6 @@
 	- When this sprite clicked
 	- When backdrop switches to
 	- When loudness >
-- The entire messaging system
 - The entire clone system
 - Collision system
 	- Touching mouse / sprite / edge

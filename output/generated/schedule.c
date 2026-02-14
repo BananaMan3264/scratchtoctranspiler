@@ -24,7 +24,7 @@ void RunScheduler()
 
 	_0_Init();
 	_1_Init();
-	AddThread(THREAD(co_create(64 * 1024, _1_Yaeevent_whenflagclicked),1));
+	_2_Init();
 
 	while (1)
 	{
@@ -36,6 +36,18 @@ void RunScheduler()
 			if (stop_all) { while (threads.length) { RemoveThread(0); } stop_all = false; }
 			if (stop_other) { cothread_t this = threads.data[i].thread; int this_index = threads.data[i].index; for (int i = 0; i < threads.length; i++) { if (threads.data[i].index == this_index && threads.data[i].thread != this) { RemoveThread(i--); } } stop_other = false; }
 		}
+		if (keysdownheld[SDL_SCANCODE_SPACE] == 1)
+		{
+			AddThread(THREAD(co_create(64 * 1024, _1_Yafevent_whenkeypressed),1));
+		}
 		Render();
 	}
 }
+void broadcast_YaGgbaEaXa8a0a5ara1a9aNaraeaCa7pbaFalaqob()
+{
+	AddThread(THREAD(co_create(64 * 1024, _1_Yagevent_whenbroadcastreceived_YaGgbaEaXa8a0a5ara1a9aNaraeaCa7pbaFalaqob),1));
+	AddThread(THREAD(co_create(64 * 1024, _1_Yahevent_whenbroadcastreceived_YaGgbaEaXa8a0a5ara1a9aNaraeaCa7pbaFalaqob),1));
+	AddThread(THREAD(co_create(64 * 1024, _1_Yaievent_whenbroadcastreceived_YaGgbaEaXa8a0a5ara1a9aNaraeaCa7pbaFalaqob),1));
+	AddThread(THREAD(co_create(64 * 1024, _2_Yamevent_whenbroadcastreceived_YaGgbaEaXa8a0a5ara1a9aNaraeaCa7pbaFalaqob),1));
+}
+

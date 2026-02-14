@@ -10,6 +10,51 @@
 
 char* sprite_index;
 
+typedef struct StringList
+{
+	void** data;
+	size_t allocated_size;
+	size_t length;
+} StringList;
+
+StringList broadcasts;
+
+void initialiseBroadcasts()
+{
+	broadcasts.data = malloc(sizeof(void*) * 8); if (!broadcasts.data) { printf("Malloc error!"); exit(-1); }
+	broadcasts.allocated_size = 8;
+	broadcasts.length = 0;
+}
+
+void resizeBroadcasts(int length)
+{
+	broadcasts.allocated_size = length;
+	void** temp = realloc(broadcasts.data, broadcasts.allocated_size * sizeof(void*));
+	if (!temp) { exit(-1); }
+	broadcasts.data = temp;
+}
+
+void addToBroadcasts(void* data)
+{
+	if (broadcasts.length + 1 > broadcasts.allocated_size)
+	{
+		resizeBroadcasts(broadcasts.allocated_size * 2);
+	}
+	broadcasts.data[broadcasts.length] = data;
+	broadcasts.length++;
+}
+
+bool broadcastsContains(void* item)
+{
+	for (int i = 0; i < broadcasts.length; i++)
+	{
+		if (strcmp(item, broadcasts.data[i]) == 0)
+		{
+			return true;
+		}
+	}
+	return false;
+}
 
 int main(int argc, char**argv)
 {
@@ -76,8 +121,8 @@ int main(int argc, char**argv)
 
 	fprintf(output, "#define YIELD TRUE_YIELD;\n#include \"../runtime/scratch.h\"\n#include \"../runtime/motion.h\"\n#include \"../runtime/looks.h\"\n#include \"../runtime/sound.h\"\n");
 	fprintf(output, "#include \"../runtime/operators.h\"\n#include \"../runtime/control.h\"\n#include \"../runtime/sensing.h\"\n#include \"../runtime/data.h\"\n#include \"../runtime/pen.h\"\n");
-	fprintf(output, "#include \"../runtime/turbowarp.h\"\n");
-	fprintf(output, "#include <libco.h>\n\nextern cothread_t scheduler;\nextern bool delete_thread;\nextern bool stop_all;\nextern bool stop_other;\nextern bool gc_enabled;\n\n");
+	fprintf(output, "#include \"../runtime/turbowarp.h\"\n#include \"../runtime/event.h\"\n");
+	fprintf(output, "#include <libco.h>\n\nextern cothread_t scheduler;\nextern bool delete_thread;\nextern bool stop_all;\nextern bool stop_other;\nextern bool gc_enabled;\nextern int activeSprite;\n\n");
 
 	fprintf(scheduler, "#include<SDL2/SDL.h>\n#include<libco.h>\n#include\"output.h\"\n#include\"../runtime/main.h\"\n#include\"../runtime/types.h\"\n#include\"../schedule_manager.h\"\n\n");
 	fprintf(scheduler, "extern bool keysdown[];\nextern int keysdownheld[];\nThreadList threads;\ncothread_t scheduler;\ncothread_t draw_thread;\nbool delete_thread = false;\nbool stop_all = false;\nbool stop_other = false;\nextern int activeSprite;\n\n");
@@ -196,7 +241,7 @@ int main(int argc, char**argv)
 
 		struct json_object* lists = json_object_object_get(json_object_array_get_idx(json_object_object_get(project, "targets"), si), "lists");
 
-		GetFullProgram(mainh, output, scheduler, vars, lists, functions, blocks);
+		GetFullProgram(mainh, output, scheduler, vars, lists, functions, blocks, si);
 		functions_arr[i] = functions;
 	}
 
@@ -217,6 +262,17 @@ int main(int argc, char**argv)
 		for (int i = 0; i < functions_arr[j].length; i++)
 		{
 			FunctionsPresent[j][functions_arr[j].data[i].opcode] = true;
+		}
+
+		if (FunctionsPresent[j][event_whenflagclicked])
+		{
+			for (int i = 0; i < functions_arr[j].length; i++)
+			{
+				if (functions_arr[j].data[i].opcode == event_whenflagclicked)
+				{
+					fprintf(scheduler, "\tAddThread(THREAD(co_create(64 * 1024, %s),%i));\n", functions_arr[j].data[i].proccode.data, j);
+				}
+			}
 		}
 
 		if (FunctionsPresent[j][event_whenflagclicked])
@@ -330,18 +386,18 @@ int main(int argc, char**argv)
 		addkeysh(SDL_SCANCODE_PERIOD, event_whenkeypressed_right_traingle_bracket);
 		addkeysh(SDL_SCANCODE_GRAVE, event_whenkeypressed_tilda);
 
-		addkey(SDL_SCANCODE_BACKSPACE,event_whenkeypressed_backspace);
-		addkey(SDL_SCANCODE_DELETE,event_whenkeypressed_delete);
+		addkey(SDL_SCANCODE_BACKSPACE, event_whenkeypressed_backspace);
+		addkey(SDL_SCANCODE_DELETE, event_whenkeypressed_delete);
 		addkey2(SDL_SCANCODE_LSHIFT, SDL_SCANCODE_RSHIFT, event_whenkeypressed_shift);
-		addkey(SDL_SCANCODE_CAPSLOCK,event_whenkeypressed_caps_lock);
-		addkey(SDL_SCANCODE_SCROLLLOCK,event_whenkeypressed_scroll_lock);
+		addkey(SDL_SCANCODE_CAPSLOCK, event_whenkeypressed_caps_lock);
+		addkey(SDL_SCANCODE_SCROLLLOCK, event_whenkeypressed_scroll_lock);
 		addkey2(SDL_SCANCODE_LCTRL, SDL_SCANCODE_RCTRL,event_whenkeypressed_control);
-		addkey(SDL_SCANCODE_ESCAPE,event_whenkeypressed_escape);
-		addkey(SDL_SCANCODE_INSERT,event_whenkeypressed_insert);
-		addkey(SDL_SCANCODE_HOME,event_whenkeypressed_home);
-		addkey(SDL_SCANCODE_END,event_whenkeypressed_end);
-		addkey(SDL_SCANCODE_PAGEUP,event_whenkeypressed_page_up);
-		addkey(SDL_SCANCODE_PAGEDOWN,event_whenkeypressed_page_down);
+		addkey(SDL_SCANCODE_ESCAPE, event_whenkeypressed_escape);
+		addkey(SDL_SCANCODE_INSERT, event_whenkeypressed_insert);
+		addkey(SDL_SCANCODE_HOME, event_whenkeypressed_home);
+		addkey(SDL_SCANCODE_END, event_whenkeypressed_end);
+		addkey(SDL_SCANCODE_PAGEUP, event_whenkeypressed_page_up);
+		addkey(SDL_SCANCODE_PAGEDOWN, event_whenkeypressed_page_down);
 
 #undef addkey()
 #undef addkeysh()
@@ -349,6 +405,43 @@ int main(int argc, char**argv)
 #undef addkey2()
 	}
 	fprintf(scheduler, "\t\tRender();\n\t}\n}\n");
+
+	initialiseBroadcasts();
+
+	for (int j = 0; j < spritecount; j++)
+	{
+		if (FunctionsPresent[j][event_whenbroadcastreceived])
+		{
+			for (int i = 0; i < functions_arr[j].length; i++)
+			{
+				if (functions_arr[j].data[i].opcode == event_whenbroadcastreceived)
+				{
+					if (!broadcastsContains(functions_arr[j].data[i].argids[0].data))
+					{
+						fprintf(scheduler, "void broadcast_%s()\n{\n", functions_arr[j].data[i].argids[0].data);
+						for (int j1 = 0; j1 < spritecount; j1++)
+						{
+							if (FunctionsPresent[j][event_whenbroadcastreceived])
+							{
+								for (int i1 = 0; i1 < functions_arr[j1].length; i1++)
+								{
+									if (functions_arr[j1].data[i1].opcode == event_whenbroadcastreceived)
+									{
+										if (strcmp(functions_arr[j].data[i].argids[0].data, functions_arr[j1].data[i1].argids[0].data) == 0)
+										{
+											fprintf(scheduler, "\tAddThread(THREAD(co_create(64 * 1024, %s),1));\n", functions_arr[j1].data[i1].proccode.data);
+										}
+									}
+								}
+							}
+						}
+						addToBroadcasts(functions_arr[j].data[i].argids[0].data);
+						fprintf(scheduler, "}\n\n");
+					}
+				}
+			}
+		}
+	}
 
 	fclose(mainh);
 	fclose(output);

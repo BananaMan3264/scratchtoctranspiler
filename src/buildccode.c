@@ -509,7 +509,7 @@ fprintf(file, " };\n");
 	fclose(header);
 }
 
-char* GetFullProgram(FILE* header_file, FILE* source_file, FILE* scheduler, struct json_object* variables, struct json_object* lists, vecFunction functions, struct json_object* blocks)
+char* GetFullProgram(FILE* header_file, FILE* source_file, FILE* scheduler, struct json_object* variables, struct json_object* lists, vecFunction functions, struct json_object* blocks, int working_index)
 {
 
 	fprintf(header_file, "void _%s_Init();\n", sprite_index);
@@ -595,6 +595,8 @@ char* GetFullProgram(FILE* header_file, FILE* source_file, FILE* scheduler, stru
 			fprintf(source_file, "ScratchValue %s", functions.data[i].argids[functions.data[i].args - 1].data);
 		}
 		PRINT_INDENTATION fprintf(source_file, ") \n{\n");
+		indentation++;
+		PRINT_INDENTATION fprintf(source_file, "activeSprite = %i;\n", working_index);
 		if (functions.data[i].warp) 
 		{
 			fprintf(source_file, "#define YIELD\n");
@@ -603,7 +605,6 @@ char* GetFullProgram(FILE* header_file, FILE* source_file, FILE* scheduler, stru
 		{
 			fprintf(source_file, "#define YIELD FUNCTION_YIELD\n");
 		}
-		indentation++;
 		for (int j = 0; j < functions.data[i].blocks.length; j++) 
 		{
 #define THIS functions.data[i].blocks.data[j]
