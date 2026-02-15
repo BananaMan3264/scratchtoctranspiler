@@ -25,18 +25,14 @@ ScratchValue* vars[] =
 {	&YAbajaEakbba4cbaidbcbaFak1beba8axfbaAaVgbhbamayibavaaaraiaaabalae,
 };
 
-ScratchList YebdbhbubawaZaha4azawAbayafaCaVacaTaVa2hb;
 
-ScratchList* lists[] = 
-{	&YebdbhbubawaZaha4azawAbayafaCaVacaTaVa2hb,
-};
+ScratchList* lists[] = { NULL };
 
-int vars_length = 1, lists_length = 1;
+int vars_length = 1, lists_length = 0;
 
 void _0_Init()
 {
-	YAbajaEakbba4cbaidbcbaFak1beba8axfbaAaVgbhbamayibavaaaraiaaabalae = ScratchSetString("apple banana");
-	YebdbhbubawaZaha4azawAbayafaCaVacaTaVa2hb = initialiseList();
+	YAbajaEakbba4cbaidbcbaFak1beba8axfbaAaVgbhbamayibavaaaraiaaabalae = ScratchSetDouble(2026);
 }
 
 
@@ -45,59 +41,13 @@ void _1_Init()
 {
 }
 
-void _1_Yagevent_whenbroadcastreceived_YaGgbaEaXa8a0a5ara1a9aNaraeaCa7pbaFalaqob();
-void _1_Yahevent_whenbroadcastreceived_YaGgbaEaXa8a0a5ara1a9aNaraeaCa7pbaFalaqob();
-void _1_Yaievent_whenbroadcastreceived_YaGgbaEaXa8a0a5ara1a9aNaraeaCa7pbaFalaqob();
-void _1_Yafevent_whenkeypressed();
+void _1_Yaaevent_whenflagclicked();
 
-void _1_Yagevent_whenbroadcastreceived_YaGgbaEaXa8a0a5ara1a9aNaraeaCa7pbaFalaqob() 
+void _1_Yaaevent_whenflagclicked() 
 {
 	activeSprite = 1;
 #define YIELD FUNCTION_YIELD
-	motion_goto(motion_goto_menuYa_araaanadaoama_());
-#define YIELD TRUE_YIELD
-	END_THREAD
-}
-
-void _1_Yahevent_whenbroadcastreceived_YaGgbaEaXa8a0a5ara1a9aNaraeaCa7pbaFalaqob() 
-{
-	activeSprite = 1;
-#define YIELD FUNCTION_YIELD
-	motion_pointtowards(motion_pointtowards_menuYa_araaanadaoama_());
-#define YIELD TRUE_YIELD
-	END_THREAD
-}
-
-void _1_Yaievent_whenbroadcastreceived_YaGgbaEaXa8a0a5ara1a9aNaraeaCa7pbaFalaqob() 
-{
-	activeSprite = 1;
-#define YIELD FUNCTION_YIELD
-	looks_setsizeto(operator_random(ScratchSetDouble(50), ScratchSetDouble(150)));
-#define YIELD TRUE_YIELD
-	END_THREAD
-}
-
-void _1_Yafevent_whenkeypressed() 
-{
-	activeSprite = 1;
-#define YIELD FUNCTION_YIELD
-	event_broadcast(YaGgbaEaXa8a0a5ara1a9aNaraeaCa7pbaFalaqob);
-#define YIELD TRUE_YIELD
-	END_THREAD
-}
-
-
-void _2_Init()
-{
-}
-
-void _2_Yamevent_whenbroadcastreceived_YaGgbaEaXa8a0a5ara1a9aNaraeaCa7pbaFalaqob();
-
-void _2_Yamevent_whenbroadcastreceived_YaGgbaEaXa8a0a5ara1a9aNaraeaCa7pbaFalaqob() 
-{
-	activeSprite = 2;
-#define YIELD FUNCTION_YIELD
-	motion_goto(motion_goto_menuYa_araaanadaoama_());
+	Yqekcknqekcknalaoagqekcknqekckniblbas(ScratchSetString("abc"));
 #define YIELD TRUE_YIELD
 	END_THREAD
 }

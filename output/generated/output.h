@@ -1,9 +1,4 @@
 #include "../runtime/types.h"
 void _0_Init();
 void _1_Init();
-void _1_Yagevent_whenbroadcastreceived_YaGgbaEaXa8a0a5ara1a9aNaraeaCa7pbaFalaqob();
-void _1_Yahevent_whenbroadcastreceived_YaGgbaEaXa8a0a5ara1a9aNaraeaCa7pbaFalaqob();
-void _1_Yaievent_whenbroadcastreceived_YaGgbaEaXa8a0a5ara1a9aNaraeaCa7pbaFalaqob();
-void _1_Yafevent_whenkeypressed();
-void _2_Init();
-void _2_Yamevent_whenbroadcastreceived_YaGgbaEaXa8a0a5ara1a9aNaraeaCa7pbaFalaqob();
+void _1_Yaaevent_whenflagclicked();

@@ -47,3 +47,52 @@ ScratchValue sensing_timer()
 {
 	return ScratchSetDouble(clock() / (double)CLOCKS_PER_SEC);
 }
+
+ScratchValue sensing_currentYaYaEaAaR() 
+{
+	time_t t = time(NULL);
+	struct tm* tm_info = localtime(&t);
+	return ScratchSetDouble(tm_info->tm_year + 1900);
+}
+
+ScratchValue sensing_currentYaMaOaNaTaH() 
+{
+	time_t t = time(NULL);
+	struct tm* tm_info = localtime(&t);
+	return ScratchSetDouble(tm_info->tm_mon + 1);
+}
+
+ScratchValue sensing_currentYaDaAaTaE() 
+{
+	time_t t = time(NULL);
+	struct tm* tm_info = localtime(&t);
+	return ScratchSetDouble(tm_info->tm_mday);
+}
+
+ScratchValue sensing_currentYaDaAaYaOaFaWaEaEaK() 
+{
+	time_t t = time(NULL);
+	struct tm* tm_info = localtime(&t);
+	return ScratchSetDouble(tm_info->tm_wday + 1);
+}
+
+ScratchValue sensing_currentYaHaOaUaR() 
+{
+	time_t t = time(NULL);
+	struct tm* tm_info = localtime(&t);
+	return ScratchSetDouble(tm_info->tm_hour);
+}
+
+ScratchValue sensing_currentYaMaIaNaUaTaE() 
+{
+	time_t t = time(NULL);
+	struct tm* tm_info = localtime(&t);
+	return ScratchSetDouble(tm_info->tm_min);
+}
+
+ScratchValue sensing_currentYaSaEaCaOaNaD() 
+{
+	time_t t = time(NULL);
+	struct tm* tm_info = localtime(&t);
+	return ScratchSetDouble(tm_info->tm_sec);
+}

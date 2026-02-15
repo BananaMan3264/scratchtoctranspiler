@@ -5,6 +5,14 @@ ScratchValue sensing_keypressed(int key);
 ScratchValue sensing_mousex();
 ScratchValue sensing_mousey();
 
+ScratchValue sensing_currentYaYaEaAaR();
+ScratchValue sensing_currentYaMaOaNaTaH();
+ScratchValue sensing_currentYaDaAaTaE();
+ScratchValue sensing_currentYaDaAaYaOaFaWaEaEaK();
+ScratchValue sensing_currentYaHaOaUaR();
+ScratchValue sensing_currentYaMaIaNaUaTaE();
+ScratchValue sensing_currentYaSaEaCaOaNaD();
+
 extern ScratchValue mouseDown;
 
 #define sensing_mousedown() mouseDown
