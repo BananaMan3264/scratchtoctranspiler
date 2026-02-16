@@ -17,6 +17,6 @@ bool ScratchVarGetBool(ScratchValue var);
 char* ScratchVarGetString(ScratchValue var);
 ScratchValue sensing_timer();
 
-#define FUNCTION_YIELD enable_gc = false;  co_switch(scheduler); enable_gc = true;
+#define FUNCTION_YIELD gc_enabled = false;  co_switch(scheduler); gc_enabled = true;
 #define TRUE_YIELD co_switch(scheduler);
 #define END_THREAD delete_thread = true; TRUE_YIELD

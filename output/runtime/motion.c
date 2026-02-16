@@ -13,11 +13,15 @@ extern int activeSprite;
 
 extern double scratch_motion_SpriteX[];
 extern double scratch_motion_SpriteY[];
+extern double scratch_motion_SpriteWidth[];
+extern double scratch_motion_SpriteHeight[];
 extern double scratch_motion_SpriteDirection[];
 extern int scratch_motion_SpriteRotStyle[];
 
 #define SX scratch_motion_SpriteX[activeSprite]
 #define SY scratch_motion_SpriteY[activeSprite]
+#define SW scratch_motion_SpriteWidth[activeSprite]
+#define SH scratch_motion_SpriteHeight[activeSprite]
 #define SD scratch_motion_SpriteDirection[activeSprite]
 #define SR scratch_motion_SpriteRotStyle[activeSprite]
 
@@ -123,64 +127,53 @@ void motion_ifonedgebounce()
 	//TODO: Fix this when real sprite bounds work
 	//TODO: This doesn't work at all. Fix it completely
 
-	//double distLeft    = max(0, (STAGE_WIDTH  / 2) + bounds.left  );
-	//double distTop     = max(0, (STAGE_HEIGHT / 2) - bounds.top   );
-	//double distRight   = max(0, (STAGE_WIDTH  / 2) - bounds.right );
-	//double distBottom  = max(0, (STAGE_HEIGHT / 2) + bounds.bottom);
+	float w = SW;
+	float h = SH;
 
-	double distLeft    = max(0, (STAGE_WIDTH  / 2) + 50);
-	double distTop     = max(0, (STAGE_HEIGHT / 2) - 50);
-	double distRight   = max(0, (STAGE_WIDTH  / 2) - 50);
-	double distBottom  = max(0, (STAGE_HEIGHT / 2) + 50);
-
-	//double distLeft    = max(0, (STAGE_WIDTH  / 2)); 
-	//double distTop     = max(0, (STAGE_HEIGHT / 2));
-	//double distRight   = max(0, (STAGE_WIDTH  / 2)); 
-	//double distBottom  = max(0, (STAGE_HEIGHT / 2));
-
-	int nearestEdge = 0;
-	double minDist = distLeft + 1;
+	double distLeft = max(0, (STAGE_WIDTH / 2) + (SX - w / 2));
+	double distTop = max(0, (STAGE_HEIGHT / 2) - (SY + h / 2));
+	double distRight = max(0, (STAGE_WIDTH / 2) - (SX + w / 2));
+	double distBottom = max(0, (STAGE_HEIGHT / 2) + (SY - h / 2));
+	// Find the nearest edge.
+	char nearestEdge = ' ';
+	double minDist = distBottom + 1;
 	if (distLeft < minDist) {
 		minDist = distLeft;
-		nearestEdge = 0; // left
+		nearestEdge = 'l';
 	}
 	if (distTop < minDist) {
 		minDist = distTop;
-		nearestEdge = 1; // top
+		nearestEdge = 't';
 	}
 	if (distRight < minDist) {
 		minDist = distRight;
-		nearestEdge = 2; // right
+		nearestEdge = 'r';
 	}
 	if (distBottom < minDist) {
 		minDist = distBottom;
-		nearestEdge = 3; // bottom
+		nearestEdge = 'b';
 	}
-
 	if (minDist > 0) {
 		return; // Not touching any edge.
 	}
-
 	// Point away from the nearest edge.
 	double radians = HALF_PI - SD;
-	double dx =  cos(radians);
-	double dy = -sin(radians);
-	switch (nearestEdge)
-	{
-	case 0:
-			dx = max(0.2, fabs(dx));
-			break;
-	case 1:
-			dy = max(0.2, fabs(dy));
-			break;
-	case 2:
-			dx = 0 - max(0.2, fabs(dx));
-			break;
-	case 3:
-			dy = 0 - max(0.2, fabs(dy));
-			break;
+	double dx = cos(radians);
+	double dy = sin(radians);
+	if (nearestEdge == 'l') {
+		dx = max(0.2, fabs(dx));
 	}
-	SD = atan2(dy, dx) + HALF_PI;
+	else if (nearestEdge == 't') {
+		dy = max(0.2, fabs(dy));
+	}
+	else if (nearestEdge == 'r') {
+		dx = 0 - max(0.2, fabs(dx));
+	}
+	else if (nearestEdge == 'b') {
+		dy = 0 - max(0.2, fabs(dy));
+	}
+	double newDirection = atan2(dy, dx) + HALF_PI;
+	SD = newDirection;
 }
 
 ScratchValue motion_xposition() 

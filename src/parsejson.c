@@ -78,16 +78,34 @@ get_by_type:
 	return arg;
 }
 
-ScratchBlock GetBlock(const char* id, struct json_object* blocks) 
+ScratchBlock GetBlock(const char* id, struct json_object* blocks)
 {
 	ScratchBlock sb;
 	struct json_object* block = json_object_object_get(blocks, id);
 
 	sb.opcode = AsManagedString(json_object_get_string(json_object_object_get(block, "opcode")));
 
+	struct json_object* args = NEXT(block, "inputs");
+
 	if (strcmp(sb.opcode.data, "procedures_call") == 0)
 	{
 		sb.opcode = SanitiseScratchNameToC(AsManagedString(json_object_get_string(NEXT2(block, "mutation", "proccode"))));
+		json_object* argumentids = json_tokener_parse(json_object_get_string(NEXT2(block, "mutation", "argumentids")));
+		
+		sb.args = json_object_array_length(argumentids);
+		sb.argdata = malloc(sizeof(ScratchArgData) * sb.args); if (!sb.argdata) { printf("Malloc error!"); exit(-1); }
+		sb.argtypes = malloc(sizeof(int) * sb.args); if (!sb.argtypes) { printf("Malloc error!"); exit(-1); }
+		for (int i = 0; i < json_object_array_length(argumentids); i++)
+		{
+			char* str = json_object_get_string(json_object_array_get_idx(argumentids, i));
+			
+			ScratchArg a = ParseArg(json_object_object_get(args, str), str);
+
+			sb.argdata[i] = a.data;
+			sb.argtypes[i] = a.type;
+		}
+
+		return sb;
 	}
 
 	struct json_object* fields = NEXT(block, "fields");
@@ -178,7 +196,6 @@ ScratchBlock GetBlock(const char* id, struct json_object* blocks)
 		sb.argdata = malloc(sizeof(ScratchArgData) * sb.args); if (!sb.argdata) { printf("Malloc error!"); exit(-1); }
 		sb.argtypes = malloc(sizeof(int) * sb.args); if (!sb.argtypes) { printf("Malloc error!"); exit(-1); }
 	}
-	struct json_object* args = NEXT(block, "inputs");
 	int i = 0;
 	json_object_object_foreach(args, block_key, block_val)
 	{
@@ -367,6 +384,8 @@ vecFunction ParseText(struct json_object* blocks)
 	json_object_object_foreach(blocks, key, block)
 	{
 		const char* opcode = json_object_get_string(json_object_object_get(block, "opcode"));
+
+		if (opcode == NULL) { continue; }
 
 		if (strcmp(opcode, "event_whenflagclicked") == 0)
 		{

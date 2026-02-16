@@ -20,7 +20,6 @@
 - Set drag mode
 - Loudness reporter
 - Backdrop # of stage reporter
-- current <> reporter
 - days since 2000
 - username
 - Addons?
