@@ -52,16 +52,20 @@ String LineToBlock(ScratchBlock sb, struct json_object* blocks, bool top)
 
 String GetArg(int argtype, ScratchArgData argdata, struct json_object* blocks)
 {
-	switch (argtype) 
+	switch (argtype)
 	{
 	case ArgType_Pointer:
 		return LineToBlock(GetBlock(argdata.idPointer.data, blocks), blocks, false);
-	
+
 	case ArgType_Number:
 	case ArgType_PositiveNumber:
 	case ArgType_NegativeNumber:
 	case ArgType_Integer:
 	case ArgType_Angle:
+		if (strlen(argdata.text.data) == 0)
+		{
+			return AsManagedString("ScratchSetDouble(0)");
+		}
 		return SafeStringMerge(SafeStringMerge(AsManagedString("ScratchSetDouble("), argdata.text), AsManagedString(")"));
 
 	case ArgType_String:
@@ -597,11 +601,7 @@ char* GetFullProgram(FILE* header_file, FILE* source_file, FILE* scheduler, stru
 		PRINT_INDENTATION fprintf(source_file, ") \n{\n");
 		indentation++;
 		PRINT_INDENTATION fprintf(source_file, "activeSprite = %i;\n", working_index);
-		if (functions.data[i].warp) 
-		{
-			fprintf(source_file, "#define YIELD\n");
-		}
-		else 
+		if (functions.data[i].opcode == procedures_prototype && functions.data[i].warp)
 		{
 			fprintf(source_file, "#define YIELD FUNCTION_YIELD\n");
 		}

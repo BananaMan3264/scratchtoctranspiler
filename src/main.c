@@ -115,18 +115,21 @@ int main(int argc, char**argv)
 	FILE* mainh = fopen("../../../output/generated/output.h", "w");
 	FILE* output = fopen("../../../output/generated/output.c", "w");
 	FILE* scheduler = fopen("../../../output/generated/schedule.c", "w");
+	FILE* schedulerh = fopen("../../../output/generated/schedule.h", "w");
 
 	int si = 0;
 	sprite_index = malloc(20);
 
 	fprintf(output, "#define YIELD TRUE_YIELD;\n#include \"../runtime/scratch.h\"\n#include \"../runtime/motion.h\"\n#include \"../runtime/looks.h\"\n#include \"../runtime/sound.h\"\n");
 	fprintf(output, "#include \"../runtime/operators.h\"\n#include \"../runtime/control.h\"\n#include \"../runtime/sensing.h\"\n#include \"../runtime/data.h\"\n#include \"../runtime/pen.h\"\n");
-	fprintf(output, "#include \"../runtime/turbowarp.h\"\n#include \"../runtime/event.h\"\n");
+	fprintf(output, "#include \"../runtime/turbowarp.h\"\n#include \"../runtime/event.h\"\n#include \"schedule.h\"\n");
 	fprintf(output, "#include <libco.h>\n\nextern cothread_t scheduler;\nextern bool delete_thread;\nextern bool stop_all;\nextern bool stop_other;\nextern bool gc_enabled;\nextern int activeSprite;\n\n");
 
 	fprintf(scheduler, "#include<SDL2/SDL.h>\n#include<libco.h>\n#include\"output.h\"\n#include\"../runtime/main.h\"\n#include\"../runtime/types.h\"\n#include\"../schedule_manager.h\"\n\n");
 	fprintf(scheduler, "extern bool keysdown[];\nextern int keysdownheld[];\nThreadList threads;\ncothread_t scheduler;\ncothread_t draw_thread;\nbool delete_thread = false;\nbool stop_all = false;\nbool stop_other = false;\nextern int activeSprite;\n\n");
 	fprintf(scheduler, "\nvoid RunScheduler()\n{\n\tInitialiseThreads();\n\n\tscheduler = co_active();\n\n");
+
+	fprintf(schedulerh, "#include \"../runtime/types.h\"\nvoid RunScheduler();\n\n");
 
 	fprintf(mainh, "#include \"../runtime/types.h\"\n");
 
@@ -274,17 +277,6 @@ int main(int argc, char**argv)
 				}
 			}
 		}
-
-		if (FunctionsPresent[j][event_whenflagclicked])
-		{
-			for (int i = 0; i < functions_arr[j].length; i++)
-			{
-				if (functions_arr[j].data[i].opcode == event_whenflagclicked)
-				{
-					fprintf(scheduler, "\tAddThread(THREAD(co_create(64 * 1024, %s),%i));\n", functions_arr[j].data[i].proccode.data, j);
-				}
-			}
-		}
 	}
 	fprintf(scheduler, "\n\twhile (1)\n\t{\n");
 	fprintf(scheduler, "\t\tfor (int i = 0; i < threads.length; i++)\n\t\t{\n\t\t\tactiveSprite = threads.data[i].index;\n\t\t\tco_switch(threads.data[i].thread);\n\t\t\tif (delete_thread) { RemoveThread(i); i--;  delete_thread = false; }\n");
@@ -418,7 +410,9 @@ int main(int argc, char**argv)
 				{
 					if (!broadcastsContains(functions_arr[j].data[i].argids[0].data))
 					{
-						fprintf(scheduler, "void broadcast_%s()\n{\n", functions_arr[j].data[i].argids[0].data);
+						fprintf(scheduler, "BroadcastInfo broadcast_%s()\n{\n", functions_arr[j].data[i].argids[0].data);
+						fprintf(schedulerh, "BroadcastInfo broadcast_%s();\n", functions_arr[j].data[i].argids[0].data);
+						int length = 0;
 						for (int j1 = 0; j1 < spritecount; j1++)
 						{
 							if (FunctionsPresent[j][event_whenbroadcastreceived])
@@ -429,14 +423,33 @@ int main(int argc, char**argv)
 									{
 										if (strcmp(functions_arr[j].data[i].argids[0].data, functions_arr[j1].data[i1].argids[0].data) == 0)
 										{
-											fprintf(scheduler, "\tAddThread(THREAD(co_create(64 * 1024, %s),1));\n", functions_arr[j1].data[i1].proccode.data);
+											length++;
+										}
+									}
+								}
+							}
+						}
+						fprintf(scheduler, "\tThread* output = malloc(sizeof(Thread)* %i);\n", length);
+						int cnt = 0;
+						for (int j1 = 0; j1 < spritecount; j1++)
+						{
+							if (FunctionsPresent[j][event_whenbroadcastreceived])
+							{
+								for (int i1 = 0; i1 < functions_arr[j1].length; i1++)
+								{
+									if (functions_arr[j1].data[i1].opcode == event_whenbroadcastreceived)
+									{
+										if (strcmp(functions_arr[j].data[i].argids[0].data, functions_arr[j1].data[i1].argids[0].data) == 0)
+										{
+											fprintf(scheduler, "\toutput[%i] = THREAD(co_create(64 * 1024, %s),1); AddThread(output[%i]);\n", cnt, functions_arr[j1].data[i1].proccode.data, cnt);
+											cnt++;
 										}
 									}
 								}
 							}
 						}
 						addToBroadcasts(functions_arr[j].data[i].argids[0].data);
-						fprintf(scheduler, "}\n\n");
+						fprintf(scheduler, "\treturn (BroadcastInfo) {output, %i};\n}\n",length);
 					}
 				}
 			}

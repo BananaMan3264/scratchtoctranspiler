@@ -3,7 +3,7 @@
 #include<SDL2/SDL_image.h>
 #include<stdbool.h>
 #include"renderer.h"
-#include"schedule.h"
+#include"../generated/schedule.h"
 #include"types.h"
 #include"sound.h"
 #include"scratch.h"

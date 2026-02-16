@@ -38,3 +38,15 @@ void RemoveThread(int idx2)
 	memmove(threads.data + idx, threads.data + idx + 1, (threads.length - idx - 1) * sizeof(Thread));
 	threads.length--;
 }
+
+bool isThreadActive(Thread t) 
+{
+	for (int i = 0; i < threads.length; i++) 
+	{
+		if (threads.data[i].thread == t.thread) 
+		{
+			return true;
+		}
+	}
+	return false;
+}

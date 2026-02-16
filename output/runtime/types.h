@@ -7,11 +7,17 @@
 
 #pragma once
 
-typedef struct Thread 
+typedef struct Thread
 {
 	int index;
 	cothread_t thread;
 } Thread;
+
+typedef struct BroadcastInfo
+{
+	Thread* threads;
+	int numthreads;
+} BroadcastInfo;
 
 enum ScratchType
 {
@@ -31,21 +37,21 @@ typedef struct ScratchValue
 	} data;
 } ScratchValue;
 
-typedef struct ScratchList 
+typedef struct ScratchList
 {
 	ScratchValue* data;
 	size_t allocated_size;
 	size_t length;
 } ScratchList;
 
-typedef struct ThreadList 
+typedef struct ThreadList
 {
 	Thread* data;
 	size_t allocated_size;
 	size_t length;
 } ThreadList;
 
-typedef struct lineData 
+typedef struct lineData
 {
 	double x1;
 	double y1;
@@ -55,7 +61,7 @@ typedef struct lineData
 	int colour;
 } lineData;
 
-typedef struct stampData 
+typedef struct stampData
 {
 	int sprite_index;
 	int costume_index;
@@ -89,7 +95,7 @@ typedef struct PenOperations
 	size_t length;
 } PenOperations;
 
-enum PenOperationType 
+enum PenOperationType
 {
 	Pen_Line,
 	Pen_Stamp

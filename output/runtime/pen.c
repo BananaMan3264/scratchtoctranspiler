@@ -78,10 +78,7 @@ void addOpToOps(PenOperation data)
 
 void pen_clear() 
 {
-	initPen();
-	free(ops.data);
-	inited = false;
-	initPen();
+	ops.length = 0;
 }
 
 void penDrawLine(double x1, double y1, double x2, double y2)
