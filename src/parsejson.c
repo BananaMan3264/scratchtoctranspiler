@@ -239,12 +239,17 @@ void PushBlock(const char* id, struct json_object* blocks, vecScratchBlock* line
 			};
 		} lines->data[lines->length] = sb; lines->length++;
 
-		const char* next = json_object_get_string(json_object_array_get_idx(NEXT2(this,"inputs","SUBSTACK"), 1));
-		while (next) 
-		{
-			PushBlock(next, blocks, lines);
+		int this_le = json_object_object_length(NEXT(this, "inputs"));
 
-			next = json_object_get_string(NEXT2(blocks, next, "next"));
+		if (this_le > 1)
+		{
+			const char* next = json_object_get_string(json_object_array_get_idx(NEXT2(this, "inputs", "SUBSTACK"), 1));
+			while (next)
+			{
+				PushBlock(next, blocks, lines);
+
+				next = json_object_get_string(NEXT2(blocks, next, "next"));
+			}
 		}
 
 		sb.opcode = SafeStringMerge(AsManagedString("control_loop_end"),AsManagedString(""));
@@ -256,8 +261,17 @@ void PushBlock(const char* id, struct json_object* blocks, vecScratchBlock* line
 		sb.argdata = malloc(sizeof(ScratchArgData)); if (!sb.argdata) { printf("Malloc error!"); exit(-1); }
 		sb.argtypes = malloc(sizeof(int)); if (!sb.argtypes) { printf("Malloc error!"); exit(-1); }
 
-		sb.argdata[0].text = AsManagedString(json_object_get_string(json_object_array_get_idx(NEXT2(this, "inputs", "CONDITION"), 1)));
-		sb.argtypes[0] = ArgType_Pointer;
+		struct json_object* condition = NEXT2(this, "inputs", "CONDITION");
+		if (condition)
+		{
+			sb.argdata[0].text = AsManagedString(json_object_get_string(json_object_array_get_idx(condition, 1)));
+			sb.argtypes[0] = ArgType_Pointer;
+		}
+		else
+		{
+			sb.argdata[0].text = AsManagedString("0");
+			sb.argtypes[0] = ArgType_Number;
+		}
 
 		if (lines->length + 1 > lines->allocated_size) {
 			{
@@ -267,12 +281,16 @@ void PushBlock(const char* id, struct json_object* blocks, vecScratchBlock* line
 			};
 		} lines->data[lines->length] = sb; lines->length++;
 
-		const char* next = json_object_get_string(json_object_array_get_idx(NEXT2(this, "inputs", "SUBSTACK"), 1));
-		while (next)
+		struct json_object* substack = NEXT2(this, "inputs", "SUBSTACK");
+		if (substack)
 		{
-			PushBlock(next, blocks, lines);
+			const char* next = json_object_get_string(json_object_array_get_idx(substack, 1));
+			while (next)
+			{
+				PushBlock(next, blocks, lines);
 
-			next = json_object_get_string(NEXT2(blocks, next, "next"));
+				next = json_object_get_string(NEXT2(blocks, next, "next"));
+			}
 		}
 
 		if (strcmp(sb.opcode.data, "control_if") == 0)
@@ -285,15 +303,24 @@ void PushBlock(const char* id, struct json_object* blocks, vecScratchBlock* line
 		}
 		sb.args = 0;
 	}
-	else if (strcmp(sb.opcode.data, "control_if_else") == 0) 
+	else if (strcmp(sb.opcode.data, "control_if_else") == 0)
 	{
 		sb.args = 1;
 		sb.opcode = SafeStringMerge(AsManagedString("control_if"), AsManagedString(""));
 		sb.argdata = malloc(sizeof(ScratchArgData)); if (!sb.argdata) { printf("Malloc error!"); exit(-1); }
 		sb.argtypes = malloc(sizeof(int)); if (!sb.argtypes) { printf("Malloc error!"); exit(-1); }
 
-		sb.argdata[0].text = AsManagedString(json_object_get_string(json_object_array_get_idx(NEXT2(this, "inputs", "CONDITION"), 1)));
-		sb.argtypes[0] = ArgType_Pointer;
+		struct json_object* condition = NEXT2(this, "inputs", "CONDITION");
+		if (condition)
+		{
+			sb.argdata[0].text = AsManagedString(json_object_get_string(json_object_array_get_idx(condition, 1)));
+			sb.argtypes[0] = ArgType_Pointer;
+		}
+		else
+		{
+			sb.argdata[0].text = AsManagedString("0");
+			sb.argtypes[0] = ArgType_Number;
+		}
 
 		if (lines->length + 1 > lines->allocated_size) {
 			{
@@ -303,12 +330,17 @@ void PushBlock(const char* id, struct json_object* blocks, vecScratchBlock* line
 			};
 		} lines->data[lines->length] = sb; lines->length++;
 
-		const char* next = json_object_get_string(json_object_array_get_idx(NEXT2(this, "inputs", "SUBSTACK"), 1));
-		while (next)
-		{
-			PushBlock(next, blocks, lines);
+		struct json_object* substack = NEXT2(this, "inputs", "SUBSTACK");
 
-			next = json_object_get_string(NEXT2(blocks, next, "next"));
+		if (substack)
+		{
+			const char* next = json_object_get_string(json_object_array_get_idx(substack, 1));
+			while (next)
+			{
+				PushBlock(next, blocks, lines);
+
+				next = json_object_get_string(NEXT2(blocks, next, "next"));
+			}
 		}
 
 		sb.opcode = SafeStringMerge(AsManagedString("control_else"), AsManagedString(""));
@@ -322,12 +354,17 @@ void PushBlock(const char* id, struct json_object* blocks, vecScratchBlock* line
 			};
 		} lines->data[lines->length] = sb; lines->length++;
 
-		next = json_object_get_string(json_object_array_get_idx(NEXT2(this, "inputs", "SUBSTACK2"), 1));
-		while (next)
-		{
-			PushBlock(next, blocks, lines);
+		struct json_object* substack2 = NEXT2(this, "inputs", "SUBSTACK2");
 
-			next = json_object_get_string(NEXT2(blocks, next, "next"));
+		if (substack2)
+		{
+			const char* next = json_object_get_string(json_object_array_get_idx(NEXT2(this, "inputs", "SUBSTACK2"), 1));
+			while (next)
+			{
+				PushBlock(next, blocks, lines);
+
+				next = json_object_get_string(NEXT2(blocks, next, "next"));
+			}
 		}
 
 		sb.opcode = SafeStringMerge(AsManagedString("control_if_end"), AsManagedString(""));
@@ -345,12 +382,18 @@ void PushBlock(const char* id, struct json_object* blocks, vecScratchBlock* line
 			};
 		} lines->data[lines->length] = sb; lines->length++;
 
-		const char* next = json_object_get_string(json_object_array_get_idx(NEXT2(this, "inputs", "SUBSTACK"), 1));
-		while (next)
-		{
-			PushBlock(next, blocks, lines);
 
-			next = json_object_get_string(NEXT2(blocks, next, "next"));
+		struct json_object* substack = NEXT2(this, "inputs", "SUBSTACK");
+
+		if (substack)
+		{
+			const char* next = json_object_get_string(json_object_array_get_idx(substack, 1));
+			while (next)
+			{
+				PushBlock(next, blocks, lines);
+
+				next = json_object_get_string(NEXT2(blocks, next, "next"));
+			}
 		}
 
 		sb.opcode = SafeStringMerge(AsManagedString("control_loop_end"), AsManagedString(""));
