@@ -12,7 +12,19 @@
 
 extern char* sprite_index;
 
-String GetArg(int argtype, ScratchArgData argdata, struct json_object* blocks);
+typedef struct return_vals 
+{
+	String double_return;
+	String string_return;
+	String bool_return;
+	String scratch_return;
+} return_vals;
+
+#define RETV(dbl,str,bl,scr) (return_vals){dbl, str, bl, scr}
+
+#define MERGE3(a,b,c) SafeStringMerge(SafeStringMerge(a,b),c)
+
+return_vals GetArg(int argtype, ScratchArgData argdata, struct json_object* blocks);
 
 int GetFirstWhenFlagClicked(vecScratchBlock lines)
 {
@@ -25,97 +37,74 @@ int GetFirstWhenFlagClicked(vecScratchBlock lines)
 	}
 }
 
-String LineToBlock(ScratchBlock sb, struct json_object* blocks, bool top)
+#define MERGE_OP(start,val,middle,val2,end) MERGE3(AsManagedString(start),val,MERGE3(AsManagedString(middle),val2,AsManagedString(end)))
+
+#define DEF_2DOUBLE_OPERATOR(opc, id, middle)													\
+if (strcmp(sb.opcode.data, id) == 0)															\
+{																								\
+	String a = GetArg(sb.argtypes[0], sb.argdata[0], blocks).double_return;						\
+	String b = GetArg(sb.argtypes[1], sb.argdata[1], blocks).double_return;						\
+																								\
+	return RETV(MERGE_OP("("opc"((", a, middle, b, ")))"),										\
+		MERGE_OP("ScratchVarGetString(ScratchSetDouble("opc"((", a, middle, b, "))))"),			\
+		MERGE_OP("ScratchVarGetBool(ScratchSetDouble("opc"((", a, middle, b, "))))"),			\
+		MERGE_OP("ScratchSetDouble("opc"((", a, middle, b, ")))"));								\
+}
+
+#define DEF_1DOUBLE_OPERATOR(opc, id)																			\
+if (strcmp(sb.opcode.data, id) == 0)																			\
+{																												\
+	String a = GetArg(sb.argtypes[0], sb.argdata[0], blocks).double_return;										\
+	return RETV(MERGE3(AsManagedString("("opc"(("), a, AsManagedString(")))")),									\
+		MERGE3(AsManagedString("ScratchVarGetString(ScratchSetDouble("opc"(("), a, AsManagedString("))))")),	\
+		MERGE3(AsManagedString("ScratchVarGetBool(ScratchSetDouble("opc"(("), a, AsManagedString("))))")),		\
+		MERGE3(AsManagedString("ScratchSetDouble("opc"(("), a, AsManagedString(")))")));						\
+}
+
+#define DEF_1DOUBLE_BLOCK(opc, id)														\
+if (strcmp(sb.opcode.data, id) == 0)													\
+{																						\
+	String a = GetArg(sb.argtypes[0], sb.argdata[0], blocks).double_return;				\
+	return RETV(AsManagedString(""), AsManagedString(""), AsManagedString(""),			\
+				MERGE3(AsManagedString(""opc"("), a, AsManagedString(");")),			\
+		);																				\
+}		
+
+#define DEF_2DOUBLE_BLOCK(opc, id)														\
+if (strcmp(sb.opcode.data, id) == 0)													\
+{																						\
+	String a = GetArg(sb.argtypes[0], sb.argdata[0], blocks).double_return;				\
+	String b = GetArg(sb.argtypes[1], sb.argdata[1], blocks).double_return;				\
+																						\
+	return RETV(AsManagedString(""), AsManagedString(""), AsManagedString(""),			\
+		MERGE_OP(""opc"(", a, ",", b, ");"));						\
+}																		
+
+
+return_vals LineToBlock(ScratchBlock sb, struct json_object* blocks, bool top)
 {
+		 DEF_2DOUBLE_OPERATOR("", "operator_add", ") + (")
+	else DEF_2DOUBLE_OPERATOR("", "operator_subtract", ") - (")
+	else DEF_2DOUBLE_OPERATOR("", "operator_multiply", ") * (")
+	else DEF_2DOUBLE_OPERATOR("", "operator_divide", ") / (double)(")
+	else DEF_2DOUBLE_OPERATOR("operator_random", "operator_random", "), (")
+	else DEF_1DOUBLE_BLOCK("motion_movesteps", "motion_movesteps")
+	else DEF_1DOUBLE_BLOCK("motion_turnright", "motion_turnright")
+	else DEF_1DOUBLE_BLOCK("motion_turnleft", "motion_turnleft")
+	else DEF_2DOUBLE_BLOCK("motion_gotoxy", "motion_gotoxy")
+
 	String str;
-
-	int op_type = -1;
-
-	enum
-	{
-		op_add,
-		op_subtract,
-		op_multiply,
-		op_divide,
-	};
-
-	if (strcmp(sb.opcode.data, "operator_add") == 0)		{ op_type = op_add;		 }
-	if (strcmp(sb.opcode.data, "operator_subtract") == 0)	{ op_type = op_subtract; }
-	if (strcmp(sb.opcode.data, "operator_multiply") == 0)	{ op_type = op_multiply; }
-	if (strcmp(sb.opcode.data, "operator_divide") == 0)		{ op_type = op_divide;   }
-
-	if (op_type != -1)
-	{
-		String a;
-		String b;
-		if (sb.argtypes[0] == ArgType_Variable) 
-		{
-			a = SafeStringMerge(AsManagedString("ScratchSetDouble(ScratchVarGetDouble("), sb.argdata[0].text);
-			a = SafeStringMerge(a, AsManagedString("))"));
-		}
-		else
-		{
-			a = GetArg(sb.argtypes[0], sb.argdata[0], blocks);
-			if (!(strlen(a.data) > strlen("ScratchSetDouble") && strncmp(a.data, "ScratchSetDouble", 16) == 0))
-			{
-				goto skip;
-			}
-		}
-		if (sb.argtypes[1] == ArgType_Variable)
-		{
-			b = SafeStringMerge(AsManagedString("ScratchSetDouble(ScratchVarGetDouble("), sb.argdata[1].text);
-			b = SafeStringMerge(b, AsManagedString("))"));
-		}
-		else
-		{
-			b = GetArg(sb.argtypes[1], sb.argdata[1], blocks);
-			if (!(strlen(b.data) > strlen("ScratchSetDouble") && strncmp(b.data, "ScratchSetDouble", 16) == 0))
-			{
-				goto skip;
-			}
-		}
-
-		int a_len = (int)strlen(a.data) - 16;
-		int b_len = (int)strlen(b.data) - 16;
-
-		int length = a_len + b_len + 22;
-
-		if (op_type == op_divide) { length += 8; }
-
-		char* output = malloc(length);
-
-		switch (op_type)
-		{
-		case op_add:
-			snprintf(output, length, "ScratchSetDouble(%.*s + %.*s)", a_len, 16 + a.data, b_len, 16 + b.data);
-			break;
-		case op_subtract:
-			snprintf(output, length, "ScratchSetDouble(%.*s - %.*s)", a_len, 16 + a.data, b_len, 16 + b.data);
-			break;
-		case op_multiply:
-			snprintf(output, length, "ScratchSetDouble(%.*s * %.*s)", a_len, 16 + a.data, b_len, 16 + b.data);
-			break;
-		case op_divide:
-			snprintf(output, length, "ScratchSetDouble(%.*s / (double)%.*s)", a_len, 16 + a.data, b_len, 16 + b.data);
-			break;
-		}
-
-		freeIfUnmanaged(a);
-		freeIfUnmanaged(b);
-		return AsUnmanagedString(output);
-	}
-	skip:
 
 	str = SafeStringMerge(sb.opcode, AsManagedString("("));
 	for (int i = 0; i < sb.args - 1; i++)
 	{
-		str = SafeStringMerge(str, GetArg(sb.argtypes[i], sb.argdata[i], blocks));
+		str = SafeStringMerge(str, GetArg(sb.argtypes[i], sb.argdata[i], blocks).scratch_return);
 		str = SafeStringMerge(str, AsManagedString(", "));
 	}
 	if (sb.args != 0)
 	{
 		int idx = sb.args - 1;
-		String c = GetArg(sb.argtypes[idx], sb.argdata[idx], blocks);
+		String c = GetArg(sb.argtypes[idx], sb.argdata[idx], blocks).scratch_return;
 		str = SafeStringMerge(str, c);
 	}
 	if (top)
@@ -126,10 +115,13 @@ String LineToBlock(ScratchBlock sb, struct json_object* blocks, bool top)
 	{
 		str = SafeStringMerge(str, AsManagedString(")"));
 	}
-	return str;
+	return RETV(MERGE3(AsManagedString("ScratchVarGetDouble("), str, AsManagedString(")")),
+				MERGE3(AsManagedString("ScratchVarGetString("), str, AsManagedString(")")),
+				MERGE3(AsManagedString("ScratchVarGetBool("), str, AsManagedString(")")),
+				str);
 }
 
-String GetArg(int argtype, ScratchArgData argdata, struct json_object* blocks)
+return_vals GetArg(int argtype, ScratchArgData argdata, struct json_object* blocks)
 {
 	switch (argtype)
 	{
@@ -143,9 +135,16 @@ String GetArg(int argtype, ScratchArgData argdata, struct json_object* blocks)
 	case ArgType_Angle:
 		if (strlen(argdata.text.data) == 0)
 		{
-			return AsManagedString("ScratchSetDouble(0)");
+			return RETV(AsManagedString("0"), AsManagedString("\"0\""), AsManagedString("false"), AsManagedString("ScratchSetDouble(0)"));
 		}
-		return SafeStringMerge(SafeStringMerge(AsManagedString("ScratchSetDouble("), argdata.text), AsManagedString(")"));
+		if (strcmp(argdata.text.data, "infinity") == 0) 
+		{
+			return RETV(AsManagedString("INFINITY"), AsManagedString("\"INFINITY\""), AsManagedString("true"), AsManagedString("ScratchSetDouble(INFINITY)"));
+		}
+		return RETV(argdata.text,
+					MERGE3(AsManagedString("ScratchVarGetString(ScratchSetDouble("), argdata.text, AsManagedString("))")),
+					MERGE3(AsManagedString("ScratchVarGetBool(ScratchSetDouble("), argdata.text, AsManagedString("))")),
+					MERGE3(AsManagedString("ScratchSetDouble("), argdata.text, AsManagedString(")")));
 
 	case ArgType_String:
 		{
@@ -155,15 +154,28 @@ String GetArg(int argtype, ScratchArgData argdata, struct json_object* blocks)
 			double value = strtod(text, &endptr);
 
 			if (endptr == text) {
-				return SafeStringMerge(SafeStringMerge(AsManagedString("ScratchSetString(\""), argdata.text), AsManagedString("\")"));
+				return RETV(MERGE3(AsManagedString("ScratchVarGetString(ScratchSetString(\""), argdata.text, AsManagedString("\"))")),
+							MERGE3(AsManagedString("\""),argdata.text, AsManagedString("\"")),
+							MERGE3(AsManagedString("ScratchVarGetBool(ScratchSetString(\""), argdata.text, AsManagedString("\"))")),
+							MERGE3(AsManagedString("ScratchSetString(\""), argdata.text, AsManagedString("\")")));
 			}
 			else {
-				return SafeStringMerge(SafeStringMerge(AsManagedString("ScratchSetDouble("), argdata.text), AsManagedString(")"));
+				if (strcmp(argdata.text.data, "infinity") == 0)
+				{
+					return RETV(AsManagedString("INFINITY"), AsManagedString("\"INFINITY\""), AsManagedString("true"), AsManagedString("ScratchSetDouble(INFINITY)"));
+				}
+				return RETV(argdata.text,
+							MERGE3(AsManagedString("ScratchVarGetString(ScratchSetDouble("), argdata.text, AsManagedString("))")),
+							MERGE3(AsManagedString("ScratchVarGetBool(ScratchSetDouble("), argdata.text, AsManagedString("))")),
+							MERGE3(AsManagedString("ScratchSetDouble("), argdata.text, AsManagedString(")")));
 			}
 
 		}
 	case ArgType_Variable:
-		return argdata.text;
+		return RETV(MERGE3(AsManagedString("ScratchVarGetDouble("), argdata.text, AsManagedString(")")),
+					MERGE3(AsManagedString("ScratchVarGetString("), argdata.text, AsManagedString(")")),
+					MERGE3(AsManagedString("ScratchVarGetBool("), argdata.text, AsManagedString(")")),
+					argdata.text);
 	}
 }
 
@@ -709,7 +721,7 @@ char* GetFullProgram(FILE* header_file, FILE* source_file, FILE* scheduler, stru
 
 			if (strcmp(THIS.opcode.data, "control_repeat") == 0)
 			{
-				String arg_this = GetArg(THIS.argtypes[0], THIS.argdata[0], blocks);
+				String arg_this = GetArg(THIS.argtypes[0], THIS.argdata[0], blocks).scratch_return;
 				if ((strlen(arg_this.data) > strlen("ScratchSetDouble") && strncmp(arg_this.data, "ScratchSetDouble", 16) == 0)) 
 				{
 					PRINT_INDENTATION fprintf(source_file, "for(int i%i = 0; i%i < (int)(%s); i%i++)\n", indentation, indentation, arg_this.data + 16, indentation);
@@ -723,19 +735,19 @@ char* GetFullProgram(FILE* header_file, FILE* source_file, FILE* scheduler, stru
 			}
 			else if (strcmp(THIS.opcode.data, "control_if") == 0) 
 			{
-				PRINT_INDENTATION fprintf(source_file, "if(ScratchVarGetBool(%s))\n", GetArg(THIS.argtypes[0], THIS.argdata[0], blocks).data);
+				PRINT_INDENTATION fprintf(source_file, "if(ScratchVarGetBool(%s))\n", GetArg(THIS.argtypes[0], THIS.argdata[0], blocks).scratch_return.data);
 				PRINT_INDENTATION fprintf(source_file, "{\n");
 				indentation++;
 			}
 			else if (strcmp(THIS.opcode.data, "control_repeat_until") == 0)
 			{
-				PRINT_INDENTATION fprintf(source_file, "while(!(ScratchVarGetBool(%s)))\n", GetArg(THIS.argtypes[0], THIS.argdata[0], blocks).data);
+				PRINT_INDENTATION fprintf(source_file, "while(!(ScratchVarGetBool(%s)))\n", GetArg(THIS.argtypes[0], THIS.argdata[0], blocks).scratch_return.data);
 				PRINT_INDENTATION fprintf(source_file, "{\n");
 				indentation++;
 			}
 			else if (strcmp(THIS.opcode.data, "control_while") == 0)
 			{
-				PRINT_INDENTATION fprintf(source_file, "while(ScratchVarGetBool(%s))\n", GetArg(THIS.argtypes[0], THIS.argdata[0], blocks).data);
+				PRINT_INDENTATION fprintf(source_file, "while(ScratchVarGetBool(%s))\n", GetArg(THIS.argtypes[0], THIS.argdata[0], blocks).scratch_return.data);
 				PRINT_INDENTATION fprintf(source_file, "{\n");
 				indentation++;
 			}
@@ -766,7 +778,7 @@ char* GetFullProgram(FILE* header_file, FILE* source_file, FILE* scheduler, stru
 			}
 			else
 			{
-				PRINT_INDENTATION fprintf(source_file, "%s\n", LineToBlock(THIS, blocks, true).data);
+				PRINT_INDENTATION fprintf(source_file, "%s\n", LineToBlock(THIS, blocks, true).scratch_return.data);
 			}
 
 #undef THIS

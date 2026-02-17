@@ -7,22 +7,22 @@
 #include "garbagecollector.h"
 
 // Note: in the actual Scratch implementation Max and Min can be flipped.
-ScratchValue operator_random(ScratchValue min, ScratchValue max)
+double operator_random(double min, double max)
 { 
-	double a = ScratchVarGetDouble(max);
-	double b = ScratchVarGetDouble(min);
+	double a = max;
+	double b = min;
 
 	if (a == (int)a && b == (int)b) // If both values are ints
 	{
 		int range = max(a, b) - min(a, b);
 
-		return ScratchSetDouble(rand() % range + min(a, b));
+		return rand() % range + min(a, b);
 	}
 	else 
 	{
 		double range = max(a, b) - min(a, b);
 		double val = (double)rand() / RAND_MAX;
-		return ScratchSetDouble(val * range + min(a, b));
+		return val * range + min(a, b);
 	}
 }
 

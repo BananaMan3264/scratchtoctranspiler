@@ -25,8 +25,8 @@ String SafeStringMerge(String a, String b)
 	memcpy(c, a.data, sa);
 	memcpy(c + sa, b.data, sb);
 	c[sa + sb] = '\0';
-	freeIfUnmanaged(a);
-	freeIfUnmanaged(b);
+	//freeIfUnmanaged(a);
+	//freeIfUnmanaged(b);
 	return AsUnmanagedString(c);
 }
 

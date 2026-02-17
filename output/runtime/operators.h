@@ -7,7 +7,7 @@ inline ScratchValue operator_add(ScratchValue a, ScratchValue b) { return Scratc
 inline ScratchValue operator_subtract(ScratchValue a, ScratchValue b) { return ScratchSetDouble(ScratchVarGetDouble(a) - ScratchVarGetDouble(b)); }
 inline ScratchValue operator_multiply(ScratchValue a, ScratchValue b) { return ScratchSetDouble(ScratchVarGetDouble(a) * ScratchVarGetDouble(b)); }
 inline ScratchValue operator_divide(ScratchValue a, ScratchValue b) { return ScratchSetDouble(ScratchVarGetDouble(a) / ScratchVarGetDouble(b)); }
-ScratchValue operator_random(ScratchValue min, ScratchValue max); 
+double operator_random(double min, double max);
 inline ScratchValue operator_gt(ScratchValue a, ScratchValue b) { return ScratchSetBool(ScratchVarGetDouble(a) > ScratchVarGetDouble(b)); }
 inline ScratchValue operator_lt(ScratchValue a, ScratchValue b) { return ScratchSetBool(ScratchVarGetDouble(a) < ScratchVarGetDouble(b)); }
 ScratchValue operator_equals(ScratchValue a, ScratchValue b);

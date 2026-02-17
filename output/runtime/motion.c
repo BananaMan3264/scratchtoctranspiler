@@ -29,9 +29,8 @@ extern int scratch_motion_SpriteRotStyle[];
 #define RAD_TO_DEG 57.295779513082
 #define HALF_PI    1.5707963267948
 
-void motion_movesteps(ScratchValue steps) 
+void motion_movesteps(double Steps) 
 {
-	double Steps = ScratchVarGetDouble(steps);
 	double nx = SX + cos(SD) * Steps, ny = SY + sin(SD) * Steps;
 	if (PenDown)
 	{
@@ -41,25 +40,24 @@ void motion_movesteps(ScratchValue steps)
 	SY = ny;
 }
 
-void motion_turnright(ScratchValue degrees) 
+void motion_turnright(double degrees) 
 {
-	SD += ScratchVarGetDouble(degrees) * DEG_TO_RAD;
+	SD += degrees * DEG_TO_RAD;
 }
 
-void motion_turnleft(ScratchValue degrees)
+void motion_turnleft(double degrees)
 {
-	SD -= ScratchVarGetDouble(degrees) * DEG_TO_RAD;
+	SD -= degrees * DEG_TO_RAD;
 }
 
-void motion_goto(ScratchValue x, ScratchValue y) 
+void motion_goto(double x, double y) 
 {
-	double nx = ScratchVarGetDouble(x), ny = ScratchVarGetDouble(y);
 	if (PenDown) 
 	{
-		penDrawLine(nx, ny, SX, SY);
+		penDrawLine(x, y, SX, SY);
 	}
-	SX = nx;
-	SY = ny;
+	SX = x;
+	SY = y;
 }
 
 void motion_pointtowards(ScratchValue dir)
