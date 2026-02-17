@@ -82,8 +82,8 @@ SDL_Texture* GetPNGSprite(char* name, int* width_out, int* height_out)
 
 SDL_Texture* GetSVGSprite(char* name, int* width_out, int* height_out) 
 {
-	int width = 256;
-	int height = 256;
+	int width = 2048;
+	int height = 2048;
 
 	GError* err = NULL;
 

@@ -42,41 +42,12 @@ void _1_Init()
 {
 }
 
-void _1_Yadevent_whenflagclicked();
-void _1_Yaeevent_whenbroadcastreceived_YaOaXsbadubaja8a2aB1blbwbsbaz1bazaza4xbaS();
-void _1_Yagevent_whenbroadcastreceived_YaOaXsbadubaja8a2aB1blbwbsbaz1bazaza4xbaS();
-void _1_Yalevent_whenbroadcastreceived_YacaKxb1bpbasazapacafagwbamaiayaiamcbaZak();
+void _1_Yaeevent_whenflagclicked();
 
-void _1_Yadevent_whenflagclicked() 
+void _1_Yaeevent_whenflagclicked() 
 {
 	activeSprite = 1;
-	Yqekcknqekcknalaoagqekcknqekckniblbas(sensing_timer());
-	event_broadcastandwait(YaOaXsbadubaja8a2aB1blbwbsbaz1bazaza4xbaS);
-	Yqekcknqekcknalaoagqekcknqekckniblbas(sensing_timer());
-	event_broadcast(YacaKxb1bpbasazapacafagwbamaiayaiamcbaZak);
-#define YIELD TRUE_YIELD
-	END_THREAD
-}
-
-void _1_Yaeevent_whenbroadcastreceived_YaOaXsbadubaja8a2aB1blbwbsbaz1bazaza4xbaS() 
-{
-	activeSprite = 1;
-	control_wait(ScratchSetDouble(1));
-#define YIELD TRUE_YIELD
-	END_THREAD
-}
-
-void _1_Yagevent_whenbroadcastreceived_YaOaXsbadubaja8a2aB1blbwbsbaz1bazaza4xbaS() 
-{
-	activeSprite = 1;
-	control_wait(ScratchSetDouble(2));
-#define YIELD TRUE_YIELD
-	END_THREAD
-}
-
-void _1_Yalevent_whenbroadcastreceived_YacaKxb1bpbasazapacafagwbamaiayaiamcbaZak() 
-{
-	activeSprite = 1;
+	motion_movesteps(ScratchSetDouble((4) + ((3) * ((2) - ((1) / (double)(ScratchVarGetDouble(YAbajaEakbba4cbaidbcbaFak1beba8axfbaAaVgbhbamayibavaaaraiaaabalae)))))));
 #define YIELD TRUE_YIELD
 	END_THREAD
 }

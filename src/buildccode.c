@@ -27,7 +27,86 @@ int GetFirstWhenFlagClicked(vecScratchBlock lines)
 
 String LineToBlock(ScratchBlock sb, struct json_object* blocks, bool top)
 {
-	String str = SafeStringMerge(sb.opcode, AsManagedString("("));
+	String str;
+
+	int op_type = -1;
+
+	enum
+	{
+		op_add,
+		op_subtract,
+		op_multiply,
+		op_divide,
+	};
+
+	if (strcmp(sb.opcode.data, "operator_add") == 0)		{ op_type = op_add;		 }
+	if (strcmp(sb.opcode.data, "operator_subtract") == 0)	{ op_type = op_subtract; }
+	if (strcmp(sb.opcode.data, "operator_multiply") == 0)	{ op_type = op_multiply; }
+	if (strcmp(sb.opcode.data, "operator_divide") == 0)		{ op_type = op_divide;   }
+
+	if (op_type != -1)
+	{
+		String a;
+		String b;
+		if (sb.argtypes[0] == ArgType_Variable) 
+		{
+			a = SafeStringMerge(AsManagedString("ScratchSetDouble(ScratchVarGetDouble("), sb.argdata[0].text);
+			a = SafeStringMerge(a, AsManagedString("))"));
+		}
+		else
+		{
+			a = GetArg(sb.argtypes[0], sb.argdata[0], blocks);
+			if (!(strlen(a.data) > strlen("ScratchSetDouble") && strncmp(a.data, "ScratchSetDouble", 16) == 0))
+			{
+				goto skip;
+			}
+		}
+		if (sb.argtypes[1] == ArgType_Variable)
+		{
+			b = SafeStringMerge(AsManagedString("ScratchSetDouble(ScratchVarGetDouble("), sb.argdata[1].text);
+			b = SafeStringMerge(b, AsManagedString("))"));
+		}
+		else
+		{
+			b = GetArg(sb.argtypes[1], sb.argdata[1], blocks);
+			if (!(strlen(b.data) > strlen("ScratchSetDouble") && strncmp(b.data, "ScratchSetDouble", 16) == 0))
+			{
+				goto skip;
+			}
+		}
+
+		int a_len = (int)strlen(a.data) - 16;
+		int b_len = (int)strlen(b.data) - 16;
+
+		int length = a_len + b_len + 22;
+
+		if (op_type == op_divide) { length += 8; }
+
+		char* output = malloc(length);
+
+		switch (op_type)
+		{
+		case op_add:
+			snprintf(output, length, "ScratchSetDouble(%.*s + %.*s)", a_len, 16 + a.data, b_len, 16 + b.data);
+			break;
+		case op_subtract:
+			snprintf(output, length, "ScratchSetDouble(%.*s - %.*s)", a_len, 16 + a.data, b_len, 16 + b.data);
+			break;
+		case op_multiply:
+			snprintf(output, length, "ScratchSetDouble(%.*s * %.*s)", a_len, 16 + a.data, b_len, 16 + b.data);
+			break;
+		case op_divide:
+			snprintf(output, length, "ScratchSetDouble(%.*s / (double)%.*s)", a_len, 16 + a.data, b_len, 16 + b.data);
+			break;
+		}
+
+		freeIfUnmanaged(a);
+		freeIfUnmanaged(b);
+		return AsUnmanagedString(output);
+	}
+	skip:
+
+	str = SafeStringMerge(sb.opcode, AsManagedString("("));
 	for (int i = 0; i < sb.args - 1; i++)
 	{
 		str = SafeStringMerge(str, GetArg(sb.argtypes[i], sb.argdata[i], blocks));
@@ -69,8 +148,20 @@ String GetArg(int argtype, ScratchArgData argdata, struct json_object* blocks)
 		return SafeStringMerge(SafeStringMerge(AsManagedString("ScratchSetDouble("), argdata.text), AsManagedString(")"));
 
 	case ArgType_String:
-		return SafeStringMerge(SafeStringMerge(AsManagedString("ScratchSetString(\""), argdata.text), AsManagedString("\")"));
+		{
+			char* text = argdata.text.data;
+			char* endptr;
 
+			double value = strtod(text, &endptr);
+
+			if (endptr == text) {
+				return SafeStringMerge(SafeStringMerge(AsManagedString("ScratchSetString(\""), argdata.text), AsManagedString("\")"));
+			}
+			else {
+				return SafeStringMerge(SafeStringMerge(AsManagedString("ScratchSetDouble("), argdata.text), AsManagedString(")"));
+			}
+
+		}
 	case ArgType_Variable:
 		return argdata.text;
 	}
@@ -601,9 +692,16 @@ char* GetFullProgram(FILE* header_file, FILE* source_file, FILE* scheduler, stru
 		PRINT_INDENTATION fprintf(source_file, ") \n{\n");
 		indentation++;
 		PRINT_INDENTATION fprintf(source_file, "activeSprite = %i;\n", working_index);
-		if (functions.data[i].opcode == procedures_prototype && functions.data[i].warp)
+		if (functions.data[i].opcode == procedures_prototype)
 		{
-			fprintf(source_file, "#define YIELD FUNCTION_YIELD\n");
+			if (functions.data[i].warp)
+			{
+				fprintf(source_file, "#define YIELD\n");
+			}
+			else
+			{
+				fprintf(source_file, "#define YIELD FUNCTION_YIELD\n");
+			}
 		}
 		for (int j = 0; j < functions.data[i].blocks.length; j++) 
 		{
@@ -611,7 +709,15 @@ char* GetFullProgram(FILE* header_file, FILE* source_file, FILE* scheduler, stru
 
 			if (strcmp(THIS.opcode.data, "control_repeat") == 0)
 			{
-				PRINT_INDENTATION fprintf(source_file, "for(int i%i = 0; i%i < (int)ScratchVarGetDouble(%s); i%i++)\n", indentation, indentation, GetArg(THIS.argtypes[0], THIS.argdata[0], blocks).data, indentation);
+				String arg_this = GetArg(THIS.argtypes[0], THIS.argdata[0], blocks);
+				if ((strlen(arg_this.data) > strlen("ScratchSetDouble") && strncmp(arg_this.data, "ScratchSetDouble", 16) == 0)) 
+				{
+					PRINT_INDENTATION fprintf(source_file, "for(int i%i = 0; i%i < (int)(%s); i%i++)\n", indentation, indentation, arg_this.data + 16, indentation);
+				}
+				else
+				{
+					PRINT_INDENTATION fprintf(source_file, "for(int i%i = 0; i%i < (int)ScratchVarGetDouble(%s); i%i++)\n", indentation, indentation, arg_this.data, indentation);
+				}
 				PRINT_INDENTATION fprintf(source_file, "{\n");
 				indentation++;
 			}

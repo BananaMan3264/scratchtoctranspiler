@@ -24,7 +24,7 @@ void RunScheduler()
 
 	_0_Init();
 	_1_Init();
-	AddThread(THREAD(co_create(64 * 1024, _1_Yadevent_whenflagclicked),1));
+	AddThread(THREAD(co_create(64 * 1024, _1_Yaeevent_whenflagclicked),1));
 
 	while (1)
 	{
@@ -38,17 +38,4 @@ void RunScheduler()
 		}
 		Render();
 	}
-}
-BroadcastInfo broadcast_YaOaXsbadubaja8a2aB1blbwbsbaz1bazaza4xbaS()
-{
-	Thread* output = malloc(sizeof(Thread)* 2);
-	output[0] = THREAD(co_create(64 * 1024, _1_Yaeevent_whenbroadcastreceived_YaOaXsbadubaja8a2aB1blbwbsbaz1bazaza4xbaS),1); AddThread(output[0]);
-	output[1] = THREAD(co_create(64 * 1024, _1_Yagevent_whenbroadcastreceived_YaOaXsbadubaja8a2aB1blbwbsbaz1bazaza4xbaS),1); AddThread(output[1]);
-	return (BroadcastInfo) {output, 2};
-}
-BroadcastInfo broadcast_YacaKxb1bpbasazapacafagwbamaiayaiamcbaZak()
-{
-	Thread* output = malloc(sizeof(Thread)* 1);
-	output[0] = THREAD(co_create(64 * 1024, _1_Yalevent_whenbroadcastreceived_YacaKxb1bpbasazapacafagwbamaiayaiamcbaZak),1); AddThread(output[0]);
-	return (BroadcastInfo) {output, 1};
 }
