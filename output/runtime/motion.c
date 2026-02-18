@@ -65,57 +65,53 @@ void motion_pointtowards(ScratchValue dir)
 	SD = ScratchVarGetDouble(dir) * DEG_TO_RAD;
 }
 
-void motion_changexby(ScratchValue x)
+void motion_changexby(double x)
 {
-	double nx = SX + ScratchVarGetDouble(x);
 	if (PenDown)
 	{
-		penDrawLine(nx, SY, SX, SY);
+		penDrawLine(x, SY, SX, SY);
 	}
-	SX = nx;
+	SX = x;
 }
 
-void motion_changeyby(ScratchValue y)
+void motion_changeyby(double y)
 {
-	double ny = SY + ScratchVarGetDouble(y);
 	if (PenDown)
 	{
-		penDrawLine(SX, ny, SX, SY);
+		penDrawLine(SX, y, SX, SY);
 	}
-	SY = ny;
+	SY = y;
 }
 
-void motion_setx(ScratchValue x)
+void motion_setx(double x)
 {
-	double nx = ScratchVarGetDouble(x);
 	if (PenDown)
 	{
-		penDrawLine(nx, SY, SX, SY);
+		penDrawLine(x, SY, SX, SY);
 	}
-	SX = nx;
+	SX = x;
 }
 
-void motion_sety(ScratchValue y)
+void motion_sety(double y)
 {
-	double ny = ScratchVarGetDouble(y);
 	if (PenDown)
 	{
-		penDrawLine(SX, ny, SX, SY);
+		penDrawLine(SX, y, SX, SY);
 	}
-	SY = ny;
+	SY = y;
 }
 
-void motion_setrotationstyleYalaeafathbaraiagahat() 
+void motion_setrotationstyle_leftzncright()
 {
 	SR = RotStyle_leftright;
 }
 
-void motion_setrotationstyleYadaoanybatibaraoataaatae()
+void motion_setrotationstyle_donzhct_rotate()
 {
 	SR = RotStyle_dontrotate;
 }
 
-void motion_setrotationstyleYaaalalibaaaraoauanad()
+void motion_setrotationstyle_all_around()
 {
 	SR = RotStyle_allaround;
 }
@@ -174,17 +170,17 @@ void motion_ifonedgebounce()
 	SD = newDirection;
 }
 
-ScratchValue motion_xposition() 
+double motion_xposition() 
 {
-	return ScratchSetDouble(SX);
+	return (SX);
 }
-ScratchValue motion_yposition()
+double motion_yposition()
 {
-	return ScratchSetDouble(SY);
+	return (SY);
 }
-ScratchValue motion_direction()
+double motion_direction()
 {
-	return ScratchSetDouble(SD * RAD_TO_DEG);
+	return (SD * RAD_TO_DEG);
 }
 
 ScratchValue motion_pointtowards_menuY_amaoauasaea_() 

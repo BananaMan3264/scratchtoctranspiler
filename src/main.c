@@ -151,7 +151,7 @@ int main(int argc, char**argv)
 		
 		json_object_object_foreach(vars, key, val)
 		{
-			fprintf(output, "ScratchValue %s;\n", SanitiseScratchNameToC(AsManagedString(key)).data);
+			fprintf(output, "ScratchValue %s;\n", SanitiseScratchNameToC(AsManagedString(json_object_get_string(json_object_array_get_idx(val, 0)))).data);
 		}
 	}
 	if (vars_count)
@@ -163,7 +163,7 @@ int main(int argc, char**argv)
 
 			json_object_object_foreach(vars, key, val)
 			{
-				fprintf(output, "\t&%s,\n", SanitiseScratchNameToC(AsManagedString(key)).data);
+				fprintf(output, "\t&%s,\n", SanitiseScratchNameToC(AsManagedString(json_object_get_string(json_object_array_get_idx(val, 0)))).data);
 			}
 		}
 		fprintf(output, "};\n\n");
@@ -190,7 +190,7 @@ int main(int argc, char**argv)
 
 		json_object_object_foreach(vars, key, val)
 		{
-			fprintf(output, "ScratchList %s;\n", SanitiseScratchNameToC(AsManagedString(key)).data);
+			fprintf(output, "ScratchList %s;\n", SanitiseScratchNameToC(AsManagedString(json_object_get_string(json_object_array_get_idx(val, 0)))).data);
 		}
 	}
 	if (lists_count)
@@ -202,7 +202,7 @@ int main(int argc, char**argv)
 
 			json_object_object_foreach(vars, key, val)
 			{
-				fprintf(output, "\t&%s,\n", SanitiseScratchNameToC(AsManagedString(key)).data);
+				fprintf(output, "\t&%s,\n", SanitiseScratchNameToC(AsManagedString(json_object_get_string(json_object_array_get_idx(val, 0)))).data);
 			}
 		}
 		fprintf(output, "};\n\n");

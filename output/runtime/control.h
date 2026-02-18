@@ -16,6 +16,8 @@ extern bool stop_all;
 		time = (clock() / (double)CLOCKS_PER_SEC);			\
 	}														\
 }											
-#define control_stopYaoatahaearibasacaraiapatasibaianibasaparaiatae() stop_other = true
+#define control_stop_other_scripts_in_sprite() stop_other = true
 
-#define control_stopYaaalal() stop_all = true
+#define control_stop_all() stop_all = true
+
+#define control_stop_this_script() END_THREAD

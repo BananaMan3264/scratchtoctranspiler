@@ -61,6 +61,15 @@ if (strcmp(sb.opcode.data, id) == 0)																			\
 		MERGE3(AsManagedString("ScratchSetDouble("opc"(("), a, AsManagedString(")))")));						\
 }
 
+#define DEF_0DOUBLE_OPERATOR(opc, id)																			\
+if (strcmp(sb.opcode.data, id) == 0)																			\
+{																												\
+	return RETV((AsManagedString("("opc"())")),																	\
+		(AsManagedString("ScratchVarGetString(ScratchSetDouble("opc"()))")),									\
+		(AsManagedString("ScratchVarGetBool(ScratchSetDouble("opc"()))")),										\
+		(AsManagedString("ScratchSetDouble("opc"())")));														\
+}
+
 #define DEF_1DOUBLE_BLOCK(opc, id)														\
 if (strcmp(sb.opcode.data, id) == 0)													\
 {																						\
@@ -70,6 +79,17 @@ if (strcmp(sb.opcode.data, id) == 0)													\
 		);																				\
 }		
 
+#define DEF_3DOUBLE_BLOCK(opc, id)														\
+if (strcmp(sb.opcode.data, id) == 0)													\
+{																						\
+	String a = GetArg(sb.argtypes[0], sb.argdata[0], blocks).double_return;				\
+	String b = GetArg(sb.argtypes[1], sb.argdata[1], blocks).double_return;				\
+	String c = GetArg(sb.argtypes[2], sb.argdata[2], blocks).double_return;				\
+																						\
+	return RETV(AsManagedString(""), AsManagedString(""), AsManagedString(""),			\
+		MERGE_OP(""opc"(", a, ", ", MERGE3(b, AsManagedString(", "), c), ");"));		\
+}
+
 #define DEF_2DOUBLE_BLOCK(opc, id)														\
 if (strcmp(sb.opcode.data, id) == 0)													\
 {																						\
@@ -77,8 +97,18 @@ if (strcmp(sb.opcode.data, id) == 0)													\
 	String b = GetArg(sb.argtypes[1], sb.argdata[1], blocks).double_return;				\
 																						\
 	return RETV(AsManagedString(""), AsManagedString(""), AsManagedString(""),			\
-		MERGE_OP(""opc"(", a, ",", b, ");"));						\
-}																		
+		MERGE_OP(""opc"(", a, ", ", b, ");"));											\
+}
+
+#define DEF_2DOUBLE_SCRATCH_BLOCK(opc, id)												\
+if (strcmp(sb.opcode.data, id) == 0)													\
+{																						\
+	String a = GetArg(sb.argtypes[0], sb.argdata[0], blocks).double_return;				\
+	String b = GetArg(sb.argtypes[1], sb.argdata[1], blocks).scratch_return;			\
+																						\
+	return RETV(AsManagedString(""), AsManagedString(""), AsManagedString(""),			\
+		MERGE_OP(""opc"(", a, ", ", b, ");"));											\
+}
 
 
 return_vals LineToBlock(ScratchBlock sb, struct json_object* blocks, bool top)
@@ -92,6 +122,15 @@ return_vals LineToBlock(ScratchBlock sb, struct json_object* blocks, bool top)
 	else DEF_1DOUBLE_BLOCK("motion_turnright", "motion_turnright")
 	else DEF_1DOUBLE_BLOCK("motion_turnleft", "motion_turnleft")
 	else DEF_2DOUBLE_BLOCK("motion_gotoxy", "motion_gotoxy")
+	else DEF_2DOUBLE_SCRATCH_BLOCK("motion_glideto", "motion_glideto")
+	else DEF_1DOUBLE_BLOCK("motion_changexby", "motion_changexby")
+	else DEF_1DOUBLE_BLOCK("motion_setx", "motion_setx")
+	else DEF_1DOUBLE_BLOCK("motion_changeyby", "motion_changeyby")
+	else DEF_1DOUBLE_BLOCK("motion_sety", "motion_sety")
+	else DEF_0DOUBLE_OPERATOR("motion_xposition", "motion_xposition")
+	else DEF_0DOUBLE_OPERATOR("motion_yposition", "motion_yposition")
+	else DEF_0DOUBLE_OPERATOR("motion_direction", "motion_direction")
+	else DEF_3DOUBLE_BLOCK("motion_glidesecstoxy", "motion_glidesecstoxy")
 
 	String str;
 
@@ -644,16 +683,16 @@ char* GetFullProgram(FILE* header_file, FILE* source_file, FILE* scheduler, stru
 			switch (json_object_get_type(json_object_array_get_idx(val, 1)))
 			{
 			case json_type_int:
-				fprintf(source_file, "\t%s = ScratchSetDouble(%i);\n", SanitiseScratchNameToC(AsManagedString(key)).data, json_object_get_int(json_object_array_get_idx(val, 1)));
+				fprintf(source_file, "\t%s = ScratchSetDouble(%i);\n", SanitiseScratchNameToC(AsManagedString(json_object_get_string(json_object_array_get_idx(val, 0)))).data, json_object_get_int(json_object_array_get_idx(val, 1)));
 				break;
 			case json_type_double:
-				fprintf(source_file, "\t%s = ScratchSetDouble(%f);\n", SanitiseScratchNameToC(AsManagedString(key)).data, json_object_get_double(json_object_array_get_idx(val, 1)));
+				fprintf(source_file, "\t%s = ScratchSetDouble(%f);\n", SanitiseScratchNameToC(AsManagedString(json_object_get_string(json_object_array_get_idx(val, 0)))).data, json_object_get_double(json_object_array_get_idx(val, 1)));
 				break;
 			case json_type_string:
-				fprintf(source_file, "\t%s = ScratchSetString(\"%s\");\n", SanitiseScratchNameToC(AsManagedString(key)).data, json_object_get_string(json_object_array_get_idx(val, 1)));
+				fprintf(source_file, "\t%s = ScratchSetString(\"%s\");\n", SanitiseScratchNameToC(AsManagedString(json_object_get_string(json_object_array_get_idx(val, 0)))).data, json_object_get_string(json_object_array_get_idx(val, 1)));
 				break;
 			case json_type_boolean:
-				fprintf(source_file, "\t%s = ScratchSetBool(\"%s\");\n", SanitiseScratchNameToC(AsManagedString(key)).data, json_object_get_boolean(json_object_array_get_idx(val, 1)) ? "true" : "false");
+				fprintf(source_file, "\t%s = ScratchSetBool(\"%s\");\n", SanitiseScratchNameToC(AsManagedString(json_object_get_string(json_object_array_get_idx(val, 0)))).data, json_object_get_boolean(json_object_array_get_idx(val, 1)) ? "true" : "false");
 				break;
 			default:
 				printf("Type not implemented!");
@@ -664,7 +703,7 @@ char* GetFullProgram(FILE* header_file, FILE* source_file, FILE* scheduler, stru
 	{
 		json_object_object_foreach(lists, key, val)
 		{
-			fprintf(source_file, "\t%s = initialiseList();\n", SanitiseScratchNameToC(AsManagedString(key)).data);
+			fprintf(source_file, "\t%s = initialiseList();\n", SanitiseScratchNameToC(AsManagedString(json_object_get_string(json_object_array_get_idx(val, 0)))).data);
 		}
 	}
 

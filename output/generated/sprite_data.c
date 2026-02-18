@@ -3,10 +3,10 @@
 #include "../runtime/motion.h"
 #include "../sprite_data.h"
 
-double scratch_motion_SpriteX[] = { 0.0, 240.000000 };
-double scratch_motion_SpriteY[] = { 0.0, 180.000000 };
+double scratch_motion_SpriteX[] = { 0.0, 135.748000 };
+double scratch_motion_SpriteY[] = { 0.0, -51.768000 };
 double scratch_motion_SpriteDirection[] = { 0.0, 0.000000 };
-bool scratch_looks_hidden[] = { false, true };
+bool scratch_looks_hidden[] = { false, false };
 int scratch_motion_SpriteRotStyle[] = { RotStyle_allaround, RotStyle_allaround };
 int scratch_looks_CostumeIndex[] = { 0, 0 };
 int scratch_looks_CostumeCounts[] = { 1, 1 };

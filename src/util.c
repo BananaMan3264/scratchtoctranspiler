@@ -32,117 +32,47 @@ String SafeStringMerge(String a, String b)
 
 String SanitiseScratchNameToC(String varName)
 {
-	String str = AsUnmanagedString(malloc(strlen(varName.data) * 2 + 2));
-	if (!str.data) { printf("Malloc Error!"); exit(-1); }
+	int real_length = 1;
 
-	for (int i = 0, j = 1; i < strlen(varName.data); i++)
+	for (int i = 0; i < strlen(varName.data); i++) 
 	{
-		unsigned char c = varName.data[i];
-		if (c > 127) 
+		if (('a' <= varName.data[i] && varName.data[i] <= 'y') ||
+			('A' <= varName.data[i] && varName.data[i] <= 'Z') ||
+			('0' <= varName.data[i] && varName.data[i] <= '9') ||
+			varName.data[i] == ' ')
 		{
-			str.data[j] = ((c & 0b11110000) >> 4) + 'c'; j++;
-			str.data[j] = (c & 0b00001111) + 'c'; j++;
-			continue;
+			real_length++;
 		}
-		switch (varName.data[i])
+		else 
 		{
-		case '`':
-			str.data[j] = 'A'; j++;
-			goto next;
-		case '@':
-			str.data[j] = 'b'; j++;
-			goto next;
-		case '|':
-			str.data[j] = 'c'; j++;
-			goto next;
-		case '[':
-			str.data[j] = 'd'; j++;
-			goto next;
-		case '#':
-			str.data[j] = 'c'; j++;
-			goto next;
-		case '(':
-			str.data[j] = 'e'; j++;
-			goto next;
-		case ')':
-			str.data[j] = 'f'; j++;
-			goto next;
-		case '.':
-			str.data[j] = 'g'; j++;
-			goto next;
-		case '-':
-			str.data[j] = 'h'; j++;
-			goto next;
-		case ' ':
-			str.data[j] = 'i'; j++;
-			goto next;
-		case ';':
-			str.data[j] = 'j'; j++;
-			goto next;
-		case ':':
-			str.data[j] = 'k'; j++;
-			goto next;
-		case '%':
-			str.data[j] = 'l'; j++;
-			goto next;
-		case '}':
-			str.data[j] = 'm'; j++;
-			goto next;
-		case ']':
-			str.data[j] = 'n'; j++;
-			goto next;
-		case '+':
-			str.data[j] = 'o'; j++;
-			goto next;
-		case '^':
-			str.data[j] = 'p'; j++;
-			goto next;
-		case '{':
-			str.data[j] = 'q'; j++;
-			goto next;
-		case '~':
-			str.data[j] = 'r'; j++;
-			goto next;
-		case '*':
-			str.data[j] = 's'; j++;
-			goto next;
-		case '/':
-			str.data[j] = 't'; j++;
-			goto next;
-		case ',':
-			str.data[j] = 'u'; j++;
-			goto next;
-		case '!':
-			str.data[j] = 'v'; j++;
-			goto next;
-		case '=':
-			str.data[j] = 'w'; j++;
-			goto next;
-		case '$':
-			str.data[j] = 'x'; j++;
-			goto next;
-		case '\'':
-			str.data[j] = 'y'; j++;
-			goto next;
-		case '\"':
-			str.data[j] = 'z'; j++;
-			goto next;
-		case '?':
-			str.data[j] = '1'; j++;
-			goto next;
-		next:
-			str.data[j] = 'b'; j++;
-			break;
-		default:
-			str.data[j] = 'a'; j++;
-			str.data[j] = varName.data[i]; j++;
-			break;
+			real_length += 3;
 		}
 	}
-	str.data[0] = 'Y';
 
-	str.data[strlen(varName.data) * 2 + 1] = '\0';
-	freeIfUnmanaged(varName);
+	String str = AsUnmanagedString(malloc(real_length + 1));
+	for (int i = 1, j = 0; j < strlen(varName.data); j++)
+	{
+		if (('a' <= varName.data[j] && varName.data[j] <= 'y') ||
+			('A' <= varName.data[j] && varName.data[j] <= 'Z') ||
+			('0' <= varName.data[j] && varName.data[j] <= '9'))
+		{
+			str.data[i] = varName.data[j]; i++;
+		}
+		else if (varName.data[j] == ' ')
+		{
+			str.data[i] = '_'; i++;
+		}
+		else 
+		{
+			str.data[i] = 'z'; i++;
+			str.data[i] = 'a' + (varName.data[j] & 0b1111); i++;
+			str.data[i] = 'a' + ((varName.data[j] & 0b11110000) >> 4); i++;
+		}
+	}
+	str.data[real_length] = '\0';
+	str.data[0] = '_';
+	
+	//freeIfUnmanaged(varName);
 
 	return str;
 }
