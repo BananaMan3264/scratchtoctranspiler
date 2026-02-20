@@ -113,11 +113,13 @@ if (strcmp(sb.opcode.data, id) == 0)													\
 
 return_vals LineToBlock(ScratchBlock sb, struct json_object* blocks, bool top)
 {
-		 DEF_2DOUBLE_OPERATOR("", "operator_add", ") + (")
-	else DEF_2DOUBLE_OPERATOR("", "operator_subtract", ") - (")
-	else DEF_2DOUBLE_OPERATOR("", "operator_multiply", ") * (")
-	else DEF_2DOUBLE_OPERATOR("", "operator_divide", ") / (double)(")
-	else DEF_2DOUBLE_OPERATOR("operator_random", "operator_random", "), (")
+	//     DEF_2DOUBLE_OPERATOR("", "operator_add", ") + (")
+	//else DEF_2DOUBLE_OPERATOR("", "operator_subtract", ") - (")
+	//else DEF_2DOUBLE_OPERATOR("", "operator_multiply", ") * (")
+	//else DEF_2DOUBLE_OPERATOR("", "operator_divide", ") / (double)(")
+	// 
+	// 
+		 DEF_2DOUBLE_OPERATOR("operator_random", "operator_random", "), (")
 	else DEF_1DOUBLE_BLOCK("motion_movesteps", "motion_movesteps")
 	else DEF_1DOUBLE_BLOCK("motion_turnright", "motion_turnright")
 	else DEF_1DOUBLE_BLOCK("motion_turnleft", "motion_turnleft")
@@ -131,6 +133,24 @@ return_vals LineToBlock(ScratchBlock sb, struct json_object* blocks, bool top)
 	else DEF_0DOUBLE_OPERATOR("motion_yposition", "motion_yposition")
 	else DEF_0DOUBLE_OPERATOR("motion_direction", "motion_direction")
 	else DEF_3DOUBLE_BLOCK("motion_glidesecstoxy", "motion_glidesecstoxy")
+	else DEF_1DOUBLE_BLOCK("motion_pointindirection", "motion_pointindirection")
+	//
+	//else DEF_1DOUBLE_OPERATOR("operator_random", "operator_random", "), (")
+	//
+	else DEF_1DOUBLE_OPERATOR("operator_mathop_abs", "operator_mathop_abs")
+	else DEF_1DOUBLE_OPERATOR("operator_mathop_floor", "operator_mathop_floor")
+	else DEF_1DOUBLE_OPERATOR("operator_mathop_ceiling", "operator_mathop_ceiling")
+	else DEF_1DOUBLE_OPERATOR("operator_mathop_sqrt", "operator_mathop_sqrt")
+	else DEF_1DOUBLE_OPERATOR("operator_mathop_sin", "operator_mathop_sin")
+	else DEF_1DOUBLE_OPERATOR("operator_mathop_cos", "operator_mathop_cos")
+	else DEF_1DOUBLE_OPERATOR("operator_mathop_tan", "operator_mathop_tan")
+	else DEF_1DOUBLE_OPERATOR("operator_mathop_asin", "operator_mathop_asin")
+	else DEF_1DOUBLE_OPERATOR("operator_mathop_acos", "operator_mathop_acos")
+	else DEF_1DOUBLE_OPERATOR("operator_mathop_atan", "operator_mathop_atan")
+	else DEF_1DOUBLE_OPERATOR("operator_mathop_ln", "operator_mathop_ln")
+	else DEF_1DOUBLE_OPERATOR("operator_mathop_log", "operator_mathop_log")
+	else DEF_1DOUBLE_OPERATOR("operator_mathop_e_zof", "operator_mathop_e_zof")
+	else DEF_1DOUBLE_OPERATOR("operator_mathop_10_zof", "operator_mathop_10_zof")
 
 	String str;
 
@@ -172,19 +192,33 @@ return_vals GetArg(int argtype, ScratchArgData argdata, struct json_object* bloc
 	case ArgType_NegativeNumber:
 	case ArgType_Integer:
 	case ArgType_Angle:
+	{
 		if (strlen(argdata.text.data) == 0)
 		{
-			return RETV(AsManagedString("0"), AsManagedString("\"0\""), AsManagedString("false"), AsManagedString("ScratchSetDouble(0)"));
+			return RETV(AsManagedString("0.0"), AsManagedString("\"0.0\""), AsManagedString("false"), AsManagedString("ScratchSetDouble(0.0)"));
 		}
-		if (strcmp(argdata.text.data, "infinity") == 0) 
+		if (strcmp(argdata.text.data, "infinity") == 0)
 		{
 			return RETV(AsManagedString("INFINITY"), AsManagedString("\"INFINITY\""), AsManagedString("true"), AsManagedString("ScratchSetDouble(INFINITY)"));
 		}
-		return RETV(argdata.text,
-					MERGE3(AsManagedString("ScratchVarGetString(ScratchSetDouble("), argdata.text, AsManagedString("))")),
-					MERGE3(AsManagedString("ScratchVarGetBool(ScratchSetDouble("), argdata.text, AsManagedString("))")),
-					MERGE3(AsManagedString("ScratchSetDouble("), argdata.text, AsManagedString(")")));
+		char* end;
+		char* num = malloc(strlen(argdata.text.data) + 3); if (!num) { printf("Malloc error!"); exit(-1); }
+		snprintf(num, strlen(argdata.text.data) + 3, "%s", argdata.text.data);
+		double out = strtod(num, &end);
+		int len = snprintf(NULL, 0, "%#.15g", out) + 2;
+		char* this = malloc(len);  if (!this) { printf("Malloc error!"); exit(-1); }
+		sprintf(this, "%.15g", out);
 
+		// If there's no decimal point or exponent, append ".0"
+		if (!strchr(this, '.')) {
+			strcat(this, ".0");
+		}
+
+		return RETV(argdata.text,
+			MERGE3(AsManagedString("ScratchVarGetString(ScratchSetDouble("), AsUnmanagedString(this), AsManagedString("))")),
+			MERGE3(AsManagedString("ScratchVarGetBool(ScratchSetDouble("), AsUnmanagedString(this), AsManagedString("))")),
+			MERGE3(AsManagedString("ScratchSetDouble("), AsUnmanagedString(this), AsManagedString(")")));
+	}
 	case ArgType_String:
 		{
 			char* text = argdata.text.data;
@@ -683,16 +717,16 @@ char* GetFullProgram(FILE* header_file, FILE* source_file, FILE* scheduler, stru
 			switch (json_object_get_type(json_object_array_get_idx(val, 1)))
 			{
 			case json_type_int:
-				fprintf(source_file, "\t%s = ScratchSetDouble(%i);\n", SanitiseScratchNameToC(AsManagedString(json_object_get_string(json_object_array_get_idx(val, 0)))).data, json_object_get_int(json_object_array_get_idx(val, 1)));
+				fprintf(source_file, "\t%s = ScratchSetDouble(%i);\n", getVariableNameById(AsManagedString(key)).data, json_object_get_int(json_object_array_get_idx(val, 1)));
 				break;
 			case json_type_double:
-				fprintf(source_file, "\t%s = ScratchSetDouble(%f);\n", SanitiseScratchNameToC(AsManagedString(json_object_get_string(json_object_array_get_idx(val, 0)))).data, json_object_get_double(json_object_array_get_idx(val, 1)));
+				fprintf(source_file, "\t%s = ScratchSetDouble(%f);\n", getVariableNameById(AsManagedString(key)).data, json_object_get_double(json_object_array_get_idx(val, 1)));
 				break;
 			case json_type_string:
-				fprintf(source_file, "\t%s = ScratchSetString(\"%s\");\n", SanitiseScratchNameToC(AsManagedString(json_object_get_string(json_object_array_get_idx(val, 0)))).data, json_object_get_string(json_object_array_get_idx(val, 1)));
+				fprintf(source_file, "\t%s = ScratchSetString(\"%s\");\n", getVariableNameById(AsManagedString(key)).data, json_object_get_string(json_object_array_get_idx(val, 1)));
 				break;
 			case json_type_boolean:
-				fprintf(source_file, "\t%s = ScratchSetBool(\"%s\");\n", SanitiseScratchNameToC(AsManagedString(json_object_get_string(json_object_array_get_idx(val, 0)))).data, json_object_get_boolean(json_object_array_get_idx(val, 1)) ? "true" : "false");
+				fprintf(source_file, "\t%s = ScratchSetBool(\"%s\");\n", getVariableNameById(AsManagedString(key)).data, json_object_get_boolean(json_object_array_get_idx(val, 1)) ? "true" : "false");
 				break;
 			default:
 				printf("Type not implemented!");

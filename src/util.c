@@ -76,3 +76,111 @@ String SanitiseScratchNameToC(String varName)
 
 	return str;
 }
+
+vecString initialiseStringVector()
+{
+	vecString list;
+	list.data = malloc(sizeof(String) * 8); if (!list.data) { printf("Malloc error!"); exit(-1); }
+	list.allocated_size = 8;
+	list.length = 0;
+	return list;
+}
+
+vecString resizeStringVector(vecString list, int length)
+{
+	vecString l2 = list;
+	l2.allocated_size = length;
+	void* temp = realloc(l2.data, l2.allocated_size * sizeof(String));
+	if (!temp) { exit(-1); }
+	l2.data = temp;
+	return l2;
+}
+
+vecString addDataToStringVector(vecString list, String data)
+{
+	vecString l2 = list;
+	if (l2.length + 1 > l2.allocated_size)
+	{
+		l2 = resizeStringVector(l2, l2.allocated_size * 2);
+	}
+	l2.data[l2.length] = data;
+	l2.length++;
+	return l2;
+}
+
+vecString removeStringVectorItem(vecString list, int idx)
+{
+	vecString l2 = list;
+	if (idx < 0 || idx >= l2.length)
+	{
+		return l2;
+	}
+	memmove(l2.data + idx, l2.data + idx + 1, (l2.length - idx - 1) * sizeof(String));
+	l2.length--;
+	return l2;
+}
+
+vecString insertItemAtStringVector(vecString list, int idx, String item)
+{
+	vecString l2 = list;
+	if (l2.length + 1 > l2.allocated_size)
+	{
+		l2 = resizeStringVector(l2, l2.allocated_size * 2);
+	}
+	memmove(l2.data + idx + 1, l2.data + idx, (l2.length - idx) * sizeof(String));
+	l2.data[idx] = item;
+	l2.length++;
+	return l2;
+}
+
+int indexOfItemStringVector(String item, vecString list)
+{
+	for (int i = 0; i < list.length; i++)
+	{
+		if (strcmp(item.data, list.data[i].data) == 0)
+		{
+			return i;
+		}
+	}
+	printf("Item %s not found!", item.data);
+	exit(-1);
+}
+
+bool stringVectorContainsItem(String item, vecString list)
+{
+	for (int i = 0; i < list.length; i++)
+	{
+		if (strcmp(item.data, list.data[i].data) == 0)
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
+vecString varIds;
+vecString varNames;
+
+void initVarIdeas() 
+{
+	varIds   = initialiseStringVector();
+	varNames = initialiseStringVector();
+}
+
+void AddVariable(String varId, String varName, int sprite_idx) 
+{
+	int len = snprintf(NULL, 0, "_%d_%s", sprite_idx, varName.data) + 1;
+	char* nm = malloc(len);
+
+	snprintf(nm, len, "_%d%s", sprite_idx, varName.data);
+	
+	String name = AsUnmanagedString(nm);
+
+	varIds   = addDataToStringVector(varIds  , varId);
+	varNames = addDataToStringVector(varNames, name );
+}
+
+String getVariableNameById(String id) 
+{
+	return varNames.data[indexOfItemStringVector(id, varIds)];
+}

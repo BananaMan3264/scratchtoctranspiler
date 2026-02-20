@@ -117,6 +117,8 @@ int main(int argc, char**argv)
 	FILE* scheduler = fopen("../../../output/generated/schedule.c", "w");
 	FILE* schedulerh = fopen("../../../output/generated/schedule.h", "w");
 
+	initVarIdeas();
+
 	int si = 0;
 	sprite_index = malloc(20);
 
@@ -142,6 +144,7 @@ int main(int argc, char**argv)
 
 		json_object_object_foreach(vars, key, val)
 		{
+			AddVariable(AsManagedString(key), SanitiseScratchNameToC(AsManagedString(json_object_get_string(json_object_array_get_idx(val, 0)))), i);
 			vars_count++;
 		}
 	}
@@ -151,7 +154,7 @@ int main(int argc, char**argv)
 		
 		json_object_object_foreach(vars, key, val)
 		{
-			fprintf(output, "ScratchValue %s;\n", SanitiseScratchNameToC(AsManagedString(json_object_get_string(json_object_array_get_idx(val, 0)))).data);
+			fprintf(output, "ScratchValue %s;\n", getVariableNameById(AsManagedString(key)).data);
 		}
 	}
 	if (vars_count)
@@ -163,7 +166,7 @@ int main(int argc, char**argv)
 
 			json_object_object_foreach(vars, key, val)
 			{
-				fprintf(output, "\t&%s,\n", SanitiseScratchNameToC(AsManagedString(json_object_get_string(json_object_array_get_idx(val, 0)))).data);
+				fprintf(output, "\t&%s,\n", getVariableNameById(AsManagedString(key)).data);
 			}
 		}
 		fprintf(output, "};\n\n");

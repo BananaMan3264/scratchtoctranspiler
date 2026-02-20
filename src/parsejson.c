@@ -68,7 +68,7 @@ get_by_type:
 		break;
 	case 11:
 	case ArgType_Variable:
-		arg.data.text = SanitiseScratchNameToC(AsManagedString(json_object_get_string(json_object_array_get_idx(this, 1))));
+		arg.data.text = getVariableNameById(AsManagedString(json_object_get_string(json_object_array_get_idx(this, 2))));
 		arg.type = ArgType_Variable;
 		break;
 	default:
@@ -115,7 +115,7 @@ ScratchBlock GetBlock(const char* id, struct json_object* blocks)
 		sb.args = 2;
 		sb.argdata = malloc(sizeof(ScratchArgData) * sb.args); if (!sb.argdata) { printf("Malloc error!"); exit(-1); }
 		sb.argtypes = malloc(sizeof(int) * sb.args); if (!sb.argtypes) { printf("Malloc error!"); exit(-1); }
-		sb.argdata[1].text = SanitiseScratchNameToC(AsManagedString(json_object_get_string(json_object_array_get_idx(NEXT2(block, "fields", "VARIABLE"), 0))));
+		sb.argdata[1].text = getVariableNameById(AsManagedString(json_object_get_string(json_object_array_get_idx(NEXT2(block, "fields", "VARIABLE"), 1))));
 		sb.argtypes[1] = ArgType_Variable;
 	}
 	else if (	strcmp(sb.opcode.data, "data_itemoflist") == 0 || strcmp(sb.opcode.data, "data_itemnumoflist") == 0 || 

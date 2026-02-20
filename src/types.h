@@ -156,6 +156,10 @@ typedef struct vecFunction {
 	Function* data; size_t allocated_size; size_t length; size_t sizeoftype;
 } vecFunction;
 
+typedef struct vecString {
+	String* data; size_t allocated_size; size_t length; size_t sizeoftype;
+} vecString;
+
 #define AsUnmanagedString(a) (String){false, (char *)(a)}
 #define AsManagedString(a)   (String){true,  (char *)(a)}
 

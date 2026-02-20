@@ -60,9 +60,9 @@ void motion_goto(double x, double y)
 	SY = y;
 }
 
-void motion_pointtowards(ScratchValue dir)
+void motion_pointtowards(double dir)
 {
-	SD = ScratchVarGetDouble(dir) * DEG_TO_RAD;
+	SD = dir * DEG_TO_RAD;
 }
 
 void motion_changexby(double x)
@@ -71,7 +71,7 @@ void motion_changexby(double x)
 	{
 		penDrawLine(x, SY, SX, SY);
 	}
-	SX = x;
+	SX += x;
 }
 
 void motion_changeyby(double y)
@@ -80,7 +80,7 @@ void motion_changeyby(double y)
 	{
 		penDrawLine(SX, y, SX, SY);
 	}
-	SY = y;
+	SY += y;
 }
 
 void motion_setx(double x)
@@ -192,3 +192,6 @@ ScratchValue motion_pointtowards_menuY_amaoauasaea_()
 
 	return ScratchSetDouble(-atan2(m_y-SY,m_x-SX) * RAD_TO_DEG);
 }
+
+double _m_getX(double x, double y) { return x; }
+double _m_getY(double x, double y) { return y; }

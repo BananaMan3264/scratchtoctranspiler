@@ -1,5 +1,7 @@
 #include "types.h"
 
+#pragma once
+
 extern double scratch_motion_SpriteX[];
 extern double scratch_motion_SpriteY[];
 
@@ -9,7 +11,7 @@ void motion_movesteps(double Steps);
 void motion_turnright(double degrees);
 void motion_turnleft(double degrees);
 void motion_goto(double x, double y);
-void motion_pointtowards(ScratchValue dir);
+void motion_pointtowards(double dir);
 void motion_changexby(double x);
 void motion_changeyby(double y);
 void motion_setx(double x);
@@ -29,19 +31,19 @@ ScratchValue motion_pointtowards_menuY_amaoauasaea_();
 #define motion_glideto_menu_zpfrandomzpf motion_goto_menu_zpfrandomzpf
 #define motion_glideto_menu_zpfmousezpf  motion_goto_menu_zpfmousezpf
 
-#define motion_pointtowards_menu_zpfmousezpf() ScratchSetDouble(operator_random(0, 360))
-#define motion_pointtowards_menu_zpfrandomzpf() ScratchSetDouble(atan2(ScratchVarGetDouble(sensing_mousey()), ScratchVarGetDouble(sensing_mousex())))
+#define motion_pointtowards_menu_zpfmousezpf() operator_random(0, 360)
+#define motion_pointtowards_menu_zpfrandomzpf() (atan2(ScratchVarGetDouble(sensing_mousey()), ScratchVarGetDouble(sensing_mousex())) * 57.295779513082)
 
 #define motion_gotoxy motion_goto
 #define motion_pointindirection motion_pointtowards
 
-double getX(double x, double y) { return x; }
-double getY(double x, double y) { return y; }
+double _m_getX(double x, double y);
+double _m_getY(double x, double y);
 
 #define motion_glideto(secs, pos)																					\
 {																													\
 double startTime = clock() / (double)CLOCKS_PER_SEC;																\
-double _secs = secs, _x = getX(pos), _y = getY(pos);																\
+double _secs = secs, _x = _m_getX(pos), _y = _m_getY(pos);															\
 double startx = scratch_motion_SpriteX[activeSprite], starty = scratch_motion_SpriteY[activeSprite];				\
 double time = (clock() / (double)CLOCKS_PER_SEC);																	\
 while (time < startTime + _secs)																					\
