@@ -1,3 +1,5 @@
+#pragma once
+
 enum ArgTypes
 {
 	ArgType_Pointer = 3,

@@ -62,7 +62,7 @@ int main(int argc, char**argv)
 {
 	sprite_index = "1";
 
-	int spritecount = 3;
+	int spritecount;
 
 	//if (argc < 2) {
 	//	printf("Error: no arguments supplied!\n");
@@ -160,9 +160,25 @@ int main(int argc, char**argv)
 
 	for (int i = 0; i < spritecount; i++) 
 	{
-		struct json_object* blocks = json_object_object_get(json_object_array_get_idx(json_object_object_get(project, "targets"), i), "block");
+		struct json_object* blocks = json_object_object_get(json_object_array_get_idx(json_object_object_get(project, "targets"), i), "blocks");
 
-
+		json_object_object_foreach(blocks, key, val)
+		{
+			if (val)
+			{
+				char* opcode = json_object_get_string(json_object_object_get(val, "opcode"));
+				if (opcode && strcmp(opcode, "data_setvariableto") == 0)
+				{
+					ScratchBlock sb = GetBlock(key, blocks);
+					String dbl_ret = GetArg(sb.argtypes[0], sb.argdata[0], blocks).double_return;
+					if (!strncmp("ScratchVarGetDouble(", dbl_ret.data, sizeof("ScratchVarGetDouble"))) 
+					{
+						int idx = getVariableIndexByName(sb.argdata[1].text);
+						doublevar[idx] = false;
+					}
+				}
+			}
+		}
 	}
 
 	int vc_2 = 0;

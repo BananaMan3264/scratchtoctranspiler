@@ -7,18 +7,11 @@
 #include "types.h"
 #include "util.h"
 #include "parsejson.h"
+#include "buildccode.h"
 
 #define DEG_TO_RAD 0.0174532925199
 
 extern char* sprite_index;
-
-typedef struct return_vals
-{
-	String double_return;
-	String string_return;
-	String bool_return;
-	String scratch_return;
-} return_vals;
 
 extern bool* doublevar;
 
@@ -29,8 +22,6 @@ extern bool* doublevar;
 #define MERGE4(a,b,c,d) MERGE3(a,b,SafeStringMerge(c,d))
 #define MERGE5(a,b,c,d,e) MERGE4(a,b,c,SafeStringMerge(d,e))
 #define MERGE6(a,b,c,d,e,f) MERGE5(a,b,c,d,SafeStringMerge(e,f))
-
-return_vals GetArg(int argtype, ScratchArgData argdata, struct json_object* blocks);
 
 int GetFirstWhenFlagClicked(vecScratchBlock lines)
 {
@@ -234,24 +225,52 @@ return_vals LineToBlock(ScratchBlock sb, struct json_object* blocks, bool top)
 
 	else if (strcmp(sb.opcode.data, "data_setvariableto") == 0 && doublevar[getVariableIndexById(sb.argdata[1].text)])
 	{
-		String a = GetArg(sb.argtypes[0], sb.argdata[0], blocks).double_return;
-		return RETV(AsManagedString(""), AsManagedString(""), AsManagedString(""),
-			MERGE4(sb.argdata[1].text, AsManagedString(" = "), a, AsManagedString(";")),
-			);
-	}
-	else if (strcmp(sb.opcode.data, "data_changevariableby") == 0 && doublevar[getVariableIndexById(sb.argdata[1].text)])
-	{
-		String a = GetArg(sb.argtypes[0], sb.argdata[0], blocks).double_return;
-		if (strcmp(a.data, "1") == 0 || strcmp(a.data, "1.0") == 0)
+		if (doublevar[getVariableIndexByName(sb.argdata[1].text)])
 		{
-	
+			String a = GetArg(sb.argtypes[0], sb.argdata[0], blocks).double_return;
 			return RETV(AsManagedString(""), AsManagedString(""), AsManagedString(""),
-				SafeStringMerge(sb.argdata[1].text, AsManagedString("++;")),
+				MERGE4(sb.argdata[1].text, AsManagedString(" = "), a, AsManagedString(";")),
 				);
 		}
-		return RETV(AsManagedString(""), AsManagedString(""), AsManagedString(""),
-			MERGE4(sb.argdata[1].text, AsManagedString(" += "), a, AsManagedString(";")),
-			);
+		else 
+		{
+			String a = GetArg(sb.argtypes[0], sb.argdata[0], blocks).scratch_return;
+			return RETV(AsManagedString(""), AsManagedString(""), AsManagedString(""),
+				MERGE4(sb.argdata[1].text, AsManagedString(" = "), a, AsManagedString(";")),
+				);
+		}
+	}
+	else if (strcmp(sb.opcode.data, "data_changevariableby") == 0 && doublevar[getVariableIndexById(sb.argdata[1].text)])
+{
+
+		if (doublevar[getVariableIndexByName(sb.argdata[1].text)])
+		{
+			String a = GetArg(sb.argtypes[0], sb.argdata[0], blocks).double_return;
+			if (strcmp(a.data, "1") == 0 || strcmp(a.data, "1.0") == 0)
+			{
+
+				return RETV(AsManagedString(""), AsManagedString(""), AsManagedString(""),
+					SafeStringMerge(sb.argdata[1].text, AsManagedString("++;")),
+					);
+			}
+			return RETV(AsManagedString(""), AsManagedString(""), AsManagedString(""),
+				MERGE4(sb.argdata[1].text, AsManagedString(" += "), a, AsManagedString(";")),
+				);
+		}
+		else 
+		{
+			String a = GetArg(sb.argtypes[0], sb.argdata[0], blocks).double_return;
+			if (strcmp(a.data, "1") == 0 || strcmp(a.data, "1.0") == 0)
+			{
+
+				return RETV(AsManagedString(""), AsManagedString(""), AsManagedString(""),
+					SafeStringMerge(sb.argdata[1].text, AsManagedString("++;")),
+					);
+			}
+			return RETV(AsManagedString(""), AsManagedString(""), AsManagedString(""),
+				MERGE6(sb.argdata[1].text, AsManagedString(" = ScratchSetDouble(ScratchVarGetDouble("), sb.argdata[1].text, AsManagedString(") + "), a, AsManagedString(");")),
+				);
+		}
 	}
 	else if (strcmp(sb.opcode.data, "data_replaceitemoflist") == 0)
 	{
@@ -388,7 +407,7 @@ return_vals GetArg(int argtype, ScratchArgData argdata, struct json_object* bloc
 		double value = strtod(text, &endptr);
 
 		if (endptr == text) {
-			return RETV(MERGE3(AsManagedString("ScratchVarGetString(ScratchSetString(\""), argdata.text, AsManagedString("\"))")),
+			return RETV(MERGE3(AsManagedString("ScratchVarGetDouble(ScratchSetString(\""), argdata.text, AsManagedString("\"))")),
 				MERGE3(AsManagedString("\""), argdata.text, AsManagedString("\"")),
 				MERGE3(AsManagedString("ScratchVarGetBool(ScratchSetString(\""), argdata.text, AsManagedString("\"))")),
 				MERGE3(AsManagedString("ScratchSetString(\""), argdata.text, AsManagedString("\")")));
