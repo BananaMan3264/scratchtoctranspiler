@@ -3,6 +3,7 @@
 #define DEG_TO_RAD 0.0174532925199
 #define RAD_TO_DEG 57.295779513082
 
+#define data_changevariableby_double(a,b) b+=a
 inline ScratchValue operator_add(ScratchValue a, ScratchValue b) { return ScratchSetDouble(ScratchVarGetDouble(a) + ScratchVarGetDouble(b)); }
 inline ScratchValue operator_subtract(ScratchValue a, ScratchValue b) { return ScratchSetDouble(ScratchVarGetDouble(a) - ScratchVarGetDouble(b)); }
 inline ScratchValue operator_multiply(ScratchValue a, ScratchValue b) { return ScratchSetDouble(ScratchVarGetDouble(a) * ScratchVarGetDouble(b)); }
@@ -10,7 +11,7 @@ inline ScratchValue operator_divide(ScratchValue a, ScratchValue b) { return Scr
 double operator_random(double min, double max);
 inline ScratchValue operator_gt(ScratchValue a, ScratchValue b) { return ScratchSetBool(ScratchVarGetDouble(a) > ScratchVarGetDouble(b)); }
 inline ScratchValue operator_lt(ScratchValue a, ScratchValue b) { return ScratchSetBool(ScratchVarGetDouble(a) < ScratchVarGetDouble(b)); }
-ScratchValue operator_equals(ScratchValue a, ScratchValue b);
+bool operator_equals(ScratchValue a, ScratchValue b);
 inline ScratchValue operator_and(ScratchValue a, ScratchValue b) { return ScratchSetBool(ScratchVarGetBool(a) && ScratchVarGetBool(b)); }
 inline ScratchValue operator_or(ScratchValue a, ScratchValue b) { return ScratchSetBool(ScratchVarGetBool(a) || ScratchVarGetBool(b)); }
 inline ScratchValue operator_not(ScratchValue a) { return ScratchSetBool(!ScratchVarGetBool(a)); }

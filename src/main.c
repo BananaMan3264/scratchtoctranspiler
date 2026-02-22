@@ -10,6 +10,8 @@
 
 char* sprite_index;
 
+bool* doublevar;
+
 typedef struct StringList
 {
 	void** data;
@@ -148,16 +150,42 @@ int main(int argc, char**argv)
 			vars_count++;
 		}
 	}
+
+	doublevar = malloc(vars_count); if (!doublevar) { printf("Malloc error!"); exit(-1); }
+
+	for (int i = 0; i < vars_count; i++) 
+	{
+		doublevar[i] = true;
+	}
+
+	for (int i = 0; i < spritecount; i++) 
+	{
+		struct json_object* blocks = json_object_object_get(json_object_array_get_idx(json_object_object_get(project, "targets"), i), "block");
+
+
+	}
+
+	int vc_2 = 0;
+
 	for (int i = 0; i < spritecount; i++) 
 	{
 		struct json_object* vars = json_object_object_get(json_object_array_get_idx(json_object_object_get(project, "targets"), i), "variables");
 		
 		json_object_object_foreach(vars, key, val)
 		{
-			fprintf(output, "ScratchValue %s;\n", getVariableNameById(AsManagedString(key)).data);
+			if (doublevar[getVariableIndexById(AsManagedString(key))])
+			{
+				fprintf(output, "double %s;\n", getVariableNameById(AsManagedString(key)).data);
+				vc_2++;
+			}
+			else
+			{
+				fprintf(output, "ScratchValue %s;\n", getVariableNameById(AsManagedString(key)).data);
+			}
 		}
 	}
-	if (vars_count)
+
+	if (vc_2)
 	{
 		fprintf(output, "\nScratchValue* vars[] = \n{");
 		for (int i = 0; i < spritecount; i++)
@@ -166,7 +194,10 @@ int main(int argc, char**argv)
 
 			json_object_object_foreach(vars, key, val)
 			{
-				fprintf(output, "\t&%s,\n", getVariableNameById(AsManagedString(key)).data);
+				if (doublevar[getVariableIndexById(AsManagedString(key))])
+				{
+					fprintf(output, "\t&%s,\n", getVariableNameById(AsManagedString(key)).data);
+				}
 			}
 		}
 		fprintf(output, "};\n\n");
@@ -215,7 +246,7 @@ int main(int argc, char**argv)
 		fprintf(output, "\nScratchList* lists[] = { NULL };\n\n");
 	}
 
-	fprintf(output, "int vars_length = %i, lists_length = %i;\n", vars_count, lists_count);
+	fprintf(output, "int vars_length = %i, lists_length = %i;\n", vc_2, lists_count);
 
 	for (int i = 0; i < spritecount; i++)
 	{

@@ -142,8 +142,7 @@ int indexOfItemStringVector(String item, vecString list)
 			return i;
 		}
 	}
-	printf("Item %s not found!", item.data);
-	exit(-1);
+	return -1;
 }
 
 bool stringVectorContainsItem(String item, vecString list)
@@ -178,6 +177,16 @@ void AddVariable(String varId, String varName, int sprite_idx)
 
 	varIds   = addDataToStringVector(varIds  , varId);
 	varNames = addDataToStringVector(varNames, name );
+}
+
+int getVariableIndexById(String id)
+{
+	return indexOfItemStringVector(id, varIds);
+}
+
+int getVariableIndexByName(String id)
+{
+	return indexOfItemStringVector(id, varNames);
 }
 
 String getVariableNameById(String id) 

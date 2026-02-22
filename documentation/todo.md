@@ -27,3 +27,4 @@
 - Track down that one discrepancy between math blocks (I wish I had more details, I don't.)
 - Optimise pen
 - Optimise the `fix.bat` step, potentially include it in `scratchcompiler`?
+- Re-add non double variables

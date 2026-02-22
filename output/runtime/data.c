@@ -104,9 +104,9 @@ ScratchValue data_listcontainsitem(ScratchValue item, ScratchList list)
 	return ScratchSetBool(false);
 }
 
-ScratchValue data_itemoflist(ScratchValue index, ScratchList list)
+ScratchValue data_itemoflist(int index, ScratchList list)
 {
-	int idx = (int)ScratchVarGetDouble(index) - 1;
+	int idx = index - 1;
 	idx = min(max(idx, 0),list.length);
 	return list.data[idx];
 }

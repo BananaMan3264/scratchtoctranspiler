@@ -7,7 +7,7 @@ ScratchList removeListItem(ScratchList list, int idx);
 ScratchList insertItemAtList(ScratchList list, int idx, ScratchValue item);
 ScratchValue data_itemnumoflist(ScratchValue item, ScratchList list);
 ScratchValue data_listcontainsitem(ScratchValue item, ScratchList list);
-ScratchValue data_itemoflist(ScratchValue index, ScratchList list);
+ScratchValue data_itemoflist(int index, ScratchList list);
 
 #define data_addtolist(data, list) list = addDataToList(list, data)
 #define data_deleteoflist(index, list) list = removeListItem(list, ScratchVarGetDouble(index) - 1)

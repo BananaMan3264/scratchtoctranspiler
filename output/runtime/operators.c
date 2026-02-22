@@ -26,7 +26,7 @@ double operator_random(double min, double max)
 	}
 }
 
-ScratchValue operator_equals(ScratchValue a, ScratchValue b)
+bool operator_equals(ScratchValue a, ScratchValue b)
 {
 	bool out = false;
 	char* astr = ScratchVarGetString(a);
@@ -43,7 +43,7 @@ ScratchValue operator_equals(ScratchValue a, ScratchValue b)
 		out = strcmp(astr, bstr) == 0;
 		break;
 	}
-	return ScratchSetBool(out);
+	return out;
 }
 
 ScratchValue operator_join(ScratchValue a, ScratchValue b)
