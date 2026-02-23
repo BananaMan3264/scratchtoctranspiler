@@ -24,7 +24,7 @@ void RunScheduler()
 
 	_0_Init();
 	_1_Init();
-	AddThread(THREAD(co_create(64 * 1024, _1__fWevent_whenflagclicked),1));
+	AddThread(THREAD(co_create(64 * 1024, _1__ldevent_whenflagclicked),1));
 
 	while (1)
 	{

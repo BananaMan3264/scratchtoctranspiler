@@ -12,6 +12,8 @@ char* sprite_index;
 
 bool* doublevar;
 
+bool doublesonly = true;
+
 typedef struct StringList
 {
 	void** data;
@@ -171,10 +173,13 @@ int main(int argc, char**argv)
 				{
 					ScratchBlock sb = GetBlock(key, blocks);
 					String dbl_ret = GetArg(sb.argtypes[0], sb.argdata[0], blocks).double_return;
-					if (!strncmp("ScratchVarGetDouble(", dbl_ret.data, sizeof("ScratchVarGetDouble"))) 
+					if (!strncmp("ScratchVarGetDouble(", dbl_ret.data, sizeof("ScratchVarGetDouble")))
 					{
 						int idx = getVariableIndexByName(sb.argdata[1].text);
-						doublevar[idx] = false;
+						if (!doublesonly)
+						{
+							doublevar[idx] = false;
+						}
 					}
 				}
 			}

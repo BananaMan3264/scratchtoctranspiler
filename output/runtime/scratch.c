@@ -88,3 +88,16 @@ char* ScratchVarGetString(ScratchValue var)
 		return "";
 	}
 }
+
+int iclamp(int idx, int min, int max) 
+{ 
+	if (max < idx)
+	{ 
+		return max; 
+	} 
+	if (min > idx)
+	{ 
+		return min; 
+	} 
+	return idx; 
+}

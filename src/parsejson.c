@@ -12,6 +12,8 @@
 
 extern char* sprite_index;
 
+extern bool doublesonly;
+
 typedef struct ScratchArg
 {
 	ScratchArgData data;
@@ -75,6 +77,7 @@ get_by_type:
 		printf("These argument types have not been implemented! %i\n", a);
 		exit(-1);
 	}
+
 	return arg;
 }
 
@@ -102,6 +105,11 @@ ScratchBlock GetBlock(const char* id, struct json_object* blocks)
 			ScratchArg a = ParseArg(json_object_object_get(args, str), str);
 
 			sb.argdata[i] = a.data;
+
+			if (doublesonly)
+			{
+				a.type += 12;
+			}
 			sb.argtypes[i] = a.type;
 		}
 

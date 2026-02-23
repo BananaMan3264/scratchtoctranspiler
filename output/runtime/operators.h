@@ -19,10 +19,9 @@ ScratchValue operator_join(ScratchValue a, ScratchValue b);
 ScratchValue operator_letter_of(ScratchValue index, ScratchValue string);
 ScratchValue operator_length(ScratchValue string);
 ScratchValue operator_contains(ScratchValue string, ScratchValue substring);
-ScratchValue operator_mod(ScratchValue a, ScratchValue b);
 inline ScratchValue operator_length(ScratchValue string) { return ScratchSetDouble(strlen(ScratchVarGetString(string))); }
 inline ScratchValue operator_contains(ScratchValue string, ScratchValue substring) { return ScratchSetBool(strstr(ScratchVarGetString(string), ScratchVarGetString(substring)) != NULL); }
-inline ScratchValue operator_mod(ScratchValue a, ScratchValue b) { return ScratchSetDouble(fmod(ScratchVarGetDouble(a), ScratchVarGetDouble(b))); }
+inline double operator_mod(double a, double b) { return fmod(a, b); }
 inline ScratchValue operator_round(ScratchValue a) { return ScratchSetDouble(round(ScratchVarGetDouble(a))); }
 inline double operator_mathop_abs(double a) { return (fabs((a))); }
 inline double operator_mathop_floor(double a) { return (floor((a))); }

@@ -16,6 +16,7 @@ double ScratchVarGetDouble(ScratchValue var);
 bool ScratchVarGetBool(ScratchValue var);
 char* ScratchVarGetString(ScratchValue var);
 ScratchValue sensing_timer();
+int iclamp(int idx, int min, int max);
 
 #define FUNCTION_YIELD gc_enabled = false;  co_switch(scheduler); gc_enabled = true;
 #define TRUE_YIELD co_switch(scheduler);

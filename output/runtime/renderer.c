@@ -252,7 +252,7 @@ void DrawLine(float x_1, float y_1, float x_2, float y_2, float thickness, int c
 
 		SDL_RenderFillRect(renderer, &rect);
 	}
-	else 
+	else
 	{
 		if (!(x_1 == x_2 && y_1 == y_2))
 		{
@@ -268,8 +268,22 @@ void DrawLine(float x_1, float y_1, float x_2, float y_2, float thickness, int c
 			SDL_RenderGeometry(renderer, NULL, verts, 4, indices, 6);
 			filledCircleRGBA(renderer, x1, y1, t / 2, r, g, b, a);
 		}
+		if (thickness == 1)
+		{
+			SDL_Rect rect;
+			rect.x = x1;
+			rect.y = y1;
+			rect.w = t * 2;
+			rect.h = t * 2;
 
-		filledCircleRGBA(renderer, x2, y2, t / 2, r, g, b, a);
+			SDL_SetRenderDrawColor(renderer, r, g, b, a);
+
+			SDL_RenderFillRect(renderer, &rect);
+		}
+		else 
+		{
+			filledCircleRGBA(renderer, x2, y2, t / 2, r, g, b, a);
+		}
 	}
 }
 

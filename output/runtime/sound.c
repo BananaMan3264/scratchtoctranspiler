@@ -4,7 +4,6 @@
 #include "scratch.h"
 #include "motion.h"
 #include "types.h"
-#include "pen.h"
 #include "../sprite_data.h"
 
 Mix_Chunk* sound[SPRITES][MAX_SOUND_LENGTH];

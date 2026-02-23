@@ -82,14 +82,14 @@ void looks_nextbackdrop()
 	scratch_looks_CostumeIndex[0] = (scratch_looks_CostumeIndex[0] + 1) % (scratch_looks_CostumeCounts[0]);
 }
 
-void looks_changesizeby(ScratchValue change)
+void looks_changesizeby(double change)
 {
-	SS += ScratchVarGetDouble(change);
+	SS += change;
 }
 
-void looks_setsizeto(ScratchValue val)
+void looks_setsizeto(double val)
 {
-	SS = ScratchVarGetDouble(val);
+	SS = val;
 }
 
 void looks_changeeffectby_COLOR(ScratchValue change) 
@@ -223,9 +223,9 @@ ScratchValue looks_backdropnumbername_name()
 	return ScratchSetString(scratch_looks_CostumeNames[0][scratch_looks_CostumeIndex[0]]);
 }
 
-ScratchValue looks_size() 
+double looks_size() 
 {
-	return ScratchSetDouble(SS);
+	return SS;
 }
 
 ScratchValue looks_costume(ScratchValue id)
